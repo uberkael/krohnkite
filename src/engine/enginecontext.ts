@@ -24,35 +24,38 @@
  * Its purpose is to limit the visibility of information and operation. It's
  * not really a find-grained control mechanism, but is simple and concise.
  */
-class EngineContext {
-    public get backend(): string {
-        return this.drvctx.backend;
-    }
+import { WindowClass } from "./window";
+import { IDriverContext } from "@src/common";
+import { TilingEngine } from "./engine";
 
-    public get currentWindow(): Window | null {
-        return this.drvctx.currentWindow;
-    }
+export class EngineContext {
+  public get backend(): string {
+    return this.drvctx.backend;
+  }
 
-    public set currentWindow(window: Window | null) {
-        this.drvctx.currentWindow = window;
-    }
+  public get currentWindow(): WindowClass | null {
+    return this.drvctx.currentWindow;
+  }
 
-    constructor(private drvctx: IDriverContext, private engine: TilingEngine) {
-    }
+  public set currentWindow(window: WindowClass | null) {
+    this.drvctx.currentWindow = window;
+  }
 
-    public setTimeout(func: () => void, timeout: number): void {
-        this.drvctx.setTimeout(func, timeout);
-    }
+  constructor(private drvctx: IDriverContext, private engine: TilingEngine) {}
 
-    public cycleFocus(step: -1 | 1) {
-        this.engine.focusOrder(this.drvctx, step);
-    }
+  public setTimeout(func: () => void, timeout: number): void {
+    this.drvctx.setTimeout(func, timeout);
+  }
 
-    public moveWindow(window: Window, target: Window, after?: boolean) {
-        this.engine.windows.move(window, target, after);
-    }
+  public cycleFocus(step: -1 | 1) {
+    this.engine.focusOrder(this.drvctx, step);
+  }
 
-    public showNotification(text: string) {
-        this.drvctx.showNotification(text);
-    }
+  public moveWindow(window: WindowClass, target: WindowClass, after?: boolean) {
+    this.engine.windows.move(window, target, after);
+  }
+
+  public showNotification(text: string) {
+    this.drvctx.showNotification(text);
+  }
 }

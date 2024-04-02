@@ -18,11 +18,11 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import QtQuick 2.0
-import QtQuick.Controls 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore;
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import org.kde.plasma.core as PlasmaCore;
 
-/* 
+/*
  * Component Documentation
  *  - PlasmaCore global `theme` object:
  *      https://techbase.kde.org/Development/Tutorials/Plasma2/QML2/API#Plasma_Themes
@@ -47,8 +47,7 @@ PlasmaCore.Dialog {
             id: messageLabel
             padding: 10
 
-            // TODO: customizable font & size ????
-            font.pointSize: Math.round(theme.defaultFont.pointSize * 2)
+            font.pointSize: Math.round(10)
             font.weight: Font.Bold
         }
 
@@ -63,10 +62,6 @@ PlasmaCore.Dialog {
         }
     }
 
-    Component.onCompleted: {
-        /* NOTE: IDK what this is, but this is necessary to keep the window working. */
-        KWin.registerWindow(this);
-    }
 
     function show(text, area, duration) {
         hideTimer.stop();

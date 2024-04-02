@@ -18,34 +18,28 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-function clip(value: number, min: number, max: number): number {
-    if (value < min)
-        return min;
-    if (value > max)
-        return max;
-    return value;
+export function clip(value: number, min: number, max: number): number {
+  if (value < min) return min;
+  if (value > max) return max;
+  return value;
 }
 
-function slide(value: number, step: number): number {
-    if (step === 0)
-        return value;
-    return Math.floor(value / step + 1.000001) * step;
+export function slide(value: number, step: number): number {
+  if (step === 0) return value;
+  return Math.floor(value / step + 1.000001) * step;
 }
 
-function matchWords(str: string, words: string[]): number {
-    for (let i = 0; i < words.length; i++) {
-        if (str.indexOf(words[i]) >= 0)
-            return i;
-    }
-    return -1;
+export function matchWords(str: string, words: string[]): number {
+  for (let i = 0; i < words.length; i++) {
+    if (str.indexOf(words[i]) >= 0) return i;
+  }
+  return -1;
 }
 
-function wrapIndex(index: number, length: number): number {
-    if (index < 0)
-        return index + length;
-    if (index >= length)
-        return index - length;
-    return index;
+export function wrapIndex(index: number, length: number): number {
+  if (index < 0) return index + length;
+  if (index >= length) return index - length;
+  return index;
 }
 
 /**
@@ -55,11 +49,17 @@ function wrapIndex(index: number, length: number): number {
  * @param predicate A function which accepts an item and returns a boolean value.
  * @return A tuple containing an array of true(matched) items, and an array of false(unmatched) items.
  */
-function partitionArray<T>(array: T[], predicate: (item: T, index: number) => boolean): [T[], T[]] {
-    return array.reduce((parts: [T[], T[]], item: T, index: number) => {
-        parts[predicate(item, index) ? 0 : 1].push(item);
-        return parts;
-    }, [[], []]);
+export function partitionArray<T>(
+  array: T[],
+  predicate: (item: T, index: number) => boolean
+): [T[], T[]] {
+  return array.reduce(
+    (parts: [T[], T[]], item: T, index: number) => {
+      parts[predicate(item, index) ? 0 : 1].push(item);
+      return parts;
+    },
+    [[], []]
+  );
 }
 
 /**
@@ -73,16 +73,16 @@ function partitionArray<T>(array: T[], predicate: (item: T, index: number) => bo
  * @returns An array of (N+1) chunks, where the last chunk contains remaining
  * items.
  */
-function partitionArrayBySizes<T>(array: T[], sizes: number[]): T[][] {
-    let base = 0;
-    const chunks = sizes.map((size): T[] => {
-        const chunk = array.slice(base, base + size);
-        base += size;
-        return chunk;
-    });
-    chunks.push(array.slice(base));
+export function partitionArrayBySizes<T>(array: T[], sizes: number[]): T[][] {
+  let base = 0;
+  const chunks = sizes.map((size): T[] => {
+    const chunk = array.slice(base, base + size);
+    base += size;
+    return chunk;
+  });
+  chunks.push(array.slice(base));
 
-    return chunks;
+  return chunks;
 }
 
 /**
@@ -92,9 +92,14 @@ function partitionArrayBySizes<T>(array: T[], sizes: number[]): T[][] {
  * @param min2 Range 2, begin
  * @param max2 Range 2, end
  */
-function overlap(min1: number, max1: number, min2: number, max2: number): boolean {
-    const min = Math.min;
-    const max = Math.max;
-    const dx = max(0, min(max1, max2) - max(min1, min2));
-    return (dx > 0);
+export function overlap(
+  min1: number,
+  max1: number,
+  min2: number,
+  max2: number
+): boolean {
+  const min = Math.min;
+  const max = Math.max;
+  const dx = max(0, min(max1, max2) - max(min1, min2));
+  return dx > 0;
 }

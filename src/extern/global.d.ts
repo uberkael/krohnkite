@@ -19,19 +19,32 @@
 // DEALINGS IN THE SOFTWARE.
 
 /* KWin global objects */
-declare var workspace: KWin.WorkspaceWrapper;
-declare var options: KWin.Options;
+import { Options } from "kwin-api";
+import { Workspace, KWin } from "kwin-api/qml";
+import { KWinConfig } from "@src/driver/kwin/kwinconfig";
 
-/* QML objects */
-declare var activityInfo: Plasma.TaskManager.ActivityInfo;
-declare var mousePoller: Plasma.PlasmaCore.DataSource;
-declare var scriptRoot: object;
+declare global {
+  var workspace: Workspace;
+  var options: Options;
+  var kwin: KWin;
+  interface Api {
+    workspace: Workspace;
+    options: Options;
+    kwin: KWin;
+  }
+  var KWINCONFIG: KWinConfig;
+  var CONFIG: KWinConfig;
+  /* QML objects */
+  var activityInfo: Plasma.TaskManager.ActivityInfo;
+  var mousePoller: Plasma.PlasmaCore.DataSource;
+  var scriptRoot: object;
 
-interface PopupDialog {
+  interface PopupDialog {
     show(text: string): void;
-}
-declare var popupDialog: PopupDialog;
+  }
+  var popupDialog: PopupDialog;
 
-/* Common Javascript globals */
-declare let console: any;
-declare let setTimeout: any;
+  /* Common Javascript globals */
+  let console: any;
+  let setTimeout: any;
+}

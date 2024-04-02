@@ -18,24 +18,30 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-class FloatingLayout implements ILayout {
-    public static readonly id = "FloatingLayout ";
-    public static instance = new FloatingLayout();
+import { ILayout } from "@src/common";
+import { EngineContext } from "@src/engine/enginecontext";
+import { WindowClass, WindowState } from "@src/engine/window";
+import { Rect } from "@src/util/rect";
 
-    public readonly classID = FloatingLayout.id;
-    public readonly description: string = "Floating";
+export class FloatingLayout implements ILayout {
+  public static readonly id = "FloatingLayout ";
+  public static instance = new FloatingLayout();
 
-    public apply(ctx: EngineContext, tileables: Window[], area: Rect): void {
-        tileables.forEach((tileable: Window) =>
-            tileable.state = WindowState.TiledAfloat);
-    }
+  public readonly classID = FloatingLayout.id;
+  public readonly description: string = "Floating";
 
-    public clone(): this {
-        /* fake clone */
-        return this;
-    }
+  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+    tileables.forEach(
+      (tileable: WindowClass) => (tileable.state = WindowState.TiledAfloat)
+    );
+  }
 
-    public toString(): string {
-        return "FloatingLayout()";
-    }
+  public clone(): this {
+    /* fake clone */
+    return this;
+  }
+
+  public toString(): string {
+    return "FloatingLayout()";
+  }
 }

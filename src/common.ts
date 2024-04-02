@@ -18,133 +18,141 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+import { EngineContext } from "./engine/enginecontext";
+import { WindowClass } from "./engine/window";
+import { Rect } from "./util/rect";
+import { RectDelta } from "./util/rectdelta";
+
 enum Shortcut {
-    Left,
-    Right,
-    Up,
-    Down,
+  Left,
+  Right,
+  Up,
+  Down,
 
-    /* Alternate HJKL bindings */
-    FocusUp,
-    FocusDown,
-    FocusLeft,
-    FocusRight,
+  /* Alternate HJKL bindings */
+  FocusUp,
+  FocusDown,
+  FocusLeft,
+  FocusRight,
 
-    ShiftLeft,
-    ShiftRight,
-    ShiftUp,
-    ShiftDown,
+  ShiftLeft,
+  ShiftRight,
+  ShiftUp,
+  ShiftDown,
 
-    SwapUp,
-    SwapDown,
-    SwapLeft,
-    SwapRight,
+  SwapUp,
+  SwapDown,
+  SwapLeft,
+  SwapRight,
 
-    GrowWidth,
-    GrowHeight,
-    ShrinkWidth,
-    ShrinkHeight,
+  GrowWidth,
+  GrowHeight,
+  ShrinkWidth,
+  ShrinkHeight,
 
-    Increase,
-    Decrease,
-    ShiftIncrease,
-    ShiftDecrease,
+  Increase,
+  Decrease,
+  ShiftIncrease,
+  ShiftDecrease,
 
-    ToggleFloat,
-    ToggleFloatAll,
-    SetMaster,
-    NextLayout,
-    PreviousLayout,
-    SetLayout,
+  ToggleFloat,
+  ToggleFloatAll,
+  SetMaster,
+  NextLayout,
+  PreviousLayout,
+  SetLayout,
 
-    Rotate,
-    RotatePart,
+  Rotate,
+  RotatePart,
 }
 
 //#region Driver
 
-interface IConfig {
-    //#region Layout
-    layoutOrder: string[];
-    layoutFactories: {[key: string]: () => ILayout};
-    monocleMaximize: boolean;
-    maximizeSoleTile: boolean;
-    //#endregion
+export interface IConfig {
+  //#region Layout
+  layoutOrder: string[];
+  layoutFactories: { [key: string]: () => ILayout };
+  monocleMaximize: boolean;
+  maximizeSoleTile: boolean;
+  //#endregion
 
-    //#region Features
-    adjustLayout: boolean;
-    adjustLayoutLive: boolean;
-    keepFloatAbove: boolean;
-    noTileBorder: boolean;
-    limitTileWidthRatio: number;
-    //#endregion
+  //#region Features
+  adjustLayout: boolean;
+  adjustLayoutLive: boolean;
+  keepFloatAbove: boolean;
+  noTileBorder: boolean;
+  limitTileWidthRatio: number;
+  //#endregion
 
-    //#region Gap
-    screenGapBottom: number;
-    screenGapLeft: number;
-    screenGapRight: number;
-    screenGapTop: number;
-    tileLayoutGap: number;
-    //#endregion
+  //#region Gap
+  screenGapBottom: number;
+  screenGapLeft: number;
+  screenGapRight: number;
+  screenGapTop: number;
+  tileLayoutGap: number;
+  //#endregion
 
-    //#region Behavior
-    directionalKeyMode: "dwm" | "focus";
-    newWindowAsMaster: boolean;
-    //#endregion
+  //#region Behavior
+  directionalKeyMode: "dwm" | "focus";
+  newWindowAsMaster: boolean;
+  //#endregion
 }
 
-interface IDriverWindow {
-    readonly fullScreen: boolean;
-    readonly geometry: Readonly<Rect>;
-    readonly id: string;
-    readonly maximized: boolean;
-    readonly shouldIgnore: boolean;
-    readonly shouldFloat: boolean;
+export interface IDriverWindow {
+  readonly fullScreen: boolean;
+  readonly geometry: Readonly<Rect>;
+  readonly id: string;
+  readonly maximized: boolean;
+  readonly shouldIgnore: boolean;
+  readonly shouldFloat: boolean;
 
-    surface: ISurface;
+  surface: ISurface;
 
-    commit(geometry?: Rect, noBorder?: boolean, keepAbove?: boolean): void;
-    visible(srf: ISurface): boolean;
+  commit(geometry?: Rect, noBorder?: boolean, keepAbove?: boolean): void;
+  visible(srf: ISurface): boolean;
 }
 
-interface ISurface {
-    readonly id: string;
-    readonly ignore: boolean;
-    readonly workingArea: Readonly<Rect>;
+export interface ISurface {
+  readonly id: string;
+  readonly ignore: boolean;
+  readonly workingArea: Readonly<Rect>;
 
-    next(): ISurface | null;
+  next(): ISurface | null;
 }
 
-interface IDriverContext {
-    readonly backend: string;
-    readonly screens: ISurface[];
-    readonly cursorPosition: [number, number] | null;
+export interface IDriverContext {
+  readonly backend: string;
+  readonly screens: ISurface[];
+  readonly cursorPosition: [number, number] | null;
 
-    currentSurface: ISurface;
-    currentWindow: Window | null;
+  currentSurface: ISurface;
+  currentWindow: WindowClass | null;
 
-    setTimeout(func: () => void, timeout: number): void;
-    showNotification(text: string): void;
+  setTimeout(func: () => void, timeout: number): void;
+  showNotification(text: string): void;
 }
 
 //#endregion
 
-interface ILayoutClass {
-    readonly id: string;
-    new(): ILayout;
+export interface ILayoutClass {
+  readonly id: string;
+  new (): ILayout;
 }
 
-interface ILayout {
-    /* read-only */
-    readonly capacity?: number;
-    readonly description: string;
+export interface ILayout {
+  /* read-only */
+  readonly capacity?: number;
+  readonly description: string;
 
-    /* methods */
-    adjust?(area: Rect, tiles: Window[], basis: Window, delta: RectDelta): void;
-    apply(ctx: EngineContext, tileables: Window[], area: Rect): void;
-    handleShortcut?(ctx: EngineContext, input: Shortcut, data?: any): boolean;
+  /* methods */
+  adjust?(
+    area: Rect,
+    tiles: WindowClass[],
+    basis: WindowClass,
+    delta: RectDelta
+  ): void;
+  apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void;
+  handleShortcut?(ctx: EngineContext, input: Shortcut, data?: any): boolean;
 
-    toString(): string;
+  toString(): string;
 }
-
-let CONFIG: IConfig;

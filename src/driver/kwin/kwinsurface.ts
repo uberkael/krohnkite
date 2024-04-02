@@ -18,50 +18,64 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-class KWinSurface implements ISurface {
-    public static generateId(screen: number, activity: string, desktop: number) {
-        let path = String(screen);
-        if (KWINCONFIG.layoutPerActivity)
-            path += "@" + activity;
-        if (KWINCONFIG.layoutPerDesktop)
-            path += "#" + desktop;
-        return path;
-    }
+import { ISurface } from "@src/common";
+import { toRect } from "@src/util/kwinutil";
+import { Rect } from "@src/util/rect";
+import { ClientAreaOption, Output, VirtualDesktop } from "kwin-api";
 
-    public readonly id: string;
-    public readonly ignore: boolean;
-    public readonly workingArea: Rect;
+export class KWinSurface implements ISurface {
+  public static generateId(
+    screenName: string,
+    activity: string,
+    desktopName: string
+  ) {
+    let path = screenName;
+    if (KWINCONFIG.layoutPerActivity) path += "@" + activity;
+    if (KWINCONFIG.layoutPerDesktop) path += "#" + desktopName;
+    return path;
+  }
 
-    public readonly screen: number;
-    public readonly activity: string;
-    public readonly desktop: number;
+  public readonly id: string;
+  public readonly ignore: boolean;
+  public readonly workingArea: Rect;
 
-    constructor(screen: number, activity: string, desktop: number) {
-        const activityName = activityInfo.activityName(activity);
+  public readonly output: Output;
+  public readonly activity: string;
+  public readonly desktop: VirtualDesktop;
 
-        this.id = KWinSurface.generateId(screen, activity, desktop);
-        this.ignore = (
-            (KWINCONFIG.ignoreActivity.indexOf(activityName) >= 0)
-            || (KWINCONFIG.ignoreScreen.indexOf(screen) >= 0)
-        );
-        this.workingArea = toRect(
-            workspace.clientArea(KWin.PlacementArea, screen, desktop));
+  constructor(output: Output, activity: string, desktop: VirtualDesktop) {
+    //const activityName = activityInfo.activityName(activity);
 
-        this.screen = screen;
-        this.activity = activity;
-        this.desktop = desktop;
-    }
+    this.id = KWinSurface.generateId(output.name, activity, desktop.name);
+    this.ignore =
+      KWINCONFIG.ignoreActivity.indexOf(activity) >= 0 ||
+      KWINCONFIG.ignoreScreen.indexOf(output.name) >= 0;
+    this.workingArea = toRect(
+      workspace.clientArea(ClientAreaOption.PlacementArea, output, desktop)
+    );
 
-    public next(): ISurface | null {
-        if (this.desktop === workspace.desktops)
-            /* this is the last virtual desktop */
-            /* TODO: option to create additional desktop */
-            return null;
+    this.output = output;
+    this.activity = activity;
+    this.desktop = desktop;
+  }
 
-        return new KWinSurface(this.screen, this.activity, this.desktop + 1);
-    }
+  public next(): ISurface | null {
+    // TODO: ... thinking about this function
+    return null;
+    // old: workspace.desktops => int number of virtual desktops. now all desktops objects where window is on and empty list if window on all desktops.
+    //if (this.desktop === workspace.desktops)
+    /* this is the last virtual desktop */
+    /* TODO: option to create additional desktop */
+    // return null;
 
-    public toString(): string {
-        return "KWinSurface(" + [this.screen, activityInfo.activityName(this.activity), this.desktop].join(", ") + ")";
-    }
+    //return new KWinSurface(this.output, this.activity, this.desktop + 1);
+  }
+
+  public toString(): string {
+    return (
+      "KWinSurface(" +
+      [this.output.name, this.activity, this.desktop.name].join(", ") +
+      ")"
+    );
+  }
 }

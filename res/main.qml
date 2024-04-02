@@ -18,11 +18,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import QtQuick 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore;
-import org.kde.plasma.components 2.0 as Plasma;
-import org.kde.kwin 2.0;
-import org.kde.taskmanager 0.1 as TaskManager
+import QtQuick 2.15
+import org.kde.plasma.core as PlasmaCore;
+import org.kde.plasma.components as Plasma;
+import org.kde.plasma.plasma5support as Plasma5Support
+import org.kde.kwin 3.0;
+import org.kde.taskmanager as TaskManager
 import "../code/script.js" as K
 
 Item {
@@ -32,7 +33,7 @@ Item {
         id: activityInfo
     }
 
-    PlasmaCore.DataSource {
+    Plasma5Support.DataSource {
         id: mousePoller
         engine: 'executable'
     }
@@ -49,6 +50,12 @@ Item {
 
     Component.onCompleted: {
         console.log("KROHNKITE: starting the script");
-        (new K.KWinDriver()).main();
+        const api = {
+            "workspace": Workspace,
+            "options": Options,
+            "kwin": KWin,
+        };
+
+        K.init(api)
     }
 }
