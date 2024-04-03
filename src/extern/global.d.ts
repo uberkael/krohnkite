@@ -19,18 +19,78 @@
 // DEALINGS IN THE SOFTWARE.
 
 /* KWin global objects */
+import { QRect, Signal } from "kwin-api/qt";
 import { Options } from "kwin-api";
 import { Workspace, KWin } from "kwin-api/qml";
-import { KWinConfig } from "@src/driver/kwin/kwinconfig";
+import { KWinConfig } from "@kwin/kwinconfig";
+import { IShortcuts } from "common";
 
+declare namespace Plasma {
+  namespace TaskManager {
+    /* reference: https://github.com/KDE/plasma-workspace/blob/master/libtaskmanager/activityinfo.h */
+    interface ActivityInfo {
+      /* read-only */
+      readonly currentActivity: string;
+      readonly numberOfRunningActivities: number;
+
+      /* methods */
+      runningActivities(): string[];
+      activityName(id: string): string;
+
+      /* signals */
+    }
+  }
+
+  namespace PlasmaCore {
+    /* reference: https://techbase.kde.org/Development/Tutorials/Plasma4/QML/API#DataSource */
+    interface DataSource {
+      readonly sources: string[];
+      readonly valid: boolean;
+      readonly data: { [key: string]: object } /* variant map */;
+
+      interval: number;
+      engine: string;
+      connectedSources: string[];
+
+      /** (sourceName: string, data: object) */
+      onNewData: Signal<(sourceName: string, data: any) => void>;
+      /** (source: string) */
+      // onSourceAdded: QSignal;
+      // /** (source: string) */
+      // onSourceRemoved: QSignal;
+      // /** (source: string) */
+      // onSourceConnected: QSignal;
+      // /** (source: string) */
+      // onSourceDisconnected: QSignal;
+      // onIntervalChanged: QSignal;
+      // onEngineChanged: QSignal;
+      // onDataChanged: QSignal;
+      // onConnectedSourcesChanged: QSignal;
+      // onSourcesChanged: QSignal;
+
+      keysForSource(source: string): string[];
+      serviceForSource(source: string): object; // TODO: returns Service
+      connectSource(source: string): void;
+      disconnectSource(source: string): void;
+    }
+  }
+}
+
+declare namespace Qt {
+  function createQmlObject(qml: string, parent: object, filepath?: string): any;
+
+  function rect(x: number, y: number, width: number, height: number): QRect;
+}
 declare global {
   var workspace: Workspace;
   var options: Options;
   var kwin: KWin;
+  var shortcuts: IShortcuts;
   interface Api {
     workspace: Workspace;
     options: Options;
     kwin: KWin;
+    shortcuts: IShortcuts;
   }
   var KWINCONFIG: KWinConfig;
   var CONFIG: KWinConfig;

@@ -18,12 +18,13 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+import { ShortcutHandler } from "kwin-api/qml";
 import { EngineContext } from "./engine/enginecontext";
 import { WindowClass } from "./engine/window";
 import { Rect } from "./util/rect";
 import { RectDelta } from "./util/rectdelta";
 
-enum Shortcut {
+export enum Shortcut {
   Left,
   Right,
   Up,
@@ -64,6 +65,43 @@ enum Shortcut {
 
   Rotate,
   RotatePart,
+}
+export interface IShortcuts {
+  getDownNext(): ShortcutHandler;
+  getUpPrev(): ShortcutHandler;
+  getLeft(): ShortcutHandler;
+  getRight(): ShortcutHandler;
+
+  getShiftDown(): ShortcutHandler;
+  getShiftUp(): ShortcutHandler;
+  getShiftLeft(): ShortcutHandler;
+  getShiftRight(): ShortcutHandler;
+
+  getGrowHeight(): ShortcutHandler;
+  getShrinkHeight(): ShortcutHandler;
+  getShrinkWidth(): ShortcutHandler;
+  getGrowWidth(): ShortcutHandler;
+
+  getIncrease(): ShortcutHandler;
+  getDecrease(): ShortcutHandler;
+
+  getToggleFloat(): ShortcutHandler;
+  getFloatAll(): ShortcutHandler;
+  getNextLayout(): ShortcutHandler;
+  getPreviousLayout(): ShortcutHandler;
+
+  getRotate(): ShortcutHandler;
+  getRotatePart(): ShortcutHandler;
+
+  getSetMaster(): ShortcutHandler;
+
+  getTileLayout(): ShortcutHandler;
+  getMonocleLayout(): ShortcutHandler;
+  getThreeColumnLayout(): ShortcutHandler;
+  getSpreadLayout(): ShortcutHandler;
+  getStairLayout(): ShortcutHandler;
+  getFloatingLayout(): ShortcutHandler;
+  getQuarterLayout(): ShortcutHandler;
 }
 
 //#region Driver

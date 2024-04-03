@@ -18,12 +18,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout } from "@src/common";
-import { KWinDriver } from "@src/driver/kwin/kwindriver";
-import { KWinWindow } from "@src/driver/kwin/kwinwindow";
-import { EngineContext } from "@src/engine/enginecontext";
-import { WindowClass, WindowState } from "@src/engine/window";
-import { Rect } from "@src/util/rect";
+import { ILayout, Shortcut } from "common";
+import { KWinDriver } from "@kwin/kwindriver";
+import { KWinWindow } from "@kwin/kwinwindow";
+import { EngineContext } from "@engine/enginecontext";
+import { WindowClass, WindowState } from "@engine/window";
+import { Rect } from "@util/rect";
 
 export class MonocleLayout implements ILayout {
   public static readonly id = "MonocleLayout";

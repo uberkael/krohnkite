@@ -18,13 +18,13 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout } from "@src/common";
-import { WindowClass, WindowState } from "@src/engine/window";
-import { Rect } from "@src/util/rect";
-import { RectDelta } from "@src/util/rectdelta";
+import { ILayout, Shortcut } from "common";
+import { WindowClass, WindowState } from "@engine/window";
+import { Rect } from "@util/rect";
+import { RectDelta } from "@util/rectdelta";
 import { LayoutUtils } from "./layoututils";
-import { clip, partitionArrayBySizes, slide } from "@src/util/func";
-import { EngineContext } from "@src/engine/enginecontext";
+import { clip, partitionArrayBySizes, slide } from "@util/func";
+import { EngineContext } from "@engine/enginecontext";
 
 export class ThreeColumnLayout implements ILayout {
   public static readonly MIN_MASTER_RATIO = 0.2;

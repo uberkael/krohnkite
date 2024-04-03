@@ -18,13 +18,13 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { IDriverWindow, ISurface } from "@src/common";
-import { clip, matchWords } from "@src/util/func";
-import { toRect } from "@src/util/kwinutil";
-import { Rect } from "@src/util/rect";
+import { IDriverWindow, ISurface } from "common";
+import { clip, matchWords } from "@util/func";
+import { toRect } from "@util/kwinutil";
+import { Rect } from "@util/rect";
 import { ClientAreaOption, Window } from "kwin-api";
 import { KWinSurface } from "./kwinsurface";
-import { debugObj } from "@src/util/debug";
+import { debugObj } from "@util/debug";
 
 export class KWinWindow implements IDriverWindow {
   public static generateID(w: Window) {

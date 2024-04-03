@@ -17,17 +17,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import { IConfig, ILayout, ILayoutClass } from "@src/common";
-import { DEBUG, debug } from "@src/util/debug";
-import { TileLayout } from "@src/layouts/tilelayout";
-import { MonocleLayout } from "@src/layouts/monoclelayout";
-import { ThreeColumnLayout } from "@src/layouts/threecolumnlayout";
-import { SpreadLayout } from "@src/layouts/spreadlayout";
-import { StairLayout } from "@src/layouts/stairlayout";
-import { SpiralLayout } from "@src/layouts/spirallayout";
-import { QuarterLayout } from "@src/layouts/quarterlayout";
-import { FloatingLayout } from "@src/layouts/floatinglayout";
-import { CascadeLayout } from "@src/layouts/cascadelayout";
+import { IConfig, ILayout, ILayoutClass } from "common";
+import { DEBUG, debug } from "@util/debug";
+import { TileLayout } from "@layouts/tilelayout";
+import { MonocleLayout } from "@layouts/monoclelayout";
+import { ThreeColumnLayout } from "@layouts/threecolumnlayout";
+import { SpreadLayout } from "@layouts/spreadlayout";
+import { StairLayout } from "@layouts/stairlayout";
+import { SpiralLayout } from "@layouts/spirallayout";
+import { QuarterLayout } from "@layouts/quarterlayout";
+import { FloatingLayout } from "@layouts/floatinglayout";
+import { CascadeLayout } from "@layouts/cascadelayout";
 
 export class KWinConfig implements IConfig {
   //#region Layout

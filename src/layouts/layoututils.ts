@@ -18,9 +18,9 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { Rect } from "@src/util/rect";
-import { RectDelta } from "@src/util/rectdelta";
-import { clip } from "@src/util/func";
+import { Rect } from "@util/rect";
+import { RectDelta } from "@util/rectdelta";
+import { clip } from "@util/func";
 
 export class LayoutUtils {
   /**

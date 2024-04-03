@@ -18,10 +18,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout } from "@src/common";
-import { EngineContext } from "@src/engine/enginecontext";
-import { WindowClass, WindowState } from "@src/engine/window";
-import { Rect } from "@src/util/rect";
+import { ILayout, Shortcut } from "common";
+import { EngineContext } from "@engine/enginecontext";
+import { WindowClass, WindowState } from "@engine/window";
+import { Rect } from "@util/rect";
 
 export class SpreadLayout implements ILayout {
   public static readonly id = "SpreadLayout";

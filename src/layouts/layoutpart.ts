@@ -17,9 +17,9 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import { WindowClass } from "@src/engine/window";
-import { Rect } from "@src/util/rect";
-import { RectDelta } from "@src/util/rectdelta";
+import { WindowClass } from "@engine/window";
+import { Rect } from "@util/rect";
+import { RectDelta } from "@util/rectdelta";
 import { LayoutUtils } from "./layoututils";
 
 interface ILayoutPart {

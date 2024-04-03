@@ -27,17 +27,25 @@
  */
 import { MaximizeMode, VirtualDesktop, Window } from "kwin-api";
 import { KWinSurface } from "./kwinsurface";
-import { ISurface, IDriverContext } from "@src/common";
-import { WindowClass, WindowState } from "@src/engine/window";
+import { ISurface, IDriverContext, Shortcut, ILayoutClass } from "common";
+import { WindowClass, WindowState } from "@engine/window";
 import { KWinWindow } from "./kwinwindow";
-import { TilingController } from "@src/engine/control";
-import { TilingEngine } from "@src/engine/engine";
-import { WrapperMap } from "@src/util/wrappermap";
+import { TilingController } from "@engine/control";
+import { TilingEngine } from "@engine/engine";
+import { WrapperMap } from "@util/wrappermap";
 import { KWinMousePoller } from "./kwinmousepoller";
 import { KWinConfig } from "./kwinconfig";
-import { debug, debugObj } from "@src/util/debug";
+import { debug, debugObj } from "@util/debug";
 import { Signal } from "kwin-api/qt";
 import { KWinSetTimeout } from "./kwinsettimeout";
+// import { shortcuts } from "init";
+import { TileLayout } from "@layouts/tilelayout";
+import { MonocleLayout } from "@layouts/monoclelayout";
+import { ThreeColumnLayout } from "@layouts/threecolumnlayout";
+import { SpreadLayout } from "@layouts/spreadlayout";
+import { StairLayout } from "@layouts/stairlayout";
+import { FloatingLayout } from "@layouts/floatinglayout";
+import { QuarterLayout } from "@layouts/quarterlayout";
 
 export class KWinDriver implements IDriverContext {
   public static backendName: string = "kwin";
@@ -153,73 +161,102 @@ export class KWinDriver implements IDriverContext {
   }
   //#endregion
 
-  // private bindShortcut() {
-  //   if (!registerShortcut) {
-  //     debug(
-  //       () => "KWin.registerShortcut doesn't exist. Omitting shortcut binding."
-  //     );
-  //     return;
-  //   }
-  //
-  //   const bind = (seq: string, title: string, input: Shortcut) => {
-  //     title = "Krohnkite: " + title;
-  //     seq = "Meta+" + seq;
-  //     registerShortcut(title, "", seq, () => {
-  //       this.enter(() => this.control.onShortcut(this, input));
-  //     });
-  //   };
-  //
-  //   bind("J", "Down/Next", Shortcut.Down);
-  //   bind("K", "Up/Prev", Shortcut.Up);
-  //   bind("H", "Left", Shortcut.Left);
-  //   bind("L", "Right", Shortcut.Right);
-  //
-  //   bind("Shift+J", "Move Down/Next", Shortcut.ShiftDown);
-  //   bind("Shift+K", "Move Up/Prev", Shortcut.ShiftUp);
-  //   bind("Shift+H", "Move Left", Shortcut.ShiftLeft);
-  //   bind("Shift+L", "Move Right", Shortcut.ShiftRight);
-  //
-  //   bind("Ctrl+J", "Grow Height", Shortcut.GrowHeight);
-  //   bind("Ctrl+K", "Shrink Height", Shortcut.ShrinkHeight);
-  //   bind("Ctrl+H", "Shrink Width", Shortcut.ShrinkWidth);
-  //   bind("Ctrl+L", "Grow Width", Shortcut.GrowWidth);
-  //
-  //   bind("I", "Increase", Shortcut.Increase);
-  //   bind("D", "Decrease", Shortcut.Decrease);
-  //
-  //   bind("F", "Float", Shortcut.ToggleFloat);
-  //   bind("Shift+F", "Float All", Shortcut.ToggleFloatAll);
-  //   bind("", "Cycle Layout", Shortcut.NextLayout); // TODO: remove this shortcut
-  //   bind("\\", "Next Layout", Shortcut.NextLayout);
-  //   bind("|", "Previous Layout", Shortcut.PreviousLayout);
-  //
-  //   bind("R", "Rotate", Shortcut.Rotate);
-  //   bind("Shift+R", "Rotate Part", Shortcut.RotatePart);
-  //
-  //   bind("Return", "Set master", Shortcut.SetMaster);
-  //
-  //   const bindLayout = (
-  //     seq: string,
-  //     title: string,
-  //     layoutClass: ILayoutClass
-  //   ) => {
-  //     title = "Krohnkite: " + title + " Layout";
-  //     seq = seq !== "" ? "Meta+" + seq : "";
-  //     registerShortcut(title, "", seq, () => {
-  //       this.enter(() =>
-  //         this.control.onShortcut(this, Shortcut.SetLayout, layoutClass.id)
-  //       );
-  //     });
-  //   };
-  //
-  //   bindLayout("T", "Tile", TileLayout);
-  //   bindLayout("M", "Monocle", MonocleLayout);
-  //   bindLayout("", "Three Column", ThreeColumnLayout);
-  //   bindLayout("", "Spread", SpreadLayout);
-  //   bindLayout("", "Stair", StairLayout);
-  //   bindLayout("", "Floating", FloatingLayout);
-  //   bindLayout("", "Quarter", QuarterLayout);
-  // }
+  private bindShortcut() {
+    const callbackShortcut = (shortcut: Shortcut) => {
+      return () => {
+        this.enter(() => this.control.onShortcut(this, shortcut));
+      };
+    };
+    shortcuts.getDownNext().activated.connect(callbackShortcut(Shortcut.Down));
+    shortcuts.getUpPrev().activated.connect(callbackShortcut(Shortcut.Up));
+    shortcuts.getLeft().activated.connect(callbackShortcut(Shortcut.Left));
+    shortcuts.getRight().activated.connect(callbackShortcut(Shortcut.Right));
+
+    shortcuts
+      .getShiftDown()
+      .activated.connect(callbackShortcut(Shortcut.ShiftDown));
+    shortcuts
+      .getShiftUp()
+      .activated.connect(callbackShortcut(Shortcut.ShiftUp));
+    shortcuts
+      .getShiftLeft()
+      .activated.connect(callbackShortcut(Shortcut.ShiftLeft));
+    shortcuts
+      .getShiftRight()
+      .activated.connect(callbackShortcut(Shortcut.ShiftRight));
+
+    shortcuts
+      .getGrowHeight()
+      .activated.connect(callbackShortcut(Shortcut.GrowHeight));
+    shortcuts
+      .getShrinkHeight()
+      .activated.connect(callbackShortcut(Shortcut.ShrinkHeight));
+    shortcuts
+      .getShrinkWidth()
+      .activated.connect(callbackShortcut(Shortcut.ShrinkWidth));
+    shortcuts
+      .getGrowWidth()
+      .activated.connect(callbackShortcut(Shortcut.GrowWidth));
+
+    shortcuts
+      .getIncrease()
+      .activated.connect(callbackShortcut(Shortcut.Increase));
+    shortcuts
+      .getDecrease()
+      .activated.connect(callbackShortcut(Shortcut.Decrease));
+
+    shortcuts
+      .getToggleFloat()
+      .activated.connect(callbackShortcut(Shortcut.ToggleFloat));
+    shortcuts
+      .getFloatAll()
+      .activated.connect(callbackShortcut(Shortcut.ToggleFloatAll));
+    shortcuts
+      .getNextLayout()
+      .activated.connect(callbackShortcut(Shortcut.NextLayout));
+    shortcuts
+      .getPreviousLayout()
+      .activated.connect(callbackShortcut(Shortcut.PreviousLayout));
+
+    shortcuts.getRotate().activated.connect(callbackShortcut(Shortcut.Rotate));
+    shortcuts
+      .getRotatePart()
+      .activated.connect(callbackShortcut(Shortcut.RotatePart));
+
+    shortcuts
+      .getSetMaster()
+      .activated.connect(callbackShortcut(Shortcut.SetMaster));
+
+    const callbackShortcutLayout = (layoutClass: ILayoutClass) => {
+      return () => {
+        this.enter(() =>
+          this.control.onShortcut(this, Shortcut.SetLayout, layoutClass.id)
+        );
+      };
+    };
+
+    shortcuts
+      .getTileLayout()
+      .activated.connect(callbackShortcutLayout(TileLayout));
+    shortcuts
+      .getMonocleLayout()
+      .activated.connect(callbackShortcutLayout(MonocleLayout));
+    shortcuts
+      .getThreeColumnLayout()
+      .activated.connect(callbackShortcutLayout(ThreeColumnLayout));
+    shortcuts
+      .getSpreadLayout()
+      .activated.connect(callbackShortcutLayout(SpreadLayout));
+    shortcuts
+      .getStairLayout()
+      .activated.connect(callbackShortcutLayout(StairLayout));
+    shortcuts
+      .getFloatingLayout()
+      .activated.connect(callbackShortcutLayout(FloatingLayout));
+    shortcuts
+      .getQuarterLayout()
+      .activated.connect(callbackShortcutLayout(QuarterLayout));
+  }
 
   //#region Helper functions
   /**

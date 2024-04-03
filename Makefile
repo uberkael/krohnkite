@@ -51,6 +51,7 @@ $(KWINPKG_DIR): $(KWIN_META)
 $(KWINPKG_DIR): $(KWIN_QML)
 $(KWINPKG_DIR): $(KWINPKG_DIR)/contents/ui/config.ui
 $(KWINPKG_DIR): $(KWINPKG_DIR)/contents/ui/popup.qml
+$(KWINPKG_DIR): $(KWINPKG_DIR)/contents/ui/shortcuts.qml
 $(KWINPKG_DIR): $(KWINPKG_DIR)/contents/code/main.js
 $(KWINPKG_DIR): $(KWINPKG_DIR)/contents/code/script.js
 $(KWINPKG_DIR): $(KWINPKG_DIR)/contents/config/main.xml
@@ -66,6 +67,7 @@ $(KWIN_QML): res/main.qml
 
 $(KWINPKG_DIR)/contents/ui/config.ui: res/config.ui
 $(KWINPKG_DIR)/contents/ui/popup.qml: res/popup.qml
+$(KWINPKG_DIR)/contents/ui/shortcuts.qml: res/shortcuts.qml
 $(KWINPKG_DIR)/contents/code/script.js: $(NODE_SCRIPT)
 $(KWINPKG_DIR)/contents/code/main.js: res/main.js
 $(KWINPKG_DIR)/contents/config/main.xml: res/config.xml
@@ -74,7 +76,9 @@ $(KWINPKG_DIR)/%:
 	@cp -v $< $@
 
 $(NODE_SCRIPT): $(SRC)
-	./node_modules/typescript/bin/tsc
+	npm run build
+		# npx esbuild --bundle src/init.ts --outfile=krohnkite.js --format=cjs --platform=neutral
+	# ./node_modules/typescript/bin/tsc src/init.ts
 
 $(NODE_META): res/package.json
 	sed "s/\$$VER/$(PROJECT_VER).0/" $< > $@

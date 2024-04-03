@@ -17,10 +17,10 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import { EngineContext } from "@src/engine/enginecontext";
-import { ILayout } from "@src/common";
-import { WindowClass } from "@src/engine/window";
-import { Rect } from "@src/util/rect";
+import { EngineContext } from "@engine/enginecontext";
+import { ILayout, Shortcut } from "common";
+import { WindowClass, WindowState } from "@engine/window";
+import { Rect } from "@util/rect";
 
 enum CascadeDirection {
   NorthWest = 0,

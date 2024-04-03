@@ -18,6 +18,17 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+import { Rect } from "@util/rect";
+import { LayoutStore } from "./layoutstore";
+import { WindowClass, WindowState } from "./window";
+import { WindowStore } from "./windowstore";
+import { RectDelta } from "@util/rectdelta";
+import { IDriverContext, ISurface, Shortcut } from "common";
+import { debug, debugObj } from "@util/debug";
+import { MonocleLayout } from "@layouts/monoclelayout";
+import { EngineContext } from "./enginecontext";
+import { overlap, wrapIndex } from "@util/func";
+
 type Direction = "up" | "down" | "left" | "right";
 
 /**

@@ -18,6 +18,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+import { IDriverWindow, ISurface } from "common";
+import { WindowClass } from "@engine/window";
+import { Rect } from "@util/rect";
+
 class TestDriver {
   public currentScreen: number;
   public currentWindow: number;

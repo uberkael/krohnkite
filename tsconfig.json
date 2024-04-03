@@ -1,17 +1,26 @@
 {
+  "include": ["src/"],
+  "exclude": ["*.*", "pkg/"],
   "compileOnSave": true,
+  "declarationDir": "types",
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES5",
     // "outFile": "krohnkite.js",
     "noEmitOnError": false,
     "removeComments": true,
-    "lib": ["es5"],
+    "lib": ["ES5"],
     "alwaysStrict": true,
     "strict": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ES2015",
+    "moduleResolution": "bundler",
+    // "rootDir": "src",
+    "baseUrl": "src",
     "paths": {
-      "@src/*": ["./src/*"]
+      "@kwin/*": ["driver/kwin/*"],
+      "@engine/*": ["engine/*"],
+      "@extern/*": ["extern/*"],
+      "@layouts/*": ["layouts/*"],
+      "@util/*": ["util/*"]
     }
   }
 }

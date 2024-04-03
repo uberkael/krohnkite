@@ -18,9 +18,9 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ISurface } from "@src/common";
-import { toRect } from "@src/util/kwinutil";
-import { Rect } from "@src/util/rect";
+import { ISurface } from "common";
+import { toRect } from "@util/kwinutil";
+import { Rect } from "@util/rect";
 import { ClientAreaOption, Output, VirtualDesktop } from "kwin-api";
 
 export class KWinSurface implements ISurface {

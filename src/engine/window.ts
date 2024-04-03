@@ -18,6 +18,11 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+import { IDriverWindow, ISurface } from "common";
+import { debugObj } from "@util/debug";
+import { Rect } from "@util/rect";
+import { RectDelta } from "@util/rectdelta";
+
 export enum WindowState {
   /* initial value */
   Unmanaged,

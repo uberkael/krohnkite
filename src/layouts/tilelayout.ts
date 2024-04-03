@@ -18,17 +18,17 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout } from "@src/common";
+import { ILayout, Shortcut } from "common";
 import {
   HalfSplitLayoutPart,
   RotateLayoutPart,
   StackLayoutPart,
 } from "./layoutpart";
-import { Rect } from "@src/util/rect";
-import { WindowClass, WindowState } from "@src/engine/window";
-import { RectDelta } from "@src/util/rectdelta";
-import { EngineContext } from "@src/engine/enginecontext";
-import { clip, slide } from "@src/util/func";
+import { Rect } from "@util/rect";
+import { WindowClass, WindowState } from "@engine/window";
+import { RectDelta } from "@util/rectdelta";
+import { EngineContext } from "@engine/enginecontext";
+import { clip, slide } from "@util/func";
 
 export class TileLayout implements ILayout {
   public static readonly MIN_MASTER_RATIO = 0.2;

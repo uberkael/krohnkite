@@ -54,8 +54,14 @@ Item {
             "workspace": Workspace,
             "options": Options,
             "kwin": KWin,
+            "shortcuts": shortcutsLoader.item
         };
 
         K.init(api)
+    }
+    Loader {
+        id: shortcutsLoader;
+
+        source: "shortcuts.qml";
     }
 }

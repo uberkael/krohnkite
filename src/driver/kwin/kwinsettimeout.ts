@@ -18,7 +18,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { debugObj } from "@src/util/debug";
+import { Qt } from "@extern/global";
+import { debugObj } from "@util/debug";
 import { QTimer } from "kwin-api/qt";
 
 class KWinTimerPool {

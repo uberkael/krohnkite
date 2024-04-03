@@ -25,8 +25,8 @@
  * In short, this class is just a bunch of event handling methods.
  */
 import { TilingEngine } from "./engine";
-import { IDriverContext } from "@src/common";
-import { debugObj } from "@src/util/debug";
+import { IDriverContext, Shortcut } from "common";
+import { debugObj } from "@util/debug";
 import { WindowClass, WindowState } from "./window";
 
 export class TilingController {

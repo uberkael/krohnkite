@@ -25,7 +25,7 @@
  * not really a find-grained control mechanism, but is simple and concise.
  */
 import { WindowClass } from "./window";
-import { IDriverContext } from "@src/common";
+import { IDriverContext } from "common";
 import { TilingEngine } from "./engine";
 
 export class EngineContext {
