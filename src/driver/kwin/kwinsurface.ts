@@ -18,12 +18,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ISurface } from "common";
-import { toRect } from "@util/kwinutil";
-import { Rect } from "@util/rect";
-import { ClientAreaOption, Output, VirtualDesktop } from "kwin-api";
-
-export class KWinSurface implements ISurface {
+class KWinSurface implements ISurface {
   public static generateId(
     screenName: string,
     activity: string,
@@ -43,7 +38,12 @@ export class KWinSurface implements ISurface {
   public readonly activity: string;
   public readonly desktop: VirtualDesktop;
 
-  constructor(output: Output, activity: string, desktop: VirtualDesktop) {
+  constructor(
+    output: Output,
+    activity: string,
+    desktop: VirtualDesktop,
+    workspace: Workspace
+  ) {
     //const activityName = activityInfo.activityName(activity);
 
     this.id = KWinSurface.generateId(output.name, activity, desktop.name);

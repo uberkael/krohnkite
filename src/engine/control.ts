@@ -24,12 +24,8 @@
  *
  * In short, this class is just a bunch of event handling methods.
  */
-import { TilingEngine } from "./engine";
-import { IDriverContext, Shortcut } from "common";
-import { debugObj } from "@util/debug";
-import { WindowClass, WindowState } from "./window";
 
-export class TilingController {
+class TilingController {
   private engine: TilingEngine;
 
   public constructor(engine: TilingEngine) {
@@ -187,18 +183,18 @@ export class TilingController {
   public onShortcut(ctx: IDriverContext, input: Shortcut, data?: any) {
     if (CONFIG.directionalKeyMode === "focus") {
       switch (input) {
-        case Shortcut.Up:
-          input = Shortcut.FocusUp;
-          break;
-        case Shortcut.Down:
-          input = Shortcut.FocusDown;
-          break;
-        case Shortcut.Left:
-          input = Shortcut.FocusLeft;
-          break;
-        case Shortcut.Right:
-          input = Shortcut.FocusRight;
-          break;
+        // case Shortcut.Up:
+        //   input = Shortcut.FocusUp;
+        //   break;
+        // case Shortcut.Down:
+        //   input = Shortcut.FocusDown;
+        //   break;
+        // case Shortcut.Left:
+        //   input = Shortcut.FocusLeft;
+        //   break;
+        // case Shortcut.Right:
+        //   input = Shortcut.FocusRight;
+        //   break;
 
         case Shortcut.ShiftUp:
           input = Shortcut.SwapUp;
@@ -222,10 +218,10 @@ export class TilingController {
 
     const window = ctx.currentWindow;
     switch (input) {
-      case Shortcut.Up:
+      case Shortcut.FocusNext:
         this.engine.focusOrder(ctx, -1);
         break;
-      case Shortcut.Down:
+      case Shortcut.FocusPrev:
         this.engine.focusOrder(ctx, +1);
         break;
 
@@ -295,7 +291,6 @@ export class TilingController {
         if (typeof data === "string") this.engine.setLayout(ctx, data);
         break;
     }
-
     this.engine.arrange(ctx);
   }
 }

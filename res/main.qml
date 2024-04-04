@@ -43,7 +43,7 @@ Item {
         source: "popup.qml"
 
         function show(text) {
-            var area = workspace.clientArea(KWin.FullScreenArea, workspace.activeScreen, workspace.currentDesktop);
+            var area = Workspace.clientArea(KWin.FullScreenArea, Workspace.activeScreen, Workspace.currentDesktop);
             this.item.show(text, area, 1000);
         }
     }
@@ -52,12 +52,12 @@ Item {
         console.log("KROHNKITE: starting the script");
         const api = {
             "workspace": Workspace,
-            "options": Options,
+            // "options": Options,
             "kwin": KWin,
             "shortcuts": shortcutsLoader.item
         };
 
-        K.init(api)
+        (new K.KWinDriver(api)).main();
     }
     Loader {
         id: shortcutsLoader;

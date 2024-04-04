@@ -18,15 +18,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout, Shortcut } from "common";
-import { WindowClass, WindowState } from "@engine/window";
-import { Rect } from "@util/rect";
-import { RectDelta } from "@util/rectdelta";
-import { LayoutUtils } from "./layoututils";
-import { clip, partitionArrayBySizes, slide } from "@util/func";
-import { EngineContext } from "@engine/enginecontext";
-
-export class ThreeColumnLayout implements ILayout {
+class ThreeColumnLayout implements ILayout {
   public static readonly MIN_MASTER_RATIO = 0.2;
   public static readonly MAX_MASTER_RATIO = 0.75;
   public static readonly id = "ThreeColumnLayout";
@@ -211,14 +203,14 @@ export class ThreeColumnLayout implements ILayout {
       case Shortcut.Decrease:
         this.resizeMaster(ctx, -1);
         return true;
-      case Shortcut.Left:
+      case Shortcut.FocusLeft:
         this.masterRatio = clip(
           slide(this.masterRatio, -0.05),
           ThreeColumnLayout.MIN_MASTER_RATIO,
           ThreeColumnLayout.MAX_MASTER_RATIO
         );
         return true;
-      case Shortcut.Right:
+      case Shortcut.FocusRight:
         this.masterRatio = clip(
           slide(this.masterRatio, +0.05),
           ThreeColumnLayout.MIN_MASTER_RATIO,

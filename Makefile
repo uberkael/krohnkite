@@ -1,4 +1,4 @@
-PROJECT_NAME = krohnkite
+PROJECT_NAME = krohnkite6
 PROJECT_VER  = 0.9.0
 PROJECT_REV  = $(shell git rev-parse HEAD | cut -b-7)
 
@@ -76,9 +76,7 @@ $(KWINPKG_DIR)/%:
 	@cp -v $< $@
 
 $(NODE_SCRIPT): $(SRC)
-	npm run build
-		# npx esbuild --bundle src/init.ts --outfile=krohnkite.js --format=cjs --platform=neutral
-	# ./node_modules/typescript/bin/tsc src/init.ts
+	./node_modules/typescript/bin/tsc
 
 $(NODE_META): res/package.json
 	sed "s/\$$VER/$(PROJECT_VER).0/" $< > $@

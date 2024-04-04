@@ -18,19 +18,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout } from "common";
-import { FillLayoutPart, HalfSplitLayoutPart } from "./layoutpart";
-import { Rect } from "@util/rect";
-import { WindowClass, WindowState } from "@engine/window";
-import { RectDelta } from "@util/rectdelta";
-import { EngineContext } from "@engine/enginecontext";
-
 type SpiralLayoutPart = HalfSplitLayoutPart<
   FillLayoutPart,
   SpiralLayoutPart | FillLayoutPart
 >;
 
-export class SpiralLayout implements ILayout {
+class SpiralLayout implements ILayout {
   public readonly description = "Spiral";
 
   private depth: number;

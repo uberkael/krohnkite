@@ -18,14 +18,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout, Shortcut } from "common";
-import { KWinDriver } from "@kwin/kwindriver";
-import { KWinWindow } from "@kwin/kwinwindow";
-import { EngineContext } from "@engine/enginecontext";
-import { WindowClass, WindowState } from "@engine/window";
-import { Rect } from "@util/rect";
-
-export class MonocleLayout implements ILayout {
+class MonocleLayout implements ILayout {
   public static readonly id = "MonocleLayout";
   public readonly description: string = "Monocle";
 
@@ -69,15 +62,17 @@ export class MonocleLayout implements ILayout {
     data?: any
   ): boolean {
     switch (input) {
-      case Shortcut.Up:
+      // case Shortcut.Up:
+      // case Shortcut.Left:
+      case Shortcut.FocusNext:
       case Shortcut.FocusUp:
-      case Shortcut.Left:
       case Shortcut.FocusLeft:
         ctx.cycleFocus(-1);
         return true;
-      case Shortcut.Down:
+      // case Shortcut.Down:
+      // case Shortcut.Right:
+      case Shortcut.FocusPrev:
       case Shortcut.FocusDown:
-      case Shortcut.Right:
       case Shortcut.FocusRight:
         ctx.cycleFocus(1);
         return true;

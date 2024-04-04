@@ -18,12 +18,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { IDriverWindow, ISurface } from "common";
-import { debugObj } from "@util/debug";
-import { Rect } from "@util/rect";
-import { RectDelta } from "@util/rectdelta";
-
-export enum WindowState {
+enum WindowState {
   /* initial value */
   Unmanaged,
 
@@ -39,7 +34,7 @@ export enum WindowState {
   Undecided,
 }
 
-export class WindowClass {
+class WindowClass {
   public static isTileableState(state: WindowState): boolean {
     return (
       state === WindowState.Tiled ||

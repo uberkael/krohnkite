@@ -18,9 +18,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { KWinSetTimeout } from "./kwinsettimeout";
-
-export class KWinMousePoller {
+class KWinMousePoller {
   public static readonly COMMAND = "xdotool getmouselocation";
   public static readonly INTERVAL = 50; /* ms */
 

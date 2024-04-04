@@ -18,11 +18,6 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout, ISurface } from "common";
-import { FloatingLayout } from "@layouts/floatinglayout";
-import { MonocleLayout } from "@layouts/monoclelayout";
-import { wrapIndex } from "@util/func";
-
 class LayoutStoreEntry {
   public get currentLayout(): ILayout {
     return this.loadLayout(this.currentID);
@@ -82,7 +77,7 @@ class LayoutStoreEntry {
   }
 }
 
-export class LayoutStore {
+class LayoutStore {
   private store: { [key: string]: LayoutStoreEntry };
 
   constructor() {

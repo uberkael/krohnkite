@@ -1,4 +1,5 @@
 // Copyright (c) 2018-2019 Eon S. Jeon <esjeon@hyunmu.am>
+// Copyright (c) 2024 Vjatcheslav V. Kolchkov <akl334@protonmail.ch>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -25,29 +26,9 @@
  * signals(Qt/KDE term for binding events), and providing specific utility
  * functions.
  */
-import { MaximizeMode, VirtualDesktop, Window } from "kwin-api";
-import { KWinSurface } from "./kwinsurface";
-import { ISurface, IDriverContext, Shortcut, ILayoutClass } from "common";
-import { WindowClass, WindowState } from "@engine/window";
-import { KWinWindow } from "./kwinwindow";
-import { TilingController } from "@engine/control";
-import { TilingEngine } from "@engine/engine";
-import { WrapperMap } from "@util/wrappermap";
-import { KWinMousePoller } from "./kwinmousepoller";
-import { KWinConfig } from "./kwinconfig";
-import { debug, debugObj } from "@util/debug";
-import { Signal } from "kwin-api/qt";
-import { KWinSetTimeout } from "./kwinsettimeout";
-// import { shortcuts } from "init";
-import { TileLayout } from "@layouts/tilelayout";
-import { MonocleLayout } from "@layouts/monoclelayout";
-import { ThreeColumnLayout } from "@layouts/threecolumnlayout";
-import { SpreadLayout } from "@layouts/spreadlayout";
-import { StairLayout } from "@layouts/stairlayout";
-import { FloatingLayout } from "@layouts/floatinglayout";
-import { QuarterLayout } from "@layouts/quarterlayout";
+var KWIN: KWin;
 
-export class KWinDriver implements IDriverContext {
+class KWinDriver implements IDriverContext {
   public static backendName: string = "kwin";
 
   // TODO: split context implementation
@@ -58,11 +39,12 @@ export class KWinDriver implements IDriverContext {
 
   public get currentSurface(): ISurface {
     return new KWinSurface(
-      workspace.activeWindow
-        ? workspace.activeWindow.output
-        : workspace.activeScreen,
-      workspace.currentActivity,
-      workspace.currentDesktop
+      this.workspace.activeWindow
+        ? this.workspace.activeWindow.output
+        : this.workspace.activeScreen,
+      this.workspace.currentActivity,
+      this.workspace.currentDesktop,
+      this.workspace
     );
   }
 
@@ -73,30 +55,31 @@ export class KWinDriver implements IDriverContext {
     // TODO: fousing window on other screen?
     // TODO: find a way to change activity
 
-    if (globalThis.workspace.currentDesktop.name !== ksrf.desktop.name)
-      workspace.currentDesktop = ksrf.desktop;
-    if (workspace.currentActivity !== ksrf.activity)
-      workspace.currentActivity = ksrf.activity;
+    if (this.workspace.currentDesktop.name !== ksrf.desktop.name)
+      this.workspace.currentDesktop = ksrf.desktop;
+    if (this.workspace.currentActivity !== ksrf.activity)
+      this.workspace.currentActivity = ksrf.activity;
   }
 
   public get currentWindow(): WindowClass | null {
-    const client = workspace.activeWindow;
+    const client = this.workspace.activeWindow;
     return client ? this.windowMap.get(client) : null;
   }
 
   public set currentWindow(window: WindowClass | null) {
     if (window !== null)
-      workspace.activeWindow = (window.window as KWinWindow).window;
+      this.workspace.activeWindow = (window.window as KWinWindow).window;
   }
 
   public get screens(): ISurface[] {
     const screens: ISurface[] = [];
-    workspace.screens.forEach((screen) => {
+    this.workspace.screens.forEach((screen) => {
       screens.push(
         new KWinSurface(
           screen,
-          workspace.currentActivity,
-          workspace.currentDesktop
+          this.workspace.currentActivity,
+          this.workspace.currentDesktop,
+          this.workspace
         )
       );
     });
@@ -109,18 +92,24 @@ export class KWinDriver implements IDriverContext {
 
   //#endregion
 
+  public workspace: Workspace;
+  private shortcuts: IShortcuts;
   private engine: TilingEngine;
   private control: TilingController;
   private windowMap: WrapperMap<Window, WindowClass>;
   private entered: boolean;
   private mousePoller: KWinMousePoller;
 
-  constructor() {
+  constructor(api: Api) {
+    KWIN = api.kwin;
+    this.workspace = api.workspace;
+    this.shortcuts = api.shortcuts;
     this.engine = new TilingEngine();
     this.control = new TilingController(this.engine);
     this.windowMap = new WrapperMap(
       (client: Window) => KWinWindow.generateID(client),
-      (client: Window) => new WindowClass(new KWinWindow(client))
+      (client: Window) =>
+        new WindowClass(new KWinWindow(client, this.workspace))
     );
     this.entered = false;
     this.mousePoller = new KWinMousePoller();
@@ -135,9 +124,9 @@ export class KWinDriver implements IDriverContext {
     debug(() => "Config: " + KWINCONFIG);
 
     this.bindEvents();
-    // this.bindShortcut();
+    this.bindShortcut();
 
-    const clients: Window[] = workspace.stackingOrder;
+    const clients: Window[] = this.workspace.stackingOrder;
     for (let i = 0; i < clients.length; i++) {
       if (!clients[i].normalWindow) {
         continue;
@@ -167,63 +156,79 @@ export class KWinDriver implements IDriverContext {
         this.enter(() => this.control.onShortcut(this, shortcut));
       };
     };
-    shortcuts.getDownNext().activated.connect(callbackShortcut(Shortcut.Down));
-    shortcuts.getUpPrev().activated.connect(callbackShortcut(Shortcut.Up));
-    shortcuts.getLeft().activated.connect(callbackShortcut(Shortcut.Left));
-    shortcuts.getRight().activated.connect(callbackShortcut(Shortcut.Right));
+    this.shortcuts
+      .getFocusNext()
+      .activated.connect(callbackShortcut(Shortcut.FocusNext));
+    this.shortcuts
+      .getFocusPrev()
+      .activated.connect(callbackShortcut(Shortcut.FocusPrev));
+    this.shortcuts
+      .getFocusDown()
+      .activated.connect(callbackShortcut(Shortcut.FocusDown));
+    this.shortcuts
+      .getFocusUp()
+      .activated.connect(callbackShortcut(Shortcut.FocusUp));
+    this.shortcuts
+      .getFocusLeft()
+      .activated.connect(callbackShortcut(Shortcut.FocusLeft));
+    this.shortcuts
+      .getFocusRight()
+      .activated.connect(callbackShortcut(Shortcut.FocusRight));
 
-    shortcuts
+    this.shortcuts
       .getShiftDown()
       .activated.connect(callbackShortcut(Shortcut.ShiftDown));
-    shortcuts
+    this.shortcuts
       .getShiftUp()
       .activated.connect(callbackShortcut(Shortcut.ShiftUp));
-    shortcuts
+    this.shortcuts
       .getShiftLeft()
       .activated.connect(callbackShortcut(Shortcut.ShiftLeft));
-    shortcuts
+    this.shortcuts
       .getShiftRight()
       .activated.connect(callbackShortcut(Shortcut.ShiftRight));
 
-    shortcuts
+    this.shortcuts
       .getGrowHeight()
       .activated.connect(callbackShortcut(Shortcut.GrowHeight));
-    shortcuts
+    this.shortcuts
       .getShrinkHeight()
       .activated.connect(callbackShortcut(Shortcut.ShrinkHeight));
-    shortcuts
+    this.shortcuts
       .getShrinkWidth()
       .activated.connect(callbackShortcut(Shortcut.ShrinkWidth));
-    shortcuts
+    this.shortcuts
       .getGrowWidth()
       .activated.connect(callbackShortcut(Shortcut.GrowWidth));
 
-    shortcuts
+    this.shortcuts
       .getIncrease()
       .activated.connect(callbackShortcut(Shortcut.Increase));
-    shortcuts
+    this.shortcuts
       .getDecrease()
       .activated.connect(callbackShortcut(Shortcut.Decrease));
 
-    shortcuts
+    this.shortcuts
       .getToggleFloat()
       .activated.connect(callbackShortcut(Shortcut.ToggleFloat));
-    shortcuts
+    this.shortcuts
       .getFloatAll()
       .activated.connect(callbackShortcut(Shortcut.ToggleFloatAll));
-    shortcuts
+    this.shortcuts
       .getNextLayout()
       .activated.connect(callbackShortcut(Shortcut.NextLayout));
-    shortcuts
+    this.shortcuts
       .getPreviousLayout()
       .activated.connect(callbackShortcut(Shortcut.PreviousLayout));
 
-    shortcuts.getRotate().activated.connect(callbackShortcut(Shortcut.Rotate));
-    shortcuts
+    this.shortcuts
+      .getRotate()
+      .activated.connect(callbackShortcut(Shortcut.Rotate));
+    this.shortcuts
       .getRotatePart()
       .activated.connect(callbackShortcut(Shortcut.RotatePart));
 
-    shortcuts
+    this.shortcuts
       .getSetMaster()
       .activated.connect(callbackShortcut(Shortcut.SetMaster));
 
@@ -235,25 +240,25 @@ export class KWinDriver implements IDriverContext {
       };
     };
 
-    shortcuts
+    this.shortcuts
       .getTileLayout()
       .activated.connect(callbackShortcutLayout(TileLayout));
-    shortcuts
+    this.shortcuts
       .getMonocleLayout()
       .activated.connect(callbackShortcutLayout(MonocleLayout));
-    shortcuts
+    this.shortcuts
       .getThreeColumnLayout()
       .activated.connect(callbackShortcutLayout(ThreeColumnLayout));
-    shortcuts
+    this.shortcuts
       .getSpreadLayout()
       .activated.connect(callbackShortcutLayout(SpreadLayout));
-    shortcuts
+    this.shortcuts
       .getStairLayout()
       .activated.connect(callbackShortcutLayout(StairLayout));
-    shortcuts
+    this.shortcuts
       .getFloatingLayout()
       .activated.connect(callbackShortcutLayout(FloatingLayout));
-    shortcuts
+    this.shortcuts
       .getQuarterLayout()
       .activated.connect(callbackShortcutLayout(QuarterLayout));
   }
@@ -269,7 +274,7 @@ export class KWinDriver implements IDriverContext {
   ): () => void {
     const wrapper = (...args: any[]) => {
       /* HACK: `workspace` become undefined when the script is disabled. */
-      if (typeof workspace === "undefined") signal.disconnect(wrapper);
+      if (typeof this.workspace === "undefined") signal.disconnect(wrapper);
       else this.enter(() => handler.apply(this, args));
     };
     signal.connect(wrapper);
@@ -302,38 +307,40 @@ export class KWinDriver implements IDriverContext {
   //#endregion
 
   private bindEvents() {
-    this.connect(workspace.screensChanged, () =>
+    this.connect(this.workspace.screensChanged, () =>
       this.control.onSurfaceUpdate(this, "screens (Outputs) changed")
     );
 
-    this.connect(workspace.virtualScreenGeometryChanged, () => {
+    this.connect(this.workspace.virtualScreenGeometryChanged, () => {
       this.control.onSurfaceUpdate(this, "virtualScreenGeometryChanged");
     });
 
-    this.connect(workspace.currentActivityChanged, (activityId: string) =>
+    this.connect(this.workspace.currentActivityChanged, (activityId: string) =>
       this.control.onCurrentActivityChanged(this, activityId)
     );
 
     this.connect(
-      workspace.currentDesktopChanged,
+      this.workspace.currentDesktopChanged,
       (virtualDesktop: VirtualDesktop) =>
         this.control.onSurfaceUpdate(this, "currentDesktopChanged")
     );
 
-    this.connect(workspace.windowAdded, (client: Window) => {
-      /* NOTE: OLD.windowShown can be fired in various situations.
+    this.connect(this.workspace.windowAdded, (client: Window) => {
+      /* NOTE: legacy note...windowShown can be fired in various situations.
        *       We need only the first one - when window is created. */
-      if (client.resourceName === "ksystemlog") return;
+      // if (client.resourceName === "ksystemlog") return;
+      // print("Win_candidate:" + debugWin(client));
       if (client.normalWindow) {
         const window = this.windowMap.add(client);
         this.control.onWindowAdded(this, window);
-        if (window.state !== WindowState.Unmanaged)
+        if (window.state !== WindowState.Unmanaged) {
+          // print("Win:" + client.internalId + " bind win events.");
           this.bindWindowEvents(window, client);
-        else this.windowMap.remove(client);
+        } else this.windowMap.remove(client);
       }
     });
 
-    this.connect(workspace.windowRemoved, (client: Window) => {
+    this.connect(this.workspace.windowRemoved, (client: Window) => {
       const window = this.windowMap.get(client);
       if (window) {
         this.control.onWindowRemoved(this, window);
@@ -357,7 +364,7 @@ export class KWinDriver implements IDriverContext {
     this.connect(client.minimizedChanged, () => {
       if (KWINCONFIG.preventMinimize) {
         client.minimized = false;
-        workspace.activeWindow = client;
+        this.workspace.activeWindow = client;
       } else {
         var comment = client.minimized ? "minimized" : "unminimized";
         this.control.onWindowChanged(this, window, comment);

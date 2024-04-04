@@ -18,19 +18,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { IDriverWindow, ISurface } from "common";
-import { clip, matchWords } from "@util/func";
-import { toRect } from "@util/kwinutil";
-import { Rect } from "@util/rect";
-import { ClientAreaOption, Window } from "kwin-api";
-import { KWinSurface } from "./kwinsurface";
-import { debugObj } from "@util/debug";
-
-export class KWinWindow implements IDriverWindow {
+class KWinWindow implements IDriverWindow {
   public static generateID(w: Window) {
     return w.internalId.toString();
   }
 
+  private readonly workspace: Workspace;
   public readonly window: Window;
   public readonly id: string;
 
@@ -78,14 +71,21 @@ export class KWinWindow implements IDriverWindow {
   public get surface(): ISurface {
     let activity;
     if (this.window.activities.length === 0)
-      activity = workspace.currentActivity;
-    else if (this.window.activities.indexOf(workspace.currentActivity) >= 0)
-      activity = workspace.currentActivity;
+      activity = this.workspace.currentActivity;
+    else if (
+      this.window.activities.indexOf(this.workspace.currentActivity) >= 0
+    )
+      activity = this.workspace.currentActivity;
     else activity = this.window.activities[0];
 
     const desktop = this.window.desktops[0];
 
-    return new KWinSurface(this.window.output, activity, desktop);
+    return new KWinSurface(
+      this.window.output,
+      activity,
+      desktop,
+      this.workspace
+    );
   }
 
   public set surface(srf: ISurface) {
@@ -102,7 +102,8 @@ export class KWinWindow implements IDriverWindow {
   private noBorderManaged: boolean;
   private noBorderOriginal: boolean;
 
-  constructor(window: Window) {
+  constructor(window: Window, workspace: Workspace) {
+    this.workspace = workspace;
     this.window = window;
     this.id = KWinWindow.generateID(window);
     this.maximized = false;
@@ -112,7 +113,6 @@ export class KWinWindow implements IDriverWindow {
 
   public commit(geometry?: Rect, noBorder?: boolean, keepAbove?: boolean) {
     debugObj(() => ["KWinWindow#commit", { geometry, noBorder, keepAbove }]);
-
     if (this.window.move || this.window.resize) return;
 
     if (noBorder !== undefined) {
@@ -141,10 +141,10 @@ export class KWinWindow implements IDriverWindow {
       geometry = this.adjustGeometry(geometry);
       if (KWINCONFIG.preventProtrusion) {
         const area = toRect(
-          workspace.clientArea(
+          this.workspace.clientArea(
             ClientAreaOption.PlacementArea,
             this.window.output,
-            workspace.currentDesktop
+            this.workspace.currentDesktop
           )
         );
         if (!area.includes(geometry)) {
@@ -155,7 +155,8 @@ export class KWinWindow implements IDriverWindow {
           geometry = this.adjustGeometry(geometry);
         }
       }
-      this.window.frameGeometry = toRect(geometry);
+      this.window.frameGeometry = toQRect(geometry);
+      this.window.rect;
     }
   }
 

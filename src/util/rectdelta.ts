@@ -22,9 +22,8 @@
  * Describes geometric changes of a rectangle, in terms of changes per edge.
  * Outward changes are in positive, and inward changes are in negative.
  */
-import { Rect } from "./rect";
 
-export class RectDelta {
+class RectDelta {
   /** Generate a delta that transforms basis to target. */
   public static fromRects(basis: Rect, target: Rect): RectDelta {
     const diff = target.subtract(basis);

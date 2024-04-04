@@ -17,13 +17,11 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import { QRect } from "kwin-api/qt";
-import { Rect } from "./rect";
 
-// export function toQRect(rect: Rect) {
-//   return Qt.rect(rect.x, rect.y, rect.width, rect.height);
-// }
+function toQRect(rect: Rect) {
+  return Qt.rect(rect.x, rect.y, rect.width, rect.height);
+}
 
-export function toRect(qrect: QRect) {
+function toRect(qrect: QRect) {
   return new Rect(qrect.x, qrect.y, qrect.width, qrect.height);
 }

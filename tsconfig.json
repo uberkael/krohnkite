@@ -2,25 +2,13 @@
   "include": ["src/"],
   "exclude": ["*.*", "pkg/"],
   "compileOnSave": true,
-  "declarationDir": "types",
   "compilerOptions": {
-    "target": "ES5",
-    // "outFile": "krohnkite.js",
+    "target": "es5",
+    "outFile": "krohnkite.js",
     "noEmitOnError": false,
     "removeComments": true,
-    "lib": ["ES5"],
+    "lib": ["es5"],
     "alwaysStrict": true,
-    "strict": true,
-    "module": "ES2015",
-    "moduleResolution": "bundler",
-    // "rootDir": "src",
-    "baseUrl": "src",
-    "paths": {
-      "@kwin/*": ["driver/kwin/*"],
-      "@engine/*": ["engine/*"],
-      "@extern/*": ["extern/*"],
-      "@layouts/*": ["layouts/*"],
-      "@util/*": ["util/*"]
-    }
+    "strict": true
   }
 }

@@ -17,10 +17,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import { WindowClass } from "@engine/window";
-import { Rect } from "@util/rect";
-import { RectDelta } from "@util/rectdelta";
-import { LayoutUtils } from "./layoututils";
 
 interface ILayoutPart {
   adjust(
@@ -32,7 +28,7 @@ interface ILayoutPart {
   apply(area: Rect, tiles: WindowClass[]): Rect[];
 }
 
-export class FillLayoutPart implements ILayoutPart {
+class FillLayoutPart implements ILayoutPart {
   public adjust(
     area: Rect,
     tiles: WindowClass[],
@@ -50,7 +46,7 @@ export class FillLayoutPart implements ILayoutPart {
   }
 }
 
-export class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
+class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
   implements ILayoutPart
 {
   /** the rotation angle for this part.
@@ -178,7 +174,7 @@ export class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
   }
 }
 
-export class StackLayoutPart implements ILayoutPart {
+class StackLayoutPart implements ILayoutPart {
   public gap: number;
 
   constructor() {
@@ -219,7 +215,7 @@ export class StackLayoutPart implements ILayoutPart {
   }
 }
 
-export class RotateLayoutPart<T extends ILayoutPart> implements ILayoutPart {
+class RotateLayoutPart<T extends ILayoutPart> implements ILayoutPart {
   constructor(public inner: T, public angle: 0 | 90 | 180 | 270 = 0) {}
 
   public adjust(

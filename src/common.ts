@@ -18,17 +18,14 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ShortcutHandler } from "kwin-api/qml";
-import { EngineContext } from "./engine/enginecontext";
-import { WindowClass } from "./engine/window";
-import { Rect } from "./util/rect";
-import { RectDelta } from "./util/rectdelta";
+enum Shortcut {
+  FocusNext,
+  FocusPrev,
 
-export enum Shortcut {
-  Left,
-  Right,
-  Up,
-  Down,
+  // Left,
+  // Right,
+  // Up,
+  // Down,
 
   /* Alternate HJKL bindings */
   FocusUp,
@@ -66,11 +63,15 @@ export enum Shortcut {
   Rotate,
   RotatePart,
 }
-export interface IShortcuts {
-  getDownNext(): ShortcutHandler;
-  getUpPrev(): ShortcutHandler;
-  getLeft(): ShortcutHandler;
-  getRight(): ShortcutHandler;
+
+interface IShortcuts {
+  getFocusNext(): ShortcutHandler;
+  getFocusPrev(): ShortcutHandler;
+
+  getFocusUp(): ShortcutHandler;
+  getFocusDown(): ShortcutHandler;
+  getFocusLeft(): ShortcutHandler;
+  getFocusRight(): ShortcutHandler;
 
   getShiftDown(): ShortcutHandler;
   getShiftUp(): ShortcutHandler;
@@ -106,7 +107,7 @@ export interface IShortcuts {
 
 //#region Driver
 
-export interface IConfig {
+interface IConfig {
   //#region Layout
   layoutOrder: string[];
   layoutFactories: { [key: string]: () => ILayout };
@@ -136,7 +137,7 @@ export interface IConfig {
   //#endregion
 }
 
-export interface IDriverWindow {
+interface IDriverWindow {
   readonly fullScreen: boolean;
   readonly geometry: Readonly<Rect>;
   readonly id: string;
@@ -150,7 +151,7 @@ export interface IDriverWindow {
   visible(srf: ISurface): boolean;
 }
 
-export interface ISurface {
+interface ISurface {
   readonly id: string;
   readonly ignore: boolean;
   readonly workingArea: Readonly<Rect>;
@@ -158,7 +159,7 @@ export interface ISurface {
   next(): ISurface | null;
 }
 
-export interface IDriverContext {
+interface IDriverContext {
   readonly backend: string;
   readonly screens: ISurface[];
   readonly cursorPosition: [number, number] | null;
@@ -172,12 +173,12 @@ export interface IDriverContext {
 
 //#endregion
 
-export interface ILayoutClass {
+interface ILayoutClass {
   readonly id: string;
   new (): ILayout;
 }
 
-export interface ILayout {
+interface ILayout {
   /* read-only */
   readonly capacity?: number;
   readonly description: string;
@@ -194,3 +195,5 @@ export interface ILayout {
 
   toString(): string;
 }
+
+let CONFIG: IConfig;

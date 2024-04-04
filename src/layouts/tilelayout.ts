@@ -18,19 +18,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout, Shortcut } from "common";
-import {
-  HalfSplitLayoutPart,
-  RotateLayoutPart,
-  StackLayoutPart,
-} from "./layoutpart";
-import { Rect } from "@util/rect";
-import { WindowClass, WindowState } from "@engine/window";
-import { RectDelta } from "@util/rectdelta";
-import { EngineContext } from "@engine/enginecontext";
-import { clip, slide } from "@util/func";
-
-export class TileLayout implements ILayout {
+class TileLayout implements ILayout {
   public static readonly MIN_MASTER_RATIO = 0.2;
   public static readonly MAX_MASTER_RATIO = 0.8;
   public static readonly id = "TileLayout";
@@ -102,14 +90,14 @@ export class TileLayout implements ILayout {
 
   public handleShortcut(ctx: EngineContext, input: Shortcut) {
     switch (input) {
-      case Shortcut.Left:
+      case Shortcut.FocusLeft:
         this.masterRatio = clip(
           slide(this.masterRatio, -0.05),
           TileLayout.MIN_MASTER_RATIO,
           TileLayout.MAX_MASTER_RATIO
         );
         break;
-      case Shortcut.Right:
+      case Shortcut.FocusRight:
         this.masterRatio = clip(
           slide(this.masterRatio, +0.05),
           TileLayout.MIN_MASTER_RATIO,

@@ -18,19 +18,19 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-export const DEBUG = {
-  enabled: true,
+const DEBUG = {
+  enabled: false,
   started: new Date().getTime(),
 };
 
-export function debug(f: () => any) {
+function debug(f: () => any) {
   if (DEBUG.enabled) {
     const timestamp = (new Date().getTime() - DEBUG.started) / 1000;
     console.log("[" + timestamp + "]", f()); // tslint:disable-line:no-console
   }
 }
 
-export function debugObj(f: () => [string, any]) {
+function debugObj(f: () => [string, any]) {
   if (DEBUG.enabled) {
     const timestamp = (new Date().getTime() - DEBUG.started) / 1000;
     const [name, obj] = f();

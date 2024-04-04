@@ -18,14 +18,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { ILayout } from "common";
-import { EngineContext } from "@engine/enginecontext";
-import { WindowClass, WindowState } from "@engine/window";
-import { clip } from "@util/func";
-import { Rect } from "@util/rect";
-import { RectDelta } from "@util/rectdelta";
-
-export class QuarterLayout implements ILayout {
+class QuarterLayout implements ILayout {
   public static readonly MAX_PROPORTION = 0.8;
   public static readonly id = "QuarterLayout";
 

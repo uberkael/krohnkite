@@ -17,3 +17,31 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
+
+// API Reference:
+//     https://techbase.kde.org/Development/Tutorials/KWin/Scripting/API_4.9
+interface KWin {
+  readConfig<T>(property: string, defaultValue: T): T;
+  registerShortcut(
+    name: string,
+    desc: string,
+    key: string,
+    callback: Function
+  ): void;
+  callDBus(
+    service: string,
+    path: string,
+    interf: string,
+    method: string,
+    ...args: object[]
+  ): void;
+  registerScreenEdge(edge: number, callback: Function): void;
+  unregisterScreenEdge(edge: number): void;
+  registerTouchScreenEdge(edge: number, callback: Function): void;
+  unregisterTouchScreenEdge(edge: number): void;
+  registerUserActionsMenu(callback: Function): void;
+}
+
+// interface IOptions {
+//   configChanged: QSignal;
+// }

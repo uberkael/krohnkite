@@ -24,11 +24,8 @@
  * Its purpose is to limit the visibility of information and operation. It's
  * not really a find-grained control mechanism, but is simple and concise.
  */
-import { WindowClass } from "./window";
-import { IDriverContext } from "common";
-import { TilingEngine } from "./engine";
 
-export class EngineContext {
+class EngineContext {
   public get backend(): string {
     return this.drvctx.backend;
   }

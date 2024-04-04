@@ -4,44 +4,65 @@ import org.kde.kwin;
 Item {
     id: dbus;
 
-    function getDownNext() {
-        return downNext;
+    function getFocusNext() {
+        return focusNext;
     }
     ShortcutHandler {
-        id: downNext;
+        id: focusNext;
 
-        name: "KrohnkiteDownNext";
-        text: "Krohnkite: Down";
+        name: "KrohnkiteFocusNext";
+        text: "Krohnkite: Focus Next";
+        sequence: "Meta+.";
+    }
+    function getFocusPrev() {
+        return focusPrev;
+    }
+    ShortcutHandler {
+        id: focusPrev;
+
+        name: "KrohnkiteFocusPrev";
+        text: "Krohnkite: Focus Previous";
+        sequence: "Meta+,";
+    }
+
+    function getFocusDown() {
+        return focusDown;
+    }
+    ShortcutHandler {
+        id: focusDown;
+
+        name: "KrohnkiteFocusDown";
+        text: "Krohnkite: Focus Down";
         sequence: "Meta+J";
     }
-    function getUpPrev() {
-        return upPrev;
+    function getFocusUp() {
+        return focusUp;
     }
     ShortcutHandler {
-        id: upPrev;
+        id: focusUp;
 
-        name: "KrohnkiteUpPrev";
-        text: "Krohnkite: Up";
+        name: "KrohnkiteFocusUp";
+        text: "Krohnkite: Focus Up";
         sequence: "Meta+K";
     }
-    function getLeft() {
-        return left;
+    function getFocusLeft() {
+        return focusLeft;
     }
     ShortcutHandler {
-        id: left;
+        id: focusLeft;
 
-        name: "KrohnkiteLeft";
-        text: "Krohnkite: Left";
+        name: "KrohnkiteFocusLeft";
+        text: "Krohnkite: Focus Left";
         sequence: "Meta+H";
     }
-    function getRight() {
-        return right;
+    function getFocusRight() {
+        return focusRight;
     }
     ShortcutHandler {
-        id: right;
+        id: focusRight;
 
-        name: "KrohnkiteRight";
-        text: "Krohnkite: Right";
+        name: "KrohnkiteFocusRight";
+        text: "Krohnkite: Focus Right";
         sequence: "Meta+L";
     }
     function getShiftDown() {

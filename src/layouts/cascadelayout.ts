@@ -17,10 +17,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-import { EngineContext } from "@engine/enginecontext";
-import { ILayout, Shortcut } from "common";
-import { WindowClass, WindowState } from "@engine/window";
-import { Rect } from "@util/rect";
 
 enum CascadeDirection {
   NorthWest = 0,
@@ -33,7 +29,7 @@ enum CascadeDirection {
   West = 7,
 }
 
-export class CascadeLayout implements ILayout {
+class CascadeLayout implements ILayout {
   public static readonly id = "CascadeLayout";
 
   /** Decompose direction into vertical and horizontal steps */

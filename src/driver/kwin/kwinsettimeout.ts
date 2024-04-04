@@ -18,10 +18,6 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-import { Qt } from "@extern/global";
-import { debugObj } from "@util/debug";
-import { QTimer } from "kwin-api/qt";
-
 class KWinTimerPool {
   public static readonly instance = new KWinTimerPool();
 
@@ -64,6 +60,6 @@ class KWinTimerPool {
   }
 }
 
-export function KWinSetTimeout(func: () => void, timeout: number) {
+function KWinSetTimeout(func: () => void, timeout: number) {
   KWinTimerPool.instance.setTimeout(func, timeout);
 }
