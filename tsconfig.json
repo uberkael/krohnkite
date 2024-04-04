@@ -4,7 +4,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
-    "outFile": "krohnkite.js",
+    "outFile": "krohnkite6.js",
     "noEmitOnError": false,
     "removeComments": true,
     "lib": ["es5"],
