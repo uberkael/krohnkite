@@ -111,7 +111,8 @@ To make changes effective, **the script must be reactivated**:
 | Meta + .         | Focus Next         |
 | Meta + ,         | Focus Previous     |
 |                  |                    |
-| Meta + K         | Focus Up/Previous  |
+| Meta + J         | Focus Down         |
+| Meta + K         | Focus Up           |
 | Meta + H         | Focus Left         |
 | Meta + L         | Focus Right        |
 |                  |                    |
