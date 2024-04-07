@@ -89,7 +89,7 @@ restart is required to deactivated it.
 4. Run Kdevelop
 5. Type in filter string: krohnkite
 6. All created windows krohnkite working with will be there.
-7. Every window entry contain only not false and empty parameters.
+7. Every debug entry contains parameters except those that are false and empty.
 
 ## Default Key Bindings
 
