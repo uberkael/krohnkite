@@ -37,9 +37,6 @@ run: $(KWINPKG_DIR)
 	bin/load-script.sh "$(KWIN_QML)" "$(PROJECT_NAME)-test"
 	@find "$(KWINPKG_DIR)" '(' -name "*.qmlc" -o -name "*.jsc" ')' -delete
 
-run1:
-	bin/load-script.sh "pkg/contents/ui/main.qml" "$(PROJECT_NAME)-test"
-	@find "pkg" '(' -name "*.qmlc" -o -name "*.jsc" ')' -delete
 stop:
 	bin/load-script.sh "unload" "$(PROJECT_NAME)-test"
 
@@ -47,6 +44,7 @@ $(KWINPKG_FILE): $(KWINPKG_DIR)
 	@rm -f "$(KWINPKG_FILE)"
 	@7z a -tzip $(KWINPKG_FILE) ./$(KWINPKG_DIR)/*
 
+$(KWINPKG_DIR): remove_meta
 $(KWINPKG_DIR): $(KWIN_META)
 $(KWINPKG_DIR): $(KWIN_QML)
 $(KWINPKG_DIR): $(KWINPKG_DIR)/contents/ui/config.ui
@@ -59,9 +57,13 @@ $(KWINPKG_DIR): $(KWINPKG_DIR)/contents/config/main.xml
 
 $(KWIN_META): res/metadata.json
 	@mkdir -vp `dirname $(KWIN_META)`
+	@touch "$(KWIN_META)"
 	sed "s/\$$VER/$(PROJECT_VER)/" $< \
 		| sed "s/\$$REV/$(PROJECT_REV)/" \
 		> $(KWIN_META)
+
+remove_meta:
+	@rm -f "$(KWIN_META)"
 
 $(KWIN_QML): res/main.qml
 
