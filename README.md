@@ -81,28 +81,15 @@ Krohnkite can be temporarily loaded without installing the script:
 Note that Krohnkite can destroy itself completely once it is disabled, so no
 restart is required to deactivated it.
 
-### Enabling User-Configuration
+### Search a window parameters to filter, float etc.
 
-[It is reported][kwinconf] that a manual step is required to enable user
-configuration of KWin scripts. This is a limitation of KWin scripting.
-
-To enable configuration, you must perform the following in command-line:
-
-    mkdir -p ~/.local/share/kservices5/
-    ln -s ~/.local/share/kwin/scripts/krohnkite/metadata.desktop ~/.local/share/kservices5/krohnkite.desktop
-
-A configuration button will appear in `KWin Scripts` in `System Settings`.
-
-![config button shown](img/conf.png)
-
-To make changes effective, **the script must be reactivated**:
-
-1. On `KWin Scripts` dialog, untick Krohnkite
-2. `Apply`
-3. tick Krohnkite
-4. `Apply`
-
-[kwinconf]: https://github.com/faho/kwin-tiling/issues/79#issuecomment-311465357
+1 Krohnkite options: ![options](img/conf.png)
+2 Options->Debug new Windows
+3 Reboot
+4 Run Kdevelop
+5 Type in filter string: krohnkite
+6 All created windows krohnkite working with will be there.
+7 Every window entry contain only not false and empty parameters.
 
 ## Default Key Bindings
 

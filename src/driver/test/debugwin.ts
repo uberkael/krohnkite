@@ -1,10 +1,15 @@
 function debugWin(win: Window): string {
   var w_props: { name: string; opt: any }[] = [
-    { name: "internalId", opt: win.internalId },
     { name: "caption", opt: win.caption },
     { name: "output.name", opt: win.output.name },
     { name: "resourceName", opt: win.resourceName },
+    { name: "resourceClass", opt: win.resourceClass },
     { name: "desktopWindow", opt: win.desktopWindow },
+    { name: "windowRole", opt: win.windowRole },
+    { name: "windowType", opt: win.windowType },
+    { name: "pid", opt: win.pid },
+    { name: "internalId", opt: win.internalId },
+    { name: "stackingOrder", opt: win.stackingOrder },
     { name: "size", opt: win.size },
     { name: "width", opt: win.width },
     { name: "height", opt: win.height },
@@ -22,11 +27,9 @@ function debugWin(win: Window): string {
     { name: "appletPopup", opt: win.appletPopup },
     { name: "onScreenDisplay", opt: win.onScreenDisplay },
     { name: "comboBox", opt: win.comboBox },
-    { name: "windowType", opt: win.windowType },
     { name: "managed", opt: win.managed },
     { name: "popupWindow", opt: win.popupWindow },
     { name: "outline", opt: win.outline },
-    { name: "stackingOrder", opt: win.stackingOrder },
     { name: "fullScreenable", opt: win.fullScreenable },
     { name: "closeable", opt: win.closeable },
     { name: "minimizable", opt: win.minimizable },
@@ -46,13 +49,17 @@ function debugWin(win: Window): string {
     { name: "keepAbove", opt: win.keepAbove },
     { name: "keepBelow", opt: win.keepBelow },
   ];
-  var s = "";
+  var s = "krohnkite:";
   w_props.forEach((el) => {
-    if (el.opt || el.opt === 0 || el.opt === "0") {
-      s += "  ";
+    if (
+      typeof el.opt !== "undefined" &&
+      (el.opt || el.opt === 0 || el.opt === "0")
+    ) {
+      s += "<";
       s += el.name;
       s += ": ";
       s += el.opt;
+      s += "> ";
     }
   });
   return s;

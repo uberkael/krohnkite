@@ -11,6 +11,11 @@
         <default>false</default>
     </entry>
 
+    <entry name="debugActiveWin" type="Bool">
+	    <label>Print only new Window</label>
+        <default>false</default>
+    </entry>
+
     <entry name="enableTileLayout" type="Bool">
 	    <label>Enable/disable Tile layout</label>
         <default>true</default>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>547</height>
+    <height>755</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -23,7 +23,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="configTabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="layoutTab">
       <attribute name="title">
@@ -847,8 +847,17 @@
           <string>Use this option to debug the script or submit detailed bug report.</string>
          </property>
          <property name="text">
-          <string>Print debug messages
-(must run KWin from terminal)</string>
+          <string>Print debug messages</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="kcfg_debugActiveWin">
+         <property name="toolTip">
+          <string>Print debug output all new windows with params. In Kdevelop write krohnkite in filter.</string>
+         </property>
+         <property name="text">
+          <string>Debug new Windows</string>
          </property>
         </widget>
        </item>

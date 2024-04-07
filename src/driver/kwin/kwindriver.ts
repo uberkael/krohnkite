@@ -331,6 +331,7 @@ class KWinDriver implements IDriverContext {
       // if (client.resourceName === "ksystemlog") return;
       // print("Win_candidate:" + debugWin(client));
       if (client.normalWindow) {
+        if (KWIN.readConfig("debugActiveWin", false)) print(debugWin(client));
         const window = this.windowMap.add(client);
         this.control.onWindowAdded(this, window);
         if (window.state !== WindowState.Unmanaged) {
