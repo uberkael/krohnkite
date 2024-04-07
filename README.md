@@ -83,13 +83,13 @@ restart is required to deactivated it.
 
 ### Search a window parameters to filter, float etc.
 
-1 Krohnkite options: ![options](img/conf.png)
-2 Options->Debug new Windows
-3 Reboot
-4 Run Kdevelop
-5 Type in filter string: krohnkite
-6 All created windows krohnkite working with will be there.
-7 Every window entry contain only not false and empty parameters.
+1. Krohnkite options: ![options](img/conf.png)
+2. Options->Debug new Windows
+3. Reboot
+4. Run Kdevelop
+5. Type in filter string: krohnkite
+6. All created windows krohnkite working with will be there.
+7. Every window entry contain only not false and empty parameters.
 
 ## Default Key Bindings
 
