@@ -78,7 +78,7 @@ $(KWINPKG_DIR)/%:
 	@cp -v $< $@
 
 $(NODE_SCRIPT): $(SRC)
-	./node_modules/typescript/bin/tsc
+	tsc
 
 $(NODE_META): res/package.json
 	sed "s/\$$VER/$(PROJECT_VER).0/" $< > $@
