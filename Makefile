@@ -78,7 +78,8 @@ $(KWINPKG_DIR)/%:
 	@cp -v $< $@
 
 $(NODE_SCRIPT): $(SRC)
-	tsc
+	npm install --save-dev
+	npm run tsc --
 
 $(NODE_META): res/package.json
 	sed "s/\$$VER/$(PROJECT_VER).0/" $< > $@
