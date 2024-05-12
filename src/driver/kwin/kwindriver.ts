@@ -326,16 +326,11 @@ class KWinDriver implements IDriverContext {
     );
 
     this.connect(this.workspace.windowAdded, (client: Window) => {
-      /* NOTE: legacy note...windowShown can be fired in various situations.
-       *       We need only the first one - when window is created. */
-      // if (client.resourceName === "ksystemlog") return;
-      // print("Win_candidate:" + debugWin(client));
       if (client.normalWindow && !client.hidden) {
         if (KWIN.readConfig("debugActiveWin", false)) print(debugWin(client));
         const window = this.windowMap.add(client);
         this.control.onWindowAdded(this, window);
         if (window.state !== WindowState.Unmanaged) {
-          // print("Win:" + client.internalId + " bind win events.");
           this.bindWindowEvents(window, client);
         } else this.windowMap.remove(client);
       }
