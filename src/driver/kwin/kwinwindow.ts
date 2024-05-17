@@ -46,7 +46,8 @@ class KWinWindow implements IDriverWindow {
       KWINCONFIG.ignoreClass.indexOf(resourceClass) >= 0 ||
       KWINCONFIG.ignoreClass.indexOf(resourceName) >= 0 ||
       matchWords(this.window.caption, KWINCONFIG.ignoreTitle) >= 0 ||
-      KWINCONFIG.ignoreRole.indexOf(windowRole) >= 0
+      KWINCONFIG.ignoreRole.indexOf(windowRole) >= 0 ||
+      (KWINCONFIG.tileNothing && KWINCONFIG.tilingClass.indexOf(resourceClass) < 0)
     );
   }
 

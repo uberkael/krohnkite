@@ -997,6 +997,23 @@
             </property>
            </widget>
           </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="kcfg_tileNothing">
+            <property name="text">
+             <string>Always, except by class</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="kcfg_tilingClass">
+            <property name="toolTip">
+             <string>Comma-separated list of window classes. Matching windows will become tiled automatically.</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
