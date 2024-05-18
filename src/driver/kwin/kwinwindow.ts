@@ -57,6 +57,7 @@ class KWinWindow implements IDriverWindow {
       moreOneDesktop ||
       this.window.onAllDesktops ||
       this.window.modal ||
+      this.window.transient ||
       !this.window.resizeable ||
       (KWINCONFIG.floatUtility &&
         (this.window.dialog || this.window.splash || this.window.utility)) ||
