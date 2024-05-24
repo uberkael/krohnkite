@@ -116,8 +116,8 @@ class KWinConfig implements IConfig {
     this.screenGapTop = KWIN.readConfig("screenGapTop", 0);
     this.tileLayoutGap = KWIN.readConfig("tileLayoutGap", 0);
 
-    const directionalKeyDwm = KWIN.readConfig("directionalKeyDwm", true);
-    const directionalKeyFocus = KWIN.readConfig("directionalKeyFocus", false);
+    const directionalKeyDwm = KWIN.readConfig("directionalKeyDwm", false);
+    const directionalKeyFocus = KWIN.readConfig("directionalKeyFocus", true);
     this.directionalKeyMode = directionalKeyDwm ? "dwm" : "focus";
     this.newWindowAsMaster = KWIN.readConfig("newWindowAsMaster", false);
 
