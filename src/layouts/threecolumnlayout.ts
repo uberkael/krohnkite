@@ -203,14 +203,14 @@ class ThreeColumnLayout implements ILayout {
       case Shortcut.Decrease:
         this.resizeMaster(ctx, -1);
         return true;
-      case Shortcut.FocusLeft:
+      case Shortcut.DWMLeft:
         this.masterRatio = clip(
           slide(this.masterRatio, -0.05),
           ThreeColumnLayout.MIN_MASTER_RATIO,
           ThreeColumnLayout.MAX_MASTER_RATIO
         );
         return true;
-      case Shortcut.FocusRight:
+      case Shortcut.DWMRight:
         this.masterRatio = clip(
           slide(this.masterRatio, +0.05),
           ThreeColumnLayout.MIN_MASTER_RATIO,

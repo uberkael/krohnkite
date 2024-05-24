@@ -64,6 +64,7 @@ class MonocleLayout implements ILayout {
     switch (input) {
       // case Shortcut.Up:
       // case Shortcut.Left:
+      case Shortcut.DWMLeft:
       case Shortcut.FocusNext:
       case Shortcut.FocusUp:
       case Shortcut.FocusLeft:
@@ -71,6 +72,7 @@ class MonocleLayout implements ILayout {
         return true;
       // case Shortcut.Down:
       // case Shortcut.Right:
+      case Shortcut.DWMRight:
       case Shortcut.FocusPrev:
       case Shortcut.FocusDown:
       case Shortcut.FocusRight:
