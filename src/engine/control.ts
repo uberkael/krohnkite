@@ -181,21 +181,23 @@ class TilingController {
   }
 
   public onShortcut(ctx: IDriverContext, input: Shortcut, data?: any) {
-    if (CONFIG.directionalKeyMode === "focus") {
+    if (CONFIG.directionalKeyMode === "dwm") {
       switch (input) {
-        // case Shortcut.Up:
-        //   input = Shortcut.FocusUp;
-        //   break;
-        // case Shortcut.Down:
-        //   input = Shortcut.FocusDown;
-        //   break;
-        // case Shortcut.Left:
-        //   input = Shortcut.FocusLeft;
-        //   break;
-        // case Shortcut.Right:
-        //   input = Shortcut.FocusRight;
-        //   break;
-
+        case Shortcut.FocusUp:
+          input = Shortcut.FocusNext;
+          break;
+        case Shortcut.FocusDown:
+          input = Shortcut.FocusPrev;
+          break;
+        case Shortcut.FocusLeft:
+          input = Shortcut.DWMLeft;
+          break;
+        case Shortcut.FocusRight:
+          input = Shortcut.DWMRight;
+          break;
+      }
+    } else if (CONFIG.directionalKeyMode === "focus") {
+      switch (input) {
         case Shortcut.ShiftUp:
           input = Shortcut.SwapUp;
           break;
@@ -231,9 +233,11 @@ class TilingController {
       case Shortcut.FocusDown:
         this.engine.focusDir(ctx, "down");
         break;
+      case Shortcut.DWMLeft:
       case Shortcut.FocusLeft:
         this.engine.focusDir(ctx, "left");
         break;
+      case Shortcut.DWMRight:
       case Shortcut.FocusRight:
         this.engine.focusDir(ctx, "right");
         break;

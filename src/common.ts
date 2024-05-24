@@ -21,6 +21,8 @@
 enum Shortcut {
   FocusNext,
   FocusPrev,
+  DWMLeft,
+  DWMRight,
 
   // Left,
   // Right,
