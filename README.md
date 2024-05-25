@@ -33,6 +33,11 @@ K and looks cool.
 - GNU Make
 - p7zip (7z)
 
+## Look at me
+
+Delete unused KWin shortcuts
+`qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanUp`
+
 ## Installation
 
 You can install Kröhnkite in multiple ways.
