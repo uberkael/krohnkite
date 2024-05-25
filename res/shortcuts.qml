@@ -121,7 +121,7 @@ Item {
     ShortcutHandler {
         id: shrinkHeight;
 
-        name: "KrohnkiteShrinkHeght";
+        name: "KrohnkiteShrinkHeight";
         text: "Krohnkite: Shrink Height";
         sequence: "Meta+Ctrl+K";
     }
