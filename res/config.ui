@@ -740,14 +740,14 @@
           <item row="1" column="0">
            <widget class="QLabel" name="ignoreScreenLabel">
             <property name="text">
-             <string>On Screen (number)</string>
+             <string>On Screen (name)</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="QLineEdit" name="kcfg_ignoreScreen">
             <property name="toolTip">
-             <string>Comma-separated list of screen numbers. Windows in corresponding screens will not be tiled.</string>
+             <string>Comma-separated list of screen names. Windows in corresponding screens will not be tiled.</string>
             </property>
            </widget>
           </item>
