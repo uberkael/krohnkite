@@ -315,4 +315,14 @@ Item {
         text: "Krohnkite: Stacked Layout";
         sequence: "";
     }
+    function getSpiralLayout() {
+        return spiralLayout;
+    }
+    ShortcutHandler {
+        id: spiralLayout;
+
+        name: "KrohnkiteSpiralLayout";
+        text: "Krohnkite: Spiral Layout";
+        sequence: "";
+    }
 }

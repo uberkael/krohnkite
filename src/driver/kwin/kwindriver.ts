@@ -264,6 +264,9 @@ class KWinDriver implements IDriverContext {
     this.shortcuts
       .getStackedLayout()
       .activated.connect(callbackShortcutLayout(StackedLayout));
+    this.shortcuts
+      .getSpiralLayout()
+      .activated.connect(callbackShortcutLayout(SpiralLayout));
   }
 
   //#region Helper functions
