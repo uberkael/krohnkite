@@ -88,6 +88,7 @@ class KWinConfig implements IConfig {
         ["enableStairLayout", true, StairLayout],
         ["enableSpiralLayout", true, SpiralLayout],
         ["enableQuarterLayout", false, QuarterLayout],
+        ["enableStackedLayout", false, StackedLayout],
         ["enableFloatingLayout", false, FloatingLayout],
         ["enableCascadeLayout", false, CascadeLayout], // TODO: add config
       ] as Array<[string, boolean, ILayoutClass]>
