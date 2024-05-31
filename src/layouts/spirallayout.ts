@@ -24,7 +24,10 @@ type SpiralLayoutPart = HalfSplitLayoutPart<
 >;
 
 class SpiralLayout implements ILayout {
+  public static readonly id = "SpiralLayout";
   public readonly description = "Spiral";
+
+  public readonly classID = SpiralLayout.id;
 
   private depth: number;
   private parts: SpiralLayoutPart;
