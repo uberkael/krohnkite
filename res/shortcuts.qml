@@ -305,4 +305,14 @@ Item {
         text: "Krohnkite: Quarter Layout";
         sequence: "";
     }
+    function getStackedLayout() {
+        return stackedLayout;
+    }
+    ShortcutHandler {
+        id: stackedLayout;
+
+        name: "KrohnkiteStackedLayout";
+        text: "Krohnkite: Stacked Layout";
+        sequence: "";
+    }
 }
