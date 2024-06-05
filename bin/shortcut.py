@@ -116,14 +116,14 @@ def register_shortcut(action_id, keycomb, force=False):
 
     keycode = get_keycode(keycomb)
     if VERBOSE:
-        print("register [{2:<14}] to '{1}/{0}'.".format(action_id[1], action_id[2], keycomb))
+        print(f"register [{keycomb:<14}] to '{action_id[2]}/{action_id[1]}'.")
     kglobalaccel.setForeignShortcut(action_id, [keycode])
 
 def register_krohnkite_shortcut(action: str, keycomb_full: str):
     action = f"Krohnkite: {action}"
     keycode = get_keycode(keycomb_full)
 
-    if VERBOSE: print("register [{1:<14}] to '{0}'.".format(action, keycomb_full))
+    if VERBOSE: print(f"register [{keycomb_full:<14}] to '{action}'.")
 
     kglobalaccel.setForeignShortcut(["kwin", action, "KWin", ""], [keycode])
 
@@ -141,7 +141,7 @@ def is_shortcut_colliding(keycomb_full: str) -> bool:
 def unregister_colliding_shortcut(keycomb_full: str):
     action_id = kglobalaccel.action(get_keycode(keycomb_full))
     if len(action_id) > 0:
-        if VERBOSE: print("unregister [{:<14}] bound to '{}'".format(keycomb_full, action_id[1]))
+        if VERBOSE: print(f"unregister [{keycomb_full:<14}] bound to '{action_id[1]}'")
         kglobalaccel.setForeignShortcut(action_id, [])
 
 def unregister_all_krohnkite_shortcuts():
