@@ -173,7 +173,7 @@ def main():
     config = parse_arguments()
 
     global VERBOSE
-    VERBOSE = False if config.quiet else True
+    VERBOSE = not config.quiet
 
     if config.command == 'register':
         binds = dict(KROHNKITE_DEFAULT_BINDINGS)
@@ -215,8 +215,6 @@ def main():
         unregister_all_krohnkite_shortcuts()
     elif config.command == 'register-desktops':
         register_desktop_shortcuts(config.modifier, config.force)
-    else:
-        pass
 
 
 session_bus = dbus.SessionBus()
