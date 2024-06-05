@@ -120,7 +120,7 @@ def register_shortcut(action_id, keycomb, force=False):
     kglobalaccel.setForeignShortcut(action_id, [keycode])
 
 def register_krohnkite_shortcut(action: str, keycomb_full: str):
-    action = "Krohnkite: " + action
+    action = f"Krohnkite: {action}"
     keycode = get_keycode(keycomb_full)
 
     if VERBOSE: print("register [{1:<14}] to '{0}'.".format(action, keycomb_full))
@@ -128,9 +128,9 @@ def register_krohnkite_shortcut(action: str, keycomb_full: str):
     kglobalaccel.setForeignShortcut(["kwin", action, "KWin", ""], [keycode])
 
 def unregister_krohnkite_shortcut(action: str):
-    action = "Krohnkite: " + action
+    action = f"Krohnkite: {action}"
 
-    if VERBOSE: print("unregister '{}'.".format(action))
+    if VERBOSE: print(f"unregister '{action}'.")
 
     kglobalaccel.setForeignShortcut(["kwin", action, "KWin", ""], [])
 
@@ -161,12 +161,12 @@ def is_shortcut_already_bound(keycomb_full: str) -> bool:
 
 def register_desktop_shortcuts(modifier, force):
     for i in range(1,10):
-        action = "Switch to Desktop {}".format(i)
-        keycomb = "{}+{}".format(modifier, i)
+        action = f"Switch to Desktop {i}"
+        keycomb = f"{modifier}+{i}"
         register_shortcut(["kwin", action, "KWin", action], keycomb, force=force)
 
-        action = "Window to Desktop {}".format(i)
-        keycomb = "{}+{}".format(modifier, NUMBER_SHIFT_MAP[i])
+        action = f"Window to Desktop {i}"
+        keycomb = f"{modifier}+{NUMBER_SHIFT_MAP[i]}"
         register_shortcut(["kwin", action, "KWin", action], keycomb, force=force)
 
 def main():
@@ -185,29 +185,29 @@ def main():
             # read-through custom binds
             for action, keycomb in custom_binds:
                 if action not in binds:
-                    print("invalid action '{}'",format(action))
+                    print(f"invalid action '{action}'")
                     sys.exit(1)
                 elif keycomb.lower() == "none":
                     binds[action] = None
-                elif is_key_valid(config.modifier + '+' + keycomb):
+                elif is_key_valid(f'{config.modifier}+{keycomb}'):
                     binds[action] = keycomb
                 else:
-                    print("invalid key '{}' for action '{}'".format(action, keycomb))
+                    print(f"invalid key '{action}' for action '{keycomb}'")
                     sys.exit(1)
 
         if config.force is True:
             for keycomb in binds.values():
                 if keycomb is not None:
-                    unregister_colliding_shortcut(config.modifier + '+' + keycomb)
+                    unregister_colliding_shortcut(f'{config.modifier}+{keycomb}')
 
         # register shortcuts
         for action, keycomb in binds.items():
             if keycomb is None:
                 unregister_krohnkite_shortcut(action)
             else:
-                keycomb_full = config.modifier + '+' + keycomb
+                keycomb_full = f'{config.modifier}+{keycomb}'
                 if is_shortcut_colliding(keycomb):
-                    print("skipping {} due to shortcut collision...".format(keycomb_full))
+                    print(f"skipping {keycomb_full} due to shortcut collision...")
                 else:
                     register_krohnkite_shortcut(action, keycomb_full)
 
