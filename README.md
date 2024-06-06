@@ -165,24 +165,12 @@ all windows:
 Changing the border color makes it easier to identify current window. This is
 convinient if title bars are removed.
 
-1.  Open `~/.config/kdeglobals` with your favorite editor
-2.  Scroll down and find `[WM]` section
-3.  Append the followings to the section:
+1. You can use the Oxygen decoration theme. [Oxygen theme settings][]
+1. You can install third-party decorations, see [Border color conversation][]
 
-    - `frame=61,174,233`: set the border color of active window to _RGB(61,174,233)_
-    - `inactiveFrame=239,240,241`: set the border color of inactive window to _RGB(239,240,241)_
+[Oxygen theme settings]: https://github.com/anametologin/krohnkite/assets/165245883/51b4cb48-33c7-4627-a119-33d1abbe2b99
+[Border color conversation]: https://github.com/anametologin/krohnkite/issues/15
 
-    Here's a nice 2-liner that'll do it for you:
-
-         kwriteconfig5 --file ~/.config/kdeglobals --group WM --key frame 61,174,233
-         kwriteconfig5 --file ~/.config/kdeglobals --group WM --key inactiveFrame  239,240,241
-
-4.  You must **restart** your session to see changes. (i.e. re-login, reboot)
-
-Note: the RGB values presented here are for the default Breeze theme
-
-Note: You might also need to set the border size larger than the theme's default:
-`System Settings` > `Application Style` > `Window Decorations`: Untick `Use theme's default window border size` and adjust the size (right from the checkbox).
 
 ### Setting Minimum Geometry Size
 
