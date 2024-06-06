@@ -10,7 +10,7 @@ KWIN_QML    = $(KWINPKG_DIR)/contents/ui/main.qml
 
 NODE_SCRIPT = $(PROJECT_NAME).js
 NODE_META   = package.json
-NODE_FILES  = $(NODE_SCRIPT) $(NODE_META) package-lock.json
+NODE_FILES  = $(NODE_SCRIPT) package-lock.json
 
 SRC = $(shell find src -name "*.ts")
 
