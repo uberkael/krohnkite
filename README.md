@@ -203,7 +203,7 @@ This behavior may not be preferable depending on your setup. This can be mitigat
 ## Useful Development Resources
 
 - [KWin Scripting Tutorial](https://techbase.kde.org/Development/Tutorials/KWin/Scripting)
-- [KWin Scripting API 4.9 Reference](https://techbase.kde.org/Development/Tutorials/KWin/Scripting/API_4.9)
+- [KWin Scripting API](https://develop.kde.org/docs/plasma/kwin/api/)
 - Adding configuration dialog
   - [Development/Tutorials/Plasma/JavaScript/ConfigDialog](https://techbase.kde.org/Development/Tutorials/Plasma/JavaScript/ConfigDialog)
   - [Development/Tutorials/Using KConfig XT](https://techbase.kde.org/Development/Tutorials/Using_KConfig_XT)
