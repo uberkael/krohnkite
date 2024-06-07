@@ -3,12 +3,12 @@ PROJECT_VER  = 0.9.5
 PROJECT_REV  = $(shell git rev-parse HEAD | cut -b-7)
 
 KWINPKG_FILE = $(PROJECT_NAME)-$(PROJECT_VER).kwinscript
-KWINPKG_DIR = pkg
+KWINPKG_DIR  = pkg
 
-KWIN_META   = $(KWINPKG_DIR)/metadata.json
-KWIN_QML    = $(KWINPKG_DIR)/contents/ui/main.qml
-NODE_SCRIPT = $(PROJECT_NAME).js
-NODE_FILES  = $(NODE_SCRIPT) package-lock.json
+KWIN_META    = $(KWINPKG_DIR)/metadata.json
+KWIN_QML     = $(KWINPKG_DIR)/contents/ui/main.qml
+NODE_SCRIPT  = $(PROJECT_NAME).js
+NODE_FILES   = $(NODE_SCRIPT) package-lock.json
 
 SRC = $(shell find src -name "*.ts")
 
