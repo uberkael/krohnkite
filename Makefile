@@ -82,4 +82,4 @@ $(NODE_SCRIPT): $(SRC)
 package_json: package.json
 	sed -i 's/"version": [^,]*/"version": "$(PROJECT_VER)"/' package.json
 
-.PHONY: all clean install package test run stop
+.PHONY: all clean install package test run stop package_json

@@ -6,10 +6,9 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "^5.4.5",
-    "mocha": "^6.0.0"
+    "mocha": "^10.4.0",
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "tsc": "tsc",
