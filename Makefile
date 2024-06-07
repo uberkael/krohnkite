@@ -7,9 +7,7 @@ KWINPKG_DIR = pkg
 
 KWIN_META   = $(KWINPKG_DIR)/metadata.json
 KWIN_QML    = $(KWINPKG_DIR)/contents/ui/main.qml
-
 NODE_SCRIPT = $(PROJECT_NAME).js
-NODE_META   = package.json
 NODE_FILES  = $(NODE_SCRIPT) package-lock.json
 
 SRC = $(shell find src -name "*.ts")
@@ -28,9 +26,9 @@ install: package
 uninstall:
 	kpackagetool6 -t kwinscript -r $(PROJECT_NAME)
 
-package: $(KWINPKG_FILE)
+package: $(KWINPKG_FILE) package_json
 
-test: $(NODE_SCRIPT) $(NODE_META)
+test: $(NODE_SCRIPT) package_json
 	npm test
 
 run: $(KWINPKG_DIR)
@@ -81,7 +79,7 @@ $(NODE_SCRIPT): $(SRC)
 	npm install --save-dev
 	npm run tsc --
 
-$(NODE_META): res/package.json
-	sed "s/\$$VER/$(PROJECT_VER).0/" $< > $@
+package_json: package.json
+	sed -i 's/"version": [^,]*/"version": "$(PROJECT_VER)"/' package.json
 
 .PHONY: all clean install package test run stop
