@@ -112,7 +112,9 @@ class TilingController {
       // TODO: arbitrary constant
       if (distance > 30) {
         window.floatGeometry = window.actualGeometry;
-        window.state = WindowState.Floating;
+        if (!CONFIG.keepTilingOnDrag) {
+          window.state = WindowState.Floating;
+        }
         this.engine.arrange(ctx);
         return;
       }
