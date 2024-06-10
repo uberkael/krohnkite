@@ -106,15 +106,13 @@ class TilingController {
     }
 
     /* ... or float window by dragging */
-    if (window.state === WindowState.Tiled) {
+    if (!CONFIG.keepTilingOnDrag && window.state === WindowState.Tiled) {
       const diff = window.actualGeometry.subtract(window.geometry);
       const distance = Math.sqrt(diff.x ** 2 + diff.y ** 2);
       // TODO: arbitrary constant
       if (distance > 30) {
         window.floatGeometry = window.actualGeometry;
-        if (!CONFIG.keepTilingOnDrag) {
-          window.state = WindowState.Floating;
-        }
+        window.state = WindowState.Floating;
         this.engine.arrange(ctx);
         return;
       }
