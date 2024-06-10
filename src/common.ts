@@ -123,6 +123,7 @@ interface IConfig {
   adjustLayout: boolean;
   adjustLayoutLive: boolean;
   keepFloatAbove: boolean;
+  keepTilingOnDrag: boolean;
   noTileBorder: boolean;
   limitTileWidthRatio: number;
   //#endregion

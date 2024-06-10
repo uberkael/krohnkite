@@ -141,6 +141,11 @@
         <default>true</default>
     </entry>
 
+    <entry name="keepTilingOnDrag" type="Bool">
+	    <label>Always preserve the tiling status of a window upon dragging</label>
+        <default>false</default>
+    </entry>
+
     <entry name="noTileBorder" type="Bool">
         <label>Remove borders of tiled windows</label>
         <default>false</default>

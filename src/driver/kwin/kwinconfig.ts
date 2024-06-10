@@ -31,6 +31,7 @@ class KWinConfig implements IConfig {
   public adjustLayout: boolean;
   public adjustLayoutLive: boolean;
   public keepFloatAbove: boolean;
+  public keepTilingOnDrag: boolean;
   public noTileBorder: boolean;
   public limitTileWidthRatio: number;
   //#endregion
@@ -105,6 +106,7 @@ class KWinConfig implements IConfig {
     this.adjustLayout = KWIN.readConfig("adjustLayout", true);
     this.adjustLayoutLive = KWIN.readConfig("adjustLayoutLive", true);
     this.keepFloatAbove = KWIN.readConfig("keepFloatAbove", true);
+    this.keepTilingOnDrag = KWIN.readConfig("keepTilingOnDrag", false);
     this.noTileBorder = KWIN.readConfig("noTileBorder", false);
 
     this.limitTileWidthRatio = 0;
