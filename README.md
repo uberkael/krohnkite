@@ -99,7 +99,7 @@ restart is required to deactivated it.
 1. Krohnkite options: ![options](img/conf.png)
 2. Options->Debug new Windows
 3. Reboot
-4. Run Kdevelop
+4. Run KSystemLog
 5. Type in filter string: krohnkite
 6. All created windows krohnkite working with will be there.
 7. Every debug entry contains parameters except those that are false and empty.
