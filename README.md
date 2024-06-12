@@ -100,9 +100,10 @@ restart is required to deactivated it.
 2. Options->Debug new Windows
 3. Reboot
 4. Run KSystemLog
-5. Type in filter string: krohnkite
-6. All created windows krohnkite working with will be there.
-7. Every debug entry contains parameters except those that are false and empty.
+5. Push `Ignore` button
+6. Type in filter string: `krohnkite`
+7. All created windows krohnkite working with will be there.
+8. Every debug entry contains parameters except those that are false and empty.
 
 ## Default Key Bindings
 
