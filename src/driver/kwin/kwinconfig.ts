@@ -24,7 +24,8 @@ class KWinConfig implements IConfig {
   public layoutFactories: { [key: string]: () => ILayout };
   public maximizeSoleTile: boolean;
   public monocleMaximize: boolean;
-  public monocleMinimizeRest: boolean; // kwin.specific
+  public monocleMinimizeRest: boolean;
+  public stairReverse: boolean; // kwin.specific
   //#endregion
 
   //#region Features
@@ -102,6 +103,7 @@ class KWinConfig implements IConfig {
     this.maximizeSoleTile = KWIN.readConfig("maximizeSoleTile", false);
     this.monocleMaximize = KWIN.readConfig("monocleMaximize", true);
     this.monocleMinimizeRest = KWIN.readConfig("monocleMinimizeRest", false);
+    this.stairReverse = KWIN.readConfig("stairReverse", false);
 
     this.adjustLayout = KWIN.readConfig("adjustLayout", true);
     this.adjustLayoutLive = KWIN.readConfig("adjustLayoutLive", true);

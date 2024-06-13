@@ -40,11 +40,12 @@ class StairLayout implements ILayout {
 
     // TODO: limit the maximum number of staired windows.
 
+    const alignRight = Number(!KWINCONFIG.stairReverse);
     for (let i = 0; i < len; i++) {
       const dx = space * (len - i - 1);
       const dy = space * i;
       tiles[i].geometry = new Rect(
-        area.x + dx,
+        area.x + alignRight * dx,
         area.y + dy,
         area.width - dx,
         area.height - dy
