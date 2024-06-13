@@ -46,6 +46,11 @@
         <default>true</default>
     </entry>
 
+    <entry name="stairReverse" type="Bool">
+	    <label>Reverse the stair layout's orientation</label>
+        <default>false</default>
+    </entry>
+
     <entry name="enableQuarterLayout" type="Bool">
 	    <label>Enable/disable Quarter layout</label>
         <default>false</default>
