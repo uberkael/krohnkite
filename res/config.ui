@@ -198,7 +198,7 @@
                <item>
                 <widget class="QCheckBox" name="kcfg_stairReverse">
                  <property name="text">
-                  <string>Reverse the stair layout's orientation</string>
+                  <string>Reverse the stair layout's direction</string>
                  </property>
                 </widget>
                </item>
