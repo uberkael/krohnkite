@@ -27,8 +27,6 @@ class BTreeLayout implements ILayout {
   public static readonly id = "StackedLayout";
 
   public readonly classID = BTreeLayout.id;
-  private level: number;
-  private tiles_len: number;
 
   public get description(): string {
     return "BTree";
@@ -37,8 +35,6 @@ class BTreeLayout implements ILayout {
   private parts: BTreeLayoutPart;
 
   constructor() {
-    this.level = 1;
-    this.tiles_len = 2;
     this.parts = new HalfSplitLayoutPart(
       new FillLayoutPart(),
       new FillLayoutPart()
@@ -47,73 +43,15 @@ class BTreeLayout implements ILayout {
     this.parts.gap = CONFIG.tileLayoutGap;
   }
 
-  // public adjust(
-  //   area: Rect,
-  //   tiles: WindowClass[],
-  //   basis: WindowClass,
-  //   delta: RectDelta
-  // ) {
-  //   this.parts.adjust(area, tiles, basis, delta);
-  // }
-
   public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
     tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
-
-    // print(">>>Parts before:" + this.parts);
-    this.bore(tileables.length);
-    // print(">>>Parts after:" + this.parts);
-
+    this.create_parts(tileables.length);
     let rectangles = this.parts.apply(area, tileables);
-
-    // print("Rectangles:" + rectangles);
-
     rectangles.forEach((geometry, i) => {
       tileables[i].geometry = geometry;
     });
-
-    // this.parts.apply(area, tileables).forEach((geometry, i) => {
-    //   tileables[i].geometry = geometry;
-    // });
   }
-  private bore(tiles_len: number): void {
-    function build_btree(
-      head: BTreeLayoutPart,
-      max_level: number,
-      current_level: number,
-      tiles_len: number
-    ): void {
-      if (current_level <= max_level) {
-        if (head.primarySize > 1) {
-          let primary = new HalfSplitLayoutPart(
-            new FillLayoutPart(),
-            new FillLayoutPart()
-          );
-          primary.primarySize = Math.floor(head.primarySize / 2);
-          primary.gap = CONFIG.tileLayoutGap;
-          primary.angle = current_level % 2 ? 0 : 90;
-          head.primary = primary;
-          build_btree(primary, max_level, current_level + 1, head.primarySize);
-        }
-        if (tiles_len - head.primarySize > 1) {
-          let secondary = new HalfSplitLayoutPart(
-            new FillLayoutPart(),
-            new FillLayoutPart()
-          );
-          secondary.primarySize = Math.floor(
-            (tiles_len - head.primarySize) / 2
-          );
-          secondary.gap = CONFIG.tileLayoutGap;
-          secondary.angle = current_level % 2 ? 0 : 90;
-          head.secondary = secondary;
-          build_btree(
-            secondary,
-            max_level,
-            current_level + 1,
-            tiles_len - head.primarySize
-          );
-        }
-      }
-    }
+  private create_parts(tiles_len: number): void {
     let head = this.get_head();
     head.angle = 0;
     head.gap = CONFIG.tileLayoutGap;
@@ -128,9 +66,45 @@ class BTreeLayout implements ILayout {
       } else {
         head.primarySize = half_level_capacity;
       }
-      build_btree(head, level, 2, tiles_len);
+      this.build_binary_tree(head, level, 2, tiles_len);
     }
     this.parts = head;
+  }
+
+  private build_binary_tree(
+    head: BTreeLayoutPart,
+    max_level: number,
+    current_level: number,
+    tiles_len: number
+  ): void {
+    if (current_level <= max_level) {
+      if (head.primarySize > 1) {
+        let primary = this.get_head();
+        primary.primarySize = Math.floor(head.primarySize / 2);
+        primary.gap = CONFIG.tileLayoutGap;
+        primary.angle = current_level % 2 ? 0 : 90;
+        head.primary = primary;
+        this.build_binary_tree(
+          primary,
+          max_level,
+          current_level + 1,
+          head.primarySize
+        );
+      }
+      if (tiles_len - head.primarySize > 1) {
+        let secondary = this.get_head();
+        secondary.primarySize = Math.floor((tiles_len - head.primarySize) / 2);
+        secondary.gap = CONFIG.tileLayoutGap;
+        secondary.angle = current_level % 2 ? 0 : 90;
+        head.secondary = secondary;
+        this.build_binary_tree(
+          secondary,
+          max_level,
+          current_level + 1,
+          tiles_len - head.primarySize
+        );
+      }
+    }
   }
 
   private get_head(): HalfSplitLayoutPart<FillLayoutPart, FillLayoutPart> {
