@@ -24,7 +24,7 @@ type BTreeLayoutPart = HalfSplitLayoutPart<
 >;
 
 class BTreeLayout implements ILayout {
-  public static readonly id = "StackedLayout";
+  public static readonly id = "BTreeLayout";
 
   public readonly classID = BTreeLayout.id;
 
