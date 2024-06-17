@@ -153,7 +153,7 @@
 
     <entry name="keepTilingOnDrag" type="Bool">
 	    <label>Always preserve the tiling status of a window upon dragging</label>
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="noTileBorder" type="Bool">
