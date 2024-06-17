@@ -214,6 +214,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_enableBTreeLayout">
+            <property name="toolTip">
+             <string>Enable BTree layout</string>
+            </property>
+            <property name="text">
+             <string>Binary tree Layout</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

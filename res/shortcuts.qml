@@ -315,6 +315,16 @@ Item {
         text: "Krohnkite: Stacked Layout";
         sequence: "";
     }
+    function getBTreeLayout() {
+        return bTreeLayout;
+    }
+    ShortcutHandler {
+        id: bTreeLayout;
+
+        name: "KrohnkiteBTreeLayout";
+        text: "Krohnkite: BTree Layout";
+        sequence: "";
+    }
     function getSpiralLayout() {
         return spiralLayout;
     }

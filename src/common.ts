@@ -107,6 +107,7 @@ interface IShortcuts {
   getQuarterLayout(): ShortcutHandler;
   getStackedLayout(): ShortcutHandler;
   getSpiralLayout(): ShortcutHandler;
+  getBTreeLayout(): ShortcutHandler;
 }
 
 //#region Driver
