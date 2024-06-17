@@ -44,6 +44,9 @@ class FillLayoutPart implements ILayoutPart {
       return area;
     });
   }
+  public toString(): string {
+    return `FillLayoutPart`;
+  }
 }
 
 class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
@@ -142,6 +145,9 @@ class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
       }
       return delta;
     }
+  }
+  public toString(): string {
+    return `<HalfSplitLayout: angle:${this.angle},ratio:${this.ratio},pr_size:${this.primarySize}.<<<Primary:${this.primary}---Secondary:${this.secondary}>>>`;
   }
 
   public apply(area: Rect, tiles: WindowClass[]): Rect[] {
