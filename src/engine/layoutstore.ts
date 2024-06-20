@@ -37,13 +37,15 @@ class LayoutStoreEntry {
     this.currentID = CONFIG.layoutOrder[0];
 
     CONFIG.screenDefaultLayout.some((entry) => {
-      let [cfg_output, cfg_screen_id] = entry.split(":");
+      let [cfg_output, cfg_screen_id_str] = entry.split(":");
+      let cfg_screen_id = parseInt(cfg_screen_id_str);
 
       if (
         output_name === cfg_output &&
-        parseInt(cfg_screen_id) <= CONFIG.layoutOrder.length
+        cfg_screen_id >= 0 &&
+        cfg_screen_id < CONFIG.layoutOrder.length
       ) {
-        this.currentIndex = parseInt(cfg_screen_id);
+        this.currentIndex = cfg_screen_id;
         this.currentID = CONFIG.layoutOrder[this.currentIndex];
         return true;
       }
