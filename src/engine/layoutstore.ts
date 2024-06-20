@@ -28,9 +28,27 @@ class LayoutStoreEntry {
   private layouts: { [key: string]: ILayout };
   private previousID: string;
 
-  constructor() {
+  constructor(output_name: string) {
+    let layouts_str = CONFIG.layoutOrder.map(
+      (layout, i) => i + "." + layout + ", "
+    );
+    print(`Krohnkite: Screen(output):${output_name}, layouts: ${layouts_str}`);
     this.currentIndex = 0;
     this.currentID = CONFIG.layoutOrder[0];
+
+    CONFIG.screenDefaultLayout.some((entry) => {
+      let [cfg_output, cfg_screen_id] = entry.split(":");
+
+      if (
+        output_name === cfg_output &&
+        parseInt(cfg_screen_id) <= CONFIG.layoutOrder.length
+      ) {
+        this.currentIndex = parseInt(cfg_screen_id);
+        this.currentID = CONFIG.layoutOrder[this.currentIndex];
+        return true;
+      }
+    });
+
     this.layouts = {};
     this.previousID = this.currentID;
 
@@ -101,7 +119,21 @@ class LayoutStore {
   }
 
   private getEntry(key: string): LayoutStoreEntry {
-    if (!this.store[key]) this.store[key] = new LayoutStoreEntry();
+    if (!this.store[key]) {
+      // key with activity format example: HDMI-A-1@f381c9cf-cb90-4ade-8b3f-24ae0002d366#Desktop 1
+      // check if this surface but without activity already constructed.
+      // surface create after desktop and constructor ran twice
+      let i1 = key.indexOf("@");
+      let i2 = key.indexOf("#");
+      let key_without_activity = key.slice(0, i1 + 1) + key.slice(i2);
+      if (i1 > 0 && i2 > 0 && i2 - i1 > 1 && this.store[key_without_activity]) {
+        this.store[key] = this.store[key_without_activity];
+        delete this.store[key_without_activity];
+      } else {
+        let output_name = key.slice(0, key.indexOf("@"));
+        this.store[key] = new LayoutStoreEntry(output_name);
+      }
+    }
     return this.store[key];
   }
 }

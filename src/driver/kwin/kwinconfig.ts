@@ -69,6 +69,8 @@ class KWinConfig implements IConfig {
 
   public ignoreActivity: string[];
   public ignoreScreen: string[];
+
+  public screenDefaultLayout: string[];
   //#endregion
 
   constructor() {
@@ -144,6 +146,10 @@ class KWinConfig implements IConfig {
 
     this.ignoreScreen = commaSeparate(KWIN.readConfig("ignoreScreen", ""));
     this.ignoreTitle = commaSeparate(KWIN.readConfig("ignoreTitle", ""));
+
+    this.screenDefaultLayout = commaSeparate(
+      KWIN.readConfig("screenDefaultLayout", "")
+    );
 
     if (this.preventMinimize && this.monocleMinimizeRest) {
       debug(

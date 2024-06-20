@@ -141,6 +141,7 @@ interface IConfig {
   directionalKeyMode: "dwm" | "focus";
   newWindowAsMaster: boolean;
   //#endregion
+  screenDefaultLayout: string[];
 }
 
 interface IDriverWindow {

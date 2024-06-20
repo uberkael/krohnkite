@@ -801,6 +801,29 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox_11">
+         <property name="title">
+          <string>Screen default layout</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="kcfg_screenDefaultLayout">
+            <property name="toolTip">
+             <string>Comma-separated list OutputName:LayoutNumber all values you will see if run KSystemLog and type krohnkite in filter string. The data will right under Krohenkite start string. 2 monitors example:HDMI-A-1:3,DP-2:1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="screenDefaultLayoutLabel">
+            <property name="text">
+             <string>OutputName:LayoutId</string>
+            </property>
+           </widget>
+           </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_4">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

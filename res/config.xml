@@ -96,6 +96,11 @@
         <default></default>
     </entry>
 
+    <entry name="screenDefaultLayout" type="String">
+	    <label>Assigning number of layout to screen(output) by default</label>
+        <default></default>
+    </entry>
+
     <entry name="floatingClass" type="String">
 	    <label>Float windows with certain classes(comma-separated list)</label>
         <default></default>
