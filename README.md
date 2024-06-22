@@ -36,14 +36,16 @@ K and looks cool.
 ## Look at me
 
 1. Delete unused KWin shortcuts:
+
 ```
 qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanUp
 ```
+
 2. If you have a gap or vice versa you have gray(white etc) rectangle that means that there is a program with size 1x1 that have to be filtered by title or other ways. Make sure that the following programs, if you have them, have been added to the filter:
+
 ```
 xwaylandvideobridge
 ```
-
 
 ## Installation
 
@@ -65,6 +67,7 @@ Alternatively, through command-line:
     kpackagetool6 -t kwin/script -u krohnkite.kwinscript # upgrading existing script
 
 To uninstall the package:
+
 ```
 kpackagetool6 -t kwin/script -r krohnkite
 ```
@@ -93,6 +96,19 @@ Krohnkite can be temporarily loaded without installing the script:
 
 Note that Krohnkite can destroy itself completely once it is disabled, so no
 restart is required to deactivated it.
+
+### Choose layout for screen by default
+
+1. Right after system boot run KSystemLog
+2. Push ignore button
+3. Type in filter string: `krohnkite`
+4. Right after `KROHNKITE: starting the script` string you can see one if you have one screen or multiple strings: Screen(output):SCREEN_NAME numbered layouts...
+5. Copy your screen name. This name usually your video port DP-2 or HDMI-A-1 or Virtual-1 for VM or something like that
+6. Open Krohnkite options: ![options](img/conf.png)
+7. Tab `Rules->Screen default layout` and type `YOUR_SCREEN_NAME:LAYOUT_ID` for example: `HDMI-A-1:2,DP-2:7`
+8. `Apply` -> `reboot`
+
+[Video: assign default layer for screen](https://github.com/anametologin/krohnkite/assets/165245883/f569f1de-1721-4cdf-b3fb-96782a3e3189)
 
 ### Search a window parameters to filter, float etc.
 
@@ -142,8 +158,8 @@ Krohnkite supports multi-screen setup, but KWin has to be configured to unlock
 the full potential of the script.
 
 1. Enable `Separate Screen Focus` feature, the GUI controls are gone since KDE6, but the option is still accessible through the configs:
-         kwriteconfig6 --file ~/.config/kwinrc --group Windows --key ActiveMouseScreen false
-         kwriteconfig6 --file ~/.config/kwinrc --group Windows --key SeparateScreenFocus true
+   kwriteconfig6 --file ~/.config/kwinrc --group Windows --key ActiveMouseScreen false
+   kwriteconfig6 --file ~/.config/kwinrc --group Windows --key SeparateScreenFocus true
 2. Bind keys for global shortcut `Switch to Next/Previous Screen`
    (Recommend: `Meta + ,` / `Meta + .`)
 3. Bind keys for global shortcut `Window to Next/Previous Screen`
@@ -171,7 +187,6 @@ convinient if title bars are removed.
 
 [Oxygen theme settings]: https://github.com/anametologin/krohnkite/assets/165245883/51b4cb48-33c7-4627-a119-33d1abbe2b99
 [Border color conversation]: https://github.com/anametologin/krohnkite/issues/15
-
 
 ### Setting Minimum Geometry Size
 
