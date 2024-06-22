@@ -97,6 +97,8 @@ Krohnkite can be temporarily loaded without installing the script:
 Note that Krohnkite can destroy itself completely once it is disabled, so no
 restart is required to deactivated it.
 
+## Settings
+
 ### Choose layout for screen by default
 
 1. Right after system boot run KSystemLog
