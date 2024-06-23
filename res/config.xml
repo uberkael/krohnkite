@@ -78,7 +78,7 @@
 
     <entry name="ignoreClass" type="String">
 	    <label>Ignore windows with certain classes(comma-separated list)</label>
-        <default>krunner,yakuake,spectacle,kded5,xwaylandvideobridge</default>
+        <default>krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml</default>
     </entry>
 
     <entry name="ignoreRole" type="String">
