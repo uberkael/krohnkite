@@ -28,20 +28,24 @@ class LayoutStoreEntry {
   private layouts: { [key: string]: ILayout };
   private previousID: string;
 
-  constructor(output_name: string) {
+  constructor(output_name: string, desktop_name?: string) {
     let layouts_str = CONFIG.layoutOrder.map(
       (layout, i) => i + "." + layout + ", "
     );
-    print(`Krohnkite: Screen(output):${output_name}, layouts: ${layouts_str}`);
+    print(`Krohnkite: Screen(output):${output_name}, Desktop(name):${desktop_name}, layouts: ${layouts_str}`);
     this.currentIndex = 0;
     this.currentID = CONFIG.layoutOrder[0];
 
     CONFIG.screenDefaultLayout.some((entry) => {
-      let [cfg_output, cfg_screen_id_str] = entry.split(":");
+      let cfg = entry.split(":");
+      let cfg_output = cfg[0];
+      let cfg_desktop = cfg.length == 2 ? undefined : cfg[1];
+      let cfg_screen_id_str = cfg.length == 2 ? cfg[1] : cfg[2];
       let cfg_screen_id = parseInt(cfg_screen_id_str);
 
       if (
-        output_name === cfg_output &&
+        (output_name === cfg_output || cfg_output === '') &&
+        (desktop_name === cfg_desktop || cfg_desktop === undefined) &&
         cfg_screen_id >= 0 &&
         cfg_screen_id < CONFIG.layoutOrder.length
       ) {
@@ -133,7 +137,8 @@ class LayoutStore {
         delete this.store[key_without_activity];
       } else {
         let output_name = key.slice(0, key.indexOf("@"));
-        this.store[key] = new LayoutStoreEntry(output_name);
+        let desktop_name = i2 !== -1 ? key.slice(i2 + 1) : undefined;
+        this.store[key] = new LayoutStoreEntry(output_name, desktop_name);
       }
     }
     return this.store[key];
