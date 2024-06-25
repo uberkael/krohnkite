@@ -140,7 +140,10 @@ class KWinConfig implements IConfig {
     this.floatingTitle = commaSeparate(KWIN.readConfig("floatingTitle", ""));
     this.ignoreActivity = commaSeparate(KWIN.readConfig("ignoreActivity", ""));
     this.ignoreClass = commaSeparate(
-      KWIN.readConfig("ignoreClass", "krunner,yakuake,spectacle,kded5")
+      KWIN.readConfig(
+        "ignoreClass",
+        "krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml"
+      )
     );
     this.ignoreRole = commaSeparate(KWIN.readConfig("ignoreRole", "quake"));
 
