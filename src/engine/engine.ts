@@ -272,8 +272,10 @@ class TilingEngine {
     if (!window.shouldIgnore) {
       /* engine#arrange will update the state when required. */
       window.state = WindowState.Undecided;
-      if (CONFIG.newWindowAsMaster) this.windows.unshift(window);
-      else this.windows.push(window);
+      if (CONFIG.newWindowPosition === 1) this.windows.unshift(window);
+      else if (CONFIG.newWindowPosition === 2) {
+        this.windows.beside_first(window);
+      } else this.windows.push(window);
     }
   }
 
