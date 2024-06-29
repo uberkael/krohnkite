@@ -108,7 +108,7 @@ restart is required to deactivated it.
 4. Right after `KROHNKITE: starting the script` string you can see one if you have one screen or multiple strings: Screen(output):SCREEN_NAME numbered layouts...
 5. Copy your screen name. This name usually your video port DP-2 or HDMI-A-1 or Virtual-1 for VM or something like that
 6. Open Krohnkite options: ![options](img/conf.png)
-7. Tab `Rules->Screen default layout` and type `YOUR_SCREEN_NAME:LAYOUT_ID` for example: `HDMI-A-1:2,DP-2:7`
+7. Tab `Rules->Screen default layout` and type `YOUR_SCREEN_NAME:LAYOUT_ID` for example: `HDMI-A-1:2,DP-2:7`, or if you have multiple `Virtual Desktop` on screen you can write `SCREEN_NAME:DESKTOP_NAME:LAYOUT_ID`. More examples: `:2` - makes layout#2 default on all screens, `:Desktop 1:2` - makes layout#2 default on all desktops with name `Desktop 1`
 8. `Apply` -> `reboot`
 
 [Video: assign default layer for screen](https://github.com/anametologin/krohnkite/assets/165245883/f569f1de-1721-4cdf-b3fb-96782a3e3189)
