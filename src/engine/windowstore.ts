@@ -67,6 +67,10 @@ class WindowStore {
     this.list.push(window);
   }
 
+  public beside_first(window: WindowClass) {
+    this.list.splice(1, 0, window);
+  }
+
   public remove(window: WindowClass) {
     const idx = this.list.indexOf(window);
     if (idx >= 0) this.list.splice(idx, 1);

@@ -139,7 +139,7 @@ interface IConfig {
 
   //#region Behavior
   directionalKeyMode: "dwm" | "focus";
-  newWindowAsMaster: boolean;
+  newWindowPosition: number;
   //#endregion
   screenDefaultLayout: string[];
 }

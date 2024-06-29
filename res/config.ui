@@ -639,10 +639,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="kcfg_newWindowAsMaster">
-         <property name="text">
-          <string>Put new window as master</string>
+        <widget class="QGroupBox" name="verticalGroupBox">
+         <property name="title">
+          <string>Position of the New Window</string>
          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+           <widget class="QComboBox" name="kcfg_newWindowPosition">
+            <property name="minimumSize">
+             <size>
+              <width>400</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>Last</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>First</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Second</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>

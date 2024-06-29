@@ -226,9 +226,9 @@
         <default>1.6</default>
     </entry>
 
-    <entry name="newWindowAsMaster" type="Bool">
-        <label>Put new window as master</label>
-        <default>false</default>
+    <entry name="newWindowPosition" type="Int">
+        <label>The position every new window in the screen window array</label>
+        <default>0</default>
     </entry>
   </group>
 </kcfg>
