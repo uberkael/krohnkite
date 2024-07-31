@@ -48,6 +48,7 @@ function debugWin(win: Window): string {
     { name: "hidden", opt: win.hidden },
     { name: "keepAbove", opt: win.keepAbove },
     { name: "keepBelow", opt: win.keepBelow },
+    { name: "opacity", opt: win.opacity },
   ];
   var s = "krohnkite:";
   w_props.forEach((el) => {
