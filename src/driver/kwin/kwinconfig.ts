@@ -76,7 +76,10 @@ class KWinConfig implements IConfig {
   constructor() {
     function commaSeparate(str: string): string[] {
       if (!str || typeof str !== "string") return [];
-      return str.split(",").map((part) => part.trim());
+      return str
+        .split(",")
+        .map((part) => part.trim())
+        .filter((part) => part != "");
     }
 
     DEBUG.enabled = DEBUG.enabled || KWIN.readConfig("debug", false);
