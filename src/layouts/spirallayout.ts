@@ -81,7 +81,7 @@ class SpiralLayout implements ILayout {
     while (i < depth - 1) {
       npart = new HalfSplitLayoutPart(new FillLayoutPart(), lastFillPart);
       npart.gap = CONFIG.tileLayoutGap;
-      npart.angle = ((i + 1) % 4) * 90;
+      npart.angle = (((i + 1) % 4) * 90) as 0 | 90 | 180 | 270;
       hpart.secondary = npart;
       hpart = npart;
       i++;
