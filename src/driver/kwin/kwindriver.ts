@@ -133,7 +133,11 @@ class KWinDriver implements IDriverContext {
   }
 
   private addWindow(client: Window) {
-    if (client.normalWindow && !client.hidden) {
+    if (
+      client.normalWindow &&
+      !client.hidden &&
+      client.width * client.height > 10
+    ) {
       if (KWIN.readConfig("debugActiveWin", false)) print(debugWin(client));
       const window = this.windowMap.add(client);
       this.control.onWindowAdded(this, window);
