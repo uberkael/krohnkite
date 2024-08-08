@@ -128,16 +128,26 @@ class KWinDriver implements IDriverContext {
 
     const clients: Window[] = this.workspace.stackingOrder;
     for (let i = 0; i < clients.length; i++) {
-      if (!clients[i].normalWindow) {
-        continue;
-      }
-      const window = this.windowMap.add(clients[i]);
-      this.engine.manage(window);
-      if (window.state !== WindowState.Unmanaged)
-        this.bindWindowEvents(window, clients[i]);
-      else this.windowMap.remove(clients[i]);
+      this.addWindow(clients[i]);
     }
-    this.engine.arrange(this);
+  }
+
+  private addWindow(client: Window) {
+    if (client.normalWindow && !client.hidden) {
+      if (KWIN.readConfig("debugActiveWin", false)) print(debugWin(client));
+      const window = this.windowMap.add(client);
+      this.control.onWindowAdded(this, window);
+      if (window.state !== WindowState.Unmanaged) {
+        this.bindWindowEvents(window, client);
+      } else {
+        this.windowMap.remove(client);
+        if (KWIN.readConfig("debugActiveWin", false))
+          print("Unmanaged: " + debugWin(client));
+      }
+    } else {
+      if (KWIN.readConfig("debugActiveWin", false))
+        print("Filtered: " + debugWin(client));
+    }
   }
 
   //#region implement methods of IDriverContext`
@@ -335,14 +345,7 @@ class KWinDriver implements IDriverContext {
     );
 
     this.connect(this.workspace.windowAdded, (client: Window) => {
-      if (client.normalWindow && !client.hidden) {
-        if (KWIN.readConfig("debugActiveWin", false)) print(debugWin(client));
-        const window = this.windowMap.add(client);
-        this.control.onWindowAdded(this, window);
-        if (window.state !== WindowState.Unmanaged) {
-          this.bindWindowEvents(window, client);
-        } else this.windowMap.remove(client);
-      }
+      this.addWindow(client);
     });
 
     this.connect(this.workspace.windowRemoved, (client: Window) => {
