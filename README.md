@@ -160,9 +160,17 @@ restart is required to deactivated it.
 Krohnkite supports multi-screen setup, but KWin has to be configured to unlock
 the full potential of the script.
 
-1. Enable `Separate Screen Focus` feature, the GUI controls are gone since KDE6, but the option is still accessible through the configs:
+1. Enable `Separate Screen Focus` feature:
+
+- `System Settings` > `Window Management` > `Window Behavior` > `Multiscreen Behaviour`
+
+  `OR` use console commands:
+
+```
    kwriteconfig6 --file ~/.config/kwinrc --group Windows --key ActiveMouseScreen false
    kwriteconfig6 --file ~/.config/kwinrc --group Windows --key SeparateScreenFocus true
+```
+
 2. Bind keys for global shortcut `Switch to Next/Previous Screen`
    (Recommend: `Meta + ,` / `Meta + .`)
 3. Bind keys for global shortcut `Window to Next/Previous Screen`
