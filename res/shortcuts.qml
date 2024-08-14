@@ -182,7 +182,7 @@ Item {
         id: floatAll;
 
         name: "KrohnkiteFloatAll";
-        text: "Krohnkite: Float All";
+        text: "Krohnkite: Toggle Float All";
         sequence: "Meta+Shift+F";
     }
     function getNextLayout() {
