@@ -162,6 +162,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="kcfg_enableColumnsLayout">
+            <property name="toolTip">
+             <string>Enable Columns layout</string>
+            </property>
+            <property name="text">
+             <string>Columns Layout</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="kcfg_enableSpreadLayout">
             <property name="toolTip">
              <string>Enable Spread layout</string>

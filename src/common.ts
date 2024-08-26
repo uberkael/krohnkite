@@ -106,6 +106,7 @@ interface IShortcuts {
   getFloatingLayout(): ShortcutHandler;
   getQuarterLayout(): ShortcutHandler;
   getStackedLayout(): ShortcutHandler;
+  getColumnsLayout(): ShortcutHandler;
   getSpiralLayout(): ShortcutHandler;
   getBTreeLayout(): ShortcutHandler;
 }

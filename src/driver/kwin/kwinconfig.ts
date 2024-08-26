@@ -97,6 +97,7 @@ class KWinConfig implements IConfig {
         ["enableSpiralLayout", true, SpiralLayout],
         ["enableQuarterLayout", false, QuarterLayout],
         ["enableStackedLayout", false, StackedLayout],
+        ["enableColumnsLayout", false, ColumnsLayout],
         ["enableFloatingLayout", false, FloatingLayout],
         ["enableBTreeLayout", false, BTreeLayout],
         ["enableCascadeLayout", false, CascadeLayout], // TODO: add config

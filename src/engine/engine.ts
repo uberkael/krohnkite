@@ -224,6 +224,7 @@ class TilingEngine {
     });
 
     const tileables = this.windows.getVisibleTileables(srf);
+
     if (CONFIG.maximizeSoleTile && tileables.length === 1) {
       tileables[0].state = WindowState.Maximized;
       tileables[0].geometry = workingArea;

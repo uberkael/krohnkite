@@ -31,6 +31,9 @@ class LayoutUtils {
     weights: number[],
     gap: number
   ): Array<[number, number]> {
+    print(
+      `splitWeighted: begin:${begin}, length:${length}, weights:${weights},gap:${gap}`
+    );
     gap = gap !== undefined ? gap : 0;
 
     const n = weights.length;
@@ -38,12 +41,22 @@ class LayoutUtils {
     const weightSum = weights.reduce((sum, weight) => sum + weight, 0);
 
     let weightAcc = 0;
-    return weights.map((weight, i) => {
+    let aaa: Array<[number, number]>;
+    aaa = weights.map((weight, i) => {
       const partBegin = (actualLength * weightAcc) / weightSum + i * gap;
       const partLength = (actualLength * weight) / weightSum;
       weightAcc += weight;
       return [begin + Math.floor(partBegin), Math.floor(partLength)];
     });
+
+    print(`splitWeightedEND: ${aaa}`);
+    return aaa;
+    // return weights.map((weight, i) => {
+    //   const partBegin = (actualLength * weightAcc) / weightSum + i * gap;
+    //   const partLength = (actualLength * weight) / weightSum;
+    //   weightAcc += weight;
+    //   return [begin + Math.floor(partBegin), Math.floor(partLength)];
+    // });
   }
 
   /**
