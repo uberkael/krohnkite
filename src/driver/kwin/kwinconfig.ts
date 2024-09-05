@@ -69,6 +69,7 @@ class KWinConfig implements IConfig {
 
   public ignoreActivity: string[];
   public ignoreScreen: string[];
+  public ignoreVDesktop: string[];
 
   public screenDefaultLayout: string[];
   //#endregion
@@ -151,6 +152,7 @@ class KWinConfig implements IConfig {
     this.ignoreRole = commaSeparate(KWIN.readConfig("ignoreRole", "quake"));
 
     this.ignoreScreen = commaSeparate(KWIN.readConfig("ignoreScreen", ""));
+    this.ignoreVDesktop = commaSeparate(KWIN.readConfig("ignoreVDesktop", ""));
     this.ignoreTitle = commaSeparate(KWIN.readConfig("ignoreTitle", ""));
 
     this.screenDefaultLayout = commaSeparate(

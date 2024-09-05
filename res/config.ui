@@ -824,6 +824,20 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="ignoreDesktopLabel">
+            <property name="text">
+             <string>On Virtual Desktop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="kcfg_ignoreVDesktop">
+            <property name="toolTip">
+             <string>Comma-separated list of Virtual Desktops names. Windows corresponding to these will not be tiled.</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
