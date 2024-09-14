@@ -4,6 +4,7 @@ class ColumnLayout implements ILayout {
   public static readonly id = "Column";
   public readonly classID = ColumnLayout.id;
   public position: positionType;
+  // public windowId: Set;
 
   private parts: StackLayoutPart;
 
@@ -14,6 +15,7 @@ class ColumnLayout implements ILayout {
     this.position = position;
     this.parts = new StackLayoutPart();
     this.parts.gap = CONFIG.tileLayoutGap;
+    // this.windowId = [];
   }
   public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
     this.parts.apply(area, tileables).forEach((geometry, i) => {
@@ -54,7 +56,11 @@ class ColumnsLayout implements ILayout {
   }
 
   public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
-    tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
+    let activeWindowId =
+      ctx.currentWindow === null ? null : ctx.currentWindow.id;
+    tileables.forEach((tileable) => {
+      tileable.state = WindowState.Tiled;
+    });
     let columnWidth = area.width / this.parts.length;
     for (var idx = 0; idx < this.parts.length; idx++) {
       var columnArea = new Rect(
@@ -66,6 +72,7 @@ class ColumnsLayout implements ILayout {
       this.parts[idx].apply(ctx, tileables, columnArea);
     }
   }
+
   private applyColumnsPosition() {
     const length = this.parts.length;
     if (length === 1) {
