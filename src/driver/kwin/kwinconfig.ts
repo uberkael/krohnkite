@@ -115,7 +115,7 @@ class KWinConfig implements IConfig {
     this.adjustLayout = KWIN.readConfig("adjustLayout", true);
     this.adjustLayoutLive = KWIN.readConfig("adjustLayoutLive", true);
     this.keepFloatAbove = KWIN.readConfig("keepFloatAbove", true);
-    this.keepTilingOnDrag = KWIN.readConfig("keepTilingOnDrag", false);
+    this.keepTilingOnDrag = KWIN.readConfig("keepTilingOnDrag", true);
     this.noTileBorder = KWIN.readConfig("noTileBorder", false);
 
     this.limitTileWidthRatio = 0;
