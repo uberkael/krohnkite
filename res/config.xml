@@ -58,7 +58,7 @@
 
     <entry name="enableColumnsLayout" type="Bool">
 	    <label>Enable/disable Columns layout</label>
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="enableStackedLayout" type="Bool">

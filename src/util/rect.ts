@@ -39,6 +39,9 @@ class Rect {
       this.y + Math.floor(this.height / 2),
     ];
   }
+  public get activationPoint(): [number, number] {
+    return [this.x + Math.floor(this.width / 2), this.y + 10];
+  }
 
   public clone(): Rect {
     return new Rect(this.x, this.y, this.width, this.height);
@@ -84,8 +87,51 @@ class Rect {
     );
   }
 
-  public includesPoint([x, y]: [number, number]): boolean {
-    return this.x <= x && x <= this.maxX && this.y <= y && y <= this.maxY;
+  public includesPoint(
+    [x, y]: [number, number],
+    part: "whole" | "top" | "bottom" = "whole"
+  ): boolean {
+    if (part === "top")
+      return (
+        this.x <= x &&
+        x <= this.maxX &&
+        this.y <= y &&
+        y <= this.y + this.height / 2
+      );
+    else if (part === "bottom")
+      return (
+        this.x <= x &&
+        x <= this.maxX &&
+        y > this.y + this.height / 2 &&
+        y <= this.maxY
+      );
+    else {
+      return this.x <= x && x <= this.maxX && this.y <= y && y <= this.maxY;
+    }
+  }
+
+  public isLeftZone(
+    [x, y]: [number, number],
+    activeZone: percentType = 10
+  ): boolean {
+    return (
+      this.x <= x &&
+      x <= this.x + (this.width * activeZone) / 100 &&
+      this.y <= y &&
+      y <= this.maxY
+    );
+  }
+
+  public isRightZone(
+    [x, y]: [number, number],
+    activeZone: percentType = 10
+  ): boolean {
+    return (
+      x >= this.maxX - (this.width * activeZone) / 100 &&
+      x <= this.maxX &&
+      this.y <= y &&
+      y <= this.maxY
+    );
   }
 
   public subtract(other: Rect): Rect {

@@ -18,6 +18,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+type percentType = number;
+
 enum Shortcut {
   FocusNext,
   FocusPrev,
@@ -200,6 +202,12 @@ interface ILayout {
   ): void;
   apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void;
   handleShortcut?(ctx: EngineContext, input: Shortcut, data?: any): boolean;
+  drag?(
+    ctx: EngineContext,
+    activationPoint: [number, number],
+    window: WindowClass,
+    workingArea: Rect
+  ): boolean;
 
   toString(): string;
 }

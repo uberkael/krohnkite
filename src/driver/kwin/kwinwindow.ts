@@ -32,7 +32,7 @@ class KWinWindow implements IDriverWindow {
   }
 
   public get geometry(): Rect {
-    return toRect(this.window.bufferGeometry);
+    return toRect(this.window.frameGeometry);
   }
 
   public get shouldIgnore(): boolean {
