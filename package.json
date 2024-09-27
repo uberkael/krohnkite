@@ -1,6 +1,6 @@
 {
   "name": "krohnkite",
-  "version": "0.9.8",
+  "version": "0.9.8.1",
   "description": "A dynamic tiling extension for KWin",
   "main": "krohnkite.js",
   "directories": {
