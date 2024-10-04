@@ -134,6 +134,9 @@ class KWinDriver implements IDriverContext {
 
   private addWindow(client: Window): WindowClass | null {
     if (
+      !client.deleted &&
+      client.pid > 1 &&
+      !client.popupWindow &&
       client.normalWindow &&
       !client.hidden &&
       client.width * client.height > 10
