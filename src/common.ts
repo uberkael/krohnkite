@@ -119,6 +119,7 @@ interface IConfig {
   //#region Layout
   layoutOrder: string[];
   layoutFactories: { [key: string]: () => ILayout };
+  tileLayoutInitialAngle: string;
   monocleMaximize: boolean;
   maximizeSoleTile: boolean;
   //#endregion
