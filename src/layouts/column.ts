@@ -28,7 +28,7 @@ class ColumnLayout implements ILayout {
   public renderedWindowsIds: Array<string>;
   public renderedWindowsRects: Array<Rect>;
   public weight: number;
-  private parts: StackLayoutPart;
+  private parts: RotateLayoutPart<StackLayoutPart>;
 
   public get description(): string {
     return "Column";
@@ -43,11 +43,15 @@ class ColumnLayout implements ILayout {
   constructor() {
     this.position = "single";
     this.weight = 1.0;
-    this.parts = new StackLayoutPart();
-    this.parts.gap = CONFIG.tileLayoutGap;
+    this.parts = new RotateLayoutPart(new StackLayoutPart());
+    this.parts.inner.gap = CONFIG.tileLayoutGap;
     this.windowIds = new Set();
     this.renderedWindowsIds = [];
     this.renderedWindowsRects = [];
+  }
+  public set isHorizontal(value: boolean) {
+    if (value) this.parts.angle = 270;
+    else this.parts.angle = 0;
   }
 
   public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {

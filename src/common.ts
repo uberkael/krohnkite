@@ -120,6 +120,7 @@ interface IConfig {
   layoutOrder: string[];
   layoutFactories: { [key: string]: () => ILayout };
   tileLayoutInitialAngle: string;
+  columnsLayoutInitialAngle: string;
   monocleMaximize: boolean;
   maximizeSoleTile: boolean;
   //#endregion

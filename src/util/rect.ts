@@ -89,25 +89,63 @@ class Rect {
 
   public includesPoint(
     [x, y]: [number, number],
-    part: "whole" | "top" | "bottom" = "whole"
+    part: RectParts = RectParts.Whole
   ): boolean {
-    if (part === "top")
+    if (part === RectParts.Top)
       return (
         this.x <= x &&
         x <= this.maxX &&
         this.y <= y &&
         y <= this.y + this.height / 2
       );
-    else if (part === "bottom")
+    else if (part === RectParts.Bottom)
       return (
         this.x <= x &&
         x <= this.maxX &&
         y > this.y + this.height / 2 &&
         y <= this.maxY
       );
-    else {
+    else if (part === RectParts.Left) {
+      return (
+        this.y <= y &&
+        y <= this.maxY &&
+        this.x <= x &&
+        x <= this.x + this.height / 2
+      );
+    } else if (part === RectParts.Right) {
+      return (
+        this.y <= y &&
+        y <= this.maxY &&
+        x > this.x + this.width / 2 &&
+        x <= this.maxX
+      );
+    } else {
       return this.x <= x && x <= this.maxX && this.y <= y && y <= this.maxY;
     }
+  }
+
+  public isTopZone(
+    [x, y]: [number, number],
+    activeZone: percentType = 10
+  ): boolean {
+    return (
+      this.y <= y &&
+      y <= this.y + (this.height * activeZone) / 100 &&
+      this.x <= x &&
+      x <= this.maxX
+    );
+  }
+
+  public isBottomZone(
+    [x, y]: [number, number],
+    activeZone: percentType = 10
+  ): boolean {
+    return (
+      y >= this.maxY - (this.height * activeZone) / 100 &&
+      y <= this.maxY &&
+      this.x <= x &&
+      x <= this.maxX
+    );
   }
 
   public isLeftZone(

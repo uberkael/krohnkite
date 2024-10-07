@@ -24,6 +24,7 @@ class KWinConfig implements IConfig {
   public layoutFactories: { [key: string]: () => ILayout };
   public maximizeSoleTile: boolean;
   public tileLayoutInitialAngle: string;
+  public columnsLayoutInitialAngle: string;
   public monocleMaximize: boolean;
   public monocleMinimizeRest: boolean;
   public stairReverse: boolean; // kwin.specific
@@ -112,6 +113,10 @@ class KWinConfig implements IConfig {
     this.maximizeSoleTile = KWIN.readConfig("maximizeSoleTile", false);
     this.tileLayoutInitialAngle = KWIN.readConfig(
       "tileLayoutInitialRotationAngle",
+      "0"
+    );
+    this.columnsLayoutInitialAngle = KWIN.readConfig(
+      "columnsLayoutInitialRotationAngle",
       "0"
     );
     this.monocleMaximize = KWIN.readConfig("monocleMaximize", true);

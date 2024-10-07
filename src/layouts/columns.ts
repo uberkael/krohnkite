@@ -22,6 +22,7 @@ class ColumnsLayout implements ILayout {
   public static readonly id = "Columns";
   public parts: ColumnLayout[];
   public readonly classID = ColumnsLayout.id;
+  private direction: windRose;
 
   public get description(): string {
     return "Columns";
@@ -29,6 +30,7 @@ class ColumnsLayout implements ILayout {
 
   constructor() {
     this.parts = [new ColumnLayout()];
+    this.direction = new windRose(CONFIG.columnsLayoutInitialAngle);
   }
   public adjust(
     area: Rect,
@@ -38,36 +40,78 @@ class ColumnsLayout implements ILayout {
   ) {
     let columnId = this.getColumnId(basis);
     if (columnId === null) return;
+    let isReverse = this.direction.east || this.direction.south;
+    let columnsLength = this.parts.length;
     // column resize
-    if (delta.east !== 0 || delta.west !== 0) {
+    if (
+      ((this.direction.east || this.direction.west) &&
+        (delta.east !== 0 || delta.west !== 0)) ||
+      ((this.direction.north || this.direction.south) &&
+        (delta.north !== 0 || delta.south !== 0))
+    ) {
+      let oldWeights: Array<number>;
+      if (isReverse) {
+        oldWeights = this.parts
+          .slice(0)
+          .reverse()
+          .map((column) => column.weight);
+      } else {
+        oldWeights = this.parts.map((column) => column.weight);
+      }
       const weights = LayoutUtils.adjustAreaWeights(
         area,
-        this.parts.map((column) => column.weight),
+        oldWeights,
         CONFIG.tileLayoutGap,
-        columnId,
+        isReverse ? columnsLength - 1 - columnId : columnId,
         delta,
-        true
+        this.direction.east || this.direction.west
       );
+
       weights.forEach((weight, i) => {
-        this.parts[i].weight = weight * this.parts.length;
+        this.parts[isReverse ? columnsLength - 1 - i : i].weight =
+          weight * columnsLength;
       });
     }
-    if (delta.north !== 0 || delta.south !== 0) {
+    if (
+      ((delta.north !== 0 || delta.south !== 0) &&
+        (this.direction.east || this.direction.west)) ||
+      ((delta.east !== 0 || delta.west !== 0) &&
+        (this.direction.north || this.direction.south))
+    ) {
       this.parts[columnId].adjust(area, tiles, basis, delta);
     }
   }
 
   public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+    print(`columnsApply: ${this.direction}`);
     this.arrangeTileables(tileables);
-    const weights = this.parts.map((tile) => tile.weight);
+    let weights: Array<number>;
+    if (this.direction.east || this.direction.south) {
+      weights = this.parts
+        .slice(0)
+        .reverse()
+        .map((tile) => tile.weight);
+    } else {
+      weights = this.parts.map((tile) => tile.weight);
+    }
     const rects = LayoutUtils.splitAreaWeighted(
       area,
       weights,
       CONFIG.tileLayoutGap,
-      true
+      this.direction.east || this.direction.west
     );
-    for (var idx = 0; idx < this.parts.length; idx++) {
-      this.parts[idx].apply(ctx, tileables, rects[idx]);
+    if (this.direction.east || this.direction.south) {
+      let i = 0;
+      for (var idx = this.parts.length - 1; idx >= 0; idx--) {
+        this.parts[idx].isHorizontal = this.direction.south;
+        this.parts[idx].apply(ctx, tileables, rects[i]);
+        i++;
+      }
+    } else {
+      for (var idx = 0; idx < this.parts.length; idx++) {
+        this.parts[idx].isHorizontal = this.direction.north;
+        this.parts[idx].apply(ctx, tileables, rects[idx]);
+      }
     }
   }
 
@@ -82,7 +126,10 @@ class ColumnsLayout implements ILayout {
     let columnId = this.getColumnId(window);
     let windowId = window.id;
     if (
-      workingArea.isLeftZone(activationPoint) &&
+      ((this.direction.north && workingArea.isTopZone(activationPoint)) ||
+        (this.direction.south && workingArea.isBottomZone(activationPoint)) ||
+        (this.direction.west && workingArea.isLeftZone(activationPoint)) ||
+        (this.direction.east && workingArea.isRightZone(activationPoint))) &&
       !(
         this.parts[0].windowIds.size === 1 &&
         this.parts[0].windowIds.has(windowId)
@@ -94,7 +141,10 @@ class ColumnsLayout implements ILayout {
       return true;
     }
     if (
-      workingArea.isRightZone(activationPoint) &&
+      ((this.direction.north && workingArea.isBottomZone(activationPoint)) ||
+        (this.direction.south && workingArea.isTopZone(activationPoint)) ||
+        (this.direction.west && workingArea.isRightZone(activationPoint)) ||
+        (this.direction.east && workingArea.isLeftZone(activationPoint))) &&
       !(
         this.parts[this.parts.length - 1].windowIds.size === 1 &&
         this.parts[this.parts.length - 1].windowIds.has(windowId)
@@ -109,7 +159,16 @@ class ColumnsLayout implements ILayout {
       const column = this.parts[colIdx];
       for (let i = 0; i < column.renderedWindowsRects.length; i++) {
         const renderedRect = column.renderedWindowsRects[i];
-        if (renderedRect.includesPoint(activationPoint, "top")) {
+        if (
+          (this.direction.west &&
+            renderedRect.includesPoint(activationPoint, RectParts.Top)) ||
+          (this.direction.north &&
+            renderedRect.includesPoint(activationPoint, RectParts.Left)) ||
+          (this.direction.east &&
+            renderedRect.includesPoint(activationPoint, RectParts.Top)) ||
+          (this.direction.south &&
+            renderedRect.includesPoint(activationPoint, RectParts.Left))
+        ) {
           if (column.renderedWindowsIds[i] === windowId) return false;
           if (i > 0 && column.renderedWindowsIds[i - 1] === windowId)
             return false;
@@ -121,7 +180,16 @@ class ColumnsLayout implements ILayout {
           ctx.moveWindowByWinId(window, renderedId);
           return true;
         }
-        if (renderedRect.includesPoint(activationPoint, "bottom")) {
+        if (
+          (this.direction.west &&
+            renderedRect.includesPoint(activationPoint, RectParts.Bottom)) ||
+          (this.direction.north &&
+            renderedRect.includesPoint(activationPoint, RectParts.Right)) ||
+          (this.direction.east &&
+            renderedRect.includesPoint(activationPoint, RectParts.Bottom)) ||
+          (this.direction.south &&
+            renderedRect.includesPoint(activationPoint, RectParts.Right))
+        ) {
           if (column.renderedWindowsIds[i] === windowId) return false;
           if (
             i < column.renderedWindowsIds.length - 1 &&
@@ -205,7 +273,7 @@ class ColumnsLayout implements ILayout {
     }
   }
 
-  private toRight(ctx: EngineContext) {
+  private toColumnWithBiggerIndex(ctx: EngineContext) {
     let currentWindowId = this.getCurrentWinId(ctx);
     let activeColumnId = this.getCurrentColumnIdx(currentWindowId);
     if (
@@ -226,7 +294,7 @@ class ColumnsLayout implements ILayout {
     this.parts[activeColumnId].windowIds.delete(currentWindowId);
     this.parts[activeColumnId + 1].windowIds.add(currentWindowId);
   }
-  private toLeft(ctx: EngineContext) {
+  private toColumnWithSmallerIndex(ctx: EngineContext) {
     let currentWindowId = this.getCurrentWinId(ctx);
     let activeColumnId = this.getCurrentColumnIdx(currentWindowId);
 
@@ -250,7 +318,7 @@ class ColumnsLayout implements ILayout {
       this.parts[activeColumnId - 1].windowIds.add(currentWindowId);
     }
   }
-  private toUp(ctx: EngineContext) {
+  private toUpOrLeft(ctx: EngineContext) {
     let currentWindow = ctx.currentWindow;
     let currentWindowId = currentWindow !== null ? currentWindow.id : null;
     let activeColumnId = this.getCurrentColumnIdx(currentWindowId);
@@ -267,7 +335,7 @@ class ColumnsLayout implements ILayout {
     if (upperWinId === null) return;
     ctx.moveWindowByWinId(currentWindow, upperWinId);
   }
-  private toLower(ctx: EngineContext) {
+  private toBottomOrRight(ctx: EngineContext) {
     let currentWindow = ctx.currentWindow;
     let currentWindowId = currentWindow !== null ? currentWindow.id : null;
     let activeColumnId = this.getCurrentColumnIdx(currentWindowId);
@@ -287,17 +355,47 @@ class ColumnsLayout implements ILayout {
   public handleShortcut(ctx: EngineContext, input: Shortcut) {
     switch (input) {
       case Shortcut.SwapLeft:
-        this.toLeft(ctx);
+        if (this.direction.north || this.direction.south) {
+          this.toUpOrLeft(ctx);
+        } else if (this.direction.east) {
+          this.toColumnWithBiggerIndex(ctx);
+        } else this.toColumnWithSmallerIndex(ctx);
         break;
       case Shortcut.SwapRight:
-        this.toRight(ctx);
+        if (this.direction.north || this.direction.south) {
+          this.toBottomOrRight(ctx);
+        } else if (this.direction.east) {
+          this.toColumnWithSmallerIndex(ctx);
+        } else this.toColumnWithBiggerIndex(ctx);
         break;
       case Shortcut.SwapUp:
-        this.toUp(ctx);
+        if (this.direction.north) {
+          this.toColumnWithSmallerIndex(ctx);
+        } else if (this.direction.south) {
+          this.toColumnWithBiggerIndex(ctx);
+        } else this.toUpOrLeft(ctx);
         break;
       case Shortcut.SwapDown:
-        this.toLower(ctx);
+        if (this.direction.north) {
+          this.toColumnWithBiggerIndex(ctx);
+        } else if (this.direction.south) {
+          print("hello");
+          this.toColumnWithSmallerIndex(ctx);
+        } else this.toBottomOrRight(ctx);
         break;
+      case Shortcut.Rotate:
+        this.direction.cwRotation();
+        print(
+          `cwRotation: north:${this.direction.north},east:${this.direction.east},south:${this.direction.south},west:${this.direction.west}`
+        );
+        break;
+      case Shortcut.RotatePart:
+        this.direction.ccwRotation();
+        print(
+          `ccwRotation: north:${this.direction.north},east:${this.direction.east},south:${this.direction.south},west:${this.direction.west}`
+        );
+        break;
+
       default:
         return false;
     }

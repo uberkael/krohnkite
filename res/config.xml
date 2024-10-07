@@ -64,6 +64,10 @@
 	    <label>Enable/disable Columns layout</label>
         <default>true</default>
     </entry>
+    <entry name="columnsLayoutInitialRotationAngle" type="String">
+	    <label>Columns layout initial rotation angle</label>
+        <default>0</default>
+    </entry>
 
     <entry name="enableStackedLayout" type="Bool">
 	    <label>Enable/disable Stacked layout</label>
