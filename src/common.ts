@@ -206,7 +206,7 @@ interface ILayout {
   handleShortcut?(ctx: EngineContext, input: Shortcut, data?: any): boolean;
   drag?(
     ctx: EngineContext,
-    activationPoint: [number, number],
+    draggingRect: Rect,
     window: WindowClass,
     workingArea: Rect
   ): boolean;

@@ -110,11 +110,10 @@ class TilingController {
       window.setDraggingState();
     }
     if (window.state === WindowState.Dragging) {
-      const wr = toRect(windowRect);
       if (
         layout.drag(
           new EngineContext(ctx, this.engine),
-          wr.activationPoint,
+          toRect(windowRect),
           window,
           srf.workingArea as Rect
         )

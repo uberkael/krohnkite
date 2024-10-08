@@ -117,17 +117,19 @@ class ColumnsLayout implements ILayout {
 
   public drag(
     ctx: EngineContext,
-    activationPoint: [number, number],
+    draggingRect: Rect,
     window: WindowClass,
     workingArea: Rect
   ): boolean {
+    const activationPoint = draggingRect.activationPoint;
+    const middlePoint = draggingRect.center;
     if (this.parts.length === 1 && this.parts[0].windowIds.size === 1)
       return false;
     let columnId = this.getColumnId(window);
     let windowId = window.id;
     if (
       ((this.direction.north && workingArea.isTopZone(activationPoint)) ||
-        (this.direction.south && workingArea.isBottomZone(activationPoint)) ||
+        (this.direction.south && workingArea.isBottomZone(middlePoint)) ||
         (this.direction.west && workingArea.isLeftZone(activationPoint)) ||
         (this.direction.east && workingArea.isRightZone(activationPoint))) &&
       !(
@@ -141,7 +143,7 @@ class ColumnsLayout implements ILayout {
       return true;
     }
     if (
-      ((this.direction.north && workingArea.isBottomZone(activationPoint)) ||
+      ((this.direction.north && workingArea.isBottomZone(middlePoint)) ||
         (this.direction.south && workingArea.isTopZone(activationPoint)) ||
         (this.direction.west && workingArea.isRightZone(activationPoint)) ||
         (this.direction.east && workingArea.isLeftZone(activationPoint))) &&
