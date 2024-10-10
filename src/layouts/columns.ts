@@ -354,6 +354,15 @@ class ColumnsLayout implements ILayout {
     if (lowerWinId === null) return;
     ctx.moveWindowByWinId(currentWindow, lowerWinId, true);
   }
+  public showDirection(ctx: EngineContext) {
+    let notification: string;
+    if (this.direction.east) notification = "vertical ⟰";
+    else if (this.direction.north) notification = "horizontal ⭆";
+    else if (this.direction.west) notification = "vertical ⟱";
+    else if (this.direction.south) notification = "horizontal ⭅";
+    else notification = "";
+    ctx.showNotification(notification);
+  }
   public handleShortcut(ctx: EngineContext, input: Shortcut) {
     switch (input) {
       case Shortcut.SwapLeft:
@@ -387,15 +396,11 @@ class ColumnsLayout implements ILayout {
         break;
       case Shortcut.Rotate:
         this.direction.cwRotation();
-        print(
-          `cwRotation: north:${this.direction.north},east:${this.direction.east},south:${this.direction.south},west:${this.direction.west}`
-        );
+        this.showDirection(ctx);
         break;
       case Shortcut.RotatePart:
         this.direction.ccwRotation();
-        print(
-          `ccwRotation: north:${this.direction.north},east:${this.direction.east},south:${this.direction.south},west:${this.direction.west}`
-        );
+        this.showDirection(ctx);
         break;
 
       default:
