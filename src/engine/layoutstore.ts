@@ -79,7 +79,7 @@ class LayoutStoreEntry {
   }
 
   public setLayout(targetID: string): ILayout {
-    const targetLayout = this.loadLayout(targetID);
+    let targetLayout = this.loadLayout(targetID);
     if (
       targetLayout instanceof MonocleLayout &&
       this.currentLayout instanceof MonocleLayout
@@ -87,6 +87,7 @@ class LayoutStoreEntry {
       /* toggle Monocle "OFF" */
       this.currentID = this.previousID;
       this.previousID = targetID;
+      targetLayout = this.loadLayout(this.currentID);
     } else if (this.currentID !== targetID) {
       this.previousID = this.currentID;
       this.currentID = targetID;
