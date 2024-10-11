@@ -36,7 +36,6 @@ K and looks cool.
 ## Look at me
 
 1. Delete unused KWin shortcuts:
-
 ```
 qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanUp
 ```
@@ -45,7 +44,6 @@ qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanU
 
 ```
 xwaylandvideobridge,plasmashell,ksplashqml
-
 ```
 
 ## Installation
@@ -54,7 +52,7 @@ You can install Kröhnkite in multiple ways.
 
 ### Using .kwinscript package file
 
-You can download `krohnkite-x.x.kwinscript` file, and install it through
+You can download `krohnkite-x.x.x.x.kwinscript` file, and install it through
 _System Settings_.
 
 1.  Download the kwinscript file
@@ -63,38 +61,48 @@ _System Settings_.
 4.  Select the downloaded file
 
 Alternatively, through command-line:
-
-    kpackagetool6 -t KWin/Script -i krohnkite.kwinscript # installing new script
-    kpackagetool6 -t kwin/script -u krohnkite.kwinscript # upgrading existing script
-
-To uninstall the package:
-
+get info about package:
 ```
-kpackagetool6 -t kwin/script -r krohnkite
+kpackagetool6 -t KWin/Script -s krohnkite
+```
+install:
+```
+kpackagetool6 -t KWin/Script -i krohnkite-x.x.x.x.kwinscript
+```
+upgrade:
+```
+kpackagetool6 -t KWin/Script -u krohnkite-x.x.x.x.kwinscript
+```
+uninstall:
+```
+kpackagetool6 -t KWin/Script -r krohnkite
 ```
 
 ### Installing from Git repository
 
-The simplest method would be:
-
-    make install
-    make uninstall # to uninstall the script
-
-This will automatically build and install kwinscript package.
-
-You can also manually build package file using:
-
-    make package
-
-The generated package file can be imported from "KWin Script" dialog.
+The simplest method to automatically build and install kwinscript package would be:
+```
+ make install
+```
+You can also build `.kwinscript` package file using:
+```
+make package
+```
+uninstall package:
+```
+make uninstall
+```
 
 ### Simply Trying Out
 
 Krohnkite can be temporarily loaded without installing the script:
-
-    make run
-    make stop
-
+```
+make run
+```
+and stop:
+```
+make stop
+```
 Note that Krohnkite can destroy itself completely once it is disabled, so no
 restart is required to deactivated it.
 
