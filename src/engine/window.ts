@@ -221,6 +221,9 @@ class WindowClass {
   public visible(srf: ISurface): boolean {
     return this.window.visible(srf);
   }
+  public get minimized(): boolean {
+    return this.window.minimized;
+  }
 
   public toString(): string {
     return "Window(" + String(this.window) + ")";

@@ -69,6 +69,9 @@ class KWinWindow implements IDriverWindow {
   }
 
   public maximized: boolean;
+  public get minimized(): boolean {
+    return this.window.minimized;
+  }
 
   public get surface(): ISurface {
     let activity;

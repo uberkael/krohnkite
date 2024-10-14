@@ -61,6 +61,9 @@ class EngineContext {
     if (target === null) return;
     this.engine.windows.moveNew(window, target, after);
   }
+  public getWindowById(id: string): WindowClass | null {
+    return this.engine.windows.getWindowById(id);
+  }
 
   public showNotification(text: string) {
     this.drvctx.showNotification(text);
