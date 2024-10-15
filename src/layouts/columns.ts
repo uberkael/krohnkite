@@ -300,9 +300,12 @@ class ColumnsLayout implements ILayout {
   }
 
   private toColumnWithBiggerIndex(ctx: EngineContext): boolean {
-    let currentWindowId = this.getCurrentWinId(ctx);
-    let activeColumnId = this.getCurrentColumnId(currentWindowId);
+    const currentWindow = ctx.currentWindow;
+    const currentWindowId = currentWindow !== null ? currentWindow.id : null;
+    const activeColumnId = this.getCurrentColumnId(currentWindowId);
+
     if (
+      currentWindow === null ||
       currentWindowId === null ||
       activeColumnId === null ||
       (this.columns[activeColumnId].size < 2 &&
@@ -310,26 +313,45 @@ class ColumnsLayout implements ILayout {
           this.columns[activeColumnId].position === "single"))
     )
       return false;
-    if (
-      this.columns[activeColumnId].position === "single" ||
-      this.columns[activeColumnId].position === "right"
-    ) {
-      let newColumn = this.insertColumn(false);
-      this.columns[activeColumnId].windowIds.delete(currentWindowId);
-      newColumn.windowIds.add(currentWindowId);
+
+    let targetColumn: ColumnLayout;
+    const column = this.columns[activeColumnId];
+    const center =
+      column.renderedWindowsRects[
+        column.renderedWindowsIds.indexOf(currentWindowId)
+      ].center;
+    column.windowIds.delete(currentWindowId);
+
+    if (column.position === "single" || column.position === "right") {
+      targetColumn = this.insertColumn(false);
+      targetColumn.windowIds.add(currentWindowId);
     } else {
-      this.columns[activeColumnId].windowIds.delete(currentWindowId);
-      this.columns[activeColumnId + 1].windowIds.add(currentWindowId);
+      targetColumn = this.columns[activeColumnId + 1];
+      targetColumn.windowIds.add(currentWindowId);
+    }
+    let idOnTarget: string | null;
+    if (this.direction.north || this.direction.south)
+      idOnTarget = targetColumn.getWindowIdOnRight(center[0]);
+    else idOnTarget = targetColumn.getWindowIdOnTop(center[1]);
+    if (idOnTarget !== null) ctx.moveWindowByWinId(currentWindow, idOnTarget);
+    else {
+      const targetId =
+        targetColumn.renderedWindowsIds[
+          targetColumn.renderedWindowsIds.length - 1
+        ];
+      ctx.moveWindowByWinId(currentWindow, targetId);
     }
     this.applyColumnsPosition();
     return true;
   }
 
   private toColumnWithSmallerIndex(ctx: EngineContext): boolean {
-    let currentWindowId = this.getCurrentWinId(ctx);
-    let activeColumnId = this.getCurrentColumnId(currentWindowId);
+    const currentWindow = ctx.currentWindow;
+    const currentWindowId = currentWindow !== null ? currentWindow.id : null;
+    const activeColumnId = this.getCurrentColumnId(currentWindowId);
 
     if (
+      currentWindow === null ||
       currentWindowId === null ||
       activeColumnId === null ||
       (this.columns[activeColumnId].windowIds.size < 2 &&
@@ -338,15 +360,32 @@ class ColumnsLayout implements ILayout {
     )
       return false;
 
-    this.columns[activeColumnId].windowIds.delete(currentWindowId);
-    if (
-      this.columns[activeColumnId].position === "single" ||
-      this.columns[activeColumnId].position === "left"
-    ) {
-      let column = this.insertColumn(true);
-      column.windowIds.add(currentWindowId);
+    let targetColumn: ColumnLayout;
+    const column = this.columns[activeColumnId];
+    const center =
+      column.renderedWindowsRects[
+        column.renderedWindowsIds.indexOf(currentWindowId)
+      ].center;
+    column.windowIds.delete(currentWindowId);
+
+    if (column.position === "single" || column.position === "left") {
+      targetColumn = this.insertColumn(true);
+      targetColumn.windowIds.add(currentWindowId);
     } else {
-      this.columns[activeColumnId - 1].windowIds.add(currentWindowId);
+      targetColumn = this.columns[activeColumnId - 1];
+      targetColumn.windowIds.add(currentWindowId);
+    }
+    let idOnTarget: string | null;
+    if (this.direction.north || this.direction.south)
+      idOnTarget = targetColumn.getWindowIdOnRight(center[0]);
+    else idOnTarget = targetColumn.getWindowIdOnTop(center[1]);
+    if (idOnTarget !== null) ctx.moveWindowByWinId(currentWindow, idOnTarget);
+    else {
+      const targetId =
+        targetColumn.renderedWindowsIds[
+          targetColumn.renderedWindowsIds.length - 1
+        ];
+      ctx.moveWindowByWinId(currentWindow, targetId);
     }
     this.applyColumnsPosition();
     return true;

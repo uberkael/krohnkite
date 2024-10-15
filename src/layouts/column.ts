@@ -94,6 +94,21 @@ class ColumnLayout implements ILayout {
     return this.renderedWindowsIds[winId + 1];
   }
 
+  public getWindowIdOnRight(x: number): string | null {
+    for (let i = 0; i < this.renderedWindowsIds.length; i++) {
+      if (x < this.renderedWindowsRects[i].center[0] + 10)
+        return this.renderedWindowsIds[i];
+    }
+    return null;
+  }
+  public getWindowIdOnTop(y: number): string | null {
+    for (let i = 0; i < this.renderedWindowsIds.length; i++) {
+      if (y < this.renderedWindowsRects[i].center[1] + 10)
+        return this.renderedWindowsIds[i];
+    }
+    return null;
+  }
+
   public adjust(
     area: Rect,
     tiles: WindowClass[],
