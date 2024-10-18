@@ -223,7 +223,7 @@ class ColumnsLayout implements ILayout {
   private arrangeTileables(ctx: EngineContext, tileables: WindowClass[]) {
     let latestTimestamp: number = 0;
     let partId: number | null = null;
-    let newWindows: Set<string> = new Set();
+    let newWindows: Array<string> = [];
     let tileableIds: Set<string> = new Set();
     let currentColumnId = 0;
 
@@ -240,15 +240,24 @@ class ColumnsLayout implements ILayout {
           currentColumnId = partId;
         }
       } else {
-        newWindows.add(tileable.id);
+        newWindows.push(tileable.id);
       }
       tileableIds.add(tileable.id);
     });
 
-    this.parts[currentColumnId].windowIds = new Set([
-      ...this.parts[currentColumnId].windowIds,
-      ...newWindows,
-    ]);
+    if (CONFIG.columnsBalanced) {
+      for (var [_, id] of newWindows.entries()) {
+        let minSizeColumn = this.parts.reduce((prev, curr) => {
+          return prev.size < curr.size ? prev : curr;
+        });
+        minSizeColumn.windowIds.add(id);
+      }
+    } else {
+      this.parts[currentColumnId].windowIds = new Set([
+        ...this.parts[currentColumnId].windowIds,
+        ...newWindows,
+      ]);
+    }
 
     this.parts.forEach((column) => {
       column.actualizeWindowIds(ctx, tileableIds);
@@ -270,10 +279,6 @@ class ColumnsLayout implements ILayout {
       if (this.parts[i].windowIds.has(t.id)) return i;
     }
     return null;
-  }
-
-  private getCurrentWinId(ctx: EngineContext): string | null {
-    return ctx.currentWindow === null ? null : ctx.currentWindow.id;
   }
 
   private getCurrentColumnId(currentWindowId: string | null): number | null {

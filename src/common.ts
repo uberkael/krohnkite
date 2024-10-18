@@ -121,6 +121,7 @@ interface IConfig {
   layoutFactories: { [key: string]: () => ILayout };
   tileLayoutInitialAngle: string;
   columnsLayoutInitialAngle: string;
+  columnsBalanced: boolean;
   monocleMaximize: boolean;
   maximizeSoleTile: boolean;
   //#endregion
