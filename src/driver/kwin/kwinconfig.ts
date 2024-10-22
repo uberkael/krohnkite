@@ -75,6 +75,9 @@ class KWinConfig implements IConfig {
   public ignoreVDesktop: string[];
 
   public screenDefaultLayout: string[];
+
+  public tileNothing: boolean;
+  public tilingClass: string[];
   //#endregion
 
   constructor() {
@@ -171,6 +174,9 @@ class KWinConfig implements IConfig {
     this.screenDefaultLayout = commaSeparate(
       KWIN.readConfig("screenDefaultLayout", "")
     );
+
+    this.tilingClass = commaSeparate(KWIN.readConfig("tilingClass", ""));
+    this.tileNothing = KWIN.readConfig("tileNothing", false);
 
     if (this.preventMinimize && this.monocleMinimizeRest) {
       debug(

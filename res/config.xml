@@ -124,6 +124,16 @@
         <default></default>
     </entry>
 
+    <entry name="tileNothing" type="Bool">
+	    <label>Don't tile any windows by default</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="tilingClass" type="String">
+	    <label>Tile windows with certain classes(comma-separated list)</label>
+        <default></default>
+    </entry>
+
     <entry name="floatingClass" type="String">
 	    <label>Float windows with certain classes(comma-separated list)</label>
         <default></default>
