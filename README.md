@@ -79,7 +79,7 @@ kpackagetool6 -t KWin/Script -r krohnkite
 ```
 
 ### Installing from Git repository
-
+Make sure you have `npm` and `7zip` packages installed.
 The simplest method to automatically build and install kwinscript package would be:
 ```
  make install
