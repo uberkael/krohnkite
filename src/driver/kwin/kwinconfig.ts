@@ -26,6 +26,7 @@ class KWinConfig implements IConfig {
   public tileLayoutInitialAngle: string;
   public columnsLayoutInitialAngle: string;
   public columnsBalanced: boolean;
+  public columnsLayerConf: string[];
   public monocleMaximize: boolean;
   public monocleMinimizeRest: boolean;
   public stairReverse: boolean; // kwin.specific
@@ -124,6 +125,9 @@ class KWinConfig implements IConfig {
       "0"
     );
     this.columnsBalanced = KWIN.readConfig("columnsBalanced", false);
+    this.columnsLayerConf = commaSeparate(
+      KWIN.readConfig("columnsLayerConf", "")
+    );
     this.monocleMaximize = KWIN.readConfig("monocleMaximize", true);
     this.monocleMinimizeRest = KWIN.readConfig("monocleMinimizeRest", false);
     this.stairReverse = KWIN.readConfig("stairReverse", false);

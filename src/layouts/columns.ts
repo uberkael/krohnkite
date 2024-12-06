@@ -24,10 +24,12 @@ class ColumnsLayout implements ILayout {
   public readonly classID = ColumnsLayout.id;
   private direction: windRose;
   private _columns: ColumnLayout[];
+  private columnsConfiguration: number[] | null;
 
   public get description(): string {
     return "Columns";
   }
+
   public get columns(): ColumnLayout[] {
     return this._columns;
   }
@@ -36,6 +38,7 @@ class ColumnsLayout implements ILayout {
     this.parts = [new ColumnLayout()];
     this._columns = [];
     this.direction = new windRose(CONFIG.columnsLayoutInitialAngle);
+    this.columnsConfiguration = null;
   }
 
   public adjust(
@@ -89,6 +92,8 @@ class ColumnsLayout implements ILayout {
   }
 
   public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+    if (this.columnsConfiguration === null)
+      this.columnsConfiguration = this.getDefaultConfig(ctx);
     this.arrangeTileables(ctx, tileables);
     if (this.columns.length === 0) return;
     let weights: Array<number>;
@@ -244,6 +249,32 @@ class ColumnsLayout implements ILayout {
       }
       tileableIds.add(tileable.id);
     });
+    if (
+      this.columnsConfiguration !== null &&
+      tileableIds.size > 0 &&
+      newWindows.length > 0 &&
+      this.columnsConfiguration.length > this.columns.length
+    ) {
+      let new_columns_length =
+        this.columnsConfiguration.length - this.columns.length >
+        newWindows.length
+          ? newWindows.length
+          : this.columnsConfiguration.length - this.columns.length;
+      for (let i = 0; i < new_columns_length; i++) {
+        let winId = newWindows.shift();
+        if (winId === undefined) continue;
+        let column = this.insertColumn(false);
+        column.windowIds.add(winId);
+      }
+      this.applyColumnsPosition();
+      if (this.columnsConfiguration[0] !== 0) {
+        let sumWeights = this.columnsConfiguration.reduce((a, b) => a + b, 0);
+        for (let i = 0; i < this.columns.length; i++) {
+          this.columns[i].weight =
+            (this.columnsConfiguration[i] / sumWeights) * this.columns.length;
+        }
+      }
+    }
 
     if (CONFIG.columnsBalanced) {
       for (var [_, id] of newWindows.entries()) {
@@ -496,5 +527,51 @@ class ColumnsLayout implements ILayout {
     let column = new ColumnLayout();
     this.parts.splice(onTop ? 0 : this.parts.length, 0, column);
     return column;
+  }
+
+  private getDefaultConfig(ctx: EngineContext): number[] {
+    let returnValue: number[] = [];
+
+    let [outputName, activityId, vDesktopName] = surfaceIdParse(
+      ctx.currentSurfaceId
+    );
+    for (let conf of CONFIG.columnsLayerConf) {
+      if (!conf || typeof conf !== "string") continue;
+      let conf_arr = conf.split(":").map((part) => part.trim());
+      if (conf_arr.length < 5) {
+        warning(`Columns conf: ${conf} has less then 5 elements`);
+        continue;
+      }
+      if (
+        (outputName === conf_arr[0] || conf_arr[0] === "") &&
+        (activityId === conf_arr[1] || conf_arr[1] === "") &&
+        (vDesktopName === conf_arr[2] || conf_arr[2] === "")
+      ) {
+        for (let i = 3; i < conf_arr.length; i++) {
+          let columnWeight = parseFloat(conf_arr[i]);
+          if (isNaN(columnWeight)) {
+            warning(
+              `Columns conf:${conf_arr}: ${conf_arr[i]} is not a number.`
+            );
+            returnValue = [];
+            break;
+          }
+          if (columnWeight === 0) {
+            warning(`Columns conf:${conf_arr}: weight cannot be zero`);
+            returnValue = [];
+            break;
+          }
+          returnValue.push(columnWeight);
+        }
+        if (
+          returnValue.length > 1 &&
+          returnValue.every((el) => el === returnValue[0])
+        ) {
+          returnValue.fill(0);
+        }
+        return returnValue;
+      }
+    }
+    return returnValue;
   }
 }

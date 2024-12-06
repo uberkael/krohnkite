@@ -75,6 +75,11 @@
         <default>false</default>
     </entry>
 
+    <entry name="columnsLayerConf" type="String">
+	    <label>Columns layout default configuration.</label>
+        <default></default>
+    </entry>
+
     <entry name="enableStackedLayout" type="Bool">
 	    <label>Enable/disable Stacked layout</label>
         <default>false</default>

@@ -122,6 +122,7 @@ interface IConfig {
   tileLayoutInitialAngle: string;
   columnsLayoutInitialAngle: string;
   columnsBalanced: boolean;
+  columnsLayerConf: string[];
   monocleMaximize: boolean;
   maximizeSoleTile: boolean;
   //#endregion
