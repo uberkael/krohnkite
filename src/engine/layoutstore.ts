@@ -28,35 +28,51 @@ class LayoutStoreEntry {
   private layouts: { [key: string]: ILayout };
   private previousID: string;
 
-  constructor(output_name: string, desktop_name?: string, activity?: string) {
+  constructor(outputName: string, desktopName?: string, activity?: string) {
     let layouts = CONFIG.layoutOrder.map((layout) => layout.toLowerCase());
     let layouts_str = layouts.map((layout, i) => i + "." + layout + " ");
     print(
-      `Krohnkite: Screen(output):${output_name}, Desktop(name):${desktop_name}, Activity: ${activity}, layouts: ${layouts_str}`
+      `Krohnkite: Screen(output):${outputName}, Desktop(name):${desktopName}, Activity: ${activity}, layouts: ${layouts_str}`
     );
     this.currentIndex = 0;
     this.currentID = CONFIG.layoutOrder[0];
 
     CONFIG.screenDefaultLayout.some((entry) => {
       let cfg = entry.split(":");
-      let cfg_output = cfg[0];
-      let cfg_desktop = cfg.length == 2 ? undefined : cfg[1];
-      let cfg_screen_id_str = cfg.length == 2 ? cfg[1] : cfg[2];
-      let cfg_screen_id = parseInt(cfg_screen_id_str);
-      if (isNaN(cfg_screen_id)) {
-        cfg_screen_id = layouts.indexOf(cfg_screen_id_str.toLowerCase());
-        cfg_screen_id =
-          cfg_screen_id >= 0
-            ? cfg_screen_id
-            : layouts.indexOf(cfg_screen_id_str.toLowerCase() + "layout");
+      const cfgLength = cfg.length;
+      if (cfgLength < 2 && cfgLength > 4) return false;
+      let cfgOutput = cfg[0];
+      let cfgActivity = "";
+      let cfgVDesktop = "";
+      let cfgLayout = undefined;
+      if (cfgLength === 2) {
+        cfgLayout = cfg[1];
+      } else if (cfgLength === 3) {
+        cfgVDesktop = cfg[1];
+        cfgLayout = cfg[2];
+      } else if (cfgLength === 4) {
+        cfgActivity = cfg[1];
+        cfgVDesktop = cfg[2];
+        cfgLayout = cfg[3];
+      }
+      if (cfgLayout === undefined) return false;
+      // let cfg_desktop = cfg.length > 2 ? undefined : cfg[1];
+      let cfgLayoutId = parseInt(cfgLayout);
+      if (isNaN(cfgLayoutId)) {
+        cfgLayoutId = layouts.indexOf(cfgLayout.toLowerCase());
+        cfgLayoutId =
+          cfgLayoutId >= 0
+            ? cfgLayoutId
+            : layouts.indexOf(cfgLayout.toLowerCase() + "layout");
       }
       if (
-        (output_name === cfg_output || cfg_output === "") &&
-        (desktop_name === cfg_desktop || cfg_desktop === undefined) &&
-        cfg_screen_id >= 0 &&
-        cfg_screen_id < CONFIG.layoutOrder.length
+        (outputName === cfgOutput || cfgOutput === "") &&
+        (desktopName === cfgVDesktop || cfgVDesktop === "") &&
+        (activity === cfgActivity || cfgActivity === "") &&
+        cfgLayoutId >= 0 &&
+        cfgLayoutId < CONFIG.layoutOrder.length
       ) {
-        this.currentIndex = cfg_screen_id;
+        this.currentIndex = cfgLayoutId;
         this.currentID = CONFIG.layoutOrder[this.currentIndex];
         return true;
       }
