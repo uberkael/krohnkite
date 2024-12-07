@@ -129,11 +129,10 @@ restart is required to deactivated it.
 ### Choose layout for screen by default
 
 1. Open Krohnkite options: ![options](img/conf.png)
-2. Tab `Rules->Screen default layout`. Layout configuration has format `OutputName:ActivityId:VirtualDesktopName:layoutName` 2 monitors example: `HDMI-A-1:99a12h44-e9a6-1142-55eedaa7-3a922a15ab08::columns,DP-2:spread,DP-3:Desktop 3:tile,:threecolumn` - result will be:
+2. Tab `Rules->Screen default layout`. Layout configuration has format `OutputName:ActivityId:VirtualDesktopName:layoutName` multy monitors example: `HDMI-A-1:99a12h44-e9a6-1142-55eedaa7-3a922a15ab08::columns,DP-2:spread,DP-3:Desktop 3:tile,:threecolumn` - result will be:
 
 - set `columns` layout as default on monitor `HDMI-A-1`, only on activity with id:`99a12h44-e9a6-1142-55eedaa7-3a922a15ab08`, every Virtual Desktops on this activity.(if you specify `activity id` you have to to specify virtual desktop name or leave it blank)
 - set `spreadlayout` layout as default on monitor `DP-2`, every Activities, every Virtual Desktops;
-  or if you have multiple `Virtual Desktop` on screen you can write `SCREEN_NAME:DESKTOP_NAME:LAYOUT_NAME` or `SCREEN_NAME:DESKTOP_NAME:LAYOUT_ID`. More examples: `:2` - makes layout#2 default on all screens, `:Desktop 1:2` - makes layout#2 default on all desktops with name `Desktop 1`.
 - set `tilelayout` layout as default on monitor `DP-3`, on every activity, only on virtual desktop with name `Desktop 3`
 - set `threecolumnlayout` layout as default on all monitors,all activities and all Virtual Desktops not covered by the previous rules
 
@@ -146,7 +145,6 @@ restart is required to deactivated it.
 
 3. `Apply` -> `reboot`
 
-[Video: assign default layer for screen](https://github.com/anametologin/krohnkite/assets/165245883/f569f1de-1721-4cdf-b3fb-96782a3e3189)
 
 ### Search a window parameters to filter, float etc.
 
