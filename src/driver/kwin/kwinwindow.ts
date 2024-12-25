@@ -24,6 +24,8 @@ class KWinWindow implements IDriverWindow {
   }
 
   private readonly workspace: Workspace;
+  private readonly isFloatByConfig: boolean;
+  private readonly isIgnoredByConfig: boolean;
   public readonly window: Window;
   public readonly id: string;
 
@@ -37,35 +39,24 @@ class KWinWindow implements IDriverWindow {
 
   public get shouldIgnore(): boolean {
     if (this.window.deleted) return true;
-    const resourceClass = String(this.window.resourceClass);
-    const resourceName = String(this.window.resourceName);
-    const windowRole = String(this.window.windowRole);
     return (
       this.window.specialWindow ||
-      resourceClass === "plasmashell" ||
-      KWINCONFIG.ignoreClass.indexOf(resourceClass) >= 0 ||
-      KWINCONFIG.ignoreClass.indexOf(resourceName) >= 0 ||
-      matchWords(this.window.caption, KWINCONFIG.ignoreTitle) >= 0 ||
-      KWINCONFIG.ignoreRole.indexOf(windowRole) >= 0 ||
-      (KWINCONFIG.tileNothing && KWINCONFIG.tilingClass.indexOf(resourceClass) < 0)
+      this.window.resourceClass === "plasmashell" ||
+      this.isIgnoredByConfig
     );
   }
 
   public get shouldFloat(): boolean {
-    const resourceClass = String(this.window.resourceClass);
-    const resourceName = String(this.window.resourceName);
     const moreOneDesktop = this.window.desktops.length !== 1;
     return (
+      this.isFloatByConfig ||
       moreOneDesktop ||
       this.window.onAllDesktops ||
       this.window.modal ||
       this.window.transient ||
       !this.window.resizeable ||
       (KWINCONFIG.floatUtility &&
-        (this.window.dialog || this.window.splash || this.window.utility)) ||
-      KWINCONFIG.floatingClass.indexOf(resourceClass) >= 0 ||
-      KWINCONFIG.floatingClass.indexOf(resourceName) >= 0 ||
-      matchWords(this.window.caption, KWINCONFIG.floatingTitle) >= 0
+        (this.window.dialog || this.window.splash || this.window.utility))
     );
   }
 
@@ -115,6 +106,17 @@ class KWinWindow implements IDriverWindow {
     this.maximized = false;
     this.noBorderManaged = false;
     this.noBorderOriginal = window.noBorder;
+    this.isIgnoredByConfig =
+      this.isContain(KWINCONFIG.ignoreClass, window.resourceClass) ||
+      this.isContain(KWINCONFIG.ignoreClass, window.resourceName) ||
+      matchWords(this.window.caption, KWINCONFIG.ignoreTitle) >= 0 ||
+      this.isContain(KWINCONFIG.ignoreRole, window.windowRole) ||
+      (KWINCONFIG.tileNothing &&
+        this.isContain(KWINCONFIG.tilingClass, window.resourceClass));
+    this.isFloatByConfig =
+      this.isContain(KWINCONFIG.floatingClass, window.resourceClass) ||
+      this.isContain(KWINCONFIG.floatingClass, window.resourceName) ||
+      matchWords(this.window.caption, KWINCONFIG.floatingTitle) >= 0;
   }
 
   public commit(geometry?: Rect, noBorder?: boolean, keepAbove?: boolean) {
@@ -191,7 +193,19 @@ class KWinWindow implements IDriverWindow {
   }
 
   //#region Private Methods
-
+  private isContain(filterList: string[], s: string): boolean {
+    for (let filterWord of filterList) {
+      if (filterWord[0] === "[" && filterWord[filterWord.length - 1] === "]") {
+        if (
+          s
+            .toLowerCase()
+            .includes(filterWord.toLowerCase().slice(1, filterWord.length - 1))
+        )
+          return true;
+      } else if (s.toLowerCase() === filterWord.toLowerCase()) return true;
+    }
+    return false;
+  }
   /** apply various resize hints to the given geometry */
   private adjustGeometry(geometry: Rect): Rect {
     let width = geometry.width;

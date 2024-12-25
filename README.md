@@ -126,6 +126,11 @@ restart is required to deactivated it.
 
 ## Settings
 
+### Add a class name, a resource name or a window caption to ignore or float
+
+1. to found window's className,resourcename or caption see [readme](https://github.com/anametologin/krohnkite#search-a-window-parameters-to-filter-float-etc)
+2. you can use the name of class in square brackets: `[myNamE]` will float or ignore all windows with class or resource names such: 'myname1', 'Myname2', 'Notmyname555' etc...
+
 ### Choose layout for screen by default
 
 1. Open Krohnkite options: ![options](img/conf.png)
@@ -144,7 +149,6 @@ restart is required to deactivated it.
 - Right after `KROHNKITE: starting the script` string you will see one if you have one monitor or multiple lines: Screen(output):`Screen Name`,Desktop(name):`Virtual Desktop Name`,Activity:`Activity Id`,layouts: `numbered layouts` (the case doesn't matter,`layout` ending can be omitted): `tilelayout`, `monoclelayout`, `columns`, `threecolumnlayout,` `spreadlayout`, `stairlayout`, `spirallayout`, `stackedlayout`, `floatinglayout`, `btreelayout`
 
 3. `Apply` -> `reboot`
-
 
 ### Search a window parameters to filter, float etc.
 
