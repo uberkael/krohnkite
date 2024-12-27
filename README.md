@@ -182,7 +182,7 @@ restart is required to deactivated it.
 | Meta + D         | Decrease           |
 | Meta + F         | Toggle Floating    |
 | Meta + \         | Next Layout        |
-| Meta + |         | Previous Layout    |
+| Meta + \|        | Previous Layout    |
 |                  |                    |
 | Meta + Return    | Set as Master      |
 |                  |                    |
