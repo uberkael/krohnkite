@@ -181,7 +181,8 @@ restart is required to deactivated it.
 | Meta + I         | Increase           |
 | Meta + D         | Decrease           |
 | Meta + F         | Toggle Floating    |
-| Meta + \         | Cycle Layout       |
+| Meta + \         | Next Layout        |
+| Meta + |         | Previous Layout    |
 |                  |                    |
 | Meta + Return    | Set as Master      |
 |                  |                    |
