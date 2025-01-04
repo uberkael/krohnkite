@@ -219,10 +219,9 @@ class TilingEngine {
     ]);
 
     visibles.forEach((window) => {
-      if (window.state === WindowState.Undecided)
-        window.state = window.shouldFloat
-          ? WindowState.Floating
-          : WindowState.Tiled;
+      window.state = window.shouldFloat
+        ? WindowState.Floating
+        : WindowState.Tiled;
     });
 
     const tileables = this.windows.getVisibleTileables(srf);
