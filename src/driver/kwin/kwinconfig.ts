@@ -27,6 +27,8 @@ class KWinConfig implements IConfig {
   public columnsLayoutInitialAngle: string;
   public columnsBalanced: boolean;
   public columnsLayerConf: string[];
+  public tiledWindowsLayer: number;
+  public floatedWindowsLayer: number;
   public monocleMaximize: boolean;
   public monocleMinimizeRest: boolean;
   public stairReverse: boolean; // kwin.specific
@@ -35,7 +37,6 @@ class KWinConfig implements IConfig {
   //#region Features
   public adjustLayout: boolean;
   public adjustLayoutLive: boolean;
-  public keepFloatAbove: boolean;
   public keepTilingOnDrag: boolean;
   public noTileBorder: boolean;
   public limitTileWidthRatio: number;
@@ -128,13 +129,18 @@ class KWinConfig implements IConfig {
     this.columnsLayerConf = commaSeparate(
       KWIN.readConfig("columnsLayerConf", "")
     );
+    this.tiledWindowsLayer = getWindowLayer(
+      KWIN.readConfig("tiledWindowsLayer", 0)
+    );
+    this.floatedWindowsLayer = getWindowLayer(
+      KWIN.readConfig("floatedWindowsLayer", 1)
+    );
     this.monocleMaximize = KWIN.readConfig("monocleMaximize", true);
     this.monocleMinimizeRest = KWIN.readConfig("monocleMinimizeRest", false);
     this.stairReverse = KWIN.readConfig("stairReverse", false);
 
     this.adjustLayout = KWIN.readConfig("adjustLayout", true);
     this.adjustLayoutLive = KWIN.readConfig("adjustLayoutLive", true);
-    this.keepFloatAbove = KWIN.readConfig("keepFloatAbove", true);
     this.keepTilingOnDrag = KWIN.readConfig("keepTilingOnDrag", true);
     this.noTileBorder = KWIN.readConfig("noTileBorder", false);
 

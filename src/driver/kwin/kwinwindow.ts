@@ -119,8 +119,15 @@ class KWinWindow implements IDriverWindow {
       matchWords(this.window.caption, KWINCONFIG.floatingTitle) >= 0;
   }
 
-  public commit(geometry?: Rect, noBorder?: boolean, keepAbove?: boolean) {
-    debugObj(() => ["KWinWindow#commit", { geometry, noBorder, keepAbove }]);
+  public commit(
+    geometry?: Rect,
+    noBorder?: boolean,
+    windowLayer?: WindowLayer
+  ) {
+    debugObj(() => [
+      "KWinWindow#commit",
+      { geometry, noBorder, keepAbove: windowLayer },
+    ]);
     if (this.window.move || this.window.resize) return;
 
     if (noBorder !== undefined) {
@@ -143,7 +150,14 @@ class KWinWindow implements IDriverWindow {
       this.noBorderManaged = noBorder;
     }
 
-    if (keepAbove !== undefined) this.window.keepAbove = keepAbove;
+    if (windowLayer !== undefined) {
+      if (windowLayer === WindowLayer.Above) this.window.keepAbove = true;
+      else if (windowLayer === WindowLayer.Below) this.window.keepBelow = true;
+      else if (windowLayer === WindowLayer.Normal) {
+        this.window.keepAbove = false;
+        this.window.keepBelow = false;
+      }
+    }
 
     if (geometry !== undefined) {
       geometry = this.adjustGeometry(geometry);

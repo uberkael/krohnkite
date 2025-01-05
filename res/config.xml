@@ -164,6 +164,16 @@
         <default>true</default>
     </entry>
 
+    <entry name="tiledWindowsLayer" type="Int">
+	    <label>What layer will have tiled windows</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="floatedWindowsLayer" type="Int">
+	    <label>What layer will have floated windows</label>
+        <default>1</default>
+    </entry>
+
     <entry name="maximizeSoleTile" type="Bool">
 	    <label>If there is only one tile on the screen, remove screen gap and its borde, making it appear almost fullscreen.</label>
         <default>false</default>
@@ -186,11 +196,6 @@
 
     <entry name="adjustLayoutLive" type="Bool">
 	    <label>Adjust as window is being resized</label>
-        <default>true</default>
-    </entry>
-
-    <entry name="keepFloatAbove" type="Bool">
-	    <label>Keep tiled windows below floating windows</label>
         <default>true</default>
     </entry>
 
