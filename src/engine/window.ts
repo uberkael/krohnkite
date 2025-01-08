@@ -183,7 +183,7 @@ class WindowClass {
         break;
 
       case WindowState.NativeFullscreen:
-        this.window.commit(undefined, undefined, undefined);
+        this.window.commit(undefined, undefined, WindowLayer.Normal);
         break;
 
       case WindowState.Floating:
