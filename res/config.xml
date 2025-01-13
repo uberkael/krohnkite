@@ -174,9 +174,9 @@
         <default>1</default>
     </entry>
 
-    <entry name="maximizeSoleTile" type="Bool">
-	    <label>If there is only one tile on the screen, remove screen gap and its borde, making it appear almost fullscreen.</label>
-        <default>false</default>
+    <entry name="soleWindowSize" type="Int">
+	    <label>The sole window size in percent. If 100% than with gaps but less than 100% then the gaps will not be taken into account</label>
+        <default>100</default>
     </entry>
 
     <entry name="monocleMaximize" type="Bool">

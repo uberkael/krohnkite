@@ -22,7 +22,7 @@ class KWinConfig implements IConfig {
   //#region Layout
   public layoutOrder: string[];
   public layoutFactories: { [key: string]: () => ILayout };
-  public maximizeSoleTile: boolean;
+  public soleWindowSize: number;
   public tileLayoutInitialAngle: string;
   public columnsLayoutInitialAngle: string;
   public columnsBalanced: boolean;
@@ -116,7 +116,7 @@ class KWinConfig implements IConfig {
       this.layoutFactories[layoutClass.id] = () => new layoutClass();
     });
 
-    this.maximizeSoleTile = KWIN.readConfig("maximizeSoleTile", false);
+    this.soleWindowSize = KWIN.readConfig("soleWindowSize", 100);
     this.tileLayoutInitialAngle = KWIN.readConfig(
       "tileLayoutInitialRotationAngle",
       "0"
