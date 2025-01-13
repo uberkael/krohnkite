@@ -172,7 +172,7 @@ class KWinConfig implements IConfig {
     this.ignoreClass = commaSeparate(
       KWIN.readConfig(
         "ignoreClass",
-        "krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml"
+        "krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter"
       )
     );
     this.ignoreRole = commaSeparate(KWIN.readConfig("ignoreRole", "quake"));
