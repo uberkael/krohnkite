@@ -222,16 +222,16 @@ class TilingEngine {
       tilingArea = workingArea;
     else if (
       tileables.length === 1 &&
-      CONFIG.soleWindowSize < 100 &&
-      CONFIG.soleWindowSize > 0
+      ((CONFIG.soleWindowWidth < 100 && CONFIG.soleWindowWidth > 0) ||
+        (CONFIG.soleWindowHeight < 100 && CONFIG.soleWindowHeight > 0))
     ) {
       const h_gap =
         (workingArea.height -
-          workingArea.height * (CONFIG.soleWindowSize / 100)) /
+          workingArea.height * (CONFIG.soleWindowHeight / 100)) /
         2;
       const v_gap =
         (workingArea.width -
-          workingArea.width * (CONFIG.soleWindowSize / 100)) /
+          workingArea.width * (CONFIG.soleWindowWidth / 100)) /
         2;
       tilingArea = workingArea.gap(v_gap, v_gap, h_gap, h_gap);
     } else

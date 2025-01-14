@@ -124,7 +124,8 @@ interface IConfig {
   columnsBalanced: boolean;
   columnsLayerConf: string[];
   monocleMaximize: boolean;
-  soleWindowSize: number;
+  soleWindowWidth: number;
+  soleWindowHeight: number;
   //#endregion
 
   //#region Features

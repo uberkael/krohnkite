@@ -174,8 +174,13 @@
         <default>1</default>
     </entry>
 
-    <entry name="soleWindowSize" type="Int">
-	    <label>The sole window size in percent. If 100% than with gaps but less than 100% then the gaps will not be taken into account</label>
+    <entry name="soleWindowWidth" type="Int">
+	    <label>The sole window width in percent.</label>
+        <default>100</default>
+    </entry>
+
+    <entry name="soleWindowHeight" type="Int">
+	    <label>The sole window height in percent.</label>
         <default>100</default>
     </entry>
 
