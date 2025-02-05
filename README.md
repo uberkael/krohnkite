@@ -88,41 +88,24 @@ kpackagetool6 -t KWin/Script -r krohnkite
 
 ### Installing from Git repository
 
-Make sure you have `npm` and `7zip` packages installed.
+Make sure you have [go-task](https://taskfile.dev/installation/), [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and [7-zip](https://www.7-zip.org/download.html) packages installed. All packages after building will be in `builds` folder.
 The simplest method to automatically build and install kwinscript package would be:
 
 ```
- make install
+ go-task install
 ```
 
 You can also build `.kwinscript` package file using:
 
 ```
-make package
+go-task package
 ```
 
 uninstall package:
 
 ```
-make uninstall
+go-task uninstall
 ```
-
-### Simply Trying Out
-
-Krohnkite can be temporarily loaded without installing the script:
-
-```
-make run
-```
-
-and stop:
-
-```
-make stop
-```
-
-Note that Krohnkite can destroy itself completely once it is disabled, so no
-restart is required to deactivated it.
 
 ## Settings
 
