@@ -976,14 +976,14 @@
           <item row="0" column="1">
            <widget class="QLineEdit" name="kcfg_ignoreActivity">
             <property name="toolTip">
-             <string>Comma-separated list of activity names. Windows in corresponding activities will not be tiled.</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comma-separated list of activity IDs. See Readme or Issue #125 to know IDs. Windows in corresponding activities will not be tiled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="ignoreActivityLabel">
             <property name="text">
-             <string>On Activity (name)</string>
+             <string>On Activity (activityId)</string>
             </property>
            </widget>
           </item>
