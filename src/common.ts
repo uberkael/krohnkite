@@ -126,6 +126,7 @@ interface IConfig {
   monocleMaximize: boolean;
   soleWindowWidth: number;
   soleWindowHeight: number;
+  soleWindowNoBorders: boolean;
   //#endregion
 
   //#region Features

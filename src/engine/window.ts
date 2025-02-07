@@ -172,7 +172,7 @@ class WindowClass {
     this.weightMap = {};
   }
 
-  public commit() {
+  public commit(noBorders?: boolean) {
     const state = this.state;
     debugObj(() => ["Window#commit", { state: WindowState[state] }]);
     switch (state) {
@@ -203,7 +203,7 @@ class WindowClass {
       case WindowState.Tiled:
         this.window.commit(
           this.geometry,
-          CONFIG.noTileBorder,
+          CONFIG.noTileBorder || Boolean(noBorders),
           CONFIG.tiledWindowsLayer
         );
         break;

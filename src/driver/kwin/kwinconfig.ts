@@ -24,6 +24,7 @@ class KWinConfig implements IConfig {
   public layoutFactories: { [key: string]: () => ILayout };
   public soleWindowWidth: number;
   public soleWindowHeight: number;
+  public soleWindowNoBorders: boolean;
   public tileLayoutInitialAngle: string;
   public columnsLayoutInitialAngle: string;
   public columnsBalanced: boolean;
@@ -119,6 +120,7 @@ class KWinConfig implements IConfig {
 
     this.soleWindowWidth = KWIN.readConfig("soleWindowWidth", 100);
     this.soleWindowHeight = KWIN.readConfig("soleWindowHeight", 100);
+    this.soleWindowNoBorders = KWIN.readConfig("soleWindowNoBorders", false);
     this.tileLayoutInitialAngle = KWIN.readConfig(
       "tileLayoutInitialRotationAngle",
       "0"

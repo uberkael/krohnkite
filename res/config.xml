@@ -184,6 +184,13 @@
         <default>100</default>
     </entry>
 
+    <entry name="soleWindowNoBorders" type="Bool">
+      <label>Do not draw borders around sole window</label>
+     </entry>
+      </label>
+        <default>false</default>
+    </entry>
+
     <entry name="monocleMaximize" type="Bool">
 	    <label>Always maximize windows in Monocle layout</label>
         <default>true</default>

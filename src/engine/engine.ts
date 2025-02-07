@@ -262,7 +262,11 @@ class TilingEngine {
         });
     }
 
-    visibles.forEach((window) => window.commit());
+    if (CONFIG.soleWindowNoBorders && visibles.length === 1) {
+      visibles[0].commit(CONFIG.soleWindowNoBorders);
+    } else {
+      visibles.forEach((window) => window.commit());
+    }
     debugObj(() => ["arrangeScreen/finished", { srf }]);
   }
 
