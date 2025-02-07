@@ -62,7 +62,7 @@ tasks:
       - cp res/shortcuts.qml  {{.KWINPKG_DIR}}/contents/ui/shortcuts.qml
       - cp {{.NODE_SCRIPT}} {{.KWINPKG_DIR}}/contents/code/script.js
       - cp res/main.js   {{.KWINPKG_DIR}}/contents/code/main.js
-      - cp res/config.xml  {{.KWINPKG_DIR}}/contents/config/config.xml
+      - cp res/config.xml  {{.KWINPKG_DIR}}/contents/config/main.xml
     sources:
       - res/main.qml
       - res/config.ui
