@@ -91,7 +91,7 @@ tasks:
     cmds:
       - npm run tsc --
     sources:
-      - "{{.SRC}}"
+      - src/**/*.ts
     preconditions:
       - test -d src
       - test -n "{{.SRC}}" || (echo "no files found in src folder" && exit 1)
