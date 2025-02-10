@@ -67,8 +67,10 @@ class KWinDriver implements IDriverContext {
   }
 
   public set currentWindow(window: WindowClass | null) {
-    if (window !== null)
+    if (window !== null) {
+      window.timestamp = new Date().getTime();
       this.workspace.activeWindow = (window.window as KWinWindow).window;
+    }
   }
 
   public get screens(): ISurface[] {
