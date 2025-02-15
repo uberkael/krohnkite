@@ -174,6 +174,10 @@ interface ISurface {
   readonly ignore: boolean;
   readonly workingArea: Readonly<Rect>;
 
+  readonly output: Output;
+  readonly activity: string;
+  readonly desktop: VirtualDesktop;
+
   next(): ISurface | null;
 }
 

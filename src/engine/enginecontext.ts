@@ -38,8 +38,9 @@ class EngineContext {
     this.drvctx.currentWindow = window;
   }
 
-  public get currentSurfaceId(): string {
-    return this.drvctx.currentSurface.id;
+  public get surfaceParams(): string {
+    let srf = this.drvctx.currentSurface;
+    return srf.output.name, srf.activity, srf.desktop.name;
   }
 
   constructor(private drvctx: IDriverContext, private engine: TilingEngine) {}

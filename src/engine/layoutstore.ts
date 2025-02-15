@@ -135,37 +135,39 @@ class LayoutStore {
   public getCurrentLayout(srf: ISurface): ILayout {
     return srf.ignore
       ? FloatingLayout.instance
-      : this.getEntry(srf.id).currentLayout;
+      : this.getEntry(srf).currentLayout;
   }
 
   public cycleLayout(srf: ISurface, step: 1 | -1): ILayout | null {
     if (srf.ignore) return null;
-    return this.getEntry(srf.id).cycleLayout(step);
+    return this.getEntry(srf).cycleLayout(step);
   }
 
   public setLayout(srf: ISurface, layoutClassID: string): ILayout | null {
     if (srf.ignore) return null;
-    return this.getEntry(srf.id).setLayout(layoutClassID);
+    return this.getEntry(srf).setLayout(layoutClassID);
   }
 
-  private getEntry(key: string): LayoutStoreEntry {
-    if (!this.store[key]) {
-      // key with activity format example: HDMI-A-1@f381c9cf-cb90-4ade-8b3f-24ae0002d366#Desktop 1
+  private getEntry(srf: ISurface): LayoutStoreEntry {
+    if (!this.store[srf.id]) {
       // check if this surface but without activity already constructed.
       // surface create after desktop and constructor ran twice
-      let [output_name, activity, desktop_name] = surfaceIdParse(key);
-      let key_without_activity = output_name + "@#" + desktop_name;
+      let key_without_activity = KWinSurface.generateId(
+        srf.output.name,
+        "",
+        srf.desktop.id
+      );
       if (this.store[key_without_activity]) {
-        this.store[key] = this.store[key_without_activity];
+        this.store[srf.id] = this.store[key_without_activity];
         delete this.store[key_without_activity];
       } else {
-        this.store[key] = new LayoutStoreEntry(
-          output_name,
-          desktop_name,
-          activity
+        this.store[srf.id] = new LayoutStoreEntry(
+          srf.output.name,
+          srf.desktop.name,
+          srf.activity
         );
       }
     }
-    return this.store[key];
+    return this.store[srf.id];
   }
 }

@@ -55,7 +55,7 @@ class KWinDriver implements IDriverContext {
     // TODO: fousing window on other screen?
     // TODO: find a way to change activity
 
-    if (this.workspace.currentDesktop.name !== ksrf.desktop.name)
+    if (this.workspace.currentDesktop.id !== ksrf.desktop.id)
       this.workspace.currentDesktop = ksrf.desktop;
     if (this.workspace.currentActivity !== ksrf.activity)
       this.workspace.currentActivity = ksrf.activity;

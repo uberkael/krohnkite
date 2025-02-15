@@ -532,9 +532,7 @@ class ColumnsLayout implements ILayout {
   private getDefaultConfig(ctx: EngineContext): number[] {
     let returnValue: number[] = [];
 
-    let [outputName, activityId, vDesktopName] = surfaceIdParse(
-      ctx.currentSurfaceId
-    );
+    let [outputName, activityId, vDesktopName] = ctx.surfaceParams;
     for (let conf of CONFIG.columnsLayerConf) {
       if (!conf || typeof conf !== "string") continue;
       let conf_arr = conf.split(":").map((part) => part.trim());
