@@ -186,8 +186,6 @@
 
     <entry name="soleWindowNoBorders" type="Bool">
       <label>Do not draw borders around sole window</label>
-     </entry>
-      </label>
         <default>false</default>
     </entry>
 
