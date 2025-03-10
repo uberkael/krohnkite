@@ -60,6 +60,11 @@
         <default>false</default>
     </entry>
 
+    <entry name="quarterLayoutReset" type="Bool">
+	    <label>Reset Quarter layout after close a layout window</label>
+        <default>false</default>
+    </entry>
+
     <entry name="enableColumnsLayout" type="Bool">
 	    <label>Enable/disable Columns layout</label>
         <default>true</default>

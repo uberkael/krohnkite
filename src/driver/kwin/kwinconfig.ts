@@ -26,6 +26,7 @@ class KWinConfig implements IConfig {
   public soleWindowHeight: number;
   public soleWindowNoBorders: boolean;
   public tileLayoutInitialAngle: string;
+  public quarterLayoutReset: boolean;
   public columnsLayoutInitialAngle: string;
   public columnsBalanced: boolean;
   public columnsLayerConf: string[];
@@ -139,6 +140,7 @@ class KWinConfig implements IConfig {
     this.floatedWindowsLayer = getWindowLayer(
       KWIN.readConfig("floatedWindowsLayer", 1)
     );
+    this.quarterLayoutReset = KWIN.readConfig("quarterLayoutReset", false);
     this.monocleMaximize = KWIN.readConfig("monocleMaximize", true);
     this.monocleMinimizeRest = KWIN.readConfig("monocleMinimizeRest", false);
     this.stairReverse = KWIN.readConfig("stairReverse", false);
