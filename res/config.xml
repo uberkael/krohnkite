@@ -61,7 +61,7 @@
     </entry>
 
     <entry name="quarterLayoutReset" type="Bool">
-	    <label>Reset Quarter layout after close a layout window</label>
+	    <label>Reset Quarter layout after closing a window</label>
         <default>false</default>
     </entry>
 
