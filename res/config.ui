@@ -225,6 +225,26 @@
            </widget>
           </item>
           <item>
+           <layout class="QVBoxLayout" name="quarterLayoutConfigLayout">
+            <property name="leftMargin">
+             <number>20</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>20</number>
+            </property>
+            <item>
+             <widget class="QCheckBox" name="kcfg_quarterLayoutReset">
+              <property name="text">
+               <string>Reset Quarter layout after closing a window</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QCheckBox" name="kcfg_enableStackedLayout">
             <property name="toolTip">
              <string>Enable Stacked layout</string>

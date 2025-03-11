@@ -120,6 +120,7 @@ interface IConfig {
   layoutOrder: string[];
   layoutFactories: { [key: string]: () => ILayout };
   tileLayoutInitialAngle: string;
+  quarterLayoutReset: boolean;
   columnsLayoutInitialAngle: string;
   columnsBalanced: boolean;
   columnsLayerConf: string[];

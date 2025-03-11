@@ -32,8 +32,17 @@ class QuarterLayout implements ILayout {
   private lhsplit: number;
   private rhsplit: number;
   private vsplit: number;
+  private prevTileCount: number; // Track the last number of tiles
 
   public constructor() {
+    this.lhsplit = 0.5;
+    this.rhsplit = 0.5;
+    this.vsplit = 0.5;
+    this.prevTileCount = 0;
+  }
+
+  // Resets the splits to their default values.
+  private resetSplits(): void {
     this.lhsplit = 0.5;
     this.rhsplit = 0.5;
     this.vsplit = 0.5;
@@ -52,30 +61,24 @@ class QuarterLayout implements ILayout {
 
     /* vertical split */
     if ((idx === 0 || idx === 3) && delta.east !== 0)
-      this.vsplit =
-        (Math.floor(area.width * this.vsplit) + delta.east) / area.width;
+      this.vsplit = (area.width * this.vsplit + delta.east) / area.width;
     else if ((idx === 1 || idx === 2) && delta.west !== 0)
-      this.vsplit =
-        (Math.floor(area.width * this.vsplit) - delta.west) / area.width;
+      this.vsplit = (area.width * this.vsplit - delta.west) / area.width;
 
     /* left-side horizontal split */
     if (tiles.length === 4) {
       if (idx === 0 && delta.south !== 0)
-        this.lhsplit =
-          (Math.floor(area.height * this.lhsplit) + delta.south) / area.height;
+        this.lhsplit = (area.height * this.lhsplit + delta.south) / area.height;
       if (idx === 3 && delta.north !== 0)
-        this.lhsplit =
-          (Math.floor(area.height * this.lhsplit) - delta.north) / area.height;
+        this.lhsplit = (area.height * this.lhsplit - delta.north) / area.height;
     }
 
     /* right-side horizontal split */
     if (tiles.length >= 3) {
       if (idx === 1 && delta.south !== 0)
-        this.rhsplit =
-          (Math.floor(area.height * this.rhsplit) + delta.south) / area.height;
+        this.rhsplit = (area.height * this.rhsplit + delta.south) / area.height;
       if (idx === 2 && delta.north !== 0)
-        this.rhsplit =
-          (Math.floor(area.height * this.rhsplit) - delta.north) / area.height;
+        this.rhsplit = (area.height * this.rhsplit - delta.north) / area.height;
     }
 
     /* clipping */
@@ -101,10 +104,20 @@ class QuarterLayout implements ILayout {
     other.lhsplit = this.lhsplit;
     other.rhsplit = this.rhsplit;
     other.vsplit = this.vsplit;
+    other.prevTileCount = this.prevTileCount;
     return other;
   }
 
   public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+    if (CONFIG.quarterLayoutReset) {
+      // Reset splits if a window was closed (i.e. tile count decreased)
+      if (tileables.length < this.prevTileCount) {
+        this.resetSplits();
+      }
+      // Update the stored count for next time
+      this.prevTileCount = tileables.length;
+    }
+
     for (let i = 0; i < 4 && i < tileables.length; i++)
       tileables[i].state = WindowState.Tiled;
 
@@ -118,10 +131,10 @@ class QuarterLayout implements ILayout {
       return;
     }
 
-    const gap1 = Math.floor(CONFIG.tileLayoutGap / 2);
+    const gap1 = CONFIG.tileLayoutGap / 2;
     const gap2 = CONFIG.tileLayoutGap - gap1;
 
-    const leftWidth = Math.floor(area.width * this.vsplit);
+    const leftWidth = area.width * this.vsplit;
     const rightWidth = area.width - leftWidth;
     const rightX = area.x + leftWidth;
     if (tileables.length === 2) {
@@ -140,7 +153,7 @@ class QuarterLayout implements ILayout {
       return;
     }
 
-    const rightTopHeight = Math.floor(area.height * this.rhsplit);
+    const rightTopHeight = area.height * this.rhsplit;
     const rightBottomHeight = area.height - rightTopHeight;
     const rightBottomY = area.y + rightTopHeight;
     if (tileables.length === 3) {
@@ -165,7 +178,7 @@ class QuarterLayout implements ILayout {
       return;
     }
 
-    const leftTopHeight = Math.floor(area.height * this.lhsplit);
+    const leftTopHeight = area.height * this.lhsplit;
     const leftBottomHeight = area.height - leftTopHeight;
     const leftBottomY = area.y + leftTopHeight;
     if (tileables.length >= 4) {
