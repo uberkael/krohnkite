@@ -38,7 +38,7 @@ K and looks cool.
 1. Delete unused KWin shortcuts:
 
 ```
-qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanUp
+qdbus6 org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanUp
 ```
 
 2. If you have a gap or vice versa you have gray(white etc) rectangle that means that there is a program with size 1x1 that have to be filtered by title or other ways. Make sure that the following programs, if you have them, have been added to the filter:
