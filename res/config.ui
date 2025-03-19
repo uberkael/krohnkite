@@ -1293,22 +1293,35 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="kcfg_displayLayoutNotification">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, a notification will be displayed telling the user what layout is currently active.&lt;/p&gt;&lt;p&gt;The notification appears whenever the layout changes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="text">
-          <string>Display a notification when the layout changes</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QCheckBox" name="kcfg_pollMouseXdotool">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, actual mouse position will be used for certain operations. (e.g. swapping tile by dragging)&lt;/p&gt;&lt;p&gt;To use this feature, user &lt;span style=&quot; text-decoration: underline;&quot;&gt;MUST make sure &lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic; text-decoration: underline;&quot;&gt;xdotool &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;is installed&lt;/span&gt; on the system.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>Get actual mouse position using xdotool while resizing (HACK)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>Duration of pop-up notifications</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="kcfg_notificationDuration">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the time (in milliseconds) for how long a pop-up notification will remain visible before it automatically disappears. A value of 0 will disable notifications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="suffix">
+          <string> ms</string>
+         </property>
+         <property name="maximum">
+          <number>10000</number>
+         </property>
+         <property name="singleStep">
+          <number>100</number>
          </property>
         </widget>
        </item>

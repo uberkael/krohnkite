@@ -239,9 +239,9 @@
         <default>true</default>
     </entry>
 
-    <entry name="displayLayoutNotification" type="Bool">
-	    <label>Display a notification when the layout changes</label>
-        <default>true</default>
+    <entry name="notificationDuration" type="Int">
+	    <label>Duration of pop-up notifications</label>
+        <default>1000</default>
     </entry>
 
     <entry name="screenGapLeft" type="Int">
