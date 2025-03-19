@@ -42,6 +42,7 @@ class KWinConfig implements IConfig {
   public adjustLayout: boolean;
   public adjustLayoutLive: boolean;
   public keepTilingOnDrag: boolean;
+  public displayLayoutNotification: boolean;
   public noTileBorder: boolean;
   public limitTileWidthRatio: number;
   //#endregion
@@ -172,6 +173,7 @@ class KWinConfig implements IConfig {
     this.floatUtility = KWIN.readConfig("floatUtility", true);
     this.preventMinimize = KWIN.readConfig("preventMinimize", false);
     this.preventProtrusion = KWIN.readConfig("preventProtrusion", true);
+    this.displayLayoutNotification = KWIN.readConfig("displayLayoutNotification", true);
     this.pollMouseXdotool = KWIN.readConfig("pollMouseXdotool", false);
 
     this.floatingClass = commaSeparate(KWIN.readConfig("floatingClass", ""));

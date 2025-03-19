@@ -138,6 +138,7 @@ interface IConfig {
   tiledWindowsLayer: WindowLayer;
   keepTilingOnDrag: boolean;
   noTileBorder: boolean;
+  displayLayoutNotification: boolean;
   limitTileWidthRatio: number;
   //#endregion
 

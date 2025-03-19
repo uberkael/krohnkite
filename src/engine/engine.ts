@@ -480,7 +480,8 @@ class TilingEngine {
    */
   public cycleLayout(ctx: IDriverContext, step: 1 | -1) {
     const layout = this.layouts.cycleLayout(ctx.currentSurface, step);
-    if (layout) ctx.showNotification(layout.description);
+    if (layout && CONFIG.displayLayoutNotification)
+      ctx.showNotification(layout.description);
   }
 
   /**
@@ -488,7 +489,8 @@ class TilingEngine {
    */
   public setLayout(ctx: IDriverContext, layoutClassID: string) {
     const layout = this.layouts.setLayout(ctx.currentSurface, layoutClassID);
-    if (layout) ctx.showNotification(layout.description);
+    if (layout && CONFIG.displayLayoutNotification)
+      ctx.showNotification(layout.description);
   }
 
   /**
