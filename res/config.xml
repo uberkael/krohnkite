@@ -194,6 +194,11 @@
         <default>false</default>
     </entry>
 
+    <entry name="soleWindowNoGaps" type="Bool">
+      <label>Do not draw gaps around sole window</label>
+        <default>false</default>
+    </entry>
+
     <entry name="monocleMaximize" type="Bool">
 	    <label>Always maximize windows in Monocle layout</label>
         <default>true</default>

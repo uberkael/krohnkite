@@ -218,7 +218,10 @@ class TilingEngine {
     const tileables = this.windows.getVisibleTileables(srf);
 
     let tilingArea: Rect;
-    if (CONFIG.monocleMaximize && layout instanceof MonocleLayout)
+    if (
+      (CONFIG.monocleMaximize && layout instanceof MonocleLayout) ||
+      (tileables.length === 1 && CONFIG.soleWindowNoGaps)
+    )
       tilingArea = workingArea;
     else if (
       tileables.length === 1 &&

@@ -128,6 +128,7 @@ interface IConfig {
   soleWindowWidth: number;
   soleWindowHeight: number;
   soleWindowNoBorders: boolean;
+  soleWindowNoGaps: boolean;
   //#endregion
 
   //#region Features
