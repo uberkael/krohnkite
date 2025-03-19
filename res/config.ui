@@ -1294,6 +1294,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="kcfg_displayLayoutNotification">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, a notification will be displayed telling the user what layout is currently active.&lt;/p&gt;&lt;p&gt;The notification appears whenever the layout changes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
           <string>Display a notification when the layout changes</string>
          </property>
