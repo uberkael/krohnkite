@@ -1262,6 +1262,54 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox_13">
+         <property name="title">
+          <string>Notifications</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_12">
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="kcfg_notificationDuration">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the time (in milliseconds) for how long a pop-up notification will remain visible before it automatically disappears. A value of 0 will disable notifications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="suffix">
+             <string> ms</string>
+            </property>
+            <property name="maximum">
+             <number>9999</number>
+            </property>
+            <property name="singleStep">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>1000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_18">
+            <property name="text">
+             <string>Duration  </string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="kcfg_noTileBorder">
          <property name="toolTip">
           <string>All tiled windows will have no borders. Borders will be added back if window become float.</string>
@@ -1299,29 +1347,6 @@
          </property>
          <property name="text">
           <string>Get actual mouse position using xdotool while resizing (HACK)</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_17">
-         <property name="text">
-          <string>Duration of pop-up notifications</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="kcfg_notificationDuration">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the time (in milliseconds) for how long a pop-up notification will remain visible before it automatically disappears. A value of 0 will disable notifications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="suffix">
-          <string> ms</string>
-         </property>
-         <property name="maximum">
-          <number>10000</number>
-         </property>
-         <property name="singleStep">
-          <number>100</number>
          </property>
         </widget>
        </item>
