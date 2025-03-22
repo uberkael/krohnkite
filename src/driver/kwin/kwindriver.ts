@@ -167,7 +167,8 @@ class KWinDriver implements IDriverContext {
   }
 
   public showNotification(text: string) {
-    popupDialog.show(text);
+    if (CONFIG.notificationDuration > 0)
+      popupDialog.show(text, CONFIG.notificationDuration);
   }
   //#endregion
 

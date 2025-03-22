@@ -37,7 +37,7 @@ declare var mousePoller: Plasma.PlasmaCore.DataSource;
 declare var scriptRoot: object;
 
 interface PopupDialog {
-  show(text: string): void;
+  show(text: string, duration: number): void;
 }
 declare var popupDialog: PopupDialog;
 
