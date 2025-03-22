@@ -35,7 +35,7 @@ K and looks cool.
 
 ## Look at me
 
-1. Delete unused KWin shortcuts:
+1. Delete unused KWin shortcuts you can use any D-Bus program which can invoke D-Bus methods. Service name -`org.kde.kglobalaccel` path - `/component/kwin` method - `org.kde.kglobalaccel.Component.cleanUp`. ArchLinux example:
 
 ```
 qdbus6 org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanUp
