@@ -18,6 +18,16 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+class Err {
+  public error: string;
+  constructor(s: string) {
+    this.error = s;
+  }
+
+  public toString(): string {
+    return `${this.error}`;
+  }
+}
 function warning(s: string) {
   print(`Krohnkite warn: ${s}`);
 }

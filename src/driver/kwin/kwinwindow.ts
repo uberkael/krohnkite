@@ -37,6 +37,10 @@ class KWinWindow implements IDriverWindow {
     return toRect(this.window.frameGeometry);
   }
 
+  public get windowClassName(): string {
+    return this.window.resourceClass;
+  }
+
   public get shouldIgnore(): boolean {
     if (this.window.deleted) return true;
     return (
@@ -47,11 +51,11 @@ class KWinWindow implements IDriverWindow {
   }
 
   public get shouldFloat(): boolean {
-    const moreOneDesktop = this.window.desktops.length !== 1;
+    //const moreOneDesktop = this.window.desktops.length !== 1;
     return (
       this.isFloatByConfig ||
-      moreOneDesktop ||
-      this.window.onAllDesktops ||
+      //moreOneDesktop ||
+      //this.window.onAllDesktops ||
       this.window.modal ||
       this.window.transient ||
       !this.window.resizeable ||
@@ -67,6 +71,7 @@ class KWinWindow implements IDriverWindow {
 
   public get surface(): ISurface {
     let activity;
+    let desktop;
     if (this.window.activities.length === 0)
       activity = this.workspace.currentActivity;
     else if (
@@ -75,7 +80,17 @@ class KWinWindow implements IDriverWindow {
       activity = this.workspace.currentActivity;
     else activity = this.window.activities[0];
 
-    const desktop = this.window.desktops[0];
+    if (this.window.desktops.length === 1) {
+      desktop = this.window.desktops[0];
+    } else if (this.window.desktops.length === 0) {
+      desktop = this.workspace.currentDesktop;
+    } else {
+      if (this.window.desktops.indexOf(this.workspace.currentDesktop) >= 0)
+        desktop = this.workspace.currentDesktop;
+      else desktop = this.window.desktops[0];
+    }
+
+    // const desktop = this.window.desktops[0];
 
     return new KWinSurface(
       this.window.output,

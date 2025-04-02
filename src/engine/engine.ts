@@ -26,10 +26,12 @@ type Direction = "up" | "down" | "left" | "right";
 class TilingEngine {
   public layouts: LayoutStore;
   public windows: WindowStore;
+  public docks: DockStore;
 
   constructor() {
     this.layouts = new LayoutStore();
     this.windows = new WindowStore();
+    this.docks = new DockStore();
   }
 
   /**
@@ -54,6 +56,29 @@ class TilingEngine {
       );
       const tiles = this.windows.getVisibleTiles(srf);
       layout.adjust(area, tiles, basis, delta);
+    }
+  }
+
+  public adjustDock(basis: WindowClass) {
+    if (basis.actualGeometry === basis.geometry) return;
+    let widthDiff = basis.actualGeometry.width - basis.geometry.width;
+    let heightDiff = basis.actualGeometry.height - basis.geometry.height;
+    let dockCfg = basis.dock!.cfg;
+    const workingArea = basis.surface.workingArea;
+
+    switch (basis.dock!.position) {
+      case DockPosition.left:
+      case DockPosition.right:
+        dockCfg.vHeight =
+          dockCfg.vHeight + (100 * heightDiff) / workingArea.height;
+        dockCfg.vWide = dockCfg.vWide + (100 * widthDiff) / workingArea.width;
+        break;
+      case DockPosition.top:
+      case DockPosition.bottom:
+        dockCfg.hHeight =
+          dockCfg.hHeight + (100 * heightDiff) / workingArea.height;
+        dockCfg.hWide = dockCfg.hWide + (100 * widthDiff) / workingArea.width;
+        break;
     }
   }
 
@@ -195,8 +220,6 @@ class TilingEngine {
   public arrangeScreen(ctx: IDriverContext, srf: ISurface) {
     const layout = this.layouts.getCurrentLayout(srf);
 
-    const workingArea = srf.workingArea;
-
     const visibles = this.windows.getVisibleWindows(srf);
     debugObj(() => [
       "arrangeScreen",
@@ -206,6 +229,12 @@ class TilingEngine {
         visibles: visibles.length,
       },
     ]);
+
+    const workingArea = this.docks.render(
+      srf,
+      visibles,
+      srf.workingArea.clone()
+    );
 
     visibles.forEach((window) => {
       if (window.state === WindowState.Undecided) {
@@ -265,7 +294,11 @@ class TilingEngine {
         });
     }
 
-    if (CONFIG.soleWindowNoBorders && visibles.length === 1) {
+    if (
+      CONFIG.soleWindowNoBorders &&
+      visibles.length === 1 &&
+      visibles[0].state !== WindowState.Docked
+    ) {
       visibles[0].commit(CONFIG.soleWindowNoBorders);
     } else {
       visibles.forEach((window) => window.commit());
@@ -305,6 +338,9 @@ class TilingEngine {
    * Unregister the given window from WM.
    */
   public unmanage(window: WindowClass) {
+    if (window.state === WindowState.Docked) {
+      this.docks.remove(window);
+    }
     this.windows.remove(window);
   }
 
@@ -429,6 +465,13 @@ class TilingEngine {
     else if (WindowClass.isTiledState(state)) this.swapDirection(ctx, dir);
   }
 
+  public toggleDock(window: WindowClass) {
+    window.state =
+      window.state !== WindowState.Docked
+        ? WindowState.Docked
+        : WindowState.Tiled;
+  }
+
   /**
    * Toggle float mode of window.
    */
@@ -505,6 +548,18 @@ class TilingEngine {
     if (layout.handleShortcut)
       return layout.handleShortcut(new EngineContext(ctx, this), input, data);
     return false;
+  }
+  /**
+   * Let the docked window override shortcut.
+   *
+   * @returns True if the layout overrides the shortcut. False, otherwise.
+   */
+  public handleDockShortcut(
+    ctx: IDriverContext,
+    window: WindowClass,
+    input: Shortcut
+  ): boolean {
+    return this.docks.handleShortcut(ctx, window, input);
   }
 
   private getNeighborByDirection(

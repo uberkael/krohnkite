@@ -19,6 +19,23 @@
 // DEALINGS IN THE SOFTWARE.
 
 class KWinConfig implements IConfig {
+  // Dock parameters
+  public dockOrder: [number, number, number, number];
+  public dockHHeight: number;
+  public dockHWide: number;
+  public dockHGap: number;
+  public dockHEdgeGap: number;
+  public dockHAlignment: number;
+  public dockHEdgeAlignment: number;
+  public dockVHeight: number;
+  public dockVWide: number;
+  public dockVGap: number;
+  public dockVEdgeGap: number;
+  public dockVAlignment: number;
+  public dockVEdgeAlignment: number;
+  public dockSurfacesConfig: string[];
+  public dockWindowClassConfig: string[];
+
   //#region Layout
   public layoutOrder: string[];
   public layoutFactories: { [key: string]: () => ILayout };
@@ -96,6 +113,14 @@ class KWinConfig implements IConfig {
         .filter((part) => part != "");
     }
 
+    function newLineSeparate(str: string): string[] {
+      if (!str || typeof str !== "string") return [];
+      return str
+        .split("\n")
+        .map((part) => part.trim())
+        .filter((part) => part != "");
+    }
+
     DEBUG.enabled = DEBUG.enabled || KWIN.readConfig("debug", false);
 
     this.layoutOrder = [];
@@ -120,6 +145,31 @@ class KWinConfig implements IConfig {
         this.layoutOrder.push(layoutClass.id);
       this.layoutFactories[layoutClass.id] = () => new layoutClass();
     });
+
+    this.dockOrder = [
+      KWIN.readConfig("dockOrderLeft", 1),
+      KWIN.readConfig("dockOrderTop", 2),
+      KWIN.readConfig("dockOrderRight", 3),
+      KWIN.readConfig("dockOrderBottom", 4),
+    ];
+    this.dockHHeight = KWIN.readConfig("dockHHeight", 15);
+    this.dockHWide = KWIN.readConfig("dockHWide", 100);
+    this.dockHGap = KWIN.readConfig("dockHGap", 0);
+    this.dockHEdgeGap = KWIN.readConfig("dockHEdgeGap", 0);
+    this.dockHAlignment = KWIN.readConfig("dockHAlignment", 0);
+    this.dockHEdgeAlignment = KWIN.readConfig("dockHEdgeAlignment", 0);
+    this.dockVHeight = KWIN.readConfig("dockVHeight", 100);
+    this.dockVWide = KWIN.readConfig("dockVWide", 15);
+    this.dockVEdgeGap = KWIN.readConfig("dockVEdgeGap", 0);
+    this.dockVGap = KWIN.readConfig("dockVGap", 0);
+    this.dockVAlignment = KWIN.readConfig("dockVAlignment", 0);
+    this.dockVEdgeAlignment = KWIN.readConfig("dockVEdgeAlignment", 0);
+    this.dockSurfacesConfig = newLineSeparate(
+      KWIN.readConfig("dockSurfacesConfig", "")
+    );
+    this.dockWindowClassConfig = newLineSeparate(
+      KWIN.readConfig("dockWindowClassConfig", "")
+    );
 
     this.soleWindowWidth = KWIN.readConfig("soleWindowWidth", 100);
     this.soleWindowHeight = KWIN.readConfig("soleWindowHeight", 100);

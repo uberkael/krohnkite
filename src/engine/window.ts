@@ -33,6 +33,7 @@ enum WindowState {
   TiledAfloat,
   Undecided,
   Dragging,
+  Docked,
 }
 
 class WindowClass {
@@ -155,6 +156,13 @@ class WindowClass {
     this.weightMap[srfID] = value;
   }
 
+  public get windowClassName(): string {
+    return this.window.windowClassName;
+  }
+
+  public isDocked: boolean;
+  public dock: Dock | null;
+
   private internalState: WindowState;
   private shouldCommitFloat: boolean;
   private weightMap: { [key: string]: number };
@@ -170,6 +178,8 @@ class WindowClass {
     this.internalState = WindowState.Unmanaged;
     this.shouldCommitFloat = this.shouldFloat;
     this.weightMap = {};
+    this.isDocked = false;
+    this.dock = null;
   }
 
   public commit(noBorders?: boolean) {
@@ -216,6 +226,20 @@ class WindowClass {
           CONFIG.floatedWindowsLayer
         );
         this.shouldCommitFloat = false;
+        break;
+      case WindowState.Floating:
+        this.window.commit(
+          this.geometry,
+          CONFIG.noTileBorder || Boolean(noBorders),
+          CONFIG.floatedWindowsLayer
+        );
+        break;
+      case WindowState.Docked:
+        this.window.commit(
+          this.geometry,
+          CONFIG.noTileBorder,
+          CONFIG.tiledWindowsLayer
+        );
         break;
     }
   }

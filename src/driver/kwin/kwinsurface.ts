@@ -70,6 +70,10 @@ class KWinSurface implements ISurface {
     this.desktop = desktop;
   }
 
+  public getParams(): [string, string, string] {
+    return [this.output.name, this.activity, this.desktop.name];
+  }
+
   public next(): ISurface | null {
     // TODO: ... thinking about this function
     return null;

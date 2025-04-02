@@ -179,6 +179,9 @@ class KWinDriver implements IDriverContext {
       };
     };
     this.shortcuts
+      .getToggleDock()
+      .activated.connect(callbackShortcut(Shortcut.ToggleDock));
+    this.shortcuts
       .getFocusNext()
       .activated.connect(callbackShortcut(Shortcut.FocusNext));
     this.shortcuts

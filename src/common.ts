@@ -20,11 +20,11 @@
 
 type percentType = number;
 
-enum Shortcut {
-  FocusNext,
-  FocusPrev,
-  DWMLeft,
-  DWMRight,
+const Shortcut = {
+  FocusNext: 1,
+  FocusPrev: 2,
+  DWMLeft: 3,
+  DWMRight: 4,
 
   // Left,
   // Right,
@@ -32,43 +32,48 @@ enum Shortcut {
   // Down,
 
   /* Alternate HJKL bindings */
-  FocusUp,
-  FocusDown,
-  FocusLeft,
-  FocusRight,
+  FocusUp: 5,
+  FocusDown: 6,
+  FocusLeft: 7,
+  FocusRight: 8,
 
-  ShiftLeft,
-  ShiftRight,
-  ShiftUp,
-  ShiftDown,
+  ShiftLeft: 9,
+  ShiftRight: 10,
+  ShiftUp: 11,
+  ShiftDown: 12,
 
-  SwapUp,
-  SwapDown,
-  SwapLeft,
-  SwapRight,
+  SwapUp: 13,
+  SwapDown: 14,
+  SwapLeft: 15,
+  SwapRight: 16,
 
-  GrowWidth,
-  GrowHeight,
-  ShrinkWidth,
-  ShrinkHeight,
+  GrowWidth: 17,
+  GrowHeight: 18,
+  ShrinkWidth: 19,
+  ShrinkHeight: 20,
 
-  Increase,
-  Decrease,
-  ShiftIncrease,
-  ShiftDecrease,
+  Increase: 21,
+  Decrease: 22,
+  ShiftIncrease: 22,
+  ShiftDecrease: 23,
 
-  ToggleFloat,
-  ToggleFloatAll,
-  SetMaster,
-  NextLayout,
-  PreviousLayout,
-  SetLayout,
+  ToggleFloat: 24,
+  ToggleFloatAll: 25,
+  SetMaster: 26,
+  NextLayout: 27,
+  PreviousLayout: 28,
+  SetLayout: 29,
 
-  Rotate,
-  RotatePart,
-}
+  Rotate: 30,
+  RotatePart: 31,
+
+  ToggleDock: 32,
+} as const;
+type Shortcut = (typeof Shortcut)[keyof typeof Shortcut];
 
 interface IShortcuts {
+  getToggleDock(): ShortcutHandler;
+
   getFocusNext(): ShortcutHandler;
   getFocusPrev(): ShortcutHandler;
 
@@ -116,6 +121,23 @@ interface IShortcuts {
 //#region Driver
 
 interface IConfig {
+  // dock parameters
+  dockOrder: [number, number, number, number];
+  dockHHeight: number;
+  dockHWide: number;
+  dockHGap: number;
+  dockHEdgeGap: number;
+  dockHAlignment: number;
+  dockHEdgeAlignment: number;
+  dockVHeight: number;
+  dockVWide: number;
+  dockVGap: number;
+  dockVEdgeGap: number;
+  dockVAlignment: number;
+  dockVEdgeAlignment: number;
+  dockSurfacesConfig: string[];
+  dockWindowClassConfig: string[];
+
   //#region Layout
   layoutOrder: string[];
   layoutFactories: { [key: string]: () => ILayout };
@@ -161,6 +183,7 @@ interface IDriverWindow {
   readonly fullScreen: boolean;
   readonly geometry: Readonly<Rect>;
   readonly id: string;
+  readonly windowClassName: string;
   readonly maximized: boolean;
   readonly minimized: boolean;
   readonly shouldIgnore: boolean;
@@ -182,6 +205,7 @@ interface ISurface {
   readonly desktop: VirtualDesktop;
 
   next(): ISurface | null;
+  getParams(): [string, string, string];
 }
 
 interface IDriverContext {
@@ -195,8 +219,6 @@ interface IDriverContext {
   setTimeout(func: () => void, timeout: number): void;
   showNotification(text: string): void;
 }
-
-//#endregion
 
 interface ILayoutClass {
   readonly id: string;

@@ -174,11 +174,16 @@ class TilingController {
 
   public onWindowResize(ctx: IDriverContext, window: WindowClass): void {
     debugObj(() => ["onWindowResize", { window }]);
-    if (CONFIG.adjustLayout && CONFIG.adjustLayoutLive) {
-      if (window.state === WindowState.Tiled) {
-        this.engine.adjustLayout(window);
-        this.engine.arrange(ctx);
-      }
+    if (
+      CONFIG.adjustLayout &&
+      CONFIG.adjustLayoutLive &&
+      window.state === WindowState.Tiled
+    ) {
+      this.engine.adjustLayout(window);
+      this.engine.arrange(ctx);
+    } else if (window.state === WindowState.Docked) {
+      this.engine.adjustDock(window);
+      this.engine.arrange(ctx);
     }
   }
 
@@ -186,6 +191,9 @@ class TilingController {
     debugObj(() => ["onWindowResizeOver", { window }]);
     if (CONFIG.adjustLayout && window.tiled) {
       this.engine.adjustLayout(window);
+      this.engine.arrange(ctx);
+    } else if (window.state === WindowState.Docked) {
+      this.engine.adjustDock(window);
       this.engine.arrange(ctx);
     } else if (!CONFIG.adjustLayout) this.engine.enforceSize(ctx, window);
   }
@@ -226,7 +234,8 @@ class TilingController {
     window.timestamp = new Date().getTime();
   }
   public onDesktopsChanged(ctx: IDriverContext, window: WindowClass) {
-    window.state = WindowState.Undecided;
+    if (window.state !== WindowState.Docked)
+      window.state = WindowState.Undecided;
   }
 
   public onShortcut(ctx: IDriverContext, input: Shortcut, data?: any) {
@@ -262,12 +271,19 @@ class TilingController {
       }
     }
 
-    if (this.engine.handleLayoutShortcut(ctx, input, data)) {
+    const window = ctx.currentWindow;
+    if (
+      window !== null &&
+      window.state === WindowState.Docked &&
+      this.engine.handleDockShortcut(ctx, window, input)
+    ) {
+      this.engine.arrange(ctx);
+      return;
+    } else if (this.engine.handleLayoutShortcut(ctx, input, data)) {
       this.engine.arrange(ctx);
       return;
     }
 
-    const window = ctx.currentWindow;
     switch (input) {
       case Shortcut.FocusNext:
         this.engine.focusOrder(ctx, -1);
@@ -342,6 +358,10 @@ class TilingController {
         break;
       case Shortcut.SetLayout:
         if (typeof data === "string") this.engine.setLayout(ctx, data);
+        break;
+
+      case Shortcut.ToggleDock:
+        if (window) this.engine.toggleDock(window);
         break;
     }
     this.engine.arrange(ctx);
