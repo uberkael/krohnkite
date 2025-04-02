@@ -294,12 +294,12 @@ class TilingEngine {
         });
     }
 
-    if (
-      CONFIG.soleWindowNoBorders &&
-      visibles.length === 1 &&
-      visibles[0].state !== WindowState.Docked
-    ) {
-      visibles[0].commit(CONFIG.soleWindowNoBorders);
+    if (CONFIG.soleWindowNoBorders && tileables.length === 1) {
+      visibles.forEach((window) => {
+        if (window.state === WindowState.Tiled)
+          window.commit(CONFIG.soleWindowNoBorders);
+        else window.commit();
+      });
     } else {
       visibles.forEach((window) => window.commit());
     }
