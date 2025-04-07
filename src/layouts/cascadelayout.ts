@@ -66,7 +66,12 @@ class CascadeLayout implements ILayout {
     /* nothing */
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     const [vertStep, horzStep] = CascadeLayout.decomposeDirection(this.dir);
 
     // TODO: adjustable step size

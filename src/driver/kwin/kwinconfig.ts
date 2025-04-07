@@ -69,7 +69,8 @@ class KWinConfig implements IConfig {
   public screenGapLeft: number;
   public screenGapRight: number;
   public screenGapTop: number;
-  public tileLayoutGap: number;
+  public screenGapBetween: number;
+  public gapsOverrideConfig: string[];
   //#endregion
 
   //#region Behavior
@@ -211,7 +212,10 @@ class KWinConfig implements IConfig {
     this.screenGapLeft = KWIN.readConfig("screenGapLeft", 0);
     this.screenGapRight = KWIN.readConfig("screenGapRight", 0);
     this.screenGapTop = KWIN.readConfig("screenGapTop", 0);
-    this.tileLayoutGap = KWIN.readConfig("tileLayoutGap", 0);
+    this.screenGapBetween = KWIN.readConfig("screenGapBetween", 0);
+    this.gapsOverrideConfig = newLineSeparate(
+      KWIN.readConfig("gapsOverrideConfig", "")
+    );
 
     const directionalKeyDwm = KWIN.readConfig("directionalKeyDwm", false);
     const directionalKeyFocus = KWIN.readConfig("directionalKeyFocus", true);

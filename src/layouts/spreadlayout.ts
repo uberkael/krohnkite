@@ -30,7 +30,12 @@ class SpreadLayout implements ILayout {
     this.space = 0.07;
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     /* Tile all tileables */
     tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
     const tiles = tileables;

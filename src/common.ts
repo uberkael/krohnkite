@@ -169,7 +169,8 @@ interface IConfig {
   screenGapLeft: number;
   screenGapRight: number;
   screenGapTop: number;
-  tileLayoutGap: number;
+  screenGapBetween: number;
+  gapsOverrideConfig: string[];
   //#endregion
 
   //#region Behavior
@@ -235,9 +236,15 @@ interface ILayout {
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ): void;
-  apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void;
+  apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void;
   handleShortcut?(ctx: EngineContext, input: Shortcut, data?: any): boolean;
   drag?(
     ctx: EngineContext,
@@ -247,6 +254,14 @@ interface ILayout {
   ): boolean;
 
   toString(): string;
+}
+
+interface IGaps {
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+  between: number;
 }
 
 let CONFIG: IConfig;

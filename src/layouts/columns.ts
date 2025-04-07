@@ -45,7 +45,8 @@ class ColumnsLayout implements ILayout {
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ) {
     let columnId = this.getColumnId(basis);
     if (columnId === null) return;
@@ -70,7 +71,7 @@ class ColumnsLayout implements ILayout {
       const weights = LayoutUtils.adjustAreaWeights(
         area,
         oldWeights,
-        CONFIG.tileLayoutGap,
+        gap,
         isReverse ? columnsLength - 1 - columnId : columnId,
         delta,
         this.direction.east || this.direction.west
@@ -87,11 +88,16 @@ class ColumnsLayout implements ILayout {
       ((delta.east !== 0 || delta.west !== 0) &&
         (this.direction.north || this.direction.south))
     ) {
-      this.columns[columnId].adjust(area, tiles, basis, delta);
+      this.columns[columnId].adjust(area, tiles, basis, delta, gap);
     }
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     if (this.columnsConfiguration === null)
       this.columnsConfiguration = this.getDefaultConfig(ctx);
     this.arrangeTileables(ctx, tileables);
@@ -108,20 +114,20 @@ class ColumnsLayout implements ILayout {
     const rects = LayoutUtils.splitAreaWeighted(
       area,
       weights,
-      CONFIG.tileLayoutGap,
+      gap,
       this.direction.east || this.direction.west
     );
     if (this.direction.east || this.direction.south) {
       let i = 0;
       for (var idx = this.columns.length - 1; idx >= 0; idx--) {
         this.columns[idx].isHorizontal = this.direction.south;
-        this.columns[idx].apply(ctx, tileables, rects[i]);
+        this.columns[idx].apply(ctx, tileables, rects[i], gap);
         i++;
       }
     } else {
       for (var idx = 0; idx < this.columns.length; idx++) {
         this.columns[idx].isHorizontal = this.direction.north;
-        this.columns[idx].apply(ctx, tileables, rects[idx]);
+        this.columns[idx].apply(ctx, tileables, rects[idx], gap);
       }
     }
   }

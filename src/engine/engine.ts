@@ -27,11 +27,15 @@ class TilingEngine {
   public layouts: LayoutStore;
   public windows: WindowStore;
   public docks: DockStore;
+  private _defaultGaps: DefaultGapsCfg | null;
+  private _gapsSurfacesCfg: gapsSurfaceCfg[];
 
   constructor() {
     this.layouts = new LayoutStore();
     this.windows = new WindowStore();
     this.docks = new DockStore();
+    this._defaultGaps = null;
+    this._gapsSurfacesCfg = [];
   }
 
   /**
@@ -48,14 +52,15 @@ class TilingEngine {
     const srf = basis.surface;
     const layout = this.layouts.getCurrentLayout(srf);
     if (layout.adjust) {
+      const gaps = this.getGaps(srf);
       const area = srf.workingArea.gap(
-        CONFIG.screenGapLeft,
-        CONFIG.screenGapRight,
-        CONFIG.screenGapTop,
-        CONFIG.screenGapBottom
+        gaps.left,
+        gaps.right,
+        gaps.top,
+        gaps.bottom
       );
       const tiles = this.windows.getVisibleTiles(srf);
-      layout.adjust(area, tiles, basis, delta);
+      layout.adjust(area, tiles, basis, delta, gaps.between);
     }
   }
 
@@ -132,6 +137,7 @@ class TilingEngine {
     step: -1 | 1
   ) {
     const srf = basis.surface;
+    const gaps = this.getGaps(srf);
 
     if (dir === "east") {
       const maxX = basis.geometry.maxX;
@@ -176,12 +182,18 @@ class TilingEngine {
     const layout = this.layouts.getCurrentLayout(srf);
     if (layout.adjust) {
       const area = srf.workingArea.gap(
-        CONFIG.screenGapLeft,
-        CONFIG.screenGapRight,
-        CONFIG.screenGapTop,
-        CONFIG.screenGapBottom
+        gaps.left,
+        gaps.right,
+        gaps.top,
+        gaps.bottom
       );
-      layout.adjust(area, this.windows.getVisibleTileables(srf), basis, delta);
+      layout.adjust(
+        area,
+        this.windows.getVisibleTileables(srf),
+        basis,
+        delta,
+        gaps.between
+      );
     }
   }
 
@@ -229,6 +241,7 @@ class TilingEngine {
         visibles: visibles.length,
       },
     ]);
+    const gaps = this.getGaps(srf);
 
     const workingArea = this.docks.render(
       srf,
@@ -268,14 +281,19 @@ class TilingEngine {
       tilingArea = workingArea.gap(v_gap, v_gap, h_gap, h_gap);
     } else
       tilingArea = workingArea.gap(
-        CONFIG.screenGapLeft,
-        CONFIG.screenGapRight,
-        CONFIG.screenGapTop,
-        CONFIG.screenGapBottom
+        gaps.left,
+        gaps.right,
+        gaps.top,
+        gaps.bottom
       );
 
     if (tileables.length > 0)
-      layout.apply(new EngineContext(ctx, this), tileables, tilingArea);
+      layout.apply(
+        new EngineContext(ctx, this),
+        tileables,
+        tilingArea,
+        gaps.between
+      );
 
     if (CONFIG.limitTileWidthRatio > 0 && !(layout instanceof MonocleLayout)) {
       const maxWidth = Math.floor(
@@ -633,5 +651,17 @@ class TilingEngine {
     );
 
     return closest.sort((a, b) => b.timestamp - a.timestamp)[0];
+  }
+
+  private getGaps(srf: ISurface): IGaps {
+    if (this._defaultGaps === null) {
+      this._defaultGaps = DefaultGapsCfg.instance;
+      this._gapsSurfacesCfg = gapsSurfaceCfg.parseGapsUserSurfacesCfg();
+    }
+    const surfaceCfg = this._gapsSurfacesCfg.find((surfaceCfg) =>
+      surfaceCfg.isFit(srf)
+    );
+    if (surfaceCfg === undefined) return this._defaultGaps;
+    return surfaceCfg.cfg;
   }
 }

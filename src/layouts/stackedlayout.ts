@@ -33,35 +33,33 @@ class StackedLayout implements ILayout {
 
   constructor() {
     this.parts = new RotateLayoutPart(
-      new HalfSplitLayoutPart(
-        new StackLayoutPart(),
-        new StackLayoutPart()
-      )
+      new HalfSplitLayoutPart(new StackLayoutPart(), new StackLayoutPart())
     );
-
-    const masterPart = this.parts.inner;
-    masterPart.gap =
-      masterPart.secondary.gap =
-      CONFIG.tileLayoutGap;
   }
 
   public adjust(
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ) {
-    this.parts.adjust(area, tiles, basis, delta);
+    this.parts.adjust(area, tiles, basis, delta, gap);
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
 
     if (tileables.length > 1) {
       this.parts.inner.angle = 90;
     }
 
-    this.parts.apply(area, tileables).forEach((geometry, i) => {
+    this.parts.apply(area, tileables, gap).forEach((geometry, i) => {
       tileables[i].geometry = geometry;
     });
   }
@@ -83,8 +81,6 @@ class StackedLayout implements ILayout {
   }
 
   public toString(): string {
-    return (
-      "StackedLayout()"
-    );
+    return "StackedLayout()";
   }
 }

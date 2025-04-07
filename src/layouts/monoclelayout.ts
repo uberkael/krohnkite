@@ -24,7 +24,12 @@ class MonocleLayout implements ILayout {
 
   public readonly classID = MonocleLayout.id;
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     /* Tile all tileables */
     tileables.forEach((tile) => {
       tile.state = CONFIG.monocleMaximize

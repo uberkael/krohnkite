@@ -52,7 +52,8 @@ class QuarterLayout implements ILayout {
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ) {
     if (tiles.length <= 1 || tiles.length > 4) return;
 
@@ -108,7 +109,12 @@ class QuarterLayout implements ILayout {
     return other;
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     if (CONFIG.quarterLayoutReset) {
       // Reset splits if a window was closed (i.e. tile count decreased)
       if (tileables.length < this.prevTileCount) {
@@ -131,8 +137,8 @@ class QuarterLayout implements ILayout {
       return;
     }
 
-    const gap1 = CONFIG.tileLayoutGap / 2;
-    const gap2 = CONFIG.tileLayoutGap - gap1;
+    const gap1 = gap / 2;
+    const gap2 = gap - gap1;
 
     const leftWidth = area.width * this.vsplit;
     const rightWidth = area.width - leftWidth;

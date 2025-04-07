@@ -355,9 +355,14 @@
         <default>0</default>
     </entry>
 
-    <entry name="tileLayoutGap" type="Int">
+    <entry name="screenGapBetween" type="Int">
         <label>Gap between tiles in Tile layout</label>
         <default>0</default>
+    </entry>
+
+    <entry name="gapsOverrideConfig" type="String">
+	    <label>Override default screen gaps</label>
+        <default></default>
     </entry>
 
     <entry name="pollMouseXdotool" type="Bool">

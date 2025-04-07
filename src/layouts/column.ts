@@ -46,7 +46,6 @@ class ColumnLayout implements ILayout {
     this.position = "single";
     this.weight = 1.0;
     this.parts = new RotateLayoutPart(new StackLayoutPart());
-    this.parts.inner.gap = CONFIG.tileLayoutGap;
     this.windowIds = new Set();
     this.renderedWindowsIds = [];
     this.renderedWindowsRects = [];
@@ -67,9 +66,13 @@ class ColumnLayout implements ILayout {
     return this.windowIds.size === this.numberFloatedOrMinimized;
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     this.renderedWindowsIds = [];
-    // this.correctArea(area);
     let columnTileables = tileables.filter((w) => {
       if (this.windowIds.has(w.id)) {
         this.renderedWindowsIds.push(w.id);
@@ -77,7 +80,7 @@ class ColumnLayout implements ILayout {
       }
     });
     this.renderedWindowsRects = [];
-    this.parts.apply(area, columnTileables).forEach((geometry, i) => {
+    this.parts.apply(area, columnTileables, gap).forEach((geometry, i) => {
       columnTileables[i].geometry = geometry;
       this.renderedWindowsRects.push(geometry);
     });
@@ -114,10 +117,11 @@ class ColumnLayout implements ILayout {
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ) {
     let columnTiles = tiles.filter((t) => this.windowIds.has(t.id));
-    this.parts.adjust(area, columnTiles, basis, delta);
+    this.parts.adjust(area, columnTiles, basis, delta, gap);
   }
 
   public actualizeWindowIds(ctx: EngineContext, ids: Set<string>) {

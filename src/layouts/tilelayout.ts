@@ -70,26 +70,27 @@ class TileLayout implements ILayout {
         break;
       }
     }
-    const masterPart = this.parts.inner;
-    masterPart.gap =
-      masterPart.primary.inner.gap =
-      masterPart.secondary.gap =
-        CONFIG.tileLayoutGap;
   }
 
   public adjust(
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ) {
-    this.parts.adjust(area, tiles, basis, delta);
+    this.parts.adjust(area, tiles, basis, delta, gap);
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
 
-    this.parts.apply(area, tileables).forEach((geometry, i) => {
+    this.parts.apply(area, tileables, gap).forEach((geometry, i) => {
       tileables[i].geometry = geometry;
     });
   }

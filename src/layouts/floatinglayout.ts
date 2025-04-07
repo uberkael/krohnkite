@@ -25,7 +25,12 @@ class FloatingLayout implements ILayout {
   public readonly classID = FloatingLayout.id;
   public readonly description: string = "Floating";
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     tileables.forEach(
       (tileable: WindowClass) => (tileable.state = WindowState.TiledAfloat)
     );

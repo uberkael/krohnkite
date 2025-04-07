@@ -39,24 +39,29 @@ class SpiralLayout implements ILayout {
       new FillLayoutPart()
     );
     this.parts.angle = 0;
-    this.parts.gap = CONFIG.tileLayoutGap;
   }
 
   public adjust(
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ): void {
-    this.parts.adjust(area, tiles, basis, delta);
+    this.parts.adjust(area, tiles, basis, delta, gap);
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
 
-    this.bore(tileables.length);
+    this.bore(tileables.length, gap);
 
-    this.parts.apply(area, tileables).forEach((geometry, i) => {
+    this.parts.apply(area, tileables, gap).forEach((geometry, i) => {
       tileables[i].geometry = geometry;
     });
   }
@@ -67,7 +72,7 @@ class SpiralLayout implements ILayout {
     return "Spiral()";
   }
 
-  private bore(depth: number): void {
+  private bore(depth: number, gap: number): void {
     if (this.depth >= depth) return;
 
     let hpart = this.parts;
@@ -80,7 +85,7 @@ class SpiralLayout implements ILayout {
     let npart: SpiralLayoutPart;
     while (i < depth - 1) {
       npart = new HalfSplitLayoutPart(new FillLayoutPart(), lastFillPart);
-      npart.gap = CONFIG.tileLayoutGap;
+      npart.gap = gap;
       npart.angle = (((i + 1) % 4) * 90) as 0 | 90 | 180 | 270;
       hpart.secondary = npart;
       hpart = npart;

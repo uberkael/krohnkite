@@ -41,7 +41,8 @@ class ThreeColumnLayout implements ILayout {
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ): void {
     const basisIndex = tiles.indexOf(basis);
     if (basisIndex < 0) return;
@@ -54,7 +55,7 @@ class ThreeColumnLayout implements ILayout {
       LayoutUtils.adjustAreaWeights(
         area,
         tiles.map((tile) => tile.weight),
-        CONFIG.tileLayoutGap,
+        gap,
         tiles.indexOf(basis),
         delta
       ).forEach((newWeight, i) => (tiles[i].weight = newWeight * tiles.length));
@@ -65,7 +66,7 @@ class ThreeColumnLayout implements ILayout {
       this.masterRatio = LayoutUtils.adjustAreaHalfWeights(
         area,
         this.masterRatio,
-        CONFIG.tileLayoutGap,
+        gap,
         basisIndex < this.masterSize ? 0 : 1,
         delta,
         true
@@ -77,7 +78,7 @@ class ThreeColumnLayout implements ILayout {
         LayoutUtils.adjustAreaWeights(
           area,
           masterTiles.map((tile) => tile.weight),
-          CONFIG.tileLayoutGap,
+          gap,
           basisIndex,
           delta
         ).forEach(
@@ -98,7 +99,7 @@ class ThreeColumnLayout implements ILayout {
       const newRatios = LayoutUtils.adjustAreaWeights(
         area,
         [stackRatio, this.masterRatio, stackRatio],
-        CONFIG.tileLayoutGap,
+        gap,
         basisGroup,
         delta,
         true
@@ -118,7 +119,7 @@ class ThreeColumnLayout implements ILayout {
       LayoutUtils.adjustAreaWeights(
         area /* we only need height */,
         groupTiles.map((tile) => tile.weight),
-        CONFIG.tileLayoutGap,
+        gap,
         groupTiles.indexOf(basis),
         delta
       ).forEach(
@@ -127,7 +128,12 @@ class ThreeColumnLayout implements ILayout {
     }
   }
 
-  public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
+  public apply(
+    ctx: EngineContext,
+    tileables: WindowClass[],
+    area: Rect,
+    gap: number
+  ): void {
     /* Tile all tileables */
     tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
     const tiles = tileables;
@@ -137,14 +143,14 @@ class ThreeColumnLayout implements ILayout {
       LayoutUtils.splitAreaWeighted(
         area,
         tiles.map((tile) => tile.weight),
-        CONFIG.tileLayoutGap
+        gap
       ).forEach((tileArea, i) => (tiles[i].geometry = tileArea));
     } else if (tiles.length === this.masterSize + 1) {
       /* master & R-stack (only 1 window in stack) */
       const [masterArea, stackArea] = LayoutUtils.splitAreaHalfWeighted(
         area,
         this.masterRatio,
-        CONFIG.tileLayoutGap,
+        gap,
         true
       );
 
@@ -152,7 +158,7 @@ class ThreeColumnLayout implements ILayout {
       LayoutUtils.splitAreaWeighted(
         masterArea,
         masterTiles.map((tile) => tile.weight),
-        CONFIG.tileLayoutGap
+        gap
       ).forEach((tileArea, i) => (masterTiles[i].geometry = tileArea));
 
       tiles[tiles.length - 1].geometry = stackArea;
@@ -164,7 +170,7 @@ class ThreeColumnLayout implements ILayout {
       const groupAreas = LayoutUtils.splitAreaWeighted(
         area,
         [stackRatio, this.masterRatio, stackRatio],
-        CONFIG.tileLayoutGap,
+        gap,
         true
       );
 
@@ -178,7 +184,7 @@ class ThreeColumnLayout implements ILayout {
         LayoutUtils.splitAreaWeighted(
           groupAreas[group],
           groupTiles.map((tile) => tile.weight),
-          CONFIG.tileLayoutGap
+          gap
         ).forEach((tileArea, i) => (groupTiles[i].geometry = tileArea));
       });
     }

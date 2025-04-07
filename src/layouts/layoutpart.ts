@@ -23,9 +23,10 @@ interface ILayoutPart {
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ): RectDelta;
-  apply(area: Rect, tiles: WindowClass[]): Rect[];
+  apply(area: Rect, tiles: WindowClass[], gap: number): Rect[];
 }
 
 class FillLayoutPart implements ILayoutPart {
@@ -33,13 +34,14 @@ class FillLayoutPart implements ILayoutPart {
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ): RectDelta {
     /* do nothing */
     return delta;
   }
 
-  public apply(area: Rect, tiles: WindowClass[]): Rect[] {
+  public apply(area: Rect, tiles: WindowClass[], gap: number): Rect[] {
     return tiles.map((tile) => {
       return area;
     });
@@ -86,17 +88,18 @@ class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ): RectDelta {
     const basisIndex = tiles.indexOf(basis);
     if (basisIndex < 0) return delta;
 
     if (tiles.length <= this.primarySize) {
       /* primary only */
-      return this.primary.adjust(area, tiles, basis, delta);
+      return this.primary.adjust(area, tiles, basis, delta, gap);
     } else if (this.primarySize === 0) {
       /* secondary only */
-      return this.secondary.adjust(area, tiles, basis, delta);
+      return this.secondary.adjust(area, tiles, basis, delta, gap);
     } else {
       /* both parts */
 
@@ -108,14 +111,16 @@ class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
           area,
           tiles.slice(0, this.primarySize),
           basis,
-          delta
+          delta,
+          gap
         );
       } else {
         delta = this.secondary.adjust(
           area,
           tiles.slice(this.primarySize),
           basis,
-          delta
+          delta,
+          gap
         );
       }
 
@@ -150,13 +155,13 @@ class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
     return `<HalfSplitLayout: angle:${this.angle},ratio:${this.ratio},pr_size:${this.primarySize}.<<<Primary:${this.primary}---Secondary:${this.secondary}>>>`;
   }
 
-  public apply(area: Rect, tiles: WindowClass[]): Rect[] {
+  public apply(area: Rect, tiles: WindowClass[], gap: number): Rect[] {
     if (tiles.length <= this.primarySize) {
       /* primary only */
-      return this.primary.apply(area, tiles);
+      return this.primary.apply(area, tiles, gap);
     } else if (this.primarySize === 0) {
       /* secondary only */
-      return this.secondary.apply(area, tiles);
+      return this.secondary.apply(area, tiles, gap);
     } else {
       /* both parts */
       const reversed = this.reversed;
@@ -169,11 +174,13 @@ class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
       );
       const result1 = this.primary.apply(
         reversed ? area2 : area1,
-        tiles.slice(0, this.primarySize)
+        tiles.slice(0, this.primarySize),
+        gap
       );
       const result2 = this.secondary.apply(
         reversed ? area1 : area2,
-        tiles.slice(this.primarySize)
+        tiles.slice(this.primarySize),
+        gap
       );
       return result1.concat(result2);
     }
@@ -181,22 +188,17 @@ class HalfSplitLayoutPart<L extends ILayoutPart, R extends ILayoutPart>
 }
 
 class StackLayoutPart implements ILayoutPart {
-  public gap: number;
-
-  constructor() {
-    this.gap = 0;
-  }
-
   public adjust(
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ): RectDelta {
     const weights = LayoutUtils.adjustAreaWeights(
       area,
       tiles.map((tile) => tile.weight),
-      CONFIG.tileLayoutGap,
+      gap,
       tiles.indexOf(basis),
       delta,
       false
@@ -215,9 +217,9 @@ class StackLayoutPart implements ILayoutPart {
     );
   }
 
-  public apply(area: Rect, tiles: WindowClass[]): Rect[] {
+  public apply(area: Rect, tiles: WindowClass[], gap: number): Rect[] {
     const weights = tiles.map((tile) => tile.weight);
-    return LayoutUtils.splitAreaWeighted(area, weights, this.gap);
+    return LayoutUtils.splitAreaWeighted(area, weights, gap);
   }
 }
 
@@ -228,7 +230,8 @@ class RotateLayoutPart<T extends ILayoutPart> implements ILayoutPart {
     area: Rect,
     tiles: WindowClass[],
     basis: WindowClass,
-    delta: RectDelta
+    delta: RectDelta,
+    gap: number
   ): RectDelta {
     // let area = area, delta = delta;
     switch (this.angle) {
@@ -247,7 +250,7 @@ class RotateLayoutPart<T extends ILayoutPart> implements ILayoutPart {
         break;
     }
 
-    delta = this.inner.adjust(area, tiles, basis, delta);
+    delta = this.inner.adjust(area, tiles, basis, delta, gap);
 
     switch (this.angle) {
       case 0:
@@ -266,7 +269,7 @@ class RotateLayoutPart<T extends ILayoutPart> implements ILayoutPart {
     return delta;
   }
 
-  public apply(area: Rect, tiles: WindowClass[]): Rect[] {
+  public apply(area: Rect, tiles: WindowClass[], gap: number): Rect[] {
     switch (this.angle) {
       case 0:
         break;
@@ -280,7 +283,7 @@ class RotateLayoutPart<T extends ILayoutPart> implements ILayoutPart {
         break;
     }
 
-    const innerResult = this.inner.apply(area, tiles);
+    const innerResult = this.inner.apply(area, tiles, gap);
 
     switch (this.angle) {
       case 0:
