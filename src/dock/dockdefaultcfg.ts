@@ -19,7 +19,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 class DefaultDockCfg implements IDockCfg {
-  static #instance: DefaultDockCfg;
+  static _dockInstance: DefaultDockCfg;
 
   public readonly hHeight: number;
   public readonly hWide: number;
@@ -173,11 +173,11 @@ class DefaultDockCfg implements IDockCfg {
     }
   }
   public static get instance(): DefaultDockCfg {
-    if (!DefaultDockCfg.#instance) {
-      DefaultDockCfg.#instance = new DefaultDockCfg();
+    if (!DefaultDockCfg._dockInstance) {
+      DefaultDockCfg._dockInstance = new DefaultDockCfg();
     }
 
-    return DefaultDockCfg.#instance;
+    return DefaultDockCfg._dockInstance;
   }
   public cloneAndUpdate(cfg: Partial<IDockCfg>): IDockCfg {
     return Object.assign({} as IDockCfg, DefaultDockCfg.instance, cfg);

@@ -56,6 +56,7 @@ class DockStore implements IDockStore {
 
     return this.store[srf.id].arrange(dockedWindows, workingArea);
   }
+
   public remove(window: WindowClass) {
     for (let key in this.store) {
       this.store[key].remove(window);
