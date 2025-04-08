@@ -225,8 +225,8 @@ class TilingController {
       debugObj(() => ["onWindowChanged", { window, comment }]);
 
       if (comment === "unminimized") ctx.currentWindow = window;
-      window.floatGeometry = window.actualGeometry;
-      window.geometry = window.actualGeometry;
+      window.floatGeometry.x = window.actualGeometry.x;
+      window.floatGeometry.y = window.actualGeometry.y;
       this.engine.arrange(ctx);
     }
   }
