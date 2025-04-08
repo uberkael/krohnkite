@@ -59,7 +59,7 @@ class SpiralLayout implements ILayout {
   ): void {
     tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
 
-    this.bore(tileables.length, gap);
+    this.bore(tileables.length);
 
     this.parts.apply(area, tileables, gap).forEach((geometry, i) => {
       tileables[i].geometry = geometry;
@@ -72,7 +72,7 @@ class SpiralLayout implements ILayout {
     return "Spiral()";
   }
 
-  private bore(depth: number, gap: number): void {
+  private bore(depth: number): void {
     if (this.depth >= depth) return;
 
     let hpart = this.parts;
@@ -85,7 +85,6 @@ class SpiralLayout implements ILayout {
     let npart: SpiralLayoutPart;
     while (i < depth - 1) {
       npart = new HalfSplitLayoutPart(new FillLayoutPart(), lastFillPart);
-      npart.gap = gap;
       npart.angle = (((i + 1) % 4) * 90) as 0 | 90 | 180 | 270;
       hpart.secondary = npart;
       hpart = npart;

@@ -40,7 +40,6 @@ class BTreeLayout implements ILayout {
       new FillLayoutPart()
     );
     this.parts.angle = 0;
-    this.parts.gap = 0;
   }
 
   public apply(
@@ -49,7 +48,6 @@ class BTreeLayout implements ILayout {
     area: Rect,
     gap: number
   ): void {
-    this.parts.gap = gap;
     tileables.forEach((tileable) => (tileable.state = WindowState.Tiled));
     this.create_parts(tileables.length);
     let rectangles = this.parts.apply(area, tileables, gap);
@@ -60,7 +58,6 @@ class BTreeLayout implements ILayout {
   private create_parts(tiles_len: number): void {
     let head = this.get_head();
     head.angle = 0;
-    head.gap = this.parts.gap;
     if (tiles_len > 2) {
       // es5 has not the log2 function, so I use natural log
       let level = Math.ceil(Math.log(tiles_len) * 1.442695);
@@ -87,7 +84,6 @@ class BTreeLayout implements ILayout {
       if (head.primarySize > 1) {
         let primary = this.get_head();
         primary.primarySize = Math.floor(head.primarySize / 2);
-        primary.gap = this.parts.gap;
         primary.angle = current_level % 2 ? 0 : 90;
         head.primary = primary;
         this.build_binary_tree(
@@ -100,7 +96,6 @@ class BTreeLayout implements ILayout {
       if (tiles_len - head.primarySize > 1) {
         let secondary = this.get_head();
         secondary.primarySize = Math.floor((tiles_len - head.primarySize) / 2);
-        secondary.gap = this.parts.gap;
         secondary.angle = current_level % 2 ? 0 : 90;
         head.secondary = secondary;
         this.build_binary_tree(
