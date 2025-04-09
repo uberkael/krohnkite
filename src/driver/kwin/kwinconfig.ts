@@ -125,25 +125,50 @@ class KWinConfig implements IConfig {
     DEBUG.enabled = DEBUG.enabled || KWIN.readConfig("debug", false);
 
     this.layoutOrder = [];
+
+    interface ISortedLayouts {
+      order: number;
+      layoutClass: ILayoutClass;
+    }
+    let sortedLayouts: ISortedLayouts[] = [];
+
     this.layoutFactories = {};
     (
       [
-        ["enableTileLayout", true, TileLayout],
-        ["enableMonocleLayout", true, MonocleLayout],
-        ["enableColumnsLayout", true, ColumnsLayout],
-        ["enableThreeColumnLayout", true, ThreeColumnLayout],
-        ["enableSpreadLayout", true, SpreadLayout],
-        ["enableStairLayout", true, StairLayout],
-        ["enableSpiralLayout", true, SpiralLayout],
-        ["enableQuarterLayout", false, QuarterLayout],
-        ["enableStackedLayout", false, StackedLayout],
-        ["enableFloatingLayout", false, FloatingLayout],
-        ["enableBTreeLayout", false, BTreeLayout],
-        ["enableCascadeLayout", false, CascadeLayout], // TODO: add config
-      ] as Array<[string, boolean, ILayoutClass]>
+        ["tileLayoutOrder", 1, TileLayout],
+        ["monocleLayoutOrder", 2, MonocleLayout],
+        ["threeColumnLayoutOrder", 3, ThreeColumnLayout],
+        ["spiralLayoutOrder", 4, SpiralLayout],
+        ["quarterLayoutOrder", 5, QuarterLayout],
+        ["stackedLayoutOrder", 6, StackedLayout],
+        ["columnsLayoutOrder", 7, ColumnsLayout],
+        ["spreadLayoutOrder", 8, SpreadLayout],
+        ["floatingLayoutOrder", 9, FloatingLayout],
+        ["stairLayoutOrder", 10, StairLayout],
+        ["binaryTreeLayoutOrder", 11, BTreeLayout],
+        ["cascadeLayoutOrder", 12, CascadeLayout],
+      ] as Array<[string, number, ILayoutClass]>
     ).forEach(([configKey, defaultValue, layoutClass]) => {
-      if (KWIN.readConfig(configKey, defaultValue))
-        this.layoutOrder.push(layoutClass.id);
+      let order = validateNumber(
+        KWIN.readConfig(configKey, defaultValue),
+        0,
+        12
+      );
+      if (order instanceof Err) {
+        order = defaultValue;
+        warning(
+          `kwinconfig: layout order for ${layoutClass.id} is invalid, using default value ${order}`
+        );
+      }
+      if (order === 0) return;
+      sortedLayouts.push({ order: order, layoutClass: layoutClass });
+    });
+    sortedLayouts.sort((a, b) => a.order - b.order);
+    if (sortedLayouts.length === 0) {
+      sortedLayouts.push({ order: 1, layoutClass: TileLayout });
+    }
+    sortedLayouts.forEach(({ layoutClass }) => {
+      this.layoutOrder.push(layoutClass.id);
       this.layoutFactories[layoutClass.id] = () => new layoutClass();
     });
 
