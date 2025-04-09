@@ -225,8 +225,17 @@ class TilingController {
       debugObj(() => ["onWindowChanged", { window, comment }]);
 
       if (comment === "unminimized") ctx.currentWindow = window;
-      window.floatGeometry.x = window.actualGeometry.x;
-      window.floatGeometry.y = window.actualGeometry.y;
+      const workingArea = window.surface.workingArea;
+      if (window.floatGeometry.width > workingArea.width) {
+        window.floatGeometry.width = workingArea.width;
+      }
+      if (window.floatGeometry.height > workingArea.height) {
+        window.floatGeometry.height = workingArea.height;
+      }
+      window.floatGeometry.x =
+        workingArea.x + (workingArea.width - window.floatGeometry.width) / 2;
+      window.floatGeometry.y =
+        workingArea.y + (workingArea.height - window.floatGeometry.height) / 2;
       this.engine.arrange(ctx);
     }
   }
