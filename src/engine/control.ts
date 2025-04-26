@@ -296,10 +296,10 @@ class TilingController {
 
     switch (input) {
       case Shortcut.FocusNext:
-        this.engine.focusOrder(ctx, -1);
+        this.engine.focusOrder(ctx, +1);
         break;
       case Shortcut.FocusPrev:
-        this.engine.focusOrder(ctx, +1);
+        this.engine.focusOrder(ctx, -1);
         break;
 
       case Shortcut.FocusUp:
