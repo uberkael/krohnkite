@@ -104,6 +104,7 @@ class KWinConfig implements IConfig {
   public tileNothing: boolean;
   public tilingClass: string[];
   //#endregion
+  public debugActiveWin: boolean;
 
   constructor() {
     function commaSeparate(str: string): string[] {
@@ -283,6 +284,8 @@ class KWinConfig implements IConfig {
       );
       this.preventMinimize = false;
     }
+
+    this.debugActiveWin = KWIN.readConfig("debugActiveWin", false);
   }
 
   public toString(): string {

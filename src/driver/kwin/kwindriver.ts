@@ -143,7 +143,7 @@ class KWinDriver implements IDriverContext {
       !client.hidden &&
       client.width * client.height > 10
     ) {
-      if (KWIN.readConfig("debugActiveWin", false)) print(debugWin(client));
+      if (CONFIG.debugActiveWin) print(debugWin(client));
       const window = this.windowMap.add(client);
       this.control.onWindowAdded(this, window);
       if (window.state !== WindowState.Unmanaged) {
@@ -151,12 +151,10 @@ class KWinDriver implements IDriverContext {
         return window;
       } else {
         this.windowMap.remove(client);
-        if (KWIN.readConfig("debugActiveWin", false))
-          print("Unmanaged: " + debugWin(client));
+        if (CONFIG.debugActiveWin) print("Unmanaged: " + debugWin(client));
       }
     } else {
-      if (KWIN.readConfig("debugActiveWin", false))
-        print("Filtered: " + debugWin(client));
+      if (CONFIG.debugActiveWin) print("Filtered: " + debugWin(client));
     }
     return null;
   }

@@ -178,6 +178,8 @@ interface IConfig {
   newWindowPosition: number;
   //#endregion
   screenDefaultLayout: string[];
+
+  debugActiveWin: boolean;
 }
 
 interface IDriverWindow {
