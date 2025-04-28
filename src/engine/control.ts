@@ -318,16 +318,72 @@ class TilingController {
         break;
 
       case Shortcut.GrowWidth:
-        if (window) this.engine.resizeWindow(window, "east", 1);
+        if (window) {
+          if (window.state === WindowState.Docked && window.dock) {
+            if (
+              window.dock.position === DockPosition.left ||
+              window.dock.position === DockPosition.right
+            ) {
+              window.dock.cfg.vWide += 1;
+            } else if (
+              window.dock.position === DockPosition.top ||
+              window.dock.position === DockPosition.bottom
+            ) {
+              window.dock.cfg.hWide += 1;
+            }
+          } else this.engine.resizeWindow(window, "east", 1);
+        }
         break;
       case Shortcut.ShrinkWidth:
-        if (window) this.engine.resizeWindow(window, "east", -1);
+        if (window) {
+          if (window.state === WindowState.Docked && window.dock) {
+            if (
+              window.dock.position === DockPosition.left ||
+              window.dock.position === DockPosition.right
+            ) {
+              window.dock.cfg.vWide -= 1;
+            } else if (
+              window.dock.position === DockPosition.top ||
+              window.dock.position === DockPosition.bottom
+            ) {
+              window.dock.cfg.hWide -= 1;
+            }
+          } else this.engine.resizeWindow(window, "east", -1);
+        }
         break;
       case Shortcut.GrowHeight:
-        if (window) this.engine.resizeWindow(window, "south", 1);
+        if (window) {
+          if (window.state === WindowState.Docked && window.dock) {
+            if (
+              window.dock.position === DockPosition.left ||
+              window.dock.position === DockPosition.right
+            ) {
+              window.dock.cfg.vHeight += 1;
+            } else if (
+              window.dock.position === DockPosition.top ||
+              window.dock.position === DockPosition.bottom
+            ) {
+              window.dock.cfg.hHeight += 1;
+            }
+          } else this.engine.resizeWindow(window, "south", 1);
+        }
         break;
       case Shortcut.ShrinkHeight:
-        if (window) this.engine.resizeWindow(window, "south", -1);
+        if (window) {
+          if (window.state === WindowState.Docked && window.dock) {
+            if (
+              window.dock.position === DockPosition.left ||
+              window.dock.position === DockPosition.right
+            ) {
+              window.dock.cfg.vHeight -= 1;
+            } else if (
+              window.dock.position === DockPosition.top ||
+              window.dock.position === DockPosition.bottom
+            ) {
+              window.dock.cfg.hHeight -= 1;
+            }
+          } else this.engine.resizeWindow(window, "south", -1);
+        }
         break;
 
       case Shortcut.ShiftUp:

@@ -160,12 +160,13 @@ class WindowClass {
     return this.window.windowClassName;
   }
 
-  public isDocked: boolean;
   public dock: Dock | null;
 
   private internalState: WindowState;
   private shouldCommitFloat: boolean;
   private weightMap: { [key: string]: number };
+  private _minSize: ISize;
+  private _maxSize: ISize;
 
   constructor(window: IDriverWindow) {
     this.id = window.id;
@@ -178,8 +179,17 @@ class WindowClass {
     this.internalState = WindowState.Unmanaged;
     this.shouldCommitFloat = this.shouldFloat;
     this.weightMap = {};
-    this.isDocked = false;
     this.dock = null;
+
+    this._minSize = window.minSize;
+    this._maxSize = window.maxSize;
+  }
+
+  public get minSize() {
+    return this._minSize;
+  }
+  public get maxSize() {
+    return this._maxSize;
   }
 
   public commit(noBorders?: boolean) {

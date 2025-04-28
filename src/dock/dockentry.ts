@@ -348,6 +348,7 @@ class DockEntry implements IDockEntry {
       w.state = WindowState.Tiled;
     });
   }
+
   private arrangeContenders(
     windows: WindowClass[],
     init: boolean
@@ -389,9 +390,10 @@ class DockEntry implements IDockEntry {
 
   private assignSizes(workingArea: Rect) {
     const MAX_SIZE = 50;
-    const MIN_SIZE = 5;
-    const MAX_V_GAPS = workingArea.width * 0.05;
-    const MAX_H_GAPS = workingArea.height * 0.05;
+    const MAX_GAPS = {
+      width: workingArea.width * 0.05,
+      height: workingArea.height * 0.05,
+    };
 
     let oppositeSlot: DockSlot | null = null;
     let donePositions: DockPosition[] = [];
@@ -401,6 +403,16 @@ class DockEntry implements IDockEntry {
     for (const slot of this.slots) {
       if (slot.window === null) continue;
       dockCfg = slot.window!.dock!.cfg;
+      const minSize: ISize = {
+        width: Math.max(
+          (slot.window.minSize.width * 100) / workingArea.width,
+          5
+        ),
+        height: Math.max(
+          (slot.window.minSize.height * 100) / workingArea.height,
+          5
+        ),
+      };
 
       if (donePositions.indexOf(slot.position) >= 0) continue;
       switch (slot.position) {
@@ -424,15 +436,35 @@ class DockEntry implements IDockEntry {
       switch (slot.position) {
         case DockPosition.left:
         case DockPosition.right:
-          if (dockCfg.vWide < MIN_SIZE) dockCfg.vWide = MIN_SIZE;
-          if (dockCfg.vGap > MAX_V_GAPS) dockCfg.vGap = MAX_V_GAPS;
+          if (dockCfg.vGap > MAX_GAPS.width) dockCfg.vGap = MAX_GAPS.width;
+          if (
+            dockCfg.vWide <
+            minSize.width + (200 * dockCfg.vGap) / workingArea.width
+          )
+            dockCfg.vWide =
+              minSize.width + (200 * dockCfg.vGap) / workingArea.width;
           if (oppositeSlot !== null) {
             oppositeDockCfg = oppositeSlot.window!.dock!.cfg;
-
-            if (oppositeDockCfg.vWide < MIN_SIZE)
-              oppositeDockCfg.vWide = MIN_SIZE;
-            if (oppositeDockCfg.vGap > MAX_V_GAPS)
-              oppositeDockCfg.vGap = MAX_V_GAPS;
+            let opMinSize: ISize = {
+              width: Math.max(
+                (oppositeSlot.window!.minSize.width * 100) / workingArea.width,
+                5
+              ),
+              height: Math.max(
+                (oppositeSlot.window!.minSize.height * 100) /
+                  workingArea.height,
+                5
+              ),
+            };
+            if (oppositeDockCfg.vGap > MAX_GAPS.width)
+              oppositeDockCfg.vGap = MAX_GAPS.width;
+            if (
+              oppositeDockCfg.vWide <
+              opMinSize.width + (200 * oppositeDockCfg.vGap) / workingArea.width
+            )
+              oppositeDockCfg.vWide =
+                opMinSize.width +
+                (200 * oppositeDockCfg.vGap) / workingArea.width;
             if (dockCfg.vWide + oppositeDockCfg.vWide > MAX_SIZE) {
               if (
                 dockCfg.vWide > MAX_SIZE / 2 &&
@@ -447,8 +479,8 @@ class DockEntry implements IDockEntry {
               }
             }
             if (oppositeDockCfg.vHeight > 100) oppositeDockCfg.vHeight = 100;
-            if (oppositeDockCfg.vHeight < MIN_SIZE)
-              oppositeDockCfg.vHeight = MIN_SIZE;
+            if (oppositeDockCfg.vHeight < minSize.height)
+              oppositeDockCfg.vHeight = minSize.height;
             donePositions.push(oppositeSlot.position);
           } else {
             if (dockCfg.vWide > MAX_SIZE) {
@@ -456,20 +488,43 @@ class DockEntry implements IDockEntry {
             }
           }
           if (dockCfg.vHeight > 100) dockCfg.vHeight = 100;
-          if (dockCfg.vHeight < MIN_SIZE) dockCfg.vHeight = MIN_SIZE;
+          if (dockCfg.vHeight < minSize.height)
+            dockCfg.vHeight = minSize.height;
           break;
         case DockPosition.top:
         case DockPosition.bottom:
-          if (dockCfg.hWide < MIN_SIZE) dockCfg.hWide = MIN_SIZE;
-          if (dockCfg.hGap > MAX_H_GAPS) dockCfg.hGap = MAX_H_GAPS;
-
+          if (dockCfg.hGap > MAX_GAPS.height) dockCfg.hGap = MAX_GAPS.height;
+          if (
+            dockCfg.hHeight <
+            minSize.height + (200 * dockCfg.hGap) / workingArea.height
+          )
+            dockCfg.hHeight =
+              minSize.height + (200 * dockCfg.hGap) / workingArea.height;
           if (oppositeSlot !== null) {
             oppositeDockCfg = oppositeSlot.window!.dock!.cfg;
 
-            if (oppositeDockCfg.hHeight < MIN_SIZE)
-              oppositeDockCfg.hHeight = MIN_SIZE;
-            if (oppositeDockCfg.hGap > MAX_H_GAPS)
-              oppositeDockCfg.hGap = MAX_H_GAPS;
+            let opMinSize: ISize = {
+              width: Math.max(
+                (oppositeSlot.window!.minSize.width * 100) / workingArea.width,
+                5
+              ),
+              height: Math.max(
+                (oppositeSlot.window!.minSize.height * 100) /
+                  workingArea.height,
+                5
+              ),
+            };
+
+            if (oppositeDockCfg.hGap > MAX_GAPS.height)
+              oppositeDockCfg.hGap = MAX_GAPS.height;
+            if (
+              oppositeDockCfg.hHeight <
+              opMinSize.height +
+                (200 * oppositeDockCfg.hGap) / workingArea.height
+            )
+              oppositeDockCfg.hHeight =
+                opMinSize.height +
+                (200 * oppositeDockCfg.hGap) / workingArea.height;
 
             if (dockCfg.hHeight + oppositeDockCfg.hHeight > MAX_SIZE) {
               if (
@@ -485,7 +540,8 @@ class DockEntry implements IDockEntry {
               }
             }
             if (oppositeDockCfg.hWide > 100) oppositeDockCfg.hWide = 100;
-            if (oppositeDockCfg.hWide < 5) oppositeDockCfg.hWide = 5;
+            if (oppositeDockCfg.hWide < opMinSize.width)
+              oppositeDockCfg.hWide = opMinSize.width;
             donePositions.push(oppositeSlot.position);
           } else {
             if (dockCfg.hHeight > MAX_SIZE) {
@@ -493,7 +549,7 @@ class DockEntry implements IDockEntry {
             }
           }
           if (dockCfg.hWide > 100) dockCfg.hWide = 100;
-          if (dockCfg.hWide < MIN_SIZE) dockCfg.hWide = MIN_SIZE;
+          if (dockCfg.hWide < minSize.width) dockCfg.hWide = minSize.width;
           break;
       }
     }

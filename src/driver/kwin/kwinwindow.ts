@@ -111,6 +111,19 @@ class KWinWindow implements IDriverWindow {
       this.window.activities = [ksrf.activity];
   }
 
+  public get minSize(): ISize {
+    return {
+      width: this.window.minSize.width,
+      height: this.window.minSize.height,
+    };
+  }
+  public get maxSize(): ISize {
+    return {
+      width: this.window.maxSize.width,
+      height: this.window.maxSize.height,
+    };
+  }
+
   private noBorderManaged: boolean;
   private noBorderOriginal: boolean;
 

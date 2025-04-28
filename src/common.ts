@@ -191,6 +191,8 @@ interface IDriverWindow {
   readonly minimized: boolean;
   readonly shouldIgnore: boolean;
   readonly shouldFloat: boolean;
+  readonly minSize: ISize;
+  readonly maxSize: ISize;
 
   surface: ISurface;
 
@@ -264,6 +266,11 @@ interface IGaps {
   top: number;
   bottom: number;
   between: number;
+}
+
+interface ISize {
+  width: number;
+  height: number;
 }
 
 let CONFIG: IConfig;
