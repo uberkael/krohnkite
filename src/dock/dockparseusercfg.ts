@@ -67,11 +67,14 @@ function parseDockUserWindowClassesCfg(): {
     let splittedUserCfg = windowCfgString[2]
       .split(",")
       .map((part) => part.trim().toLowerCase());
-    let partialDockCfg = parseSplittedUserCfg(splittedUserCfg);
-    if (partialDockCfg instanceof Err) {
-      warning(`Invalid User window class config: ${cfg}. ${partialDockCfg}`);
-      return;
-    }
+    let partialDockCfg: Partial<IDockCfg> | Err;
+    if (splittedUserCfg[0] !== "") {
+      partialDockCfg = parseSplittedUserCfg(splittedUserCfg);
+      if (partialDockCfg instanceof Err) {
+        warning(`Invalid User window class config: ${cfg}. ${partialDockCfg}`);
+        return;
+      }
+    } else partialDockCfg = {};
     let splittedSpecialFlags = windowCfgString[1]
       .split(",")
       .map((part) => part.trim().toLowerCase());
@@ -92,6 +95,10 @@ function parseSpecialFlags(
   let dock = new Dock(DefaultDockCfg.instance.cloneAndUpdate(partialDockCfg));
   splittedSpecialFlags.forEach((flag) => {
     switch (flag) {
+      case "auto":
+      case "a":
+        dock.autoDock = true;
+        break;
       case "pin":
       case "p":
         dock.priority = 5;

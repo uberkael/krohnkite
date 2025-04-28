@@ -67,11 +67,18 @@ interface IDock {
   renderedTime: number | null;
   priority: number;
   position: DockPosition | null;
+  autoDock: boolean;
   cfg: IDockCfg;
   clone(): IDock;
 }
 
-interface IDockEntry {}
+interface IDockEntry {
+  id: string;
+  slots: DockSlot[];
+  remove(window: WindowClass): void;
+  arrange(dockedWindows: WindowClass[], workingArea: Rect): Rect;
+  handleShortcut(window: WindowClass, shortcut: Shortcut): boolean;
+}
 
 interface IDockStore {
   render(srf: ISurface, win: WindowClass[], workingArea: Rect): Rect;

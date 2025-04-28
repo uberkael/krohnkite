@@ -339,15 +339,29 @@ class DockEntry implements IDockEntry {
   }
 
   private arrangeSlots(dockedWindows: WindowClass[]) {
+    let contenders = this.arrangeContenders(dockedWindows, true);
+    if (contenders.length !== 0 && this.isHasEmptySlot()) {
+      contenders.forEach((w) => (w.dock!.position = null));
+      contenders = this.arrangeContenders(contenders, false);
+    }
+    contenders.forEach((w) => {
+      w.state = WindowState.Tiled;
+    });
+  }
+  private arrangeContenders(
+    windows: WindowClass[],
+    init: boolean
+  ): WindowClass[] {
     let contenders: WindowClass[] = [];
     for (const slot of this.slots) {
-      if (dockedWindows.length === 0 && contenders.length === 0) {
+      if (!init && slot.window !== null) continue;
+      if (windows.length === 0 && contenders.length === 0) {
         slot.window = null;
         continue;
       }
       let tempDockedWindows: WindowClass[] = [];
       contenders.push(
-        ...dockedWindows.filter((w) => {
+        ...windows.filter((w) => {
           if (w.dock === null) {
             w.dock = new Dock(this.surfaceCfg.cfg);
             return true;
@@ -360,7 +374,7 @@ class DockEntry implements IDockEntry {
           tempDockedWindows.push(w);
         })
       );
-      dockedWindows = tempDockedWindows;
+      windows = tempDockedWindows;
 
       if (contenders.length !== 0) {
         this.contendersSort(contenders, slot.position, this.id);
@@ -370,9 +384,7 @@ class DockEntry implements IDockEntry {
         slot.window = null;
       }
     }
-    contenders.forEach((w) => {
-      w.state = WindowState.Tiled;
-    });
+    return contenders;
   }
 
   private assignSizes(workingArea: Rect) {
@@ -534,5 +546,9 @@ class DockEntry implements IDockEntry {
 
     slots.sort((a, b) => a.order - b.order);
     return slots;
+  }
+
+  private isHasEmptySlot(): boolean {
+    return !this.slots.every((slot) => slot.window !== null);
   }
 }

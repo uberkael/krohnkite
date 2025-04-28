@@ -62,6 +62,7 @@ class DockStore implements IDockStore {
       this.store[key].remove(window);
     }
   }
+
   public handleShortcut(
     ctx: IDriverContext,
     window: WindowClass,
@@ -80,6 +81,15 @@ class DockStore implements IDockStore {
       default:
         return false;
     }
+  }
+
+  public isNewWindowHaveDocked(window: WindowClass): boolean {
+    if (
+      window.windowClassName in this.windowClassesCfg &&
+      this.windowClassesCfg[window.windowClassName].autoDock === true
+    )
+      return true;
+    return false;
   }
 
   private getSurfaceCfg(srf: ISurface): dockSurfaceCfg {

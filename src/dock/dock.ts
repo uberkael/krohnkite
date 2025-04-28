@@ -24,6 +24,7 @@ class Dock implements IDock {
   public priority: number;
   public cfg: IDockCfg;
   public position: DockPosition | null;
+  public autoDock: boolean;
 
   constructor(cfg: IDockCfg, priority = 0) {
     this.renderedOutputId = "";
@@ -31,12 +32,14 @@ class Dock implements IDock {
     this.priority = priority;
     this.position = null;
     this.cfg = { ...cfg };
+    this.autoDock = false;
   }
   public clone(): Dock {
     let dock = new Dock(this.cfg, this.priority);
     dock.renderedOutputId = this.renderedOutputId;
     dock.renderedTime = this.renderedTime;
     dock.position = this.position;
+    dock.autoDock = this.autoDock;
     return dock;
   }
 }

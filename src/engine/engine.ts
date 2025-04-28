@@ -343,8 +343,10 @@ class TilingEngine {
    */
   public manage(window: WindowClass) {
     if (!window.shouldIgnore) {
+      if (this.docks.isNewWindowHaveDocked(window)) {
+        window.state = WindowState.Docked;
+      } else window.state = WindowState.Undecided;
       /* engine#arrange will update the state when required. */
-      window.state = WindowState.Undecided;
       if (CONFIG.newWindowPosition === 1) this.windows.unshift(window);
       else if (CONFIG.newWindowPosition === 2) {
         this.windows.beside_first(window);
