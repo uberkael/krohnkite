@@ -250,7 +250,7 @@ This behavior may not be preferable depending on your setup. This can be mitigat
 
 ## Useful Development Resources
 
-- [KWin Scripting Tutorial](https://techbase.kde.org/Development/Tutorials/KWin/Scripting)
+- [KWin Scripting Tutorial](https://develop.kde.org/docs/plasma/kwin/)
 - [KWin Scripting API](https://develop.kde.org/docs/plasma/kwin/api/)
 - Adding configuration dialog
   - [Development/Tutorials/Plasma/JavaScript/ConfigDialog](https://techbase.kde.org/Development/Tutorials/Plasma/JavaScript/ConfigDialog)
