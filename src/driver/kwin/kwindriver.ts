@@ -89,7 +89,8 @@ class KWinDriver implements IDriverContext {
   }
 
   public get cursorPosition(): [number, number] | null {
-    return this.mousePoller.mousePosition;
+    const workspacePos = this.workspace.cursorPos;
+    return workspacePos !== null ? [workspacePos.x, workspacePos.y] : this.mousePoller.mousePosition;
   }
 
   //#endregion

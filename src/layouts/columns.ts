@@ -138,8 +138,8 @@ class ColumnsLayout implements ILayout {
     window: WindowClass,
     workingArea: Rect
   ): boolean {
-    const activationPoint = draggingRect.activationPoint;
-    const middlePoint = draggingRect.center;
+    const cursorOrActivationPoint = ctx.cursorPos || draggingRect.activationPoint;
+    const cursorOrMiddlePoint = ctx.cursorPos || draggingRect.center;
     if (
       this.columns.length === 0 ||
       (this.columns.length === 1 && this.columns[0].windowIds.size === 1)
@@ -147,11 +147,14 @@ class ColumnsLayout implements ILayout {
       return false;
     let columnId = this.getColumnId(window);
     let windowId = window.id;
+
+    // Handle drag to the primary edge of the screen
+    // Creates a new column at the beginning and moves the window to it
     if (
-      ((this.direction.north && workingArea.isTopZone(activationPoint)) ||
-        (this.direction.south && workingArea.isBottomZone(middlePoint)) ||
-        (this.direction.west && workingArea.isLeftZone(activationPoint)) ||
-        (this.direction.east && workingArea.isRightZone(activationPoint))) &&
+      ((this.direction.north && workingArea.isTopZone(cursorOrActivationPoint)) ||
+        (this.direction.south && workingArea.isBottomZone(cursorOrMiddlePoint)) ||
+        (this.direction.west && workingArea.isLeftZone(cursorOrActivationPoint)) ||
+        (this.direction.east && workingArea.isRightZone(cursorOrActivationPoint))) &&
       !(
         this.columns[0].windowIds.size === 1 &&
         this.columns[0].windowIds.has(windowId)
@@ -162,11 +165,14 @@ class ColumnsLayout implements ILayout {
       column.windowIds.add(windowId);
       return true;
     }
+
+    // Handle drag to the secondary edge of the screen
+    // Creates a new column at the end and moves the window to it
     if (
-      ((this.direction.north && workingArea.isBottomZone(middlePoint)) ||
-        (this.direction.south && workingArea.isTopZone(activationPoint)) ||
-        (this.direction.west && workingArea.isRightZone(activationPoint)) ||
-        (this.direction.east && workingArea.isLeftZone(activationPoint))) &&
+      ((this.direction.north && workingArea.isBottomZone(cursorOrMiddlePoint)) ||
+        (this.direction.south && workingArea.isTopZone(cursorOrActivationPoint)) ||
+        (this.direction.west && workingArea.isRightZone(cursorOrActivationPoint)) ||
+        (this.direction.east && workingArea.isLeftZone(cursorOrActivationPoint))) &&
       !(
         this.columns[this.columns.length - 1].windowIds.size === 1 &&
         this.columns[this.columns.length - 1].windowIds.has(windowId)
@@ -177,19 +183,23 @@ class ColumnsLayout implements ILayout {
       column.windowIds.add(windowId);
       return true;
     }
+
+    // Handle drag over existing windows - iterate through all columns and their windows
     for (let colIdx = 0; colIdx < this.columns.length; colIdx++) {
       const column = this.columns[colIdx];
       for (let i = 0; i < column.renderedWindowsRects.length; i++) {
         const renderedRect = column.renderedWindowsRects[i];
+        
+        // Check if dragged to top/left half of a window - place BEFORE the target window
         if (
           (this.direction.west &&
-            renderedRect.includesPoint(activationPoint, RectParts.Top)) ||
+            renderedRect.includesPoint(cursorOrActivationPoint, RectParts.Top)) ||
           (this.direction.north &&
-            renderedRect.includesPoint(activationPoint, RectParts.Left)) ||
+            renderedRect.includesPoint(cursorOrActivationPoint, RectParts.Left)) ||
           (this.direction.east &&
-            renderedRect.includesPoint(activationPoint, RectParts.Top)) ||
+            renderedRect.includesPoint(cursorOrActivationPoint, RectParts.Top)) ||
           (this.direction.south &&
-            renderedRect.includesPoint(activationPoint, RectParts.Left))
+            renderedRect.includesPoint(cursorOrActivationPoint, RectParts.Left))
         ) {
           if (column.renderedWindowsIds[i] === windowId) return false;
           if (i > 0 && column.renderedWindowsIds[i - 1] === windowId)
@@ -202,15 +212,17 @@ class ColumnsLayout implements ILayout {
           ctx.moveWindowByWinId(window, renderedId);
           return true;
         }
+        
+        // Check if dragged to bottom/right half of a window - place AFTER the target window
         if (
           (this.direction.west &&
-            renderedRect.includesPoint(activationPoint, RectParts.Bottom)) ||
+            renderedRect.includesPoint(cursorOrActivationPoint, RectParts.Bottom)) ||
           (this.direction.north &&
-            renderedRect.includesPoint(activationPoint, RectParts.Right)) ||
+            renderedRect.includesPoint(cursorOrActivationPoint, RectParts.Right)) ||
           (this.direction.east &&
-            renderedRect.includesPoint(activationPoint, RectParts.Bottom)) ||
+            renderedRect.includesPoint(cursorOrActivationPoint, RectParts.Bottom)) ||
           (this.direction.south &&
-            renderedRect.includesPoint(activationPoint, RectParts.Right))
+            renderedRect.includesPoint(cursorOrActivationPoint, RectParts.Right))
         ) {
           if (column.renderedWindowsIds[i] === windowId) return false;
           if (

@@ -38,6 +38,10 @@ class EngineContext {
     this.drvctx.currentWindow = window;
   }
 
+  public get cursorPos(): [number, number] | null {
+    return this.drvctx.cursorPosition;
+  }
+
   public get surfaceParams(): string {
     let srf = this.drvctx.currentSurface;
     return srf.output.name, srf.activity, srf.desktop.name;

@@ -129,7 +129,7 @@ class WindowClass {
   public setDraggingState() {
     this.internalState = WindowState.Dragging;
   }
-  public removeDraggingState(value: WindowState) {
+  public setState(value: WindowState) {
     this.internalState = value;
   }
 
