@@ -90,7 +90,7 @@ class KWinDriver implements IDriverContext {
 
   public get cursorPosition(): [number, number] | null {
     const workspacePos = this.workspace.cursorPos;
-    return workspacePos !== null ? [workspacePos.x, workspacePos.y] : this.mousePoller.mousePosition;
+    return workspacePos !== null ? [workspacePos.x, workspacePos.y] : null;
   }
 
   //#endregion
@@ -101,7 +101,6 @@ class KWinDriver implements IDriverContext {
   private control: TilingController;
   private windowMap: WrapperMap<Window, WindowClass>;
   private entered: boolean;
-  private mousePoller: KWinMousePoller;
 
   constructor(api: Api) {
     KWIN = api.kwin;
@@ -115,7 +114,6 @@ class KWinDriver implements IDriverContext {
         new WindowClass(new KWinWindow(client, this.workspace))
     );
     this.entered = false;
-    this.mousePoller = new KWinMousePoller();
   }
 
   /*
@@ -427,11 +425,9 @@ class KWinDriver implements IDriverContext {
       if (moving !== client.move) {
         moving = client.move;
         if (moving) {
-          this.mousePoller.start();
           this.control.onWindowMoveStart(window);
         } else {
           this.control.onWindowMoveOver(this, window);
-          this.mousePoller.stop();
         }
       }
       if (resizing !== client.resize) {
