@@ -130,7 +130,7 @@ class TilingController {
     debugObj(() => ["onWindowMoveOver", { window }]);
     /* swap window by dragging */
     if (window.state === WindowState.Dragging) {
-      window.removeDraggingState(WindowState.Tiled);
+      window.setState(WindowState.Tiled);
       this.engine.arrange(ctx);
       return;
     }
