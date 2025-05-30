@@ -38,12 +38,21 @@ class LayoutUtils {
     const weightSum = weights.reduce((sum, weight) => sum + weight, 0);
 
     let weightAcc = 0;
-    return weights.map((weight, i) => {
+    const parts: [number, number][] = weights.map((weight, i) => {
       const partBegin = (actualLength * weightAcc) / weightSum + i * gap;
       const partLength = (actualLength * weight) / weightSum;
       weightAcc += weight;
       return [begin + Math.floor(partBegin), Math.floor(partLength)];
     });
+    let finalLength = parts.reduce((sum, [, length]) => sum + length, 0);
+    finalLength += (n - 1) * gap;
+    let remainder = length - finalLength;
+    if (remainder > 0 && remainder < n) {
+      for (let i = 0; i < remainder; i++) {
+        parts[n - i - 1][1] += 1;
+      }
+    }
+    return parts;
   }
 
   /**
