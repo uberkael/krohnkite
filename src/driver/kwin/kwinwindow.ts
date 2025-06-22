@@ -135,15 +135,15 @@ class KWinWindow implements IDriverWindow {
     this.noBorderManaged = false;
     this.noBorderOriginal = window.noBorder;
     this.isIgnoredByConfig =
-      this.isContain(KWINCONFIG.ignoreClass, window.resourceClass) ||
-      this.isContain(KWINCONFIG.ignoreClass, window.resourceName) ||
+      KWinWindow.isContain(KWINCONFIG.ignoreClass, window.resourceClass) ||
+      KWinWindow.isContain(KWINCONFIG.ignoreClass, window.resourceName) ||
       matchWords(this.window.caption, KWINCONFIG.ignoreTitle) >= 0 ||
-      this.isContain(KWINCONFIG.ignoreRole, window.windowRole) ||
+      KWinWindow.isContain(KWINCONFIG.ignoreRole, window.windowRole) ||
       (KWINCONFIG.tileNothing &&
-        this.isContain(KWINCONFIG.tilingClass, window.resourceClass));
+        KWinWindow.isContain(KWINCONFIG.tilingClass, window.resourceClass));
     this.isFloatByConfig =
-      this.isContain(KWINCONFIG.floatingClass, window.resourceClass) ||
-      this.isContain(KWINCONFIG.floatingClass, window.resourceName) ||
+      KWinWindow.isContain(KWINCONFIG.floatingClass, window.resourceClass) ||
+      KWinWindow.isContain(KWINCONFIG.floatingClass, window.resourceName) ||
       matchWords(this.window.caption, KWINCONFIG.floatingTitle) >= 0;
   }
 
@@ -152,10 +152,11 @@ class KWinWindow implements IDriverWindow {
     noBorder?: boolean,
     windowLayer?: WindowLayer
   ) {
-    debugObj(() => [
-      "KWinWindow#commit",
-      { geometry, noBorder, keepAbove: windowLayer },
-    ]);
+    LOG?.send(
+      LogModules.window,
+      "KwinWindow#commit",
+      `geometry:${geometry}, noBorder:${noBorder}, windowLayer:${windowLayer}`
+    );
     if (this.window.move || this.window.resize) return;
 
     if (noBorder !== undefined) {
@@ -235,7 +236,7 @@ class KWinWindow implements IDriverWindow {
   }
 
   //#region Private Methods
-  private isContain(filterList: string[], s: string): boolean {
+  public static isContain(filterList: string[], s: string): boolean {
     for (let filterWord of filterList) {
       if (filterWord[0] === "[" && filterWord[filterWord.length - 1] === "]") {
         if (

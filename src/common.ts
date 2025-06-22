@@ -71,6 +71,8 @@ const Shortcut = {
 } as const;
 type Shortcut = (typeof Shortcut)[keyof typeof Shortcut];
 
+const ShortcutsKeys = Object.keys(Shortcut);
+
 interface IShortcuts {
   getToggleDock(): ShortcutHandler;
 
@@ -178,8 +180,6 @@ interface IConfig {
   newWindowPosition: number;
   //#endregion
   screenDefaultLayout: string[];
-
-  debugActiveWin: boolean;
 }
 
 interface IDriverWindow {
@@ -273,4 +273,102 @@ interface ISize {
   height: number;
 }
 
+// Logging
+const LogModules = {
+  newWindowAdded: 1,
+  newWindowFiltered: 2,
+  newWindowUnmanaged: 3,
+  screensChanged: 4,
+  virtualScreenGeometryChanged: 5,
+  currentActivityChanged: 6,
+  currentDesktopChanged: 7,
+  windowAdded: 8,
+  windowActivated: 9,
+  windowRemoved: 10,
+  activitiesChanged: 11,
+  bufferGeometryChanged: 12,
+  desktopsChanged: 13,
+  fullScreenChanged: 14,
+  interactiveMoveResizeStepped: 15,
+  maximizedAboutToChange: 16,
+  minimizedChanged: 17,
+  moveResizedChanged: 18,
+  outputChanged: 19,
+  shortcut: 20,
+  arrangeScreen: 21,
+  printConfig: 22,
+  setTimeout: 23,
+  window: 24,
+};
+type LogModule = (typeof LogModules)[keyof typeof LogModules];
+
+const LogModulesKeys = Object.keys(LogModules);
+
+const LogPartitions = {
+  newWindow: {
+    number: 100,
+    name: "newWindow",
+    modules: [
+      LogModules.newWindowAdded,
+      LogModules.newWindowFiltered,
+      LogModules.newWindowUnmanaged,
+    ],
+  },
+  workspaceSignals: {
+    number: 200,
+    name: "workspaceSignal",
+    modules: [
+      LogModules.screensChanged,
+      LogModules.virtualScreenGeometryChanged,
+      LogModules.currentActivityChanged,
+      LogModules.currentDesktopChanged,
+      LogModules.windowAdded,
+      LogModules.windowActivated,
+      LogModules.windowRemoved,
+    ],
+  },
+  windowSignals: {
+    number: 300,
+    name: "windowSignal",
+    modules: [
+      LogModules.activitiesChanged,
+      LogModules.bufferGeometryChanged,
+      LogModules.desktopsChanged,
+      LogModules.fullScreenChanged,
+      LogModules.interactiveMoveResizeStepped,
+      LogModules.maximizedAboutToChange,
+      LogModules.minimizedChanged,
+      LogModules.moveResizedChanged,
+      LogModules.outputChanged,
+    ],
+  },
+  other: {
+    number: 1000,
+    name: "other",
+    modules: [
+      LogModules.shortcut,
+      LogModules.arrangeScreen,
+      LogModules.printConfig,
+      LogModules.setTimeout,
+      LogModules.window,
+    ],
+  },
+} as const;
+type LogPartition = (typeof LogPartitions)[keyof typeof LogPartitions];
+
+interface ILogModules {
+  send(
+    module?: LogModule,
+    action?: string,
+    message?: string,
+    filters?: ILogFilters
+  ): void;
+}
+
+interface ILogFilters {
+  winClass?: string[] | null;
+}
+
+// Globals
 let CONFIG: IConfig;
+let LOG: ILogModules | undefined;

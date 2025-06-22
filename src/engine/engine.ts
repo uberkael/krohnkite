@@ -220,7 +220,6 @@ class TilingEngine {
    * Arrange tiles on all screens.
    */
   public arrange(ctx: IDriverContext) {
-    debug(() => "arrange");
     ctx.screens.forEach((srf: ISurface) => {
       this.arrangeScreen(ctx, srf);
     });
@@ -233,14 +232,11 @@ class TilingEngine {
     const layout = this.layouts.getCurrentLayout(srf);
 
     const visibles = this.windows.getVisibleWindows(srf);
-    debugObj(() => [
-      "arrangeScreen",
-      {
-        layout,
-        srf,
-        visibles: visibles.length,
-      },
-    ]);
+    LOG?.send(
+      LogModules.arrangeScreen,
+      "Begin",
+      `layout: ${layout}, surface: ${srf}, visibles number: ${visibles.length}`
+    );
     const gaps = this.getGaps(srf);
 
     const workingArea = this.docks.render(
@@ -321,7 +317,7 @@ class TilingEngine {
     } else {
       visibles.forEach((window) => window.commit());
     }
-    debugObj(() => ["arrangeScreen/finished", { srf }]);
+    LOG?.send(LogModules.arrangeScreen, "Finished", `${srf}`);
   }
 
   /**

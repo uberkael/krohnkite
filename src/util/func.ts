@@ -29,7 +29,7 @@ class Err {
   }
 }
 function warning(s: string) {
-  print(`Krohnkite warn: ${s}`);
+  print(`Krohnkite.WARNING: ${s}`);
 }
 
 function clip(value: number, min: number, max: number): number {

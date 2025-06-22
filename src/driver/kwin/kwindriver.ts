@@ -122,7 +122,7 @@ class KWinDriver implements IDriverContext {
 
   public main() {
     CONFIG = KWINCONFIG = new KWinConfig();
-    debug(() => "Config: " + KWINCONFIG);
+    LOG?.send(LogModules.printConfig, undefined, `Config: ${CONFIG}`);
 
     this.bindEvents();
     this.bindShortcut();
@@ -142,18 +142,24 @@ class KWinDriver implements IDriverContext {
       !client.hidden &&
       client.width * client.height > 10
     ) {
-      if (CONFIG.debugActiveWin) print(debugWin(client));
       const window = this.windowMap.add(client);
       this.control.onWindowAdded(this, window);
       if (window.state !== WindowState.Unmanaged) {
         this.bindWindowEvents(window, client);
+        LOG?.send(LogModules.newWindowAdded, "", debugWin(client), {
+          winClass: [`${client.resourceClass}`],
+        });
         return window;
       } else {
         this.windowMap.remove(client);
-        if (CONFIG.debugActiveWin) print("Unmanaged: " + debugWin(client));
+        LOG?.send(LogModules.newWindowUnmanaged, "", debugWin(client), {
+          winClass: [`${client.resourceClass}`],
+        });
       }
     } else {
-      if (CONFIG.debugActiveWin) print("Filtered: " + debugWin(client));
+      LOG?.send(LogModules.newWindowFiltered, "", debugWin(client), {
+        winClass: [`${client.resourceClass}`],
+      });
     }
     return null;
   }
@@ -172,6 +178,11 @@ class KWinDriver implements IDriverContext {
   private bindShortcut() {
     const callbackShortcut = (shortcut: Shortcut) => {
       return () => {
+        LOG?.send(
+          LogModules.shortcut,
+          `Shortcut pressed:`,
+          `${ShortcutsKeys[shortcut]}`
+        );
         this.enter(() => this.control.onShortcut(this, shortcut));
       };
     };
@@ -256,6 +267,7 @@ class KWinDriver implements IDriverContext {
 
     const callbackShortcutLayout = (layoutClass: ILayoutClass) => {
       return () => {
+        LOG?.send(LogModules.shortcut, "shortcut layout", `${layoutClass.id}`);
         this.enter(() =>
           this.control.onShortcut(this, Shortcut.SetLayout, layoutClass.id)
         );
@@ -332,46 +344,81 @@ class KWinDriver implements IDriverContext {
     try {
       callback();
     } catch (e: any) {
-      debug(() => "Error raised from line " + e.lineNumber);
-      debug(() => e);
+      warning(`ProtectFunc: Error raised line: ${e.lineNumber}. Error: ${e}`);
     } finally {
       this.entered = false;
     }
   }
   //#endregion
-
   private bindEvents() {
-    this.connect(this.workspace.screensChanged, () =>
-      this.control.onSurfaceUpdate(this, "screens (Outputs) changed")
-    );
-
-    this.connect(this.workspace.virtualScreenGeometryChanged, () => {
-      this.control.onSurfaceUpdate(this, "virtualScreenGeometryChanged");
+    this.connect(this.workspace.screensChanged, () => {
+      LOG?.send(LogModules.screensChanged, "eventFired");
+      this.control.onSurfaceUpdate(this);
     });
 
-    this.connect(this.workspace.currentActivityChanged, (activityId: string) =>
-      this.control.onCurrentActivityChanged(this, activityId)
+    this.connect(this.workspace.virtualScreenGeometryChanged, () => {
+      LOG?.send(LogModules.virtualScreenGeometryChanged, "eventFired");
+      this.control.onSurfaceUpdate(this);
+    });
+
+    this.connect(
+      this.workspace.currentActivityChanged,
+      (activityId: string) => {
+        LOG?.send(
+          LogModules.currentActivityChanged,
+          "eventFired",
+          `Activity ID:${activityId}`
+        );
+        this.control.onCurrentActivityChanged(this);
+      }
     );
 
     this.connect(
       this.workspace.currentDesktopChanged,
-      (virtualDesktop: VirtualDesktop) =>
-        this.control.onSurfaceUpdate(this, "currentDesktopChanged")
+      (virtualDesktop: VirtualDesktop) => {
+        LOG?.send(
+          LogModules.currentDesktopChanged,
+          "eventFired",
+          `Virtual Desktop. name:${virtualDesktop.name}, id:${virtualDesktop.id}`
+        );
+        this.control.onSurfaceUpdate(this);
+      }
     );
 
     this.connect(this.workspace.windowAdded, (client: Window) => {
+      if (!client) return;
+      LOG?.send(
+        LogModules.windowAdded,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
       const window = this.addWindow(client);
       if (client.active && window !== null)
         this.control.onWindowFocused(this, window);
     });
 
     this.connect(this.workspace.windowActivated, (client: Window) => {
+      if (!client) return;
+      LOG?.send(
+        LogModules.windowActivated,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
       const window = this.windowMap.get(client);
       if (client.active && window !== null)
         this.control.onWindowFocused(this, window);
     });
 
     this.connect(this.workspace.windowRemoved, (client: Window) => {
+      if (!client) return;
+      LOG?.send(
+        LogModules.windowRemoved,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
       const window = this.windowMap.get(client);
       if (window) {
         this.control.onWindowRemoved(this, window);
@@ -387,12 +434,91 @@ class KWinDriver implements IDriverContext {
   private bindWindowEvents(window: WindowClass, client: Window) {
     let moving = false;
     let resizing = false;
+    this.connect(client.activitiesChanged, () => {
+      LOG?.send(
+        LogModules.activitiesChanged,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${
+          client.internalId
+        }, activities: ${client.activities.join(",")}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
+      this.control.onWindowChanged(
+        this,
+        window,
+        "activity=" + client.activities.join(",")
+      );
+    });
+
+    this.connect(client.bufferGeometryChanged, () => {
+      LOG?.send(
+        LogModules.bufferGeometryChanged,
+        "eventFired",
+        `Window: caption:${client.caption} internalId:${client.internalId}, moving:${moving}, resizing:${resizing}, geometry:${window.geometry}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
+      if (moving) this.control.onWindowMove(window);
+      else if (resizing) this.control.onWindowResize(this, window);
+      else {
+        if (!window.actualGeometry.equals(window.geometry))
+          this.control.onWindowGeometryChanged(this, window);
+      }
+    });
+
+    this.connect(client.desktopsChanged, () => {
+      LOG?.send(
+        LogModules.desktopsChanged,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId}, desktops: ${client.desktops}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
+      this.control.onWindowChanged(this, window, "Window's desktop changed.");
+    });
+
+    this.connect(client.fullScreenChanged, () => {
+      LOG?.send(
+        LogModules.fullScreenChanged,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId}, fullscreen: ${client.fullScreen}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
+      this.control.onWindowChanged(
+        this,
+        window,
+        "fullscreen=" + client.fullScreen
+      );
+    });
+
+    this.connect(client.interactiveMoveResizeStepped, (geometry) => {
+      LOG?.send(
+        LogModules.interactiveMoveResizeStepped,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId},interactiveMoveResizeStepped:${geometry}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
+      if (client.resize) return;
+      this.control.onWindowDragging(this, window, geometry);
+    });
+
     this.connect(client.maximizedAboutToChange, (mode: MaximizeMode) => {
+      LOG?.send(
+        LogModules.maximizedAboutToChange,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId},maximizedAboutToChange:${mode}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
       const maximized = mode === MaximizeMode.MaximizeFull;
       (window.window as KWinWindow).maximized = maximized;
       this.control.onWindowMaximizeChanged(this, window, maximized);
     });
+
     this.connect(client.minimizedChanged, () => {
+      LOG?.send(
+        LogModules.minimizedChanged,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId},minimized:${client.minimized}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
       if (KWINCONFIG.preventMinimize) {
         client.minimized = false;
         this.workspace.activeWindow = client;
@@ -401,27 +527,14 @@ class KWinDriver implements IDriverContext {
         this.control.onWindowChanged(this, window, comment);
       }
     });
-    this.connect(client.fullScreenChanged, () =>
-      this.control.onWindowChanged(
-        this,
-        window,
-        "fullscreen=" + client.fullScreen
-      )
-    );
-    this.connect(client.desktopsChanged, () =>
-      this.control.onDesktopsChanged(this, window)
-    );
-
-    this.connect(client.interactiveMoveResizeStepped, (geometry) => {
-      if (client.resize) return;
-      this.control.onWindowDragging(this, window, geometry);
-    });
 
     this.connect(client.moveResizedChanged, () => {
-      debugObj(() => [
-        "moveResizedChanged",
-        { window, move: client.move, resize: client.resize },
-      ]);
+      LOG?.send(
+        LogModules.moveResizedChanged,
+        "eventFired",
+        `Window: caption:${client.caption} internalId:${client.internalId}, moving:${moving}, resizing:${resizing}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
       if (moving !== client.move) {
         moving = client.move;
         if (moving) {
@@ -437,30 +550,19 @@ class KWinDriver implements IDriverContext {
       }
     });
 
-    this.connect(client.bufferGeometryChanged, () => {
-      if (moving) this.control.onWindowMove(window);
-      else if (resizing) this.control.onWindowResize(this, window);
-      else {
-        if (!window.actualGeometry.equals(window.geometry))
-          this.control.onWindowGeometryChanged(this, window);
-      }
-    });
-
-    this.connect(client.outputChanged, () =>
-      this.control.onWindowChanged(this, window, "screen=" + client.output.name)
-    );
-
-    this.connect(client.activitiesChanged, () =>
+    this.connect(client.outputChanged, () => {
+      LOG?.send(
+        LogModules.outputChanged,
+        "eventFired",
+        `window: caption:${client.caption} internalID:${client.internalId} output: ${client.output.name}`,
+        { winClass: [`${client.resourceClass}`] }
+      );
       this.control.onWindowChanged(
         this,
         window,
-        "activity=" + client.activities.join(",")
-      )
-    );
-
-    this.connect(client.desktopsChanged, () =>
-      this.control.onWindowChanged(this, window, "Window's desktop changed.")
-    );
+        "screen=" + client.output.name
+      );
+    });
   }
 
   // TODO: private onConfigChanged = () => {

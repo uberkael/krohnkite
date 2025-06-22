@@ -104,28 +104,57 @@ class KWinConfig implements IConfig {
   public tileNothing: boolean;
   public tilingClass: string[];
   //#endregion
-  public debugActiveWin: boolean;
 
   constructor() {
-    function commaSeparate(str: string): string[] {
+    function separate(str: string, separator: string): string[] {
       if (!str || typeof str !== "string") return [];
       return str
-        .split(",")
+        .split(separator)
         .map((part) => part.trim())
         .filter((part) => part != "");
     }
 
-    function newLineSeparate(str: string): string[] {
-      if (!str || typeof str !== "string") return [];
-      return str
-        .split("\n")
-        .map((part) => part.trim())
-        .filter((part) => part != "");
-    }
+    if (KWIN.readConfig("logging", false)) {
+      let logParts: [LogPartition, string[]][] = [];
+      let newWindowSubmodules: string[] = [];
+      if (KWIN.readConfig("logNewWindows", false))
+        newWindowSubmodules.push("1");
+      if (KWIN.readConfig("logFilteredWindows", false))
+        newWindowSubmodules.push("2");
+      if (KWIN.readConfig("logUnmanagedWindows", false))
+        newWindowSubmodules.push("3");
+      if (newWindowSubmodules.length > 0)
+        logParts.push([LogPartitions.newWindow, newWindowSubmodules]);
 
-    DEBUG.enabled = DEBUG.enabled || KWIN.readConfig("debug", false);
-
-    this.layoutOrder = [];
+      if (KWIN.readConfig("logWorkspaceSignals", false)) {
+        let workspaceSignalsSubmodules = separate(
+          KWIN.readConfig("logWorkspaceSignalsSubmodules", ""),
+          ","
+        );
+        logParts.push([
+          LogPartitions.workspaceSignals,
+          workspaceSignalsSubmodules,
+        ]);
+      }
+      if (KWIN.readConfig("logWindowSignals", false)) {
+        let windowSignalsSubmodules = separate(
+          KWIN.readConfig("logWindowSignalsSubmodules", ""),
+          ","
+        );
+        logParts.push([LogPartitions.windowSignals, windowSignalsSubmodules]);
+      }
+      if (KWIN.readConfig("logOther", false)) {
+        let otherSubmodules = separate(
+          KWIN.readConfig("logOtherSubmodules", ""),
+          ","
+        );
+        logParts.push([LogPartitions.other, otherSubmodules]);
+      }
+      const logFilters = KWIN.readConfig("logFilter", false)
+        ? separate(KWIN.readConfig("logFilterStr", ""), ",")
+        : [];
+      LOG = new Logging(logParts, logFilters);
+    } else LOG = undefined;
 
     interface ISortedLayouts {
       order: number;
@@ -168,6 +197,7 @@ class KWinConfig implements IConfig {
     if (sortedLayouts.length === 0) {
       sortedLayouts.push({ order: 1, layoutClass: TileLayout });
     }
+    this.layoutOrder = [];
     sortedLayouts.forEach(({ layoutClass }) => {
       this.layoutOrder.push(layoutClass.id);
       this.layoutFactories[layoutClass.id] = () => new layoutClass();
@@ -191,11 +221,13 @@ class KWinConfig implements IConfig {
     this.dockVGap = KWIN.readConfig("dockVGap", 0);
     this.dockVAlignment = KWIN.readConfig("dockVAlignment", 0);
     this.dockVEdgeAlignment = KWIN.readConfig("dockVEdgeAlignment", 0);
-    this.dockSurfacesConfig = newLineSeparate(
-      KWIN.readConfig("dockSurfacesConfig", "")
+    this.dockSurfacesConfig = separate(
+      KWIN.readConfig("dockSurfacesConfig", ""),
+      "\n"
     );
-    this.dockWindowClassConfig = newLineSeparate(
-      KWIN.readConfig("dockWindowClassConfig", "")
+    this.dockWindowClassConfig = separate(
+      KWIN.readConfig("dockWindowClassConfig", ""),
+      "\n"
     );
 
     this.soleWindowWidth = KWIN.readConfig("soleWindowWidth", 100);
@@ -211,8 +243,9 @@ class KWinConfig implements IConfig {
       "0"
     );
     this.columnsBalanced = KWIN.readConfig("columnsBalanced", false);
-    this.columnsLayerConf = commaSeparate(
-      KWIN.readConfig("columnsLayerConf", "")
+    this.columnsLayerConf = separate(
+      KWIN.readConfig("columnsLayerConf", ""),
+      ","
     );
     this.tiledWindowsLayer = getWindowLayer(
       KWIN.readConfig("tiledWindowsLayer", 0)
@@ -239,8 +272,9 @@ class KWinConfig implements IConfig {
     this.screenGapRight = KWIN.readConfig("screenGapRight", 0);
     this.screenGapTop = KWIN.readConfig("screenGapTop", 0);
     this.screenGapBetween = KWIN.readConfig("screenGapBetween", 0);
-    this.gapsOverrideConfig = newLineSeparate(
-      KWIN.readConfig("gapsOverrideConfig", "")
+    this.gapsOverrideConfig = separate(
+      KWIN.readConfig("gapsOverrideConfig", ""),
+      "\n"
     );
 
     const directionalKeyDwm = KWIN.readConfig("directionalKeyDwm", false);
@@ -256,36 +290,33 @@ class KWinConfig implements IConfig {
     this.notificationDuration = KWIN.readConfig("notificationDuration", 1000);
     this.pollMouseXdotool = KWIN.readConfig("pollMouseXdotool", false);
 
-    this.floatingClass = commaSeparate(KWIN.readConfig("floatingClass", ""));
-    this.floatingTitle = commaSeparate(KWIN.readConfig("floatingTitle", ""));
-    this.ignoreActivity = commaSeparate(KWIN.readConfig("ignoreActivity", ""));
-    this.ignoreClass = commaSeparate(
+    this.floatingClass = separate(KWIN.readConfig("floatingClass", ""), ",");
+    this.floatingTitle = separate(KWIN.readConfig("floatingTitle", ""), ",");
+    this.ignoreActivity = separate(KWIN.readConfig("ignoreActivity", ""), ",");
+    this.ignoreClass = separate(
       KWIN.readConfig(
         "ignoreClass",
         "krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter"
-      )
+      ),
+      ","
     );
-    this.ignoreRole = commaSeparate(KWIN.readConfig("ignoreRole", "quake"));
+    this.ignoreRole = separate(KWIN.readConfig("ignoreRole", "quake"), ",");
 
-    this.ignoreScreen = commaSeparate(KWIN.readConfig("ignoreScreen", ""));
-    this.ignoreVDesktop = commaSeparate(KWIN.readConfig("ignoreVDesktop", ""));
-    this.ignoreTitle = commaSeparate(KWIN.readConfig("ignoreTitle", ""));
+    this.ignoreScreen = separate(KWIN.readConfig("ignoreScreen", ""), ",");
+    this.ignoreVDesktop = separate(KWIN.readConfig("ignoreVDesktop", ""), ",");
+    this.ignoreTitle = separate(KWIN.readConfig("ignoreTitle", ""), ",");
 
-    this.screenDefaultLayout = commaSeparate(
-      KWIN.readConfig("screenDefaultLayout", "")
+    this.screenDefaultLayout = separate(
+      KWIN.readConfig("screenDefaultLayout", ""),
+      ","
     );
 
-    this.tilingClass = commaSeparate(KWIN.readConfig("tilingClass", ""));
+    this.tilingClass = separate(KWIN.readConfig("tilingClass", ""), ",");
     this.tileNothing = KWIN.readConfig("tileNothing", false);
 
     if (this.preventMinimize && this.monocleMinimizeRest) {
-      debug(
-        () => "preventMinimize is disabled because of monocleMinimizeRest."
-      );
       this.preventMinimize = false;
     }
-
-    this.debugActiveWin = KWIN.readConfig("debugActiveWin", false);
   }
 
   public toString(): string {

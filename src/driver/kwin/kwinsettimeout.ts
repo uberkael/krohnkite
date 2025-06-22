@@ -32,7 +32,11 @@ class KWinTimerPool {
   public setTimeout(func: () => void, timeout: number) {
     if (this.timers.length === 0) {
       this.numTimers++;
-      debugObj(() => ["setTimeout/newTimer", { numTimers: this.numTimers }]);
+      LOG?.send(
+        LogModules.setTimeout,
+        "setTimeout/newTimer",
+        `numTimers: ${this.numTimers}`
+      );
     }
 
     const timer: QTimer =

@@ -36,25 +36,18 @@ class TilingController {
     this.dragCompleteTime = null;
   }
 
-  public onSurfaceUpdate(ctx: IDriverContext, comment: string): void {
-    debugObj(() => ["onSurfaceUpdate", { comment }]);
+  public onSurfaceUpdate(ctx: IDriverContext): void {
     this.engine.arrange(ctx);
   }
-  public onCurrentActivityChanged(
-    ctx: IDriverContext,
-    activityId: string
-  ): void {
-    debugObj(() => ["onCurrentActivityChanged", { activityId: activityId }]);
+  public onCurrentActivityChanged(ctx: IDriverContext): void {
     this.engine.arrange(ctx);
   }
 
   public onCurrentSurfaceChanged(ctx: IDriverContext): void {
-    debugObj(() => ["onCurrentSurfaceChanged", { srf: ctx.currentSurface }]);
     this.engine.arrange(ctx);
   }
 
   public onWindowAdded(ctx: IDriverContext, window: WindowClass): void {
-    debugObj(() => ["onWindowAdded", { window }]);
     this.engine.manage(window);
 
     /* move window to next surface if the current surface is "full" */
@@ -76,7 +69,6 @@ class TilingController {
   }
 
   public onWindowRemoved(ctx: IDriverContext, window: WindowClass): void {
-    debugObj(() => ["onWindowRemoved", { window }]);
     this.engine.unmanage(window);
     this.engine.arrange(ctx);
   }
@@ -127,7 +119,6 @@ class TilingController {
   }
 
   public onWindowMoveOver(ctx: IDriverContext, window: WindowClass): void {
-    debugObj(() => ["onWindowMoveOver", { window }]);
     /* swap window by dragging */
     if (window.state === WindowState.Dragging) {
       window.setState(WindowState.Tiled);
@@ -173,7 +164,6 @@ class TilingController {
   }
 
   public onWindowResize(ctx: IDriverContext, window: WindowClass): void {
-    debugObj(() => ["onWindowResize", { window }]);
     if (
       CONFIG.adjustLayout &&
       CONFIG.adjustLayoutLive &&
@@ -188,7 +178,6 @@ class TilingController {
   }
 
   public onWindowResizeOver(ctx: IDriverContext, window: WindowClass): void {
-    debugObj(() => ["onWindowResizeOver", { window }]);
     if (CONFIG.adjustLayout && window.tiled) {
       this.engine.adjustLayout(window);
       this.engine.arrange(ctx);
@@ -210,7 +199,6 @@ class TilingController {
     ctx: IDriverContext,
     window: WindowClass
   ): void {
-    debugObj(() => ["onWindowGeometryChanged", { window }]);
     this.engine.enforceSize(ctx, window);
   }
 
@@ -222,8 +210,6 @@ class TilingController {
     comment?: string
   ): void {
     if (window) {
-      debugObj(() => ["onWindowChanged", { window, comment }]);
-
       if (comment === "unminimized") ctx.currentWindow = window;
       const workingArea = window.surface.workingArea;
       if (window.floatGeometry.width > workingArea.width) {

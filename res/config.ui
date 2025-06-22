@@ -22,6 +22,18 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QTabWidget" name="configTabs">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>1171</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>805</width>
+       <height>1171</height>
+      </size>
+     </property>
      <property name="toolTip">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
@@ -3519,42 +3531,6 @@
         </widget>
        </item>
        <item>
-        <spacer name="debugSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Policy::Maximum</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="kcfg_debug">
-         <property name="toolTip">
-          <string>Use this option to debug the script or submit detailed bug report.</string>
-         </property>
-         <property name="text">
-          <string>Print debug messages</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="kcfg_debugActiveWin">
-         <property name="toolTip">
-          <string>Print debug output all new windows with params. In Kdevelop write krohnkite in filter.</string>
-         </property>
-         <property name="text">
-          <string>Debug new Windows</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <spacer name="verticalSpacer_5">
          <property name="orientation">
           <enum>Qt::Orientation::Vertical</enum>
@@ -3566,6 +3542,172 @@
           </size>
          </property>
         </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="logTab">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>1125</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>1125</height>
+       </size>
+      </property>
+      <attribute name="title">
+       <string>Log</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="title">
+          <string/>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <widget class="QCheckBox" name="kcfg_logging">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Use this option to debug the script or submit detailed bug report.</string>
+            </property>
+            <property name="text">
+             <string>Logging</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_10">
+            <property name="title">
+             <string/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_16">
+             <property name="leftMargin">
+              <number>15</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="kcfg_logNewWindows">
+               <property name="text">
+                <string>Added new windows</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="kcfg_logFilteredWindows">
+               <property name="text">
+                <string>Filtered new windows</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="kcfg_logUnmanagedWindows">
+               <property name="text">
+                <string>Unmanaged new windows</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_25">
+            <property name="title">
+             <string/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_26">
+             <property name="leftMargin">
+              <number>15</number>
+             </property>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="kcfg_logWindowSignals">
+               <property name="text">
+                <string>Window signals     </string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="kcfg_logWorkspaceSignalsSubmodules"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="kcfg_logWorkspaceSignals">
+               <property name="text">
+                <string>Workspace signals</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="kcfg_logWindowSignalsSubmodules"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="kcfg_logOther">
+               <property name="text">
+                <string>Other                       </string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="kcfg_logOtherSubmodules"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_26">
+            <property name="title">
+             <string/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_27">
+             <property name="leftMargin">
+              <number>15</number>
+             </property>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="kcfg_logFilterStr"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="kcfg_logFilter">
+               <property name="text">
+                <string>Filter</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>

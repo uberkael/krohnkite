@@ -194,7 +194,7 @@ class WindowClass {
 
   public commit(noBorders?: boolean) {
     const state = this.state;
-    debugObj(() => ["Window#commit", { state: WindowState[state] }]);
+    LOG?.send(LogModules.window, "commit", `state: ${WindowState[state]}`);
     switch (state) {
       case WindowState.Dragging:
         break;
