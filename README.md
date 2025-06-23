@@ -30,7 +30,7 @@ K and looks cool.
 ## Development Requirement
 
 - Typescript (tested w/ 3.1.x)
-- GNU Make
+- [go-task](https://github.com/go-task/task)
 - p7zip (7z)
 
 ## Look at me
