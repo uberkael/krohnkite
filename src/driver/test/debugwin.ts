@@ -43,6 +43,7 @@ function debugWin(win: Window): string {
     { name: "transient", opt: win.transient },
     { name: "transientFor", opt: win.transientFor },
     { name: "maximizable", opt: win.maximizable },
+    { name: "maximizeMode", opt: win.maximizeMode },
     { name: "moveable", opt: win.moveable },
     { name: "moveableAcrossScreens", opt: win.moveableAcrossScreens },
     { name: "hidden", opt: win.hidden },

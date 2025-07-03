@@ -189,8 +189,7 @@ class TilingController {
 
   public onWindowMaximizeChanged(
     ctx: IDriverContext,
-    window: WindowClass,
-    maximized: boolean
+    window: WindowClass
   ): void {
     this.engine.arrange(ctx);
   }

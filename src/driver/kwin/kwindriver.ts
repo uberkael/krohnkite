@@ -146,6 +146,7 @@ class KWinDriver implements IDriverContext {
       this.control.onWindowAdded(this, window);
       if (window.state !== WindowState.Unmanaged) {
         this.bindWindowEvents(window, client);
+        if (client.maximizeMode > 0) client.setMaximize(false, false);
         LOG?.send(LogModules.newWindowAdded, "", debugWin(client), {
           winClass: [`${client.resourceClass}`],
         });
@@ -507,9 +508,10 @@ class KWinDriver implements IDriverContext {
         `window: caption:${client.caption} internalID:${client.internalId},maximizedAboutToChange:${mode}`,
         { winClass: [`${client.resourceClass}`] }
       );
-      const maximized = mode === MaximizeMode.MaximizeFull;
-      (window.window as KWinWindow).maximized = maximized;
-      this.control.onWindowMaximizeChanged(this, window, maximized);
+      // const maximized = mode === MaximizeMode.MaximizeFull;
+      (window.window as KWinWindow).maximized =
+        (mode as number) > 0 ? true : false;
+      this.control.onWindowMaximizeChanged(this, window);
     });
 
     this.connect(client.minimizedChanged, () => {
