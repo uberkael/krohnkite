@@ -29,7 +29,7 @@ K and looks cool.
 
 ## Development Requirement
 
-- Typescript (tested w/ 3.1.x)
+- Typescript (see package.json)
 - [go-task](https://github.com/go-task/task)
 - p7zip (7z)
 
