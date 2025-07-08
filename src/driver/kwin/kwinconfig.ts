@@ -83,7 +83,7 @@ class KWinConfig implements IConfig {
   public layoutPerDesktop: boolean;
   public preventMinimize: boolean;
   public preventProtrusion: boolean;
-  public pollMouseXdotool: boolean;
+  public floatSkipPager: boolean;
   //#endregion
 
   //#region kwin.specific Rules
@@ -288,7 +288,7 @@ class KWinConfig implements IConfig {
     this.preventMinimize = KWIN.readConfig("preventMinimize", false);
     this.preventProtrusion = KWIN.readConfig("preventProtrusion", true);
     this.notificationDuration = KWIN.readConfig("notificationDuration", 1000);
-    this.pollMouseXdotool = KWIN.readConfig("pollMouseXdotool", false);
+    this.floatSkipPager = KWIN.readConfig("floatSkipPagerWindows", false);
 
     this.floatingClass = separate(KWIN.readConfig("floatingClass", ""), ",");
     this.floatingTitle = separate(KWIN.readConfig("floatingTitle", ""), ",");

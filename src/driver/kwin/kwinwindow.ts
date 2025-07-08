@@ -51,11 +51,9 @@ class KWinWindow implements IDriverWindow {
   }
 
   public get shouldFloat(): boolean {
-    //const moreOneDesktop = this.window.desktops.length !== 1;
     return (
       this.isFloatByConfig ||
-      //moreOneDesktop ||
-      //this.window.onAllDesktops ||
+      (CONFIG.floatSkipPager && this.window.skipPager) ||
       this.window.modal ||
       this.window.transient ||
       !this.window.resizeable ||

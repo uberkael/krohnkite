@@ -180,6 +180,7 @@ interface IConfig {
   newWindowPosition: number;
   //#endregion
   screenDefaultLayout: string[];
+  floatSkipPager: boolean;
 }
 
 interface IDriverWindow {

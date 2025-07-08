@@ -565,6 +565,11 @@ class KWinDriver implements IDriverContext {
         "screen=" + client.output.name
       );
     });
+    if (CONFIG.floatSkipPager) {
+      this.connect(client.skipPagerChanged, () => {
+        this.control.onWindowSkipPagerChanged(this, window, client.skipPager);
+      });
+    }
   }
 
   // TODO: private onConfigChanged = () => {

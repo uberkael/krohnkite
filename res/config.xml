@@ -359,8 +359,8 @@
         <default></default>
     </entry>
 
-    <entry name="pollMouseXdotool" type="Bool">
-	    <label>Poll actual mouse position using xdotool (for tile swapping, for example)</label>
+    <entry name="floatSkipPagerWindows" type="Bool">
+	    <label>Make the window float if its property: skipPager=true (HACK)</label>
         <default>false</default>
     </entry>
 

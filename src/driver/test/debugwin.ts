@@ -4,6 +4,7 @@ function debugWin(win: Window): string {
     { name: "output.name", opt: win.output.name },
     { name: "resourceName", opt: win.resourceName },
     { name: "resourceClass", opt: win.resourceClass },
+    { name: "skipPager", opt: win.skipPager },
     { name: "desktopWindow", opt: win.desktopWindow },
     { name: "windowRole", opt: win.windowRole },
     { name: "windowType", opt: win.windowType },

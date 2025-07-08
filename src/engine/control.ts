@@ -68,6 +68,15 @@ class TilingController {
     this.engine.arrange(ctx);
   }
 
+  public onWindowSkipPagerChanged(
+    ctx: IDriverContext,
+    window: WindowClass,
+    skipPager: boolean
+  ) {
+    if (skipPager) window.state = WindowState.Floating;
+    else window.state = WindowState.Undecided;
+    this.engine.arrange(ctx);
+  }
   public onWindowRemoved(ctx: IDriverContext, window: WindowClass): void {
     this.engine.unmanage(window);
     this.engine.arrange(ctx);

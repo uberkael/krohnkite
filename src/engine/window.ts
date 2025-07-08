@@ -85,7 +85,6 @@ class WindowClass {
 
     return RectDelta.fromRects(this.geometry, this.actualGeometry);
   }
-
   public floatGeometry: Rect;
   public geometry: Rect;
   public timestamp: number;
