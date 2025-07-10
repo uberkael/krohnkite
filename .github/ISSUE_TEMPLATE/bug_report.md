@@ -6,6 +6,11 @@ labels: bug
 assignees: ''
 
 ---
+```
+1. Don't create an issue to ask a question, that's what "Discussions" is for.
+2. Make sure the problem persists after `rebooting`.
+3. Make sure that the problem goes away if you turn off Krohnkite.
+```
 
 **Symptom**
 A simple description of the problem you're experiencing.
