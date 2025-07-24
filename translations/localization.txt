@@ -1,0 +1,3 @@
+echo "SOURCES = config.ui" > temp.pro
+lupdate -no-obsolete temp.pro -ts translations.ts
+ts2po -i translations.ts -o translations.po

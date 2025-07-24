@@ -1,0 +1,918 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-23 13:05+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 3.15.6\n"
+
+#: KrohnkiteConfigForm%231
+msgid "Form"
+msgstr ""
+
+#: KrohnkiteConfigForm%232
+msgid "<html><head/><body><p><br/></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%233
+msgid "Layouts"
+msgstr ""
+
+#: KrohnkiteConfigForm%234
+msgid "<html><head/><body><p>0 - to disable</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%235
+msgid "Tile Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%236
+msgid "Order:"
+msgstr ""
+
+#: KrohnkiteConfigForm%237
+msgid "0"
+msgstr ""
+
+#: KrohnkiteConfigForm%238
+msgid "90"
+msgstr ""
+
+#: KrohnkiteConfigForm%239
+msgid "180"
+msgstr ""
+
+#: KrohnkiteConfigForm%2310
+msgid "270"
+msgstr ""
+
+#: KrohnkiteConfigForm%2311
+msgid "Initial rotation angle"
+msgstr ""
+
+#: KrohnkiteConfigForm%2312
+msgid "Monocle Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2313
+msgid "All windows will be maximized in Monocle layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2314
+msgid "Fully maximize windows (no borders, no gaps)"
+msgstr ""
+
+#: KrohnkiteConfigForm%2315
+msgid "Minimize unfocused windows (WIP)"
+msgstr ""
+
+#: KrohnkiteConfigForm%2316
+msgid "Three Column Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2317
+msgid "Spiral Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2318
+msgid "Quarter Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2319
+msgid "Reset Quarter layout after closing a window"
+msgstr ""
+
+#: KrohnkiteConfigForm%2320
+msgid "Stacked Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2321
+msgid "Columns Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2322
+msgid "Creating a new window in the shortest column"
+msgstr ""
+
+#: KrohnkiteConfigForm%2323
+msgid "Balanced"
+msgstr ""
+
+#: KrohnkiteConfigForm%2324
+msgid "Config"
+msgstr ""
+
+#: KrohnkiteConfigForm%2325
+msgid ""
+"<html><head/><body><p>Comma-separated list "
+"OutputName:VirtualDesktopName:ActivityId:ColumnWeight:ColumnWeight:... "
+"OutputName value you will see if run KSystemLog and type krohnkite in filter "
+"string. The data will right under Krohenkite start string.If all weights are "
+"equal they will not be taken into account </p><p>Example: Any monitors 3 "
+"columns without weights:</p><p>:::1:1:1</p><p>Example with desktop name and "
+"activity id 3 columns the third one is twice as big as the first "
+"two:</p><p>HDMI-A-1:Desktop 1:99e10d31-e8f3-44aa-bbed-"
+"2a543f13fa54:1:1:2</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%2326
+msgid "Spread Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2327
+msgid "Floating Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2328
+msgid "Stair Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2329
+msgid "Reverse the stair layout's direction"
+msgstr ""
+
+#: KrohnkiteConfigForm%2330
+msgid "Binary Tree Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2331
+msgid "Cascade Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2332
+msgid "Geometry"
+msgstr ""
+
+#: KrohnkiteConfigForm%2333
+msgid "Default Gaps"
+msgstr ""
+
+#: KrohnkiteConfigForm%2334
+msgid "Top"
+msgstr ""
+
+#: KrohnkiteConfigForm%2335
+msgid "px"
+msgstr ""
+
+#: KrohnkiteConfigForm%2336
+msgid "Bottom"
+msgstr ""
+
+#: KrohnkiteConfigForm%2337
+msgid "Left"
+msgstr ""
+
+#: KrohnkiteConfigForm%2338
+msgid "Right"
+msgstr ""
+
+#: KrohnkiteConfigForm%2339
+msgid "Between tiles"
+msgstr ""
+
+#: KrohnkiteConfigForm%2340
+msgid "Override default gaps for a screen"
+msgstr ""
+
+#: KrohnkiteConfigForm%2341
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Overriding default "
+"gaps parameters for the specified Screen Name(OutputName). Format:</span></"
+"p><p><span style=\" font-size:12pt; font-weight:700;\""
+">OutputName:&lt;left,right,top,bottom,between&gt;=number,...&lt;Enter&gt;</span></"
+"p><p><span style=\" font-size:12pt; font-weight:700;\""
+">OutputName:ActivityId:VirtualDesktopName:&lt;left,right,top,bottom,between&gt;=number,...&lt;Enter&gt;</span></"
+"p><p><span style=\" font-size:12pt; font-weight:700;\">xrandr "
+"--listmonitors</span><span style=\" font-size:12pt;\"> to define Output "
+"names</span></p><p><span style=\" font-size:12pt; font-weight:700;\""
+">left,right,top,bottom,between</span><span style=\" font-size:12pt;\"> or "
+"you can use shortname</span><span style=\" font-size:12pt; font-weight:700;\""
+"> l,r,t,b,e </span></p><p><span style=\" font-size:12pt;\">You can only "
+"write down the parameters you want to change. Examples:</span></p><p><span "
+"style=\" font-size:12pt;\">on monitor with Output name </span><span style="
+"\" font-size:12pt; font-weight:700;\">DP-2 </span><span style="
+"\" font-size:12pt;\">will override right gap to 10, left gap to 20 and "
+"between gap to 10</span></p><p><span style="
+"\" font-size:12pt; font-weight:700;\">DP-2:r=10,l=20,between=10</span></"
+"p><p><span style=\" font-size:12pt;\">this one, will override between gaps "
+"only for defined display, virtual desktop and activity</span></p><p><span "
+"style=\" font-size:12pt; font-weight:700;\">HDMI-A-1:99e10d31-e8f3-44aa-bbed-"
+"2a543f13fa54:Desktop 1:e=0</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%2342
+msgid "OutputName:<left,right,top,bottom,between>=number,...<Enter>"
+msgstr ""
+
+#: KrohnkiteConfigForm%2343
+msgid "Maximum Tile Width"
+msgstr ""
+
+#: KrohnkiteConfigForm%2344
+msgid "Ratio of the max width to screen height "
+msgstr ""
+
+#: KrohnkiteConfigForm%2345
+msgid ""
+"<html><head/><body><p>value 1.6 means the width of the tile can be 60% "
+"greater than  the height</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%2346
+msgid "Limit the width of tiled windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%2347
+msgid "Behavior"
+msgstr ""
+
+#: KrohnkiteConfigForm%2348
+msgid "Layout Adjustment"
+msgstr ""
+
+#: KrohnkiteConfigForm%2349
+msgid ""
+"Resizing window will cause layout to be adjusted. The actual behaviour might "
+"differ based on layout in use."
+msgstr ""
+
+#: KrohnkiteConfigForm%2350
+msgid "Adjust layout by resizing windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%2351
+msgid ""
+"If enabled, resizing window will immediately adjust layout. If disabled, "
+"layout will be adjusted *after* window resizing is over."
+msgstr ""
+
+#: KrohnkiteConfigForm%2352
+msgid "Adjust layout in realtime as window is being resized"
+msgstr ""
+
+#: KrohnkiteConfigForm%2353
+msgid "Directional Keys Behaviors"
+msgstr ""
+
+#: KrohnkiteConfigForm%2354
+msgid "Up"
+msgstr ""
+
+#: KrohnkiteConfigForm%2355
+msgid "Directional"
+msgstr ""
+
+#: KrohnkiteConfigForm%2356
+msgid "DWM st&yle"
+msgstr ""
+
+#: KrohnkiteConfigForm%2357
+msgid "Focus Next"
+msgstr ""
+
+#: KrohnkiteConfigForm%2358
+msgid "Down"
+msgstr ""
+
+#: KrohnkiteConfigForm%2359
+msgid "Focus Prev"
+msgstr ""
+
+#: KrohnkiteConfigForm%2360
+msgid "Adjust Layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2361
+msgid "Focus Up"
+msgstr ""
+
+#: KrohnkiteConfigForm%2362
+msgid "Focus Down"
+msgstr ""
+
+#: KrohnkiteConfigForm%2363
+msgid "Focus Left"
+msgstr ""
+
+#: KrohnkiteConfigForm%2364
+msgid "Focus Right"
+msgstr ""
+
+#: KrohnkiteConfigForm%2365
+msgid "Position of the New Window"
+msgstr ""
+
+#: KrohnkiteConfigForm%2366
+msgid "Last"
+msgstr ""
+
+#: KrohnkiteConfigForm%2367
+msgid "First"
+msgstr ""
+
+#: KrohnkiteConfigForm%2368
+msgid "Second"
+msgstr ""
+
+#: KrohnkiteConfigForm%2369
+msgid "Rules"
+msgstr ""
+
+#: KrohnkiteConfigForm%2370
+msgid "Ignore Windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%2371
+msgid "By Title"
+msgstr ""
+
+#: KrohnkiteConfigForm%2372
+msgid "By Class"
+msgstr ""
+
+#: KrohnkiteConfigForm%2373
+msgid ""
+"Comma-separated list of window classes. Matching windows will not be tiled."
+msgstr ""
+
+#: KrohnkiteConfigForm%2374
+msgid ""
+"Comma-separated list of keywords(or substrings). Any windows with matching "
+"title will not be tiled."
+msgstr ""
+
+#: KrohnkiteConfigForm%2375
+msgid "By Role"
+msgstr ""
+
+#: KrohnkiteConfigForm%2376
+msgid "Float Windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%2377
+msgid ""
+"Comma-separated list of window classes. Matching windows will become float "
+"automatically."
+msgstr ""
+
+#: KrohnkiteConfigForm%2378
+msgid ""
+"Comma-separated list of keywords(or substrings). Any windows with matching "
+"title will become float automatically"
+msgstr ""
+
+#: KrohnkiteConfigForm%2379
+msgid ""
+"This is mainly for debugging purpose, but can also be used to meet some "
+"specific requirements."
+msgstr ""
+
+#: KrohnkiteConfigForm%2380
+msgid ""
+"Float utility windows\n"
+"(applies to window type Dialog, Splash, Utility)"
+msgstr ""
+
+#: KrohnkiteConfigForm%2381
+msgid "Disable Tiling"
+msgstr ""
+
+#: KrohnkiteConfigForm%2382
+msgid ""
+"<html><head/><body><p>Comma-separated list of activity IDs. See Readme or "
+"Issue #125 to know IDs. Windows in corresponding activities will not be "
+"tiled.</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%2383
+msgid "On Activity (activityId)"
+msgstr ""
+
+#: KrohnkiteConfigForm%2384
+msgid "On Screen (name)"
+msgstr ""
+
+#: KrohnkiteConfigForm%2385
+msgid ""
+"Comma-separated list of screen names. Windows in corresponding screens will "
+"not be tiled."
+msgstr ""
+
+#: KrohnkiteConfigForm%2386
+msgid "On Virtual Desktop"
+msgstr ""
+
+#: KrohnkiteConfigForm%2387
+msgid ""
+"Comma-separated list of Virtual Desktops names. Windows corresponding to "
+"these will not be tiled."
+msgstr ""
+
+#: KrohnkiteConfigForm%2388
+msgid "Always, except by class"
+msgstr ""
+
+#: KrohnkiteConfigForm%2389
+msgid ""
+"Comma-separated list of window classes. Matching windows will become tiled "
+"automatically."
+msgstr ""
+
+#: KrohnkiteConfigForm%2390
+msgid "Screen default layout"
+msgstr ""
+
+#: KrohnkiteConfigForm%2391
+msgid ""
+"<html><head/><body><p>Comma-separated list OutputName:LayoutName. 'Layout' "
+"word can be omit. </p><p>2 monitors example: HDMI-A-1:spread,DP-2:tile</"
+"p><p>Example with desktop name: HDMI-A-1:Desktop 1:1,HDMI-A-1:Desktop "
+"2:columns</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%2392
+msgid "OutputName:LayoutName,..."
+msgstr ""
+
+#: KrohnkiteConfigForm%2393
+msgid "Dock"
+msgstr ""
+
+#: KrohnkiteConfigForm%2394
+msgid "<html><head/><body><p>hv - short name</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%2395
+msgid "Surfaces configuration"
+msgstr ""
+
+#: KrohnkiteConfigForm%2396
+msgid "Order of docked windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%2397
+msgid "Off"
+msgstr ""
+
+#: KrohnkiteConfigForm%2398
+msgid "Third"
+msgstr ""
+
+#: KrohnkiteConfigForm%2399
+msgid "Fourth"
+msgstr ""
+
+#: KrohnkiteConfigForm%23100
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Overriding default "
+"parameters for every surface. Format: </span><span style="
+"\" font-size:12pt; font-weight:700;\""
+">OuputName:ActivityId:VirtualDesktopName:shortname=value,shortname=value... "
+"&lt;Enter&gt;</span></p><p><span style=\" font-size:12pt;\">You can only "
+"write down parameters you want to change. You can see the short name of the "
+"parameter if you hover over any default parameter above.</span></p><p><span "
+"style=\" font-size:12pt;\">Next example override three params on all "
+"surfaces with OutputName=HDMI-A-1 </span></p><p><span style="
+"\" font-size:12pt; font-weight:700;\">HDMI-A-1:::hh=80,vw=80,ha=left</span></"
+"p><p><span style=\" font-size:12pt;\">this one, will override two params "
+"only for defined display, virtual desktop and activity</span></p><p><span "
+"style=\" font-size:12pt; font-weight:700;\">HDMI-A-1:99e10d31-e8f3-44aa-bbed-"
+"2a543f13fa54:Desktop 1:vg=5,va=2</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23101
+msgid "Default settings for a docked window"
+msgstr ""
+
+#: KrohnkiteConfigForm%23102
+msgid "Up/Bottom Dock"
+msgstr ""
+
+#: KrohnkiteConfigForm%23103
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</"
+"span><span style=\" font-weight:700;\">hh</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23104
+msgid " %"
+msgstr ""
+
+#: KrohnkiteConfigForm%23105
+msgid "Height"
+msgstr ""
+
+#: KrohnkiteConfigForm%23106
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </"
+"span><span style=\" font-weight:700;\">hw</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23107
+msgid "<html><head/><body><p>vw - short name</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23108
+msgid "Wide"
+msgstr ""
+
+#: KrohnkiteConfigForm%23109
+msgid "Gaps"
+msgstr ""
+
+#: KrohnkiteConfigForm%23110
+msgid "Horizontal "
+msgstr ""
+
+#: KrohnkiteConfigForm%23111
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </"
+"span><span style=\" font-weight:700;\">hgv</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23112
+msgid " px"
+msgstr ""
+
+#: KrohnkiteConfigForm%23113
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</"
+"span><span style=\" font-weight:700;\">hgh</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23114
+msgid "Vertical"
+msgstr ""
+
+#: KrohnkiteConfigForm%23115
+msgid "Alignment"
+msgstr ""
+
+#: KrohnkiteConfigForm%23116
+msgid "Horizontal"
+msgstr ""
+
+#: KrohnkiteConfigForm%23117
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </"
+"span><span style=\" font-weight:700;\">he</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23118
+msgid "Outside"
+msgstr ""
+
+#: KrohnkiteConfigForm%23119
+msgid "Middle"
+msgstr ""
+
+#: KrohnkiteConfigForm%23120
+msgid "Inside"
+msgstr ""
+
+#: KrohnkiteConfigForm%23121
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</"
+"span><span style=\" font-weight:700;\">ha</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23122
+msgid "Center"
+msgstr ""
+
+#: KrohnkiteConfigForm%23123
+msgid "Left/Right Dock"
+msgstr ""
+
+#: KrohnkiteConfigForm%23124
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </"
+"span><span style=\" font-weight:700;\">vh</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23125
+msgid "Horizontal Spacer 'horizontalSpacer_4', 40 x 20"
+msgstr ""
+
+#: KrohnkiteConfigForm%23126
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </"
+"span><span style=\" font-weight:700;\">vw</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23127
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</"
+"span><span style=\" font-weight:700;\">vgh</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23128
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</"
+"span><span style=\" font-weight:700;\">vgv</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23129
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </"
+"span><span style=\" font-weight:700;\">va</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23130
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </"
+"span><span style=\" font-weight:700;\">ve</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23131
+msgid "Window class configuration"
+msgstr ""
+
+#: KrohnkiteConfigForm%23132
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Overriding default "
+"parameters for the specified WindowClass. Format:</span></p><p><span style="
+"\" font-size:12pt; font-weight:700;\""
+">WindowClass:SpecialFlag,SpecialFlag...:shortname=value,shortname=value...</span></"
+"p><p><span style=\" font-size:12pt; font-weight:700;\">pin - </span><span "
+"style=\" font-size:12pt;\">docked window with this flag will displace "
+"another if their positions are equal.</span></p><p><span style="
+"\" font-size:12pt; font-weight:700;\">left,right,top,bottom</span><span "
+"style=\" font-size:12pt;\"> - you can use one them to explicitly set the "
+"initial position.</span></p><p><span style="
+"\" font-size:12pt; font-weight:700;\">auto</span><span style="
+"\" font-size:12pt;\"> - automatically makes a window docked. Krohnkite "
+"version &gt;=0.9.9.1</span></p><p><span style=\" font-size:12pt;\">You can "
+"only write down the parameters you want to change. You can see the short "
+"name of the parameter if you hover over any default parameter above.</span></"
+"p><p><span style=\" font-size:12pt;\">Examples:</span></p><p><span style="
+"\" font-size:12pt;\">1. if Elisa switches to dock it will have higher "
+"priority, top dock position and 10% of screen height </span></p><p><span "
+"style=\" font-size:12pt;\">org.kde.elisa</span><span style="
+"\" font-size:12pt; font-weight:700;\">:pin,top:hh=10</span></p><p><span "
+"style=\" font-size:12pt;\">2. Conky automatic docking</span></p><p><span "
+"style=\" font-family:'Hack'; font-size:12pt;\">Conky:</span><span style="
+"\" font-family:'Hack'; font-size:12pt; font-weight:700;\">auto</span><span "
+"style=\" font-family:'Hack'; font-size:12pt;\">:</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23133
+msgid "Options"
+msgstr ""
+
+#: KrohnkiteConfigForm%23134
+msgid "Window Layer"
+msgstr ""
+
+#: KrohnkiteConfigForm%23135
+msgid "Tiled"
+msgstr ""
+
+#: KrohnkiteConfigForm%23136
+msgid "Normal"
+msgstr ""
+
+#: KrohnkiteConfigForm%23137
+msgid "Above"
+msgstr ""
+
+#: KrohnkiteConfigForm%23138
+msgid "Float  "
+msgstr ""
+
+#: KrohnkiteConfigForm%23139
+msgid "The Sole Window properties"
+msgstr ""
+
+#: KrohnkiteConfigForm%23140
+msgid "%"
+msgstr ""
+
+#: KrohnkiteConfigForm%23141
+msgid "Width "
+msgstr ""
+
+#: KrohnkiteConfigForm%23142
+msgid "No Borders"
+msgstr ""
+
+#: KrohnkiteConfigForm%23143
+msgid "No Gaps"
+msgstr ""
+
+#: KrohnkiteConfigForm%23144
+msgid "Notifications"
+msgstr ""
+
+#: KrohnkiteConfigForm%23145
+msgid ""
+"<html><head/><body><p>Set the time (in milliseconds) for how long a pop-up "
+"notification will remain visible before it automatically disappears. A value "
+"of 0 will disable notifications.</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23146
+msgid " ms"
+msgstr ""
+
+#: KrohnkiteConfigForm%23147
+msgid "Duration  "
+msgstr ""
+
+#: KrohnkiteConfigForm%23148
+msgid ""
+"All tiled windows will have no borders. Borders will be added back if window "
+"become float."
+msgstr ""
+
+#: KrohnkiteConfigForm%23149
+msgid "Use separate layouts for each Activity"
+msgstr ""
+
+#: KrohnkiteConfigForm%23150
+msgid "Use separate layouts for each Desktop"
+msgstr ""
+
+#: KrohnkiteConfigForm%23151
+msgid "Remove borders of tiled windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%23152
+msgid "Always preserve the tiling status of a window upon dragging"
+msgstr ""
+
+#: KrohnkiteConfigForm%23153
+msgid "Prevent windows from minimizing (experimental)"
+msgstr ""
+
+#: KrohnkiteConfigForm%23154
+msgid "Prevent window from protruding from its screen"
+msgstr ""
+
+#: KrohnkiteConfigForm%23155
+msgid ""
+"<html><head/><body><p>If enabled, all windows with property skipPager=true "
+"become floating. You can create KDE Window Rule and force  "
+"skipPager=true.</p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23156
+msgid "Make the window float if its property: skipPager=true (HACK)"
+msgstr ""
+
+#: KrohnkiteConfigForm%23157
+msgid "Log"
+msgstr ""
+
+#: KrohnkiteConfigForm%23158
+msgid "Use this option to debug the script or submit detailed bug report."
+msgstr ""
+
+#: KrohnkiteConfigForm%23159
+msgid "Logging"
+msgstr ""
+
+#: KrohnkiteConfigForm%23160
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">logs all windows that "
+"Krohnkite indexes and manages</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23161
+msgid "Added new windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%23162
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">logs all windows that "
+"Krohnkite does not manage for many reasons: service, dialog, "
+"etc.</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23163
+msgid "Filtered new windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%23164
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">logs all windows that "
+"Krohkite could manage if not for the filters in the "
+"configuration</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23165
+msgid "Unmanaged new windows"
+msgstr ""
+
+#: KrohnkiteConfigForm%23166
+msgid ""
+"<html><head/><body><h4 style=\" margin-top:12px; margin-bottom:12px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-size:medium; font-weight:700;\">Filtering log "
+"modules</span></h4><p>the group of the log modules checkbox enables the "
+"entire group of log modules at once and in order to include only certain "
+"modules there is a line-edit nearby. Examples:</p><ul style=\"margin-top: "
+"0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-"
+"indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-family:'Hack';\">1,4-</span> - enable only the first "
+"and from the fourth to the last module</li><li style=\" margin-top:0px; "
+"margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; "
+"text-indent:0px;\"><span style=\" font-family:'Hack';\">!1,4-6</span> - the "
+"exclamation mark at the beginning turns on the exclude mode, so this line "
+"will enable all modules except 1 and from 4 to 6. <span style="
+"\" font-family:'Hack';\">!</span> - the exclamation mark you can use only "
+"once in the beginning, to enable the exclude mode.</li></ul></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23167
+msgid "filter log modules popup tooltip <<<hover me>>>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23168
+msgid ""
+"<html><head/><body><h5 style=\" margin-top:12px; margin-bottom:4px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-size:11pt; font-weight:700;"
+"\">Workspace signals log modules</span></h5><p><span style=\" font-size:11pt;"
+"\">1. screensChanged</span></p><p><span style=\" font-size:11pt;"
+"\">2. virtualScreenGeometryChanged</span></p><p><span style=\" font-"
+"size:11pt;\">3. currentActivityChanged</span></p><p><span style=\" font-"
+"size:11pt;\">4. currentDesktopChanged</span></p><p><span style=\" font-"
+"size:11pt;\">5. windowAdded</span></p><p><span style=\" font-size:11pt;"
+"\">6. windowActivated</span></p><p><span style=\" font-size:11pt;\">7. "
+"windowRemoved</span></p><p><br/></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23169
+msgid ""
+"<html><head/><body><p><span style=\" font-size:11pt; font-weight:700;\">All "
+"other log modules</span></p><p><span style=\" font-size:11pt;\">1. "
+"shortcut</span></p><p><span style=\" font-size:11pt;\">2. "
+"arrangeScreen</span></p><p><span style=\" font-size:11pt;\">3. "
+"printConfig</span></p><p><span style=\" font-size:11pt;\">4. "
+"setTimeout</span></p><p><span style=\" font-size:11pt;\">5. "
+"window</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23170
+msgid "Workspace signals"
+msgstr ""
+
+#: KrohnkiteConfigForm%23171
+msgid "Window signals     "
+msgstr ""
+
+#: KrohnkiteConfigForm%23172
+msgid ""
+"<html><head/><body><h5 style=\" margin-top:12px; margin-bottom:4px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-size:11pt; font-weight:700;"
+"\">Window signals log modules</span></h5><p><span style=\" font-size:11pt;"
+"\">1. activitiesChanged</span></p><p><span style=\" font-size:11pt;"
+"\">2. bufferGeometryChanged</span></p><p><span style=\" font-size:11pt;"
+"\">3. desktopsChanged</span></p><p><span style=\" font-size:11pt;"
+"\">4. fullScreenChanged</span></p><p><span style=\" font-size:11pt;"
+"\">5. interactiveMoveResizeStepped</span></p><p><span style=\" font-"
+"size:11pt;\">6. maximizedAboutToChange</span></p><p><span style=\" font-"
+"size:11pt;\">7. minimizedChanged</span></p><p><span style=\" font-size:11pt;"
+"\">8. moveResizedChanged</span></p><p><span style=\" font-size:11pt;\">9. "
+"outputChanged</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23173
+msgid "Other                       "
+msgstr ""
+
+#: KrohnkiteConfigForm%23174
+msgid ""
+"<html><head/><body><p><span style=\" font-size:11pt;\">Also, in addition to "
+"the fact that you can include only the modules you need, you can enable </"
+"span><span style=\" font-family:'Hack'; font-size:11pt;\">Filter</span><span "
+"style=\" font-size:11pt;\"> checkbox and use other filters in filter line "
+"edit:</span></p><p><span style=\" font-size:11pt;\">- </span><span style="
+"\" font-size:11pt; font-weight:700;\">winclass</span></p><p><span style="
+"\" font-size:11pt;\">Examples:</span></p><p><span style="
+"\" font-family:'Hack'; font-size:11pt;\">- </span><span style="
+"\" font-family:'Hack'; font-size:11pt; font-weight:700;\">winclass=[konsole]"
+"</span><span style=\" font-size:11pt; font-weight:700;\"/><span style="
+"\" font-size:11pt;\">- some modules may be filtered by a window class, so "
+"this logs modules will show only windows with class that contains </"
+"span><span style=\" font-family:'Hack'; font-size:11pt;\">konsole</"
+"span><span style=\" font-size:11pt;\"> word.</span></p><p><span style="
+"\" font-family:'Hack'; font-size:11pt;\">- </span><span style="
+"\" font-family:'Hack'; font-size:11pt; font-weight:700;\""
+">!winclass=org.kde.elisa:org.kde.ruler</span><span style=\" font-size:11pt;\""
+"> -Exclude Elisa and Kruler from log output</span></p></body></html>"
+msgstr ""
+
+#: KrohnkiteConfigForm%23175
+msgid "Filter"
+msgstr ""

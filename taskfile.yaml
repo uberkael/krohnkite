@@ -13,6 +13,7 @@ vars:
   KWINPKG_FILE: "{{.PROJECT_NAME }}-{{.PROJECT_VER }}{{.GIT_BRANCH}}_{{.PROJECT_REV }}.{{.KWINPKG_FILE_EXT}}"
   PACKAGE: "builds/{{.KWINPKG_FILE}}"
   KWINPKG_DIR: "pkg"
+  LOCALE_DIR: "./translations/locale"
 
   KWIN_META: "{{.KWINPKG_DIR}}/metadata.json"
   KWIN_QML: "{{.KWINPKG_DIR}}/contents/ui/main.qml"
@@ -63,6 +64,7 @@ tasks:
       - cp {{.NODE_SCRIPT}} {{.KWINPKG_DIR}}/contents/code/script.js
       - cp res/main.js   {{.KWINPKG_DIR}}/contents/code/main.js
       - cp res/config.xml  {{.KWINPKG_DIR}}/contents/config/main.xml
+      - cp -r {{.LOCALE_DIR}} {{.KWINPKG_DIR}}/contents/
     sources:
       - res/main.qml
       - res/config.ui

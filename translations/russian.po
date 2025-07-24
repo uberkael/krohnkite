@@ -1,0 +1,1069 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Krohnkite\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-23 13:05+0300\n"
+"PO-Revision-Date: 2025-07-24 11:12+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: KrohnkiteConfigForm%231
+msgid "Form"
+msgstr "Форма"
+
+#: KrohnkiteConfigForm%232
+msgid "<html><head/><body><p><br/></p></body></html>"
+msgstr "<html><head/><body><p><br/></p></body></html>"
+
+#: KrohnkiteConfigForm%233
+msgid "Layouts"
+msgstr "Схемы"
+
+#: KrohnkiteConfigForm%234
+msgid "<html><head/><body><p>0 - to disable</p></body></html>"
+msgstr "<html><head/><body><p>0 - выключить</p></body></html>"
+
+#: KrohnkiteConfigForm%235
+msgid "Tile Layout"
+msgstr "Схема Плитки"
+
+#: KrohnkiteConfigForm%236
+msgid "Order:"
+msgstr "Последовательность:"
+
+#: KrohnkiteConfigForm%237
+msgid "0"
+msgstr "0"
+
+#: KrohnkiteConfigForm%238
+msgid "90"
+msgstr "90"
+
+#: KrohnkiteConfigForm%239
+msgid "180"
+msgstr "180"
+
+#: KrohnkiteConfigForm%2310
+msgid "270"
+msgstr "270"
+
+#: KrohnkiteConfigForm%2311
+msgid "Initial rotation angle"
+msgstr "Начальный угол поворота"
+
+#: KrohnkiteConfigForm%2312
+msgid "Monocle Layout"
+msgstr "Схема Монокля"
+
+#: KrohnkiteConfigForm%2313
+msgid "All windows will be maximized in Monocle layout"
+msgstr "При схеме Монокля все окна будут развёрнуты"
+
+#: KrohnkiteConfigForm%2314
+msgid "Fully maximize windows (no borders, no gaps)"
+msgstr "Полностью разворачивать окна (без рамок, без  отступов)"
+
+#: KrohnkiteConfigForm%2315
+msgid "Minimize unfocused windows (WIP)"
+msgstr "Сворачивать неактивные окна (WIP)"
+
+#: KrohnkiteConfigForm%2316
+msgid "Three Column Layout"
+msgstr "Схема Трёх Колонок"
+
+#: KrohnkiteConfigForm%2317
+msgid "Spiral Layout"
+msgstr "Схема Спирали"
+
+#: KrohnkiteConfigForm%2318
+msgid "Quarter Layout"
+msgstr "Схема Четверти"
+
+#: KrohnkiteConfigForm%2319
+msgid "Reset Quarter layout after closing a window"
+msgstr "Сбрасывать Схему Четверти после закрытия окна"
+
+#: KrohnkiteConfigForm%2320
+msgid "Stacked Layout"
+msgstr "Схема Стопки"
+
+#: KrohnkiteConfigForm%2321
+msgid "Columns Layout"
+msgstr "Схема Колонок"
+
+#: KrohnkiteConfigForm%2322
+msgid "Creating a new window in the shortest column"
+msgstr "Новое окно в самой короткой колонке"
+
+#: KrohnkiteConfigForm%2323
+msgid "Balanced"
+msgstr "Сбалансировать"
+
+#: KrohnkiteConfigForm%2324
+msgid "Config"
+msgstr "Конфиг"
+
+#: KrohnkiteConfigForm%2325
+msgid ""
+"<html><head/><body><p>Comma-separated list "
+"OutputName:VirtualDesktopName:ActivityId:ColumnWeight:ColumnWeight:... OutputName value "
+"you will see if run KSystemLog and type krohnkite in filter string. The data will right "
+"under Krohenkite start string.If all weights are equal they will not be taken into "
+"account </p><p>Example: Any monitors 3 columns without weights:</p><p>:::1:1:1</"
+"p><p>Example with desktop name and activity id 3 columns the third one is twice as big "
+"as the first two:</p><p>HDMI-A-1:Desktop 1:99e10d31-e8f3-44aa-bbed-2a543f13fa54:1:1:2</"
+"p></body></html>"
+msgstr ""
+"<html><head/><body><p>Через запятую. Формат: "
+"OutputName:VirtualDesktopName:ActivityId:ColumnWeight:ColumnWeight:... OutputName -можно "
+"посмотреть запустив  KSystemLog и напечатав  krohnkite в строке фильтра. Данные будут "
+"сразу после строки \"Krohnkite start\". Если все веса \"ColumnWeight\" равны, то и "
+"колонки будут равны. </p><p>Примеры:  1. На всех мониторах 3 колонки без весов:</"
+"p><p>:::1:1:1</p><p>2. Это правило действует только на одном мониторе с виртуальным "
+"рабочим столом \"Desktop 1\" и толко на Активности с заданным номером. Там будут три "
+"колонки, причём последняя будет в два раза больше первых двух.</p><p>HDMI-A-1:Desktop "
+"1:99e10d31-e8f3-44aa-bbed-2a543f13fa54:1:1:2</p></body></html>"
+
+#: KrohnkiteConfigForm%2326
+msgid "Spread Layout"
+msgstr "Схема Распространения"
+
+#: KrohnkiteConfigForm%2327
+msgid "Floating Layout"
+msgstr "Схема Плавающая"
+
+#: KrohnkiteConfigForm%2328
+msgid "Stair Layout"
+msgstr "Схема Лесенки"
+
+#: KrohnkiteConfigForm%2329
+msgid "Reverse the stair layout's direction"
+msgstr "Изменить направление в схеме Лесенка"
+
+#: KrohnkiteConfigForm%2330
+msgid "Binary Tree Layout"
+msgstr "Схема Бинарного Дерева"
+
+#: KrohnkiteConfigForm%2331
+msgid "Cascade Layout"
+msgstr "Схема Каскадная"
+
+#: KrohnkiteConfigForm%2332
+msgid "Geometry"
+msgstr "Геометрия"
+
+#: KrohnkiteConfigForm%2333
+msgid "Default Gaps"
+msgstr "Отступы"
+
+#: KrohnkiteConfigForm%2334
+msgid "Top"
+msgstr "Верхний"
+
+#: KrohnkiteConfigForm%2335
+msgid "px"
+msgstr "px"
+
+#: KrohnkiteConfigForm%2336
+msgid "Bottom"
+msgstr "Нижний"
+
+#: KrohnkiteConfigForm%2337
+msgid "Left"
+msgstr "Левый"
+
+#: KrohnkiteConfigForm%2338
+msgid "Right"
+msgstr "Правый"
+
+#: KrohnkiteConfigForm%2339
+msgid "Between tiles"
+msgstr "Между"
+
+#: KrohnkiteConfigForm%2340
+msgid "Override default gaps for a screen"
+msgstr "Переопределить отступы для монитора"
+
+#: KrohnkiteConfigForm%2341
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Overriding default gaps "
+"parameters for the specified Screen Name(OutputName). Format:</span></p><p><span "
+"style=\" font-size:12pt; font-"
+"weight:700;\">OutputName:&lt;left,right,top,bottom,between&gt;=number,...&lt;Enter&gt;</"
+"span></p><p><span style=\" font-size:12pt; font-"
+"weight:700;\">OutputName:ActivityId:VirtualDesktopName:&lt;left,right,top,bottom,between&gt;=number,...&lt;Enter&gt;"
+"</span></p><p><span style=\" font-size:12pt; font-weight:700;\">xrandr --listmonitors</"
+"span><span style=\" font-size:12pt;\"> to define Output names</span></p><p><span "
+"style=\" font-size:12pt; font-weight:700;\">left,right,top,bottom,between</span><span "
+"style=\" font-size:12pt;\"> or you can use shortname</span><span style=\" font-"
+"size:12pt; font-weight:700;\"> l,r,t,b,e </span></p><p><span style=\" font-size:12pt;"
+"\">You can only write down the parameters you want to change. Examples:</span></"
+"p><p><span style=\" font-size:12pt;\">on monitor with Output name </span><span style=\" "
+"font-size:12pt; font-weight:700;\">DP-2 </span><span style=\" font-size:12pt;\">will "
+"override right gap to 10, left gap to 20 and between gap to 10</span></p><p><span "
+"style=\" font-size:12pt; font-weight:700;\">DP-2:r=10,l=20,between=10</span></p><p><span "
+"style=\" font-size:12pt;\">this one, will override between gaps only for defined "
+"display, virtual desktop and activity</span></p><p><span style=\" font-size:12pt; font-"
+"weight:700;\">HDMI-A-1:99e10d31-e8f3-44aa-bbed-2a543f13fa54:Desktop 1:e=0</span></p></"
+"body></html>"
+msgstr ""
+"html><head/><body><p><span style=\" font-size:12pt;\">Переопределение отступов для "
+"заданного монитора(OutputName). Формат:</span></p><p><span style=\" font-size:12pt; font-"
+"weight:700;\">OutputName:&lt;left,right,top,bottom,between&gt;=number,...&lt;Enter&gt;</"
+"span></p><p><span style=\" font-size:12pt; font-"
+"weight:700;\">OutputName:ActivityId:VirtualDesktopName:&lt;left,right,top,bottom,between&gt;=number,...&lt;Enter&gt;"
+"</span></p><p><span style=\" font-size:12pt; font-weight:700;\">xrandr --listmonitors</"
+"span><span style=\" font-size:12pt;\"> - команда чтобы посмотреть имена мониторов</"
+"span></p><p><span style=\" font-size:12pt; font-"
+"weight:700;\">left,right,top,bottom,between</span><span style=\" font-size:12pt;\"> или "
+"вы можете использовать короткие имена</span><span style=\" font-size:12pt; font-"
+"weight:700;\"> l,r,t,b,e </span></p><p><span style=\" font-size:12pt;\">Вы можете "
+"записать только те параметры, которые хотите изменить. Примеры:</span></p><p><span "
+"style=\" font-size:12pt;\">на мониторе с именем</span><span style=\" font-size:12pt; "
+"font-weight:700;\">DP-2 </span><span style=\" font-size:12pt;\">будет установлен правый "
+"отступ в 10 пикселей, левый в 20 и между окнами будет 10</span></p><p><span style=\" "
+"font-size:12pt; font-weight:700;\">DP-2:r=10,l=20,between=10</span></p><p><span style=\" "
+"font-size:12pt;\">а в этом будет убран интервал между окнами только для заданного "
+"монитора, виртуального рабочего стола и Активности</span></p><p><span style=\" font-"
+"size:12pt; font-weight:700;\">HDMI-A-1:99e10d31-e8f3-44aa-bbed-2a543f13fa54:Desktop "
+"1:e=0</span></p></body></html>"
+
+#: KrohnkiteConfigForm%2342
+msgid "OutputName:<left,right,top,bottom,between>=number,...<Enter>"
+msgstr "OutputName:<left,right,top,bottom,between>=number,...<Enter>"
+
+#: KrohnkiteConfigForm%2343
+msgid "Maximum Tile Width"
+msgstr "Максимальная ширина плитки"
+
+#: KrohnkiteConfigForm%2344
+msgid "Ratio of the max width to screen height "
+msgstr "Соотношение макс.ширины к высоте экрана "
+
+#: KrohnkiteConfigForm%2345
+msgid ""
+"<html><head/><body><p>value 1.6 means the width of the tile can be 60% greater than  the "
+"height</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Значение 1.6 значит, что ширина тайла будет максимум на 60% больше "
+"его высоты.</p></body></html>"
+
+#: KrohnkiteConfigForm%2346
+msgid "Limit the width of tiled windows"
+msgstr "Ограничить ширину Тайлов"
+
+#: KrohnkiteConfigForm%2347
+msgid "Behavior"
+msgstr "Поведение"
+
+#: KrohnkiteConfigForm%2348
+msgid "Layout Adjustment"
+msgstr "Выравнивание Схемы"
+
+#: KrohnkiteConfigForm%2349
+msgid ""
+"Resizing window will cause layout to be adjusted. The actual behaviour might differ "
+"based on layout in use."
+msgstr ""
+"Изменение размена окна будет влиять на размер схемы. Это поведение зависет от выбранной "
+"схемы."
+
+#: KrohnkiteConfigForm%2350
+msgid "Adjust layout by resizing windows"
+msgstr "Менять размер схемы, изменяя размер окон"
+
+#: KrohnkiteConfigForm%2351
+msgid ""
+"If enabled, resizing window will immediately adjust layout. If disabled, layout will be "
+"adjusted *after* window resizing is over."
+msgstr ""
+"Если включён, изменение размера окна будет немедленно менять размер схемы. Если "
+"выключен, размер схемы будет изменяться после окончания изменения окна."
+
+#: KrohnkiteConfigForm%2352
+msgid "Adjust layout in realtime as window is being resized"
+msgstr "Изменять Схему в реальном времени, как только окно изменило размер"
+
+#: KrohnkiteConfigForm%2353
+msgid "Directional Keys Behaviors"
+msgstr "Поведение клавиш направления"
+
+#: KrohnkiteConfigForm%2354
+msgid "Up"
+msgstr "Верх"
+
+#: KrohnkiteConfigForm%2355
+msgid "Directional"
+msgstr "Направленный"
+
+#: KrohnkiteConfigForm%2356
+msgid "DWM st&yle"
+msgstr "в стиле DWM"
+
+#: KrohnkiteConfigForm%2357
+msgid "Focus Next"
+msgstr "Фокус След"
+
+#: KrohnkiteConfigForm%2358
+msgid "Down"
+msgstr "Вниз"
+
+#: KrohnkiteConfigForm%2359
+msgid "Focus Prev"
+msgstr "Фокус пред"
+
+#: KrohnkiteConfigForm%2360
+msgid "Adjust Layout"
+msgstr "Размер Схемы"
+
+#: KrohnkiteConfigForm%2361
+msgid "Focus Up"
+msgstr "Фокус Вверх"
+
+#: KrohnkiteConfigForm%2362
+msgid "Focus Down"
+msgstr "Фокус Вниз"
+
+#: KrohnkiteConfigForm%2363
+msgid "Focus Left"
+msgstr "Фокус Влево"
+
+#: KrohnkiteConfigForm%2364
+msgid "Focus Right"
+msgstr "Фокус Вправо"
+
+#: KrohnkiteConfigForm%2365
+msgid "Position of the New Window"
+msgstr "Позиция для Нового окна"
+
+#: KrohnkiteConfigForm%2366
+msgid "Last"
+msgstr "Последняя"
+
+#: KrohnkiteConfigForm%2367
+msgid "First"
+msgstr "Первая"
+
+#: KrohnkiteConfigForm%2368
+msgid "Second"
+msgstr "Вторая"
+
+#: KrohnkiteConfigForm%2369
+msgid "Rules"
+msgstr "Правила"
+
+#: KrohnkiteConfigForm%2370
+msgid "Ignore Windows"
+msgstr "Игнорировать Окна"
+
+#: KrohnkiteConfigForm%2371
+msgid "By Title"
+msgstr "По Заголовку"
+
+#: KrohnkiteConfigForm%2372
+msgid "By Class"
+msgstr "По Классу"
+
+#: KrohnkiteConfigForm%2373
+msgid "Comma-separated list of window classes. Matching windows will not be tiled."
+msgstr ""
+"Через запятую список  классов(windowClass или ResourceClass) окон, которые будут "
+"игнорироваться."
+
+#: KrohnkiteConfigForm%2374
+msgid ""
+"Comma-separated list of keywords(or substrings). Any windows with matching title will "
+"not be tiled."
+msgstr ""
+"Через запятую список  слов(или части предложения). Любые окна с заголовками(title) "
+"содержащими эти слова будут игнорироваться."
+
+#: KrohnkiteConfigForm%2375
+msgid "By Role"
+msgstr "По Роли"
+
+#: KrohnkiteConfigForm%2376
+msgid "Float Windows"
+msgstr "Плавающие Окна"
+
+#: KrohnkiteConfigForm%2377
+msgid ""
+"Comma-separated list of window classes. Matching windows will become float automatically."
+msgstr ""
+"Через запятую список классов(windowClass или ResourceClass) окон, которые будут "
+"становиться плавающими автоматически."
+
+#: KrohnkiteConfigForm%2378
+msgid ""
+"Comma-separated list of keywords(or substrings). Any windows with matching title will "
+"become float automatically"
+msgstr ""
+"Через запятую список слов(или части предложения). Любые окна с заголовками(title) "
+"содержащими эти слова будут становиться плавающими автоматически"
+
+#: KrohnkiteConfigForm%2379
+msgid ""
+"This is mainly for debugging purpose, but can also be used to meet some specific "
+"requirements."
+msgstr ""
+"В основном для отладочных целей, но также может использоваться в специальных ситуациях."
+
+#: KrohnkiteConfigForm%2380
+msgid ""
+"Float utility windows\n"
+"(applies to window type Dialog, Splash, Utility)"
+msgstr "Делать все вспомогательные(диалоговые,всплывающие и т.д) окна плавающими."
+
+#: KrohnkiteConfigForm%2381
+msgid "Disable Tiling"
+msgstr "Выключение Тайлинга"
+
+#: KrohnkiteConfigForm%2382
+msgid ""
+"<html><head/><body><p>Comma-separated list of activity IDs. See Readme or Issue #125 to "
+"know IDs. Windows in corresponding activities will not be tiled.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Через запятую список номеров Активностей(activity IDs). Смотри  "
+"Документацию или Issue #125 чтобы узнать эти номера. Окна относящиеся к этой Активности "
+"будут игнорироваться.</p></body></html>"
+
+#: KrohnkiteConfigForm%2383
+msgid "On Activity (activityId)"
+msgstr "На Активности(activityId)"
+
+#: KrohnkiteConfigForm%2384
+msgid "On Screen (name)"
+msgstr "На Мониторе"
+
+#: KrohnkiteConfigForm%2385
+msgid ""
+"Comma-separated list of screen names. Windows in corresponding screens will not be tiled."
+msgstr "Через запятую список имён мониторов. Окна на этих мониторах будут игнорироваться."
+
+#: KrohnkiteConfigForm%2386
+msgid "On Virtual Desktop"
+msgstr "На Вирт.Раб.Столе"
+
+#: KrohnkiteConfigForm%2387
+msgid ""
+"Comma-separated list of Virtual Desktops names. Windows corresponding to these will not "
+"be tiled."
+msgstr ""
+"Через запятую имена Виртуальных Рабочих Столов. Все окна на этих столах будут "
+"игнорироваться."
+
+#: KrohnkiteConfigForm%2388
+msgid "Always, except by class"
+msgstr "Всё, кроме классов"
+
+#: KrohnkiteConfigForm%2389
+msgid ""
+"Comma-separated list of window classes. Matching windows will become tiled automatically."
+msgstr "Через запятую список классов окон. Совпадающие окна не будут проигнорированы."
+
+#: KrohnkiteConfigForm%2390
+msgid "Screen default layout"
+msgstr "Схема по умолчанию для монитора"
+
+#: KrohnkiteConfigForm%2391
+msgid ""
+"<html><head/><body><p>Comma-separated list OutputName:LayoutName. 'Layout' word can be "
+"omit. </p><p>2 monitors example: HDMI-A-1:spread,DP-2:tile</p><p>Example with desktop "
+"name: HDMI-A-1:Desktop 1:1,HDMI-A-1:Desktop 2:columns</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Разделённый запятыми список ИмяМонитора:ИмяСхемы. Схему нужно "
+"писать на английском, так как она пишется на экране при её включении, слово 'layout' "
+"можно не писать. </p><p>Пример для двух мониторов: HDMI-A-1:spread,DP-2:tile</"
+"p><p>Example with desktop name: HDMI-A-1:Desktop 1:1,HDMI-A-1:Desktop 2:columns</p></"
+"body></html>"
+
+#: KrohnkiteConfigForm%2392
+msgid "OutputName:LayoutName,..."
+msgstr "ИмяМонитора:ИмяСхемы"
+
+#: KrohnkiteConfigForm%2393
+msgid "Dock"
+msgstr "Док"
+
+#: KrohnkiteConfigForm%2394
+msgid "<html><head/><body><p>hv - short name</p></body></html>"
+msgstr "<html><head/><body><p>короткое имя - hv </p></body></html>"
+
+#: KrohnkiteConfigForm%2395
+msgid "Surfaces configuration"
+msgstr "Конфигурация Поверхности"
+
+#: KrohnkiteConfigForm%2396
+msgid "Order of docked windows"
+msgstr "Очерёдность пристыковки окон"
+
+#: KrohnkiteConfigForm%2397
+msgid "Off"
+msgstr "Выключить"
+
+#: KrohnkiteConfigForm%2398
+msgid "Third"
+msgstr "Третий"
+
+#: KrohnkiteConfigForm%2399
+msgid "Fourth"
+msgstr "Четвёртый"
+
+#: KrohnkiteConfigForm%23100
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Overriding default parameters for "
+"every surface. Format: </span><span style=\" font-size:12pt; font-"
+"weight:700;\">OuputName:ActivityId:VirtualDesktopName:shortname=value,shortname=value... "
+"&lt;Enter&gt;</span></p><p><span style=\" font-size:12pt;\">You can only write down "
+"parameters you want to change. You can see the short name of the parameter if you hover "
+"over any default parameter above.</span></p><p><span style=\" font-size:12pt;\">Next "
+"example override three params on all surfaces with OutputName=HDMI-A-1 </span></"
+"p><p><span style=\" font-size:12pt; font-weight:700;\">HDMI-A-1:::hh=80,vw=80,ha=left</"
+"span></p><p><span style=\" font-size:12pt;\">this one, will override two params only for "
+"defined display, virtual desktop and activity</span></p><p><span style=\" font-"
+"size:12pt; font-weight:700;\">HDMI-A-1:99e10d31-e8f3-44aa-bbed-2a543f13fa54:Desktop "
+"1:vg=5,va=2</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Переопределение  параметров для "
+"поверхности. Формат: </span><span style=\" font-size:12pt; font-"
+"weight:700;\">OuputName:ActivityId:VirtualDesktopName:shortname=value,shortname=value... "
+"&lt;Enter&gt;</span></p><p><span style=\" font-size:12pt;\">Вы можете писать только те "
+"параметры, значение которых хотите переопределить. Вы увидите короткие имена параметров "
+"если наведёте мышь на любой из параметров.</span></p><p><span style=\" font-size:12pt;"
+"\">Следующий пример переопределяет три параметра на всех поверхностях с OutputName=HDMI-"
+"A-1 </span></p><p><span style=\" font-size:12pt; font-weight:700;\">HDMI-"
+"A-1:::hh=80,vw=80,ha=left</span></p><p><span style=\" font-size:12pt;\">этот пример "
+"переопределит два параметра на полностью определённой поверхности</span></p><p><span "
+"style=\" font-size:12pt; font-weight:700;\">HDMI-A-1:99e10d31-e8f3-44aa-"
+"bbed-2a543f13fa54:Desktop 1:vg=5,va=2</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23101
+msgid "Default settings for a docked window"
+msgstr "Параметры пристыкованного окна"
+
+#: KrohnkiteConfigForm%23102
+msgid "Up/Bottom Dock"
+msgstr "Верхний/Нижний Док"
+
+#: KrohnkiteConfigForm%23103
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</span><span style=\" "
+"font-weight:700;\">hh</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя:</span><span "
+"style=\" font-weight:700;\">hh</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23104
+msgid " %"
+msgstr " %"
+
+#: KrohnkiteConfigForm%23105
+msgid "Height"
+msgstr "Высота"
+
+#: KrohnkiteConfigForm%23106
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </span><span style=\" "
+"font-weight:700;\">hw</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя: </span><span "
+"style=\" font-weight:700;\">hw</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23107
+msgid "<html><head/><body><p>vw - short name</p></body></html>"
+msgstr "<html><head/><body><p>короткое имя: vw </p></body></html>"
+
+#: KrohnkiteConfigForm%23108
+msgid "Wide"
+msgstr "Ширина"
+
+#: KrohnkiteConfigForm%23109
+msgid "Gaps"
+msgstr "Отступы"
+
+#: KrohnkiteConfigForm%23110
+msgid "Horizontal "
+msgstr "По ширине "
+
+#: KrohnkiteConfigForm%23111
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </span><span style=\" "
+"font-weight:700;\">hgv</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя: </span><span "
+"style=\" font-weight:700;\">hgv</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23112
+msgid " px"
+msgstr " px"
+
+#: KrohnkiteConfigForm%23113
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</span><span style=\" "
+"font-weight:700;\">hgh</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя:</span><span "
+"style=\" font-weight:700;\">hgh</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23114
+msgid "Vertical"
+msgstr "По высоте"
+
+#: KrohnkiteConfigForm%23115
+msgid "Alignment"
+msgstr "Выравнивание"
+
+#: KrohnkiteConfigForm%23116
+msgid "Horizontal"
+msgstr "По ширине"
+
+#: KrohnkiteConfigForm%23117
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </span><span style=\" "
+"font-weight:700;\">he</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя: </span><span "
+"style=\" font-weight:700;\">he</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23118
+msgid "Outside"
+msgstr "Наружу"
+
+#: KrohnkiteConfigForm%23119
+msgid "Middle"
+msgstr "Посередине"
+
+#: KrohnkiteConfigForm%23120
+msgid "Inside"
+msgstr "Внутрь"
+
+#: KrohnkiteConfigForm%23121
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</span><span style=\" "
+"font-weight:700;\">ha</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя:</span><span "
+"style=\" font-weight:700;\">ha</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23122
+msgid "Center"
+msgstr "По центру"
+
+#: KrohnkiteConfigForm%23123
+msgid "Left/Right Dock"
+msgstr "Левый/Правый док"
+
+#: KrohnkiteConfigForm%23124
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </span><span style=\" "
+"font-weight:700;\">vh</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя: </span><span "
+"style=\" font-weight:700;\">vh</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23125
+msgid "Horizontal Spacer 'horizontalSpacer_4', 40 x 20"
+msgstr "Horizontal Spacer 'horizontalSpacer_4', 40 x 20"
+
+#: KrohnkiteConfigForm%23126
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </span><span style=\" "
+"font-weight:700;\">vw</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя: </span><span "
+"style=\" font-weight:700;\">vw</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23127
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</span><span style=\" "
+"font-weight:700;\">vgh</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя:</span><span "
+"style=\" font-weight:700;\">vgh</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23128
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name:</span><span style=\" "
+"font-weight:700;\">vgv</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя:</span><span "
+"style=\" font-weight:700;\">vgv</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23129
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </span><span style=\" "
+"font-weight:700;\">va</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя: </span><span "
+"style=\" font-weight:700;\">va</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23130
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">short name: </span><span style=\" "
+"font-weight:700;\">ve</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">короткое имя: </span><span "
+"style=\" font-weight:700;\">ve</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23131
+msgid "Window class configuration"
+msgstr "Конфигурация для класса окна"
+
+#: KrohnkiteConfigForm%23132
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Overriding default parameters for "
+"the specified WindowClass. Format:</span></p><p><span style=\" font-size:12pt; font-"
+"weight:700;\">WindowClass:SpecialFlag,SpecialFlag...:shortname=value,shortname=value...</"
+"span></p><p><span style=\" font-size:12pt; font-weight:700;\">pin - </span><span "
+"style=\" font-size:12pt;\">docked window with this flag will displace another if their "
+"positions are equal.</span></p><p><span style=\" font-size:12pt; font-"
+"weight:700;\">left,right,top,bottom</span><span style=\" font-size:12pt;\"> - you can "
+"use one them to explicitly set the initial position.</span></p><p><span style=\" font-"
+"size:12pt; font-weight:700;\">auto</span><span style=\" font-size:12pt;\"> - "
+"automatically makes a window docked. Krohnkite version &gt;=0.9.9.1</span></p><p><span "
+"style=\" font-size:12pt;\">You can only write down the parameters you want to change. "
+"You can see the short name of the parameter if you hover over any default parameter "
+"above.</span></p><p><span style=\" font-size:12pt;\">Examples:</span></p><p><span "
+"style=\" font-size:12pt;\">1. if Elisa switches to dock it will have higher priority, "
+"top dock position and 10% of screen height </span></p><p><span style=\" font-size:12pt;"
+"\">org.kde.elisa</span><span style=\" font-size:12pt; font-weight:700;\">:pin,top:hh=10</"
+"span></p><p><span style=\" font-size:12pt;\">2. Conky automatic docking</span></"
+"p><p><span style=\" font-family:'Hack'; font-size:12pt;\">Conky:</span><span style=\" "
+"font-family:'Hack'; font-size:12pt; font-weight:700;\">auto</span><span style=\" font-"
+"family:'Hack'; font-size:12pt;\">:</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Переопределение параметров для "
+"указанного WindowClass(ResourceClass). Формат:</span></p><p><span style=\" font-"
+"size:12pt; font-"
+"weight:700;\">КлассОкна:СпециальныйФлаг,СпециальныйФлаг...:короткоеИмя=значение,короткоеИмя=значение..."
+"</span></p><p><span style=\" font-size:12pt; font-weight:700;\">pin - </span><span "
+"style=\" font-size:12pt;\">пристыкованное окно с этим специальным флагом будет вытеснять "
+"другое окно с такой же позицией.</span></p><p><span style=\" font-size:12pt; font-"
+"weight:700;\">left,right,top,bottom</span><span style=\" font-size:12pt;\">- "
+"использование одного из этих специальных флагов явно указывает начальную позицию.</"
+"span></p><p><span style=\" font-size:12pt; font-weight:700;\">auto</span><span style=\" "
+"font-size:12pt;\"> - автоматически пристыковывать окно. Версия Krohnkite&gt;=0.9.9.1</"
+"span></p><p><span style=\" font-size:12pt;\">Можно указывать только те параметры, "
+"которые хотите изменить. КороткоеИмя можно увидеть если навести мышью на поле с этим "
+"параметром.</span></p><p><span style=\" font-size:12pt;\">Примеры:</span></p><p><span "
+"style=\" font-size:12pt;\">1.Если  Elisa будет пристыкованна она будет иметь повышенный "
+"приоритет, верхнюю позицию и высота будет 10% от высоты экрана</span></p><p><span "
+"style=\" font-size:12pt;\">org.kde.elisa</span><span style=\" font-size:12pt; font-"
+"weight:700;\">:pin,top:hh=10</span></p><p><span style=\" font-size:12pt;\">2. Conky авто "
+"пристыковка</span></p><p><span style=\" font-family:'Hack'; font-size:12pt;\">Conky:</"
+"span><span style=\" font-family:'Hack'; font-size:12pt; font-weight:700;\">auto</"
+"span><span style=\" font-family:'Hack'; font-size:12pt;\">:</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23133
+msgid "Options"
+msgstr "Опции"
+
+#: KrohnkiteConfigForm%23134
+msgid "Window Layer"
+msgstr "Слой окна"
+
+#: KrohnkiteConfigForm%23135
+msgid "Tiled"
+msgstr "Тайлед"
+
+#: KrohnkiteConfigForm%23136
+msgid "Normal"
+msgstr "Нормальный"
+
+#: KrohnkiteConfigForm%23137
+msgid "Above"
+msgstr "Выше"
+
+#: KrohnkiteConfigForm%23138
+msgid "Float  "
+msgstr "Плавающее "
+
+#: KrohnkiteConfigForm%23139
+msgid "The Sole Window properties"
+msgstr "Свойства единственного окна"
+
+#: KrohnkiteConfigForm%23140
+msgid "%"
+msgstr "%"
+
+#: KrohnkiteConfigForm%23141
+msgid "Width "
+msgstr "Ширина"
+
+#: KrohnkiteConfigForm%23142
+msgid "No Borders"
+msgstr "Убрать обрамление"
+
+#: KrohnkiteConfigForm%23143
+msgid "No Gaps"
+msgstr "Убрать отступы"
+
+#: KrohnkiteConfigForm%23144
+msgid "Notifications"
+msgstr "Оповещения"
+
+#: KrohnkiteConfigForm%23145
+msgid ""
+"<html><head/><body><p>Set the time (in milliseconds) for how long a pop-up notification "
+"will remain visible before it automatically disappears. A value of 0 will disable "
+"notifications.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Установить время(в миллисекундах) отображения всплывающих "
+"оповещений. Значение Ноль отключит всплывающие оповещения.</p></body></html>"
+
+#: KrohnkiteConfigForm%23146
+msgid " ms"
+msgstr " ms"
+
+#: KrohnkiteConfigForm%23147
+msgid "Duration  "
+msgstr "Продолжительность "
+
+#: KrohnkiteConfigForm%23148
+msgid ""
+"All tiled windows will have no borders. Borders will be added back if window become "
+"float."
+msgstr ""
+"Все тайлинговые окна не будут иметь обрамлений, они появятся если окно станет плавающем."
+
+#: KrohnkiteConfigForm%23149
+msgid "Use separate layouts for each Activity"
+msgstr "Для каждой Активности использовать свою Схему"
+
+#: KrohnkiteConfigForm%23150
+msgid "Use separate layouts for each Desktop"
+msgstr "Для каждого Виртуального Рабочего Стола использовать свою Схему"
+
+#: KrohnkiteConfigForm%23151
+msgid "Remove borders of tiled windows"
+msgstr "Удалять обрамление для тайлинговых окон"
+
+#: KrohnkiteConfigForm%23152
+msgid "Always preserve the tiling status of a window upon dragging"
+msgstr "Сохранять окно тайлинговым во время перетаскивания"
+
+#: KrohnkiteConfigForm%23153
+msgid "Prevent windows from minimizing (experimental)"
+msgstr "Предотвращать сворачивание окон(экспериментально)"
+
+#: KrohnkiteConfigForm%23154
+msgid "Prevent window from protruding from its screen"
+msgstr "Предотвращать выход окна за границы экрана"
+
+#: KrohnkiteConfigForm%23155
+msgid ""
+"<html><head/><body><p>If enabled, all windows with property skipPager=true become "
+"floating. You can create KDE Window Rule and force  skipPager=true.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Если включён, все окна со свойством skipPager=true станут "
+"плавающими. Нужно создать Правило для Окна в KDE skipPager=true. Более подробно читайте "
+"в Github Вики</p></body></html>"
+
+#: KrohnkiteConfigForm%23156
+msgid "Make the window float if its property: skipPager=true (HACK)"
+msgstr "Сделать окно плавающем если его свойство: skipPager=true (HACK)"
+
+#: KrohnkiteConfigForm%23157
+msgid "Log"
+msgstr "Лог"
+
+#: KrohnkiteConfigForm%23158
+msgid "Use this option to debug the script or submit detailed bug report."
+msgstr "Включить отладку скрипта"
+
+#: KrohnkiteConfigForm%23159
+msgid "Logging"
+msgstr "Логирование"
+
+#: KrohnkiteConfigForm%23160
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">logs all windows that Krohnkite "
+"indexes and manages</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Логи всех окон которыми  "
+"Krohnkite управляет</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23161
+msgid "Added new windows"
+msgstr "Добавленные новые окна"
+
+#: KrohnkiteConfigForm%23162
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">logs all windows that Krohnkite "
+"does not manage for many reasons: service, dialog, etc.</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">включает логирование всех новых "
+"окон, которыми Krohnkite не управляет по разным причинам: service, dialog, etc.</span></"
+"p></body></html>"
+
+#: KrohnkiteConfigForm%23163
+msgid "Filtered new windows"
+msgstr "Отфильтрованные новые окна"
+
+#: KrohnkiteConfigForm%23164
+msgid ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">logs all windows that Krohkite "
+"could manage if not for the filters in the configuration</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:12pt;\">Логи всех окон которыми Krohkite "
+"мог бы управлять если бы они не были отфильтрованы с помощью конфигурации.</span></p></"
+"body></html>"
+
+#: KrohnkiteConfigForm%23165
+msgid "Unmanaged new windows"
+msgstr "Отфильтрованные новые окна"
+
+#: KrohnkiteConfigForm%23166
+msgid ""
+"<html><head/><body><h4 style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"size:medium; font-weight:700;\">Filtering log modules</span></h4><p>the group of the log "
+"modules checkbox enables the entire group of log modules at once and in order to include "
+"only certain modules there is a line-edit nearby. Examples:</p><ul style=\"margin-top: "
+"0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li "
+"style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-"
+"block-indent:0; text-indent:0px;\"><span style=\" font-family:'Hack';\">1,4-</span> - "
+"enable only the first and from the fourth to the last module</li><li style=\" margin-"
+"top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\"><span style=\" font-family:'Hack';\">!1,4-6</span> - the exclamation mark "
+"at the beginning turns on the exclude mode, so this line will enable all modules except "
+"1 and from 4 to 6. <span style=\" font-family:'Hack';\">!</span> - the exclamation mark "
+"you can use only once in the beginning, to enable the exclude mode.</li></ul></body></"
+"html>"
+msgstr ""
+"<html><head/><body><h4 style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"size:medium; font-weight:700;\">Фильтр лог модулей</span></h4><p>чекбокс рядом с "
+"названием группы включает все модули в этой группе; чтобы включить только определённые "
+"модули нужно написать их порядковые номера рядом в строке. Примеры:</p><ul "
+"style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-"
+"list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Hack';\">1,4-</span> - включит первый модуль и все модули с четвёртого до "
+"последнего</li><li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Hack';\">!"
+"1,4-6</span> - восклицательный знак включит режим исключения; в этом примере будут "
+"включены все модули кроме 1,4,5 и 6. <span style=\" font-family:'Hack';\">!</span> - "
+"восклицательный знак можно использовать только раз в начале.</li></ul></body></html>"
+
+#: KrohnkiteConfigForm%23167
+msgid "filter log modules popup tooltip <<<hover me>>>"
+msgstr "Подсказка для фильтра лог модулей <<<наведи на меня>>>"
+
+#: KrohnkiteConfigForm%23168
+msgid ""
+"<html><head/><body><h5 style=\" margin-top:12px; margin-bottom:4px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt; "
+"font-weight:700;\">Workspace signals log modules</span></h5><p><span style=\" font-"
+"size:11pt;\">1. screensChanged</span></p><p><span style=\" font-size:11pt;\">2. "
+"virtualScreenGeometryChanged</span></p><p><span style=\" font-size:11pt;\">3. "
+"currentActivityChanged</span></p><p><span style=\" font-size:11pt;\">4. "
+"currentDesktopChanged</span></p><p><span style=\" font-size:11pt;\">5. windowAdded</"
+"span></p><p><span style=\" font-size:11pt;\">6. windowActivated</span></p><p><span "
+"style=\" font-size:11pt;\">7. windowRemoved</span></p><p><br/></p></body></html>"
+msgstr ""
+"<html><head/><body><h5 style=\" margin-top:12px; margin-bottom:4px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt; "
+"font-weight:700;\">Список лог модулей сигналов Workspace </span></h5><p><span style=\" "
+"font-size:11pt;\">1. screensChanged</span></p><p><span style=\" font-size:11pt;\">2. "
+"virtualScreenGeometryChanged</span></p><p><span style=\" font-size:11pt;\">3. "
+"currentActivityChanged</span></p><p><span style=\" font-size:11pt;\">4. "
+"currentDesktopChanged</span></p><p><span style=\" font-size:11pt;\">5. windowAdded</"
+"span></p><p><span style=\" font-size:11pt;\">6. windowActivated</span></p><p><span "
+"style=\" font-size:11pt;\">7. windowRemoved</span></p><p><br/></p></body></html>"
+
+#: KrohnkiteConfigForm%23169
+msgid ""
+"<html><head/><body><p><span style=\" font-size:11pt; font-weight:700;\">All other log "
+"modules</span></p><p><span style=\" font-size:11pt;\">1. shortcut</span></p><p><span "
+"style=\" font-size:11pt;\">2. arrangeScreen</span></p><p><span style=\" font-size:11pt;"
+"\">3. printConfig</span></p><p><span style=\" font-size:11pt;\">4. setTimeout</span></"
+"p><p><span style=\" font-size:11pt;\">5. window</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:11pt; font-weight:700;\">Все прочие лог "
+"модули</span></p><p><span style=\" font-size:11pt;\">1. shortcut</span></p><p><span "
+"style=\" font-size:11pt;\">2. arrangeScreen</span></p><p><span style=\" font-size:11pt;"
+"\">3. printConfig</span></p><p><span style=\" font-size:11pt;\">4. setTimeout</span></"
+"p><p><span style=\" font-size:11pt;\">5. window</span></p></body></html>"
+
+#: KrohnkiteConfigForm%23170
+msgid "Workspace signals"
+msgstr "Workspace сигналы"
+
+#: KrohnkiteConfigForm%23171
+msgid "Window signals     "
+msgstr "Сигналы Окна"
+
+#: KrohnkiteConfigForm%23172
+msgid ""
+"<html><head/><body><h5 style=\" margin-top:12px; margin-bottom:4px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt; "
+"font-weight:700;\">Window signals log modules</span></h5><p><span style=\" font-"
+"size:11pt;\">1. activitiesChanged</span></p><p><span style=\" font-size:11pt;\">2. "
+"bufferGeometryChanged</span></p><p><span style=\" font-size:11pt;\">3. desktopsChanged</"
+"span></p><p><span style=\" font-size:11pt;\">4. fullScreenChanged</span></p><p><span "
+"style=\" font-size:11pt;\">5. interactiveMoveResizeStepped</span></p><p><span style=\" "
+"font-size:11pt;\">6. maximizedAboutToChange</span></p><p><span style=\" font-size:11pt;"
+"\">7. minimizedChanged</span></p><p><span style=\" font-size:11pt;\">8. "
+"moveResizedChanged</span></p><p><span style=\" font-size:11pt;\">9. outputChanged</"
+"span></p></body></html>"
+msgstr ""
+"<html><head/><body><h5 style=\" margin-top:12px; margin-bottom:4px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt; "
+"font-weight:700;\">Список лог модулей сигналов Window</span></h5><p><span style=\" font-"
+"size:11pt;\">1. activitiesChanged</span></p><p><span style=\" font-size:11pt;\">2. "
+"bufferGeometryChanged</span></p><p><span style=\" font-size:11pt;\">3. desktopsChanged</"
+"span></p><p><span style=\" font-size:11pt;\">4. fullScreenChanged</span></p><p><span "
+"style=\" font-size:11pt;\">5. interactiveMoveResizeStepped</span></p><p><span style=\" "
+"font-size:11pt;\">6. maximizedAboutToChange</span></p><p><span style=\" font-size:11pt;"
+"\">7. minimizedChanged</span></p><p><span style=\" font-size:11pt;\">8. "
+"moveResizedChanged</span></p><p><span style=\" font-size:11pt;\">9. outputChanged</"
+"span></p></body></html>"
+
+#: KrohnkiteConfigForm%23173
+msgid "Other                       "
+msgstr "Другие                       "
+
+#: KrohnkiteConfigForm%23174
+msgid ""
+"<html><head/><body><p><span style=\" font-size:11pt;\">Also, in addition to the fact "
+"that you can include only the modules you need, you can enable </span><span style=\" "
+"font-family:'Hack'; font-size:11pt;\">Filter</span><span style=\" font-size:11pt;\"> "
+"checkbox and use other filters in filter line edit:</span></p><p><span style=\" font-"
+"size:11pt;\">- </span><span style=\" font-size:11pt; font-weight:700;\">winclass</span></"
+"p><p><span style=\" font-size:11pt;\">Examples:</span></p><p><span style=\" font-"
+"family:'Hack'; font-size:11pt;\">- </span><span style=\" font-family:'Hack'; font-"
+"size:11pt; font-weight:700;\">winclass=[konsole]</span><span style=\" font-size:11pt; "
+"font-weight:700;\"/><span style=\" font-size:11pt;\">- some modules may be filtered by a "
+"window class, so this logs modules will show only windows with class that contains </"
+"span><span style=\" font-family:'Hack'; font-size:11pt;\">konsole</span><span style=\" "
+"font-size:11pt;\"> word.</span></p><p><span style=\" font-family:'Hack'; font-size:11pt;"
+"\">- </span><span style=\" font-family:'Hack'; font-size:11pt; font-weight:700;\">!"
+"winclass=org.kde.elisa:org.kde.ruler</span><span style=\" font-size:11pt;\"> -Exclude "
+"Elisa and Kruler from log output</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:11pt;\">Также в дополнение к тому, что вы "
+"можете включать только те модули которые нужны, вы можете включить</span><span style=\" "
+"font-family:'Hack'; font-size:11pt;\">Фильтр</span><span style=\" font-size:11pt;\"> "
+"чекбокс и использовать ещё один вид фильтров:</span></p><p><span style=\" font-size:11pt;"
+"\">- </span><span style=\" font-size:11pt; font-weight:700;\">winclass</span></"
+"p><p><span style=\" font-size:11pt;\">Примеры:</span></p><p><span style=\" font-"
+"family:'Hack'; font-size:11pt;\">- </span><span style=\" font-family:'Hack'; font-"
+"size:11pt; font-weight:700;\">winclass=[konsole]</span><span style=\" font-size:11pt; "
+"font-weight:700;\"/><span style=\" font-size:11pt;\">- некоторые модули могут быть "
+"отфильтрованы по классу окна и лог модули будут показывать логи только тех окон в "
+"которых есть слово </span><span style=\" font-family:'Hack'; font-size:11pt;\">konsole</"
+"span><span style=\" font-size:11pt;\"> .</span></p><p><span style=\" font-family:'Hack'; "
+"font-size:11pt;\">- </span><span style=\" font-family:'Hack'; font-size:11pt; font-"
+"weight:700;\">!winclass=org.kde.elisa:org.kde.ruler</span><span style=\" font-size:11pt;"
+"\"> - исключает из показа логов окна Elisa и Kruler </span></p></body></html>"
+
+#: KrohnkiteConfigForm%23175
+msgid "Filter"
+msgstr "Фильтр"
