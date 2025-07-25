@@ -509,8 +509,7 @@ class KWinDriver implements IDriverContext {
         { winClass: [`${client.resourceClass}`] }
       );
       // const maximized = mode === MaximizeMode.MaximizeFull;
-      (window.window as KWinWindow).maximized =
-        (mode as number) > 0 ? true : false;
+      (window.window as KWinWindow).maximized = (mode as number) > 0;
       this.control.onWindowMaximizeChanged(this, window);
     });
 
