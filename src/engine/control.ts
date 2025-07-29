@@ -64,8 +64,11 @@ class TilingController {
         }
       }
     }
-
-    this.engine.arrange(ctx);
+    if (
+      window.state !== WindowState.NativeMaximized &&
+      window.state !== WindowState.NativeFullscreen
+    )
+      this.engine.arrange(ctx);
   }
 
   public onWindowSkipPagerChanged(

@@ -143,10 +143,14 @@ class KWinDriver implements IDriverContext {
       client.width * client.height > 10
     ) {
       const window = this.windowMap.add(client);
+      if (client.maximizeMode > 0) {
+        (window.window as KWinWindow).maximized = true;
+        // it can set maximized to false when window start already with maximized flag
+        // client.setMaximize(false, false);
+      }
       this.control.onWindowAdded(this, window);
       if (window.state !== WindowState.Unmanaged) {
         this.bindWindowEvents(window, client);
-        if (client.maximizeMode > 0) client.setMaximize(false, false);
         LOG?.send(LogModules.newWindowAdded, "", debugWin(client), {
           winClass: [`${client.resourceClass}`],
         });
