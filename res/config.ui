@@ -77,8 +77,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>783</width>
-            <height>1116</height>
+            <width>787</width>
+            <height>1120</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -3687,6 +3687,41 @@
          <zorder>kcfg_soleWindowHeight</zorder>
          <zorder>kcfg_soleWindowNoBorders</zorder>
          <zorder>kcfg_soleWindowNoGaps</zorder>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Unfitted Windows</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_18">
+          <item>
+           <widget class="QCheckBox" name="kcfg_unfitGreater">
+            <property name="toolTip">
+             <string>If enable make all windows floating if they minimum size to large for tile</string>
+            </property>
+            <property name="text">
+             <string>make floating if  min. size of window greater than Tile size </string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_unfitLess">
+            <property name="toolTip">
+             <string>If enable make all windows floating if the maximum size to small for tile</string>
+            </property>
+            <property name="text">
+             <string>make floating if  max. size of window less than Tile size </string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>

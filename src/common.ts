@@ -155,6 +155,9 @@ interface IConfig {
   soleWindowNoGaps: boolean;
   //#endregion
 
+  unfitGreater: boolean;
+  unfitLess: boolean;
+
   //#region Features
   adjustLayout: boolean;
   adjustLayoutLive: boolean;

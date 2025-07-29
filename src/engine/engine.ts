@@ -253,7 +253,7 @@ class TilingEngine {
       }
     });
 
-    const tileables = this.windows.getVisibleTileables(srf);
+    let tileables = this.windows.getVisibleTileables(srf);
 
     let tilingArea: Rect;
     if (
@@ -283,13 +283,34 @@ class TilingEngine {
         gaps.bottom
       );
 
-    if (tileables.length > 0)
-      layout.apply(
-        new EngineContext(ctx, this),
-        tileables,
-        tilingArea,
-        gaps.between
-      );
+    let tileablesLen = tileables.length;
+    if (tileablesLen > 0) {
+      let engineCtx = new EngineContext(ctx, this);
+      layoutApply();
+      if (CONFIG.unfitGreater || CONFIG.unfitLess) {
+        tileables = tileables.filter((tile) => {
+          if (
+            (CONFIG.unfitGreater &&
+              (tile.minSize.height > tile.geometry.height ||
+                tile.minSize.width > tile.geometry.width)) ||
+            (CONFIG.unfitLess &&
+              (tile.maxSize.height < tile.geometry.height ||
+                tile.maxSize.width < tile.geometry.width))
+          ) {
+            tile.state = WindowState.Floating;
+            return false;
+          } else {
+            return true;
+          }
+        });
+        if (tileables.length !== tileablesLen) {
+          layoutApply();
+        }
+      }
+      function layoutApply() {
+        layout.apply(engineCtx, tileables, tilingArea, gaps.between);
+      }
+    }
 
     if (CONFIG.limitTileWidthRatio > 0 && !(layout instanceof MonocleLayout)) {
       const maxWidth = Math.floor(
