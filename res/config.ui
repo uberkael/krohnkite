@@ -2385,46 +2385,70 @@
           <string>Float Windows</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <widget class="QLabel" name="floatingClassLabel">
-            <property name="text">
-             <string>By Class</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="kcfg_floatingClass">
-            <property name="toolTip">
-             <string>Comma-separated list of window classes. Matching windows will become float automatically.</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="floatingTitleLabel">
-            <property name="text">
-             <string>By Title</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="kcfg_floatingTitle">
-            <property name="toolTip">
-             <string>Comma-separated list of keywords(or substrings). Any windows with matching title will become float automatically</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
+          <item row="5" column="1">
            <widget class="QCheckBox" name="kcfg_floatUtility">
             <property name="toolTip">
              <string>This is mainly for debugging purpose, but can also be used to meet some specific requirements.</string>
             </property>
             <property name="text">
-             <string>Float utility windows
-(applies to window type Dialog, Splash, Utility)</string>
+             <string>Float utility windows(applies to window type Dialog, Splash, Utility)</string>
             </property>
             <property name="checked">
              <bool>true</bool>
             </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="kcfg_floatDefault">
+            <property name="toolTip">
+             <string>This is mainly for debugging purpose, but can also be used to meet some specific requirements.</string>
+            </property>
+            <property name="text">
+             <string>by default all new windows become floating</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QGroupBox" name="groupBox_31">
+            <property name="title">
+             <string/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_28">
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="kcfg_floatingClass">
+               <property name="toolTip">
+                <string>Comma-separated list of window classes. Matching windows will become float automatically.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="floatingClassLabel">
+               <property name="text">
+                <string>By Class</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="floatingTitleLabel">
+               <property name="text">
+                <string>By Title</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="kcfg_floatingTitle">
+               <property name="toolTip">
+                <string>Comma-separated list of keywords(or substrings). Any windows with matching title will become float automatically</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>

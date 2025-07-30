@@ -94,6 +94,7 @@ class KWinConfig implements IConfig {
   public floatingClass: string[];
   public floatingTitle: string[];
   public ignoreClass: string[];
+  public floatDefault: boolean;
   public ignoreTitle: string[];
   public ignoreRole: string[];
 
@@ -298,6 +299,7 @@ class KWinConfig implements IConfig {
 
     this.floatingClass = separate(KWIN.readConfig("floatingClass", ""), ",");
     this.floatingTitle = separate(KWIN.readConfig("floatingTitle", ""), ",");
+    this.floatDefault = KWIN.readConfig("floatDefault", false);
     this.ignoreActivity = separate(KWIN.readConfig("ignoreActivity", ""), ",");
     this.ignoreClass = separate(
       KWIN.readConfig(

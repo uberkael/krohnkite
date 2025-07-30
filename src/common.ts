@@ -184,6 +184,7 @@ interface IConfig {
   //#endregion
   screenDefaultLayout: string[];
   floatSkipPager: boolean;
+  floatDefault: boolean;
 }
 
 interface IDriverWindow {

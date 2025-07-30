@@ -239,6 +239,11 @@
         <default></default>
     </entry>
 
+    <entry name="floatDefault" type="Bool">
+	    <label>by default all new windows become floating</label>
+        <default>false</default>
+    </entry>
+
     <entry name="floatUtility" type="Bool">
 	    <label>Automatically float utility windows (Dialog, Splash, Utility)</label>
         <default>true</default>
