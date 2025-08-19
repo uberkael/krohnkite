@@ -249,30 +249,38 @@ class TilingController {
     if (CONFIG.directionalKeyMode === "dwm") {
       switch (input) {
         case Shortcut.FocusUp:
+          console.log("dwm Shortcut.FocusUp")
           input = Shortcut.FocusNext;
           break;
         case Shortcut.FocusDown:
+          console.log("dwm Shortcut.FocusDown")
           input = Shortcut.FocusPrev;
           break;
         case Shortcut.FocusLeft:
+          console.log("dwm Shortcut.FocusLeft")
           input = Shortcut.DWMLeft;
           break;
         case Shortcut.FocusRight:
+          console.log("dwm Shortcut.FocusRight")
           input = Shortcut.DWMRight;
           break;
       }
     } else if (CONFIG.directionalKeyMode === "focus") {
       switch (input) {
         case Shortcut.ShiftUp:
+          console.log("dwm Shortcut.ShiftUp")
           input = Shortcut.SwapUp;
           break;
         case Shortcut.ShiftDown:
+          console.log("dwm Shortcut.ShiftDown")
           input = Shortcut.SwapDown;
           break;
         case Shortcut.ShiftLeft:
+          console.log("dwm Shortcut.ShiftLeft")
           input = Shortcut.SwapLeft;
           break;
         case Shortcut.ShiftRight:
+          console.log("dwm Shortcut.ShiftRight")
           input = Shortcut.SwapRight;
           break;
       }
@@ -293,24 +301,32 @@ class TilingController {
 
     switch (input) {
       case Shortcut.FocusNext:
+        console.log("Shortcut.FocusNext")
         this.engine.focusOrder(ctx, +1);
         break;
       case Shortcut.FocusPrev:
+        console.log("Shortcut.FocusPrev")
         this.engine.focusOrder(ctx, -1);
         break;
 
       case Shortcut.FocusUp:
+        console.log("Shortcut.FocusUp")
         this.engine.focusDir(ctx, "up");
         break;
       case Shortcut.FocusDown:
+        console.log("Shortcut.FocusDown")
         this.engine.focusDir(ctx, "down");
         break;
       case Shortcut.DWMLeft:
+        console.log("Shortcut.DWMLeft")
       case Shortcut.FocusLeft:
+        console.log("Shortcut.FocusLeft")
         this.engine.focusDir(ctx, "left");
         break;
       case Shortcut.DWMRight:
+        console.log("Shortcut.DWMRight")
       case Shortcut.FocusRight:
+        console.log("Shortcut.FocusRight")
         this.engine.focusDir(ctx, "right");
         break;
 
@@ -384,22 +400,28 @@ class TilingController {
         break;
 
       case Shortcut.ShiftUp:
+      console.log("Normal? Shortcut.ShiftUp")
         if (window) this.engine.swapOrder(window, -1);
         break;
       case Shortcut.ShiftDown:
+      console.log("Normal? Shortcut.ShiftDown")
         if (window) this.engine.swapOrder(window, +1);
         break;
 
       case Shortcut.SwapUp:
+      console.log("Normal? Shortcut.SwapUp")
         this.engine.swapDirOrMoveFloat(ctx, "up");
         break;
       case Shortcut.SwapDown:
+      console.log("Normal? Shortcut.SwapDown")
         this.engine.swapDirOrMoveFloat(ctx, "down");
         break;
       case Shortcut.SwapLeft:
+      console.log("Normal? Shortcut.SwapLeft")
         this.engine.swapDirOrMoveFloat(ctx, "left");
         break;
       case Shortcut.SwapRight:
+      console.log("Normal? Shortcut.SwapRight")
         this.engine.swapDirOrMoveFloat(ctx, "right");
         break;
 
