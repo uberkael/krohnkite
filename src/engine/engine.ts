@@ -456,7 +456,41 @@ class TilingEngine {
     }
 
     const neighbor = this.getNeighborByDirection(ctx, window, dir);
-    if (neighbor) this.windows.swap(window, neighbor);
+    console.log(neighbor)
+    if (neighbor) {
+      this.windows.swap(window, neighbor)
+    } else {
+        switch (dir) {
+          case "up":
+            console.log("--------------------------");
+            console.log("> Up");
+            console.log(ctx.workspace);
+            ctx.workspace.slotWindowToAboveScreen();
+            console.log("--------------------------");
+            break;
+          case "down":
+            console.log("--------------------------");
+            console.log("> Down");
+            console.log(ctx.workspace);
+            ctx.workspace.slotWindowToBelowScreen();
+            console.log("--------------------------");
+            break;
+          case "left":
+            console.log("--------------------------");
+            console.log("> Left");
+            console.log(ctx.workspace);
+            ctx.workspace.slotWindowToPrevScreen();
+            console.log("--------------------------");
+            break;
+          case "right":
+            console.log("--------------------------");
+            console.log("> Right");
+            console.log(ctx.workspace);
+            ctx.workspace.slotWindowToNextScreen();
+            console.log("--------------------------");
+            break;
+      }
+    }
   }
 
   /**
