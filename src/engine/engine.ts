@@ -473,6 +473,7 @@ class TilingEngine {
             ctx.workspace.slotWindowToNextScreen();
             break;
       }
+      window.state = WindowState.Tiled;
     }
   }
 
