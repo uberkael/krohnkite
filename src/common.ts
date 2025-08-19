@@ -225,6 +225,7 @@ interface IDriverContext {
 
   currentSurface: ISurface;
   currentWindow: WindowClass | null;
+  workspace: Workspace;
 
   setTimeout(func: () => void, timeout: number): void;
   showNotification(text: string): void;
